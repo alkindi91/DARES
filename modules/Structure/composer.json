@@ -1,5 +1,5 @@
 {
-	"name": "pingpong-modules/academystructure",
+	"name": "pingpong-modules/structure",
 	"description": "",
 	"authors": [
 		{
@@ -9,7 +9,7 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"Modules\\AcademyStructure\\": ""
+			"Modules\\Structure\\": ""
 		}
 	}
 }

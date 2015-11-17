@@ -2,7 +2,10 @@
 
                         <div class="menu_section">
                             <h3>&nbsp;</h3>
-                            {!! $SidebarMenu->asUl(['class'=>'nav side-menu']) !!}
+                            
+                            <ul class="nav side-menu">
+                            @include(config('laravel-menu.views.bootstrap-items'), array('items' => $SidebarMenu->roots()))
+                            </ul>
                             {{-- <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> الرئيسية <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">

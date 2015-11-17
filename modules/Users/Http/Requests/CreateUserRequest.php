@@ -1,8 +1,8 @@
-<?php namespace Modules\Academystructure\Http\Requests;
+<?php namespace Modules\Users\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateStructureRequest extends FormRequest {
+class CreateUserRequest extends FormRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -22,13 +22,12 @@ class CreateStructureRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-			'faculty_name'=>'required|max:255|min:3'
-			
+			'name'	=>'required|max:255|min:3',
+			'email'	=>'required|email|unique:users,email',
+			'gender'=>'required|in:f,m',
+			'password'=>'required|confirmed|min:4',
+			'birthday'=>'sometimes|date'
 		];
 	}
-
-	
-
-
 
 }

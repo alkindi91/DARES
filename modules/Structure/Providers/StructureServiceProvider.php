@@ -1,10 +1,8 @@
-<?php namespace Modules\Academystructure\Providers;
+<?php namespace Modules\Structure\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Modules\Academystructure\Entities\Faculty;
-use Auth;
 
-class AcademyStructureServiceProvider extends ServiceProvider {
+class StructureServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -23,7 +21,6 @@ class AcademyStructureServiceProvider extends ServiceProvider {
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();
-		$this->registerEvents();
 	}
 
 	/**
@@ -44,10 +41,10 @@ class AcademyStructureServiceProvider extends ServiceProvider {
 	protected function registerConfig()
 	{
 		$this->publishes([
-		    __DIR__.'/../Config/config.php' => config_path('academystructure.php'),
+		    __DIR__.'/../Config/config.php' => config_path('structure.php'),
 		]);
 		$this->mergeConfigFrom(
-		    __DIR__.'/../Config/config.php', 'academystructure'
+		    __DIR__.'/../Config/config.php', 'structure'
 		);
 	}
 
@@ -58,7 +55,7 @@ class AcademyStructureServiceProvider extends ServiceProvider {
 	 */
 	public function registerViews()
 	{
-		$viewPath = base_path('resources/views/modules/academystructure');
+		$viewPath = base_path('resources/views/modules/structure');
 
 		$sourcePath = __DIR__.'/../Resources/views';
 
@@ -66,7 +63,7 @@ class AcademyStructureServiceProvider extends ServiceProvider {
 			$sourcePath => $viewPath
 		]);
 
-		$this->loadViewsFrom([$viewPath, $sourcePath], 'academystructure');
+		$this->loadViewsFrom([$viewPath, $sourcePath], 'structure');
 	}
 
 	/**
@@ -76,12 +73,12 @@ class AcademyStructureServiceProvider extends ServiceProvider {
 	 */
 	public function registerTranslations()
 	{
-		$langPath = base_path('resources/lang/modules/academystructure');
+		$langPath = base_path('resources/lang/modules/structure');
 
 		if (is_dir($langPath)) {
-			$this->loadTranslationsFrom($langPath, 'academystructure');
+			$this->loadTranslationsFrom($langPath, 'structure');
 		} else {
-			$this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'academystructure');
+			$this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'structure');
 		}
 	}
 
@@ -93,13 +90,6 @@ class AcademyStructureServiceProvider extends ServiceProvider {
 	public function provides()
 	{
 		return array();
-	}
-
-	public function registerEvents() {
-		
-		Faculty::creating( function($faculty) {
-			$faculty->created_by = Auth::user()->id;
-		});
 	}
 
 }

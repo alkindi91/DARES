@@ -20,6 +20,7 @@
 
     <link href="{{ asset('template/fonts/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template/css/animate.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('template/css/icheck/flat/green.css') }}" rel="stylesheet">
 
     <!-- Custom styling plus plugins -->
     <link href="{{ asset('template/css/custom.css') }}" rel="stylesheet">
@@ -77,7 +78,7 @@
                                     <li>
                                         <a href="javascript:;">Help</a>
                                     </li>
-                                    <li><a href="login.php"><i class="fa fa-sign-out pull-left"></i> Log Out</a>
+                                    <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out pull-left"></i> @lang('global.logout')</a>
                                     </li>
                                 </ul>
                             </li>
@@ -222,52 +223,30 @@
 
     
 
+
     <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('template/js/nicescroll/jquery.nicescroll.min.js') }}"></script>
+    <script src="{{ asset('template/js/icheck/icheck.min.js') }}"></script>
+     <!-- PNotify -->
+    <script type="text/javascript" src="{{ asset('template/js/notify/pnotify.core.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('template/js/notify/pnotify.buttons.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('template/js/notify/pnotify.nonblock.js') }}"></script>
+    <script src="{{ asset('template/js/custom.js') }}"></script>
    
     <script>
-        NProgress.done();
+    jQuery(document).ready(function($) {
+        $('input.tableflat').iCheck({
+                    checkboxClass: 'icheckbox_flat-green',
+                    radioClass: 'iradio_flat-green'
+                });
+         NProgress.done();
+    });
+       
+
     </script>
    
-@if(session()->has('success'))
-<script>
-    jQuery(document).ready(function($) {
-        new PNotify({
-                text: '{{ session()->get("success") }}',
-                type: 'success'
-    });
-    });
-</script>  
-@endif 
-@if(session()->has('error'))
-<script>
-    jQuery(document).ready(function($) {
-        new PNotify({
-                text: '{{ session()->get("error") }}',
-                type: 'error'
-    });
-    });
-</script>
-@endif 
-@if(session()->has('info'))
-<script>
-    jQuery(document).ready(function($) {
-        new PNotify({
-                text: '{{ session()->get("info") }}',
-                type: 'info'
-    });
-    });
-</script>
-@endif
-@if(session()->has('warning'))
-<script>
-    jQuery(document).ready(function($) {
-        new PNotify({
-                text: '{{ session()->get("warning") }}',
-                type: 'warning'
-    });
-    });
-</script>
-@endif
+@include('partials.notifications')
+
 
 @section('footer')
 @show

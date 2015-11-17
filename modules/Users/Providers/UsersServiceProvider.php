@@ -1,5 +1,6 @@
 <?php namespace Modules\Users\Providers;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Menu;
 class UsersServiceProvider extends ServiceProvider {
@@ -16,8 +17,9 @@ class UsersServiceProvider extends ServiceProvider {
 	 * 
 	 * @return void
 	 */
-	public function boot()
+	public function boot(Router $router)
 	{
+		$router->model('user' ,'\Modules\Users\Entities\User');
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();
@@ -95,7 +97,8 @@ class UsersServiceProvider extends ServiceProvider {
 
 	public function registerMenu() {
 		$menu = Menu::get('SidebarMenu');
-		$menu->add(trans('users::users.header') ,['route'=>'users.index'])->data('order' ,2);
+		$sysmenu = $menu->add('<i class="fa fa-home"></i> النظام' ,null)->data('order' ,2);
+		$sysmenu->add('المستخدمين' ,['route'=>'users.index']);
 	}
 
 }

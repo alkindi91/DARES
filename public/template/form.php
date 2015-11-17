@@ -1292,7 +1292,7 @@
         <!-- switchery -->
         <script src="js/switchery/switchery.min.js"></script>
         <!-- daterangepicker -->
-        <script type="text/javascript" src="js/moment.min2.js"></script>
+        <script type="text/javascript" src="js/moment.min.js"></script>
         <script type="text/javascript" src="js/datepicker/daterangepicker.js"></script>
         <!-- richtext editor -->
         <script src="js/editor/bootstrap-wysiwyg.js"></script>

@@ -1,6 +1,6 @@
 @foreach($items as $item)
   <li@lm-attrs($item) @if($item->hasChildren())class ="dropdown"@endif @lm-endattrs>
-    @if($item->link) <a@lm-attrs($item->link) @if($item->hasChildren())   @endif @lm-endattrs href="{!! $item->url() !!}">
+    @if($item->link) <a @lm-attrs($item->link) @if(!$item->hasChildren())  href="{!! $item->url() !!}" @endif @lm-endattrs >
       {!! $item->title !!}
       @if($item->hasChildren()) <span class="fa fa-chevron-down"></span> @endif
     </a>
@@ -9,8 +9,7 @@
     @endif
     @if($item->hasChildren())
       <ul class="nav child_menu" style="display: none">
-        @include(config('laravel-menu.views.bootstrap-items'), 
-array('items' => $item->children()))
+        @include(config('laravel-menu.views.bootstrap-items'), array('items' => $item->children()))
       </ul> 
     @endif
   </li>

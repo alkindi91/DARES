@@ -1,9 +1,9 @@
-<?php namespace Modules\Academystructure\Database\Seeders;
+<?php namespace Modules\Structure\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class AcademyStructureDatabaseSeeder extends Seeder {
+class StructureDatabaseSeeder extends Seeder {
 
 	/**
 	 * Run the database seeds.
