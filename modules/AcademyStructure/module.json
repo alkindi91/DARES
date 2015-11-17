@@ -1,0 +1,15 @@
+{
+    "name": "AcademyStructure",
+    "alias": "academystructure",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\AcademyStructure\\Providers\\AcademyStructureServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}

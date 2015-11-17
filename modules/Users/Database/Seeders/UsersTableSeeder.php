@@ -1,0 +1,23 @@
+<?php namespace Modules\Users\Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+
+use Modules\Users\Entities\User;
+
+class UsersTableSeeder extends Seeder {
+
+	/**
+	 * Run the database seeds.
+	 *
+	 * @return void
+	 */
+	public function run()
+	{
+		Model::unguard();
+		
+		User::create(['name'=>'mouhsine bakhich' ,'email'=>'mouhsine.bakhich@gmail.com' ,'password'=>bcrypt("123456")]);
+		// $this->call("OthersTableSeeder");
+	}
+
+}

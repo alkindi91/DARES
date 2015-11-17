@@ -34,5 +34,10 @@ return [
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+    'rollbar' => [
+    'access_token' => 'ac877524c4134b38af7c25949e5e4ca1',
+    'level' => 'debug',
+    ],
+
 
 ];

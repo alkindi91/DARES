@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ar',
 
     /*
     |--------------------------------------------------------------------------
@@ -145,7 +145,14 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Pingpong\Modules\ModulesServiceProvider::class
+        Lavary\Menu\ServiceProvider::class,
+        Pingpong\Modules\ModulesServiceProvider::class,
+        Jenssegers\Rollbar\RollbarServiceProvider::class,
+        Bican\Roles\RolesServiceProvider::class,
+        Illuminate\Html\HtmlServiceProvider::class,
+
+        // Our providers
+        App\Providers\MenuServiceProvider::class,
     ],
 
     /*
@@ -195,6 +202,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'Module'    => Pingpong\Modules\Facades\Module::class,
+        'Menu'      => Lavary\Menu\Facade::class,
+        'Form'=>   Illuminate\Html\FormFacade::class,
+        'HTML'=> Illuminate\Html\HtmlFacade::class
     ],
 
 ];

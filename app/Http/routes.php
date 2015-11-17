@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+get('/', ['uses'=>'HomeController@index' ,'as'=>'welcome','middleware'=>'auth']);
 
+// Authentication routes...
+get('auth/login', ['as'=>'login','uses'=>'Auth\AuthController@getLogin']);
+post('auth/login', ['as'=>'login','uses'=>'Auth\AuthController@postLogin']);
+get('auth/logout', ['as'=>'logout','uses'=>'Auth\AuthController@getLogout','middleware'=>'auth']);
 
-resource('subjects','SubjectsController');
+// Registration routes...
+// get('auth/register', 'Auth\AuthController@getRegister');
+// post('auth/register', 'Auth\AuthController@postRegister');
