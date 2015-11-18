@@ -63,7 +63,10 @@
                         <ul class="nav navbar-nav navbar-left">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset(user()->avatar->url()) }}" alt="">John Doe
+                                @if(user()->avatar->size())
+                                    <img src="{{ asset(user()->avatar->url()) }}" alt="">
+                                @endif
+                                    {{ user()->name }}
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-left">
@@ -91,9 +94,11 @@
                                 <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
                                     <li>
                                         <a>
+                                        @if(user()->avatar->size())
                                             <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
+                                        <img src="{{ asset(user()->avatar->url()) }}" alt="Profile Image" />
                                     </span>
+                                    @endif
                                             <span>
                                         <span>John Smith</span>
                                             <span class="time">3 mins ago</span>
@@ -177,9 +182,9 @@
 
                     <!-- menu prile quick info -->
                     <div class="profile">
-                    @if(user()->avatar)
+                    @if(user()->avatar->size())
                         <div class="profile_pic">
-                            <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                            <img src="{{ asset(user()->avatar->url()) }}" alt="{{ user()->name }}" class="img-circle profile_img">
                         </div>
                     @endif
                         <div class="profile_info">
@@ -233,6 +238,8 @@
     <script type="text/javascript" src="{{ asset('template/js/notify/pnotify.core.js') }}"></script>
     <script type="text/javascript" src="{{ asset('template/js/notify/pnotify.buttons.js') }}"></script>
     <script type="text/javascript" src="{{ asset('template/js/notify/pnotify.nonblock.js') }}"></script>
+    @section('footer')
+    @show
     <script src="{{ asset('template/js/custom.js') }}"></script>
    
     <script>
@@ -250,8 +257,7 @@
 @include('partials.notifications')
 
 
-@section('footer')
-@show
+
 </body>
 
 </html>

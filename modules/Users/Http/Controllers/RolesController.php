@@ -4,6 +4,7 @@ use Pingpong\Modules\Routing\Controller;
 use Bican\Roles\Models\Role;
 use Modules\Users\Http\Requests\CreateRoleRequest;
 use Modules\Users\Http\Requests\UpdateRoleRequest;
+use Bican\Roles\Models\Permission;
 
 class RolesController extends Controller {
 	
@@ -19,14 +20,16 @@ class RolesController extends Controller {
 
 	public function store(CreateRoleRequest $req ,Role $RoleModel) {
 		$role = $RoleModel;
-		$RoleModel->name = $req->input('name');
+		$role->name = $req->input('name');
 		$role->save();
+		$this->processPermissions($role);
 		return redirect()->route('roles.index')->with('success' ,'تم اضافة المجموعة بنجاح');
 	}
 
 	public function update(UpdateRoleRequest $req ,Role $role) {
 		$role->name = $req->input('name');
 		$role->save();
+		$this->processPermissions($role);
 		return redirect()->route('roles.index')->with('success' ,'تم تحديث بيانات المجموعة بنجاح');
 	}
 
@@ -53,6 +56,23 @@ class RolesController extends Controller {
 		$RoleModel->destroy($ids);
 		// we redirect to the role index view with a success message
 		return redirect()->route('roles.index')->with('success' ,trans('users::roles.delete_bulk_success'));
+	}
+
+	public function processPermissions($role) {
+		$permissions = request('permissions');
+		
+		$role->detachAllPermissions();
+
+		if(is_array($permissions)) {
+		foreach($permissions as $permission) {
+			$permission = Permission::where("slug" ,$permission)->first();
+			$role->attachPermission($permission);
+		}
+		}
+	}
+
+	public function show(Role $role) {
+		return view('users::roles.show' ,compact('role'));
 	}
 	
 }

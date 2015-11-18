@@ -3,6 +3,7 @@
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Menu;
+use Auth;
 class UsersServiceProvider extends ServiceProvider {
 
 	/**
@@ -98,9 +99,23 @@ class UsersServiceProvider extends ServiceProvider {
 
 	public function registerMenu() {
 		$menu = Menu::get('SidebarMenu');
-		$sysmenu = $menu->add('<i class="fa fa-home"></i> النظام' ,null)->data('order' ,2);
+		$sysmenu = $menu->add('<i class="fa fa-home"></i> النظام')
+						->data('module' ,'users')
+						->data('permission' ,'view.users')
+						->data('order' ,2);
+		
+
+		
 		$sysmenu->add('المستخدمين' ,['route'=>'users.index']);
+
 		$sysmenu->add('المجموعات' ,['route'=>'roles.index']);
+
+
+		// foreach($menu->items as $item) 
+		// if(isset($item->data['module']) and $item->data['module']=='users') $id = $item->id;
+
+		// dd('');
+
 	}
 
 }

@@ -7,12 +7,25 @@
     </div>
     <br>
     {!! Form::model($user ,['route'=>['users.update' ,$user->id] ,'files'=>true,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate']) !!}
+    <div class="form-group">
+    <div class="col-md-12">
+       
+ <a href="{{ route('users.index') }}" class="btn btn-primary pull-left">
+ <i class="fa fa-close"></i> @lang('global.cancel')</a>
+ <button type="submit" class="btn btn-success pull-left">
+ <i class="fa fa-save"></i> @lang('global.save')</button>
+ <div class="clearfix"></div>
+    </div>
+    </div>
+    <br>
     @include('users::users._fields')
 <div class="ln_solid"></div>
 <div class="form-group">
-    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-        <a href="{{ route('users.index') }}" class="btn btn-primary">@lang('global.cancel')</a>
-        <button type="submit" class="btn btn-success">@lang('global.save')</button>
+    <div class="col-md-12">
+        <a href="{{ route('users.index') }}" class="btn btn-primary pull-left">
+        <i class="fa fa-close"></i> @lang('global.cancel')</a>
+        <button type="submit" class="btn btn-success pull-left">
+        <i class="fa fa-save"></i> @lang('global.save')</button>
     </div>
 </div>
 {!! Form::close() !!}
@@ -24,6 +37,8 @@
 <script type="text/javascript" src="{{ asset('template/js/parsley/parsley.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('template/js/parsley/ar.js') }}"></script>
 <script type="text/javascript" src="{{ asset('template/js/datepicker/daterangepicker.js') }}"></script>
+<!-- switchery -->
+<script src="{{ asset('template/js/switchery/switchery.min.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#birthday').daterangepicker({
@@ -36,4 +51,9 @@
         });
     });
 </script>
+@endsection
+
+@section('head')
+<!-- switchery -->
+    <link rel="stylesheet" href="{{ asset('template/css/switchery/switchery.min.css') }}" />
 @endsection

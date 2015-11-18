@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'url' => '/system/:class/:attachment/:id_partition/:style/:filename',
+    'url' => '/uploads/:class/:attachment/:id_partition/:style/:filename',
 
     /*
     |--------------------------------------------------------------------------

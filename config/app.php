@@ -146,11 +146,11 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Lavary\Menu\ServiceProvider::class,
-        Pingpong\Modules\ModulesServiceProvider::class,
         Jenssegers\Rollbar\RollbarServiceProvider::class,
         Bican\Roles\RolesServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
         Codesleeve\LaravelStapler\Providers\L5ServiceProvider::class,
+        Pingpong\Modules\ModulesServiceProvider::class,
         // Our providers
         App\Providers\MenuServiceProvider::class,
     ],

@@ -48,6 +48,12 @@ class Handler extends ExceptionHandler
             $e = new NotFoundHttpException($e->getMessage(), $e);
         }
 
+        if ($e instanceof \Bican\Roles\Exceptions\PermissionDeniedException) {
+            session()->flash('error','ليست لديك صلاحية للقيام بهاته العملية');
+        // you can for example flash message, redirect...
+            return redirect()->back();
+        }
+
         return parent::render($request, $e);
     }
 }

@@ -1,13 +1,14 @@
 <?php namespace Modules\Users\Http\Controllers;
 
 
-
+use Bican\Roles\Models\Permission;
 use Illuminate\Http\Request;
 use Modules\Academystructure\Http\Requests\CreateStructureRequest;
 use Modules\Users\Entities\User;
 use Modules\Users\Http\Requests\CreateUserRequest;
 use Modules\Users\Http\Requests\UpdateUserRequest;
 use Pingpong\Modules\Routing\Controller;
+use Bican\Roles\Models\Role;
 
 class UsersController extends Controller {
 	
@@ -29,7 +30,7 @@ class UsersController extends Controller {
 			$users->where('sex' ,$req->input('sex'));
 		
 		// get our results with pagination with 20 user per page
-		$users = $users->paginate(2);
+		$users = $users->paginate(20);
 
 		// return the index view of the users module with a collection of users objects
 		return view('users::users.index' ,compact('users'));
@@ -40,7 +41,8 @@ class UsersController extends Controller {
 	 * @return \Illuminate\View\View the user create view create.blade.php
 	 */
 	public function create() {
-		return view('users::users.create');
+		$roles = Role::all();
+		return view('users::users.create' ,compact('roles'));
 	}
 
 	/**
@@ -49,7 +51,8 @@ class UsersController extends Controller {
 	 * @return \Illuminate\View\View       the user edit view edit.blade.php
 	 */
 	public function edit(User $user) {
-		return view('users::users.edit' ,compact('user'));
+		$roles = Role::all();
+		return view('users::users.edit' ,compact('user' ,'roles'));
 	}
 
 	/**
@@ -64,6 +67,7 @@ class UsersController extends Controller {
 		$UserModel->password = bcrypt($request->input('password'));
 		// save the user
 		$UserModel->save();
+		$this->processPermissions($UserModel);
 		// redirect back to the users index
 		return redirect()->route('users.index')->with('success' ,trans('users::users.create_success' ,['name'=>$UserModel->name]));
 
@@ -104,16 +108,31 @@ class UsersController extends Controller {
 	public function update(UpdateUserRequest $req ,User $user) {
 		$user->fill($req->all());
 
-		if($req->has('password'))
+		if(!empty($req->input('password')))
 		$UserModel->password = bcrypt($request->input('password'));
 
 		$user->save();
 
-		return redirect()->route('users.index')->with('success' ,trans('users.update_success' ,['name'=>$user->name]));
+		$this->processPermissions($user);
+
+		return redirect()->route('users.index')->with('success' ,trans('users::users.update_success' ,['name'=>$user->name]));
 	}
 
 	public function show(User $user) {
 		return view('users::users.show' ,compact('user'));
+	}
+
+	public function processPermissions($user) {
+		$permissions = request('permissions');
+		
+		$user->detachAllPermissions();
+
+		if(is_array($permissions)) {
+		foreach($permissions as $permission) {
+			$permission = Permission::where("slug" ,$permission)->first();
+			$user->attachPermission($permission);
+		}
+		}
 	}
 	
 }

@@ -6,9 +6,11 @@
 
 <div class="clearfix"></div>
 </div>
+@permission('create.roles')
 <a href="{{ route('roles.create') }}" class="btn btn-primary pull-left">
 	<i class="fa fa-plus"></i> @lang('global.new')
 </a>
+@endif
 <div class="clearfix"></div>
 <br />
 {!! Form::open(['route'=>'roles.delete-bulk' ,'method'=>'GET']) !!}
@@ -20,10 +22,6 @@
 			</th>
 			<th>
 				@lang('users::roles.name')
-			</th>
-			<th>
-				
-				@lang('users::roles.permissions')
 			</th>
 			
 			<th class=" no-link last"><span class="nobr">
@@ -42,9 +40,6 @@
 		<td>
 			{{ $role->name }}
 		</td>
-		<td>
-			{{ $role->permissions }}
-		</td>
 		
 		<td class=" last">
 			<a href="{{ route('roles.edit' ,$role->id)}}" class='btn btn-sm btn-success'>
@@ -52,6 +47,9 @@
 			</a>
 			<a href="{{ route('roles.delete' ,$role->id)}}" class="btn btn-danger btn-sm">
 			<i class="fa fa-trash"></i> @lang('global.delete')
+			</a>
+			<a href="{{ route('roles.show' ,$role->id)}}" class="btn btn-info btn-md">
+			<i class="fa fa-table"></i> @lang('global.details')
 			</a>
 	</td>
 	@endforeach
