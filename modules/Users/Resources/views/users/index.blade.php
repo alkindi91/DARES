@@ -41,6 +41,7 @@
 				<i class="fa fa-envelope"></i>
 				@lang('users::users.email')
 			</th>
+			
 			<th>
 				@lang('users::users.sex')
 			</th>
@@ -73,6 +74,9 @@
 			</a>
 			<a href="{{ route('users.delete' ,$user->id)}}" class="btn btn-danger btn-sm">
 			<i class="fa fa-trash"></i> @lang('global.delete')
+			</a>
+			<a href="{{ route('users.show' ,$user->id)}}" class="btn btn-info btn-md">
+			<i class="fa fa-table"></i> @lang('global.details')
 			</a>
 	</td>
 	@endforeach

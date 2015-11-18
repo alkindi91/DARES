@@ -12,7 +12,18 @@ Route::group(['prefix' => 'users','middleware'=>'auth', 'namespace' => 'Modules\
 	post('store' ,['as'=>'users.store' ,'uses'=>'UsersController@store']);
 	post('update/{user}' ,['as'=>'users.update' ,'uses'=>'UsersController@update']);
 	
-
+	Route::group(['prefix'=>'roles'] ,function() {
+		get('/', ['as'=>'roles.index','uses'=>'RolesController@index']);
+		get('create' ,['as'=>'roles.create' ,'uses'=>'RolesController@create']);
+		get('edit/{role}' ,['as'=>'roles.edit' ,'uses'=>'RolesController@edit']);
+		get('show/{role}' ,['as'=>'roles.show' ,'uses'=>'RolesController@show']);
+		get('delete/{role?}' ,['as'=>'roles.delete' ,'uses'=>'RolesController@delete']);
+		get('delete-bulk' ,['as'=>'roles.delete-bulk' ,'uses'=>'RolesController@deleteBulk']);
+		
+		post('store' ,['as'=>'roles.store' ,'uses'=>'RolesController@store']);
+		post('update/{role}' ,['as'=>'roles.update' ,'uses'=>'RolesController@update']);
+	});
+	
 });
 
 

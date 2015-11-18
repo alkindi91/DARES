@@ -150,7 +150,7 @@ return [
         Jenssegers\Rollbar\RollbarServiceProvider::class,
         Bican\Roles\RolesServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
-
+        Codesleeve\LaravelStapler\Providers\L5ServiceProvider::class,
         // Our providers
         App\Providers\MenuServiceProvider::class,
     ],

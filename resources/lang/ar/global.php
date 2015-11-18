@@ -10,5 +10,6 @@ return [
 	'update'=>'تحديث',
 	'cancel'=>'الغاء',
 	'search'=>'البحث',
-	'logout'=>'خروج'
+	'logout'=>'خروج',
+	'details'=>'التفاصيل'
 ];

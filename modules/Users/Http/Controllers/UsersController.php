@@ -32,7 +32,7 @@ class UsersController extends Controller {
 		$users = $users->paginate(2);
 
 		// return the index view of the users module with a collection of users objects
-		return view('users::index' ,compact('users'));
+		return view('users::users.index' ,compact('users'));
 	}
 
 	/**
@@ -40,7 +40,7 @@ class UsersController extends Controller {
 	 * @return \Illuminate\View\View the user create view create.blade.php
 	 */
 	public function create() {
-		return view('users::create');
+		return view('users::users.create');
 	}
 
 	/**
@@ -49,7 +49,7 @@ class UsersController extends Controller {
 	 * @return \Illuminate\View\View       the user edit view edit.blade.php
 	 */
 	public function edit(User $user) {
-		return view('users::edit' ,compact('user'));
+		return view('users::users.edit' ,compact('user'));
 	}
 
 	/**
@@ -80,7 +80,7 @@ class UsersController extends Controller {
 		// we delete the user
 		$user->delete();
 		// redirect to the users index
-		return redirect()->route('users.index')->with('message' ,trans('users::users.delete_success'));
+		return redirect()->route('users.index')->with('success' ,trans('users::users.delete_success'));
 	}
 
 	public function deleteBulk(Request $req ,User $UserModel) {
@@ -109,7 +109,11 @@ class UsersController extends Controller {
 
 		$user->save();
 
-		return redirect()->rotue('users.index')->with('success' ,trans('users.update_success' ,['name'=>$user->name]));
+		return redirect()->route('users.index')->with('success' ,trans('users.update_success' ,['name'=>$user->name]));
+	}
+
+	public function show(User $user) {
+		return view('users::users.show' ,compact('user'));
 	}
 	
 }

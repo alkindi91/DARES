@@ -20,6 +20,7 @@ class UsersServiceProvider extends ServiceProvider {
 	public function boot(Router $router)
 	{
 		$router->model('user' ,'\Modules\Users\Entities\User');
+		$router->model('role' ,'\Bican\Roles\Models\Role');
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();
@@ -99,6 +100,7 @@ class UsersServiceProvider extends ServiceProvider {
 		$menu = Menu::get('SidebarMenu');
 		$sysmenu = $menu->add('<i class="fa fa-home"></i> النظام' ,null)->data('order' ,2);
 		$sysmenu->add('المستخدمين' ,['route'=>'users.index']);
+		$sysmenu->add('المجموعات' ,['route'=>'roles.index']);
 	}
 
 }

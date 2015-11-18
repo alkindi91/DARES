@@ -39,6 +39,15 @@
 </div>
 {{-- Form Input Group --}}
 <div class="form-group">
+    {!! Form::label('avatar' ,trans('users::users.avatar') ,['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        {!! Form::file('avatar',['class'=>'form-control col-md-7 col-xs-12']) !!}
+       
+        {!! $errors->first('avatar' ,'<div class="label label-danger">:message</div>') !!}
+    </div>
+</div>
+{{-- Form Input Group --}}
+<div class="form-group">
     {!! Form::label('sex' ,trans('users::users.sex') ,['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
     <div class="col-md-6 col-sm-6 col-xs-12">
         <div id="gender" class="btn-group" data-toggle="buttons">

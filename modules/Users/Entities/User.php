@@ -4,15 +4,37 @@ namespace Modules\Users\Entities;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Foundation\Auth\Access\Authorizable;
+// use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+// use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+
+
+use Codesleeve\Stapler\ORM\StaplerableInterface;
+use Codesleeve\Stapler\ORM\EloquentTrait;
+
+use Bican\Roles\Traits\HasRoleAndPermission;
+use Bican\Roles\Contracts\HasRoleAndPermission as HasRoleAndPermissionContract;
+
+
 class User extends Model implements AuthenticatableContract,
-                                    AuthorizableContract,
-                                    CanResetPasswordContract
+                                    HasRoleAndPermissionContract,
+                                    CanResetPasswordContract,
+                                    StaplerableInterface
 {
-    use Authenticatable, Authorizable, CanResetPassword;
+    use Authenticatable, HasRoleAndPermission, CanResetPassword ,EloquentTrait;
+
+    public function __construct(array $attributes = array()) {
+        $this->hasAttachedFile('avatar', [
+            'styles' => [
+                'medium' => '300x300',
+                'thumb' => '100x100'
+            ]
+        ]);
+
+        parent::__construct($attributes);
+    }
+
     /**
      * The database table used by the model.
      *
@@ -24,7 +46,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password' ,'sex' ,'birthday'];
+    protected $fillable = ['name','avatar', 'email', 'password' ,'sex' ,'birthday'];
     /**
      * The attributes excluded from the model's JSON form.
      *
