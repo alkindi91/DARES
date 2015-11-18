@@ -8,5 +8,11 @@ class StructureController extends Controller {
 	{
 		return view('structure::index');
 	}
+
+	public function store() {
+		$faculty = new Faculty;
+		$faculty->fill($request->all());
+		$faculty->save();
+	}
 	
 }
