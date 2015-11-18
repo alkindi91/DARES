@@ -41,7 +41,7 @@ class UsersController extends Controller {
 	 * @return \Illuminate\View\View the user create view create.blade.php
 	 */
 	public function create() {
-		$roles = Role::all();
+		$roles = Role::lists('name' ,'id')->toArray();
 		return view('users::users.create' ,compact('roles'));
 	}
 
@@ -51,7 +51,7 @@ class UsersController extends Controller {
 	 * @return \Illuminate\View\View       the user edit view edit.blade.php
 	 */
 	public function edit(User $user) {
-		$roles = Role::all();
+		$roles = Role::lists('name' ,'id')->toArray();
 		return view('users::users.edit' ,compact('user' ,'roles'));
 	}
 

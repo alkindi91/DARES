@@ -39,6 +39,16 @@
 </div>
 {{-- Form Input Group --}}
 <div class="form-group">
+    <label for='role' class="control-label col-md-3 col-sm-3 col-xs-12">@lang('users::users.role')
+    </label>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+       {!! Form::select('role',$roles,null,['id'=>'role','class'=>'form-control col-md-7 col-xs-12']) !!}
+       {!! $errors->first('role' ,'<div class="label label-danger">:message</div>') !!}
+   </div>
+
+</div>
+{{-- Form Input Group --}}
+<div class="form-group">
     {!! Form::label('avatar' ,trans('users::users.avatar') ,['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
     <div class="col-md-6 col-sm-6 col-xs-12">
         {!! Form::file('avatar',['class'=>'form-control col-md-7 col-xs-12']) !!}
@@ -73,6 +83,7 @@
    </div>
 
 </div>
+
 <br>
 <div class="row">
     <div class="col-md-4 col-sm-6 col-lg-3">
