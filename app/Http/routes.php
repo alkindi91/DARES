@@ -21,3 +21,10 @@ get('auth/logout', ['as'=>'logout','uses'=>'Auth\AuthController@getLogout','midd
 // Registration routes...
 // get('auth/register', 'Auth\AuthController@getRegister');
 // post('auth/register', 'Auth\AuthController@postRegister');
+
+
+if(!function_exists('user')) {
+	function user() {
+		return Auth::user();
+	}
+}

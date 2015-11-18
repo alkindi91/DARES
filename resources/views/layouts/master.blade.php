@@ -177,12 +177,14 @@
 
                     <!-- menu prile quick info -->
                     <div class="profile">
+                    @if(user()->avatar)
                         <div class="profile_pic">
                             <img src="images/img.jpg" alt="..." class="img-circle profile_img">
                         </div>
+                    @endif
                         <div class="profile_info">
                             <span>مرحبا,</span>
-                            <h2>محسن بخيش</h2>
+                            <h2>{{ user()->name }}</h2>
                         </div>
                     </div>
                     <!-- /menu prile quick info -->
