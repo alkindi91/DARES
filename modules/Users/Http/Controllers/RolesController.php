@@ -52,6 +52,8 @@ class RolesController extends Controller {
 	public function deleteBulk(Request $req ,Role $RoleModel) {
 		// if the table_records is empty we redirect to the roles index
 		if(!$req->has('table_records')) return redirect()->route('roles.index');
+
+		$ids = array_filter($req->input('table_records') ,function($id) { return $id!=1; });
 		// we delete all the roles with the ids $ids
 		$RoleModel->destroy($ids);
 		// we redirect to the role index view with a success message

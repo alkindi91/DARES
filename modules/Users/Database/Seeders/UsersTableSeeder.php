@@ -15,80 +15,46 @@ class UsersTableSeeder extends Seeder {
 	public function run()
 	{
 		User::whereNotNull('id')->delete();
-		Model::unguard();
 		
-		$user = User::create(['name'=>'محسن بخيش' ,'email'=>'mouhsine.bakhich@gmail.com' ,'password'=>bcrypt("123456")]);
-		$user->id=1;
-		$user->save();
-		$user = User::create(['name'=>'هيثم' ,'email'=>'haitham.hamdy@css.edu.om ' ,'password'=>bcrypt("123456")]);
-		$user = User::create(['name'=>'سامي' ,'email'=>'samialmamari@css.edu.om ' ,'password'=>bcrypt("123456")]);
-		$user = User::create(['name'=>'احمد' ,'email'=>'aalkindi@css.edu.om ' ,'password'=>bcrypt("123456")]);
-		// $this->call("OthersTableSeeder");
-		// 
-		Permission::whereIn('slug' ,['delete.roles' ,'create.roles' ,'edit.roles' ,'view.roles','delete.users' ,'create.users' ,'edit.users' ,'view.users'])->delete();
+		Model::unguard();
+
 		$users = User::all();
 
-		$createUsersPermission = Permission::create([
-		    'name' => 'اضافة مستخدم',
-		    'slug' => 'create.users',
-		]);
-		$deleteUsersPermission = Permission::create([
-		    'name' => 'حذف مستخدم',
-		    'slug' => 'delete.users',
-		]);
-		$editUsersPermission = Permission::create([
-		    'name' => 'تعديل مستخدم',
-		    'slug' => 'edit.users',
-		]);
-		$viewUsersPermission = Permission::create([
-		    'name' => 'مشاهدة المستخدمين',
-		    'slug' => 'view.users',
-		]);
-		$createRolesPermission = Permission::create([
-		    'name' => 'اضافة صلاحية',
-		    'slug' => 'create.roles',
-		]);
-		$deleteRolesPermission = Permission::create([
-		    'name' => 'حذف صلاحية',
-		    'slug' => 'delete.roles',
-		]);
-		$editRolesPermission = Permission::create([
-		    'name' => 'تعديل صلاحية',
-		    'slug' => 'edit.roles',
-		]);
-		$viewRolesPermission = Permission::create([
-		    'name' => 'مشاهدة الصلاحيات',
-		    'slug' => 'view.roles',
-		]);
+		$users = [
+			['id'=>1,'name'=>'محسن بخيش' ,'email'=>'mouhsine.bakhich@gmail.com' ,'password'=>bcrypt("123456")],
+			['name'=>'هيثم' ,'email'=>'haitham.hamdy@css.edu.om ' ,'password'=>bcrypt("123456")],
+			['name'=>'سامي' ,'email'=>'samialmamari@css.edu.om ' ,'password'=>bcrypt("123456")],
+			['name'=>'احمد' ,'email'=>'aalkindi@css.edu.om ' ,'password'=>bcrypt("123456")]
+		];
 
-		foreach($users as $user):
-		// permission-
+		foreach($users as $user) 
+			User::create($user);
 
-		$user->attachPermission($createUsersPermission);
-		// permission
-		
-		$user->attachPermission($deleteUsersPermission);
-		// permission
-		
-		$user->attachPermission($editUsersPermission);
-		// permission
-		
-		$user->attachPermission($viewUsersPermission);
+		$permissions = [
+			['name' => 'اضافة مستخدم','slug' => 'create.users'],
+			['name' => 'حذف مستخدم','slug' => 'delete.users'],
+			['name' => 'تعديل مستخدم','slug' => 'edit.users'],
+			['name' => 'مشاهدة المستخدمين','slug' => 'view.users'],
+			['name' => 'اضافة صلاحية','slug' => 'create.roles'],
+			['name' => 'حذف صلاحية','slug' => 'delete.roles'],
+			['name' => 'تعديل صلاحية','slug' => 'edit.roles'],
+			['name' => 'مشاهدة الصلاحيات','slug' => 'view.roles']
+		];
 
-		/**
-		 * seed roles permissions
-		 */
+		$slugs = array_map(function ($ar) {return $ar['slug'];}, $permissions);
 		
-		// permission-
+		$users = User::all();
+		
+		Permission::whereIn('slug' ,$slugs)->delete();
 
-		$user->attachPermission($createRolesPermission);
-		// permission
-		$user->attachPermission($deleteRolesPermission);
-		// permission
-		$user->attachPermission($editRolesPermission);
-		// permission
-		$user->attachPermission($viewRolesPermission);
-		endforeach;
+		foreach($permissions as $permission){
+			$perm = Permission::create($permission);
+
+			foreach($users as $user)
+				$user->attachPermission($perm);
+		}
+
+		
 	}
 
 }
