@@ -1,5 +1,24 @@
 @extends('layouts.master')
 @section('content')
+
+{{-- Start breadcrumbs --}}
+<ol class="breadcrumb">
+  <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
+   <li>
+    النظام
+  </li>
+  <li>
+  <a href="{{ route('roles.index')}}">
+    @lang('users::roles.header')
+    </a>
+  </li>
+  <li class='active'>
+    @lang('users::roles.create_role')
+    
+  </li>
+</ol>
+{{-- End breadcrumbs --}}
+
 <div class="x_panel" style="min-height:600px;">
     <div class="x_title">
         <h2>@lang('users::roles.create_role')</h2>
@@ -7,14 +26,24 @@
     </div>
     <br>
     {!! Form::open(['route'=>'roles.store' ,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate']) !!}
-    
+<div class="form-group">
+    <div class="col-md-12">
+        <a href="{{ route('roles.index') }}" class="pull-left btn btn-primary">
+        <i class="fa fa-times"></i> @lang('global.cancel')</a>
+        <button type="submit" class="pull-left btn btn-success">
+        <i class="fa fa-save"></i> @lang('global.save')</button>
+    </div>
+</div>
+<div class="ln_solid"></div>
     @include('users::roles._fields')
 
 <div class="ln_solid"></div>
 <div class="form-group">
-    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-        <a href="{{ route('roles.index') }}" class="btn btn-primary">@lang('global.cancel')</a>
-        <button type="submit" class="btn btn-success">@lang('global.save')</button>
+    <div class="col-md-12">
+        <a href="{{ route('roles.index') }}" class="pull-left btn btn-primary">
+        <i class="fa fa-times"></i> @lang('global.cancel')</a>
+        <button type="submit" class="pull-left btn btn-success">
+        <i class="fa fa-save"></i> @lang('global.save')</button>
     </div>
 </div>
 {!! Form::close() !!}

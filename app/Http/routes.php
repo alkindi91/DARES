@@ -22,6 +22,12 @@ get('auth/logout', ['as'=>'logout','uses'=>'Auth\AuthController@getLogout','midd
 // get('auth/register', 'Auth\AuthController@getRegister');
 // post('auth/register', 'Auth\AuthController@postRegister');
 
+Route::group(['prefix'=>'ajax'], function () {
+	get('togglesidebar', [
+		'as'=>'ajax.togglesidebar',
+		'uses'=>'Ajax\SideMenuController@toggle'
+		]);
+});
 
 if(!function_exists('user')) {
 	function user() {

@@ -109,7 +109,7 @@ class ListsServiceProvider extends ServiceProvider {
 		
 
 		
-		$sysmenu->add('الدول و المدن' ,['route'=>'countries.index']);
+		$sysmenu->add('الدول و المدن' ,['route'=>'countries.index'])->prepend('<i class="fa fa-map-marker"></i>');
 
 	}
 

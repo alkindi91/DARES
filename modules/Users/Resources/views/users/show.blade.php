@@ -1,7 +1,25 @@
 @extends('layouts.master')
 
 @section('content')
-	
+
+{{-- Start breadcrumbs --}}
+<ol class="breadcrumb">
+  <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
+   <li>
+    النظام
+  </li>
+  <li>
+  <a href="{{ route('users.index')}}">
+    @lang('users::users.header')
+    </a>
+  </li>
+  <li class='active'>
+    @lang('users::users.user_details' ,['name'=>$user->name])
+    
+  </li>
+</ol>
+{{-- End breadcrumbs --}}
+
 <div class="x_panel" style="min-height:600px;">
 <div class="x_title">
     <h2>{{ $user->name }}</h2>
@@ -45,9 +63,9 @@
 			<td>الصلاحيات</td>
 			<td>
 				@foreach($user->getPermissions() as $permission)
-				<span class="label label-info">
+				<div class="label label-info" style='display: inline-block;padding: 5px;margin: 2px;'>
 					{{ $permission->name }}
-				</span>&nbsp;
+				</div>&nbsp;
 				@endforeach
 			</td>
 		</tr>

@@ -4,7 +4,10 @@ use Modules\Lists\Http\Controllers\CitiesController;
 
 Route::group(['prefix' => 'lists', 'namespace' => 'Modules\Lists\Http\Controllers'], function()
 {
-	Route::get('/', 'ListsController@index');
+	Route::get('/', [
+		'uses'=>'ListsController@index',
+		'as'=>'lists.index'
+		]);
 
 	Route::group(['prefix'=>'countries'] ,function() {
 

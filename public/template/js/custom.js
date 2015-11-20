@@ -25,7 +25,9 @@ $(function () {
         }
     });
 
-    $('#menu_toggle').click(function () {
+    $('#menu_toggle').click(function (e) {
+        e.preventDefault();
+
         if ($('body').hasClass('nav-md')) {
             $('body').removeClass('nav-md');
             $('body').addClass('nav-sm');
@@ -47,6 +49,20 @@ $(function () {
                 $('#sidebar-menu li.active-sm').removeClass('active-sm');
             }
         }
+
+        $.ajax({
+            url: $(this).attr('href'),
+        })
+        .done(function() {
+           
+        })
+        .fail(function() {
+            
+        })
+        .always(function() {
+           
+        });
+        
     });
 });
 

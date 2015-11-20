@@ -13,7 +13,7 @@
 
 </div>
 <!-- /menu footer buttons -->
-<div class="sidebar-footer hidden-small" style="display:{{ !session('sidebar') ? 'none' : 'block'}}">
+<div class="sidebar-footer hidden-small" style="display:{{ session('sidebar_hidden') ? 'none' : 'block'}}">
     <a data-toggle="tooltip" data-placement="top" title="Settings">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
     </a>
@@ -23,8 +23,8 @@
     <a data-toggle="tooltip" data-placement="top" title="Lock">
         <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
     </a>
-    <a data-toggle="tooltip" href='admin/logout.php' data-placement="top" title="تسجيل الخروج">
+    <a data-toggle="tooltip" href='{{ route('logout')}}' data-placement="top" title="تسجيل الخروج">
         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
     </a>
 </div>
-                    <!-- /menu footer buttons -->
+<!-- /menu footer buttons -->

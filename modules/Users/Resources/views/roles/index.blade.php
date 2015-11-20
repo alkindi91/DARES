@@ -1,5 +1,18 @@
 @extends('layouts.master')
 @section('content')
+
+{{-- Start breadcrumbs --}}
+<ol class="breadcrumb">
+  <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
+   <li>
+    النظام
+  </li>
+  <li class='class='active''>
+    @lang('users::roles.header')
+  </li>
+</ol>
+{{-- End breadcrumbs --}}
+
  <div class="x_panel" style="min-height:600px;">
 <div class="x_title">
     <h2>@lang('users::roles.header')</h2>

@@ -31,11 +31,13 @@ class CitiesController extends Controller {
 		$city->save();
 
 		return redirect()->route('cities.index' ,$country->id)
-						 ->with('success' ,trans('lists::cities.create_success'));
+						 ->with('success' ,trans('lists::cities.create_success', ['name'=>$city->name]));
 	}
 
 	public function edit(City $city) {
-		return view('lists::cities.edit' ,compact('city'));
+		$city->load('country');
+		$country = $city->country;
+		return view('lists::cities.edit' ,compact('city' ,'country'));
 	}
 
 	public function update(UpdateCityRequest $req ,City $City) {

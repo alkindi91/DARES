@@ -1,5 +1,27 @@
 @extends('layouts.master')
 @section('content')
+
+{{-- Start breadcrumbs --}}
+<ol class="breadcrumb">
+  <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
+  <li><a href="{{ route('lists.index') }}">
+    @lang('lists::lists.header')
+    </a>
+  </li>
+  <li><a href="{{ route('countries.index') }}">
+    @lang('lists::countries.header')
+    </a>
+  </li>
+  <li><a href="{{ route('countries.edit' ,$country->id) }}">
+    {{ $country->name }}
+    </a>
+  </li>
+  <li class='active'>
+    @lang('lists::cities.header')
+  </li>
+</ol>
+{{-- End breadcrumbs --}}
+
  <div class="x_panel" style="min-height:600px;">
 <div class="x_title">
     <h2>@lang('lists::cities.header')</h2>
@@ -13,6 +35,12 @@
 @endif
 <div class="clearfix"></div>
 <br />
+@if($cities->isEmpty())
+<div class="alert alert-info">
+	<i class="fa fa-info"></i>
+	@lang('lists::cities.no_items', ['country_name'=>$country->name])
+</div>
+@else
 {!! Form::open(['route'=>['cities.delete-bulk' ,$country->id] ,'method'=>'GET']) !!}
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
 	<thead>
@@ -59,6 +87,7 @@
 <i class="fa fa-trash"></i> @lang('global.delete')
 </button>
 </div>
+@endif
 {!! Form::close() !!}
 </div>
 @stop

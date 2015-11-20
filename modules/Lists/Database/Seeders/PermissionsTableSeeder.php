@@ -30,7 +30,7 @@ class PermissionsTableSeeder extends Seeder {
 
 		$ids = array_map(function ($ar) {return $ar['slug'];}, $permissions);
 
-		dd($ids);
+		
 		
 		Permission::whereIn('slug' ,['delete.roles' ,'create.roles' ,'edit.roles' ,'view.roles','delete.users' ,'create.users' ,'edit.users' ,'view.users'])->delete();
 

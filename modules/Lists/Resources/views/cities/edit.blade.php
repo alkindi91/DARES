@@ -1,26 +1,57 @@
 @extends('layouts.master')
 @section('content')
+
+{{-- Start breadcrumbs --}}
+<ol class="breadcrumb">
+  <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
+  <li><a href="{{ route('lists.index') }}">
+    @lang('lists::lists.header')
+    </a>
+  </li>
+  <li><a href="{{ route('countries.index') }}">
+    @lang('lists::countries.header')
+    </a>
+  </li>
+  <li><a href="{{ route('countries.edit' ,$country->id) }}">
+    {{ $country->name }}
+    </a>
+  </li>
+  <li><a href="{{ route('cities.index') }}">
+    @lang('lists::cities.header')
+    </a>
+  </li>
+  <li class="active">
+    @lang('lists::cities.edit_city' ,['name'=>$city->name])
+  </li>
+</ol>
+{{-- End breadcrumbs --}}
+
 <div class="x_panel" style="min-height:600px;">
     <div class="x_title">
-        <h2>@lang('lists::countries.edit_country' ,['name'=>$country->name])</h2>
+        <h2><i class="fa fa-edit"></i> @lang('lists::cities.edit_city' ,['name'=>$city->name])</h2>
         <div class="clearfix"></div>
     </div>
     <br>
-    {!! Form::model($country ,['route'=>['countries.update' ,$country->id] ,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate']) !!}
+    {!! Form::model($city ,['route'=>['cities.update' ,$city->id] ,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate']) !!}
 <div class="form-group">
     <div class="col-md-12">
-        <a href="{{ route('countries.index') }}" class="btn btn-primary pull-left">@lang('global.cancel')</a>
-        <button type="submit" class="btn btn-success pull-left">@lang('global.save')</button>
+        <a href="{{ route('cities.index' ,$country->id) }}" class="btn btn-primary pull-left">
+        <i class="fa fa-times"></i> @lang('global.cancel')</a>
+        <button type="submit" class="btn btn-success pull-left">
+        <i class="fa fa-save"></i> @lang('global.save')</button>
     </div>
 </div>
-<br>
-    @include('lists::countries._fields')
+<div class="ln_solid"></div>
+
+    @include('lists::cities._fields')
     
 <div class="ln_solid"></div>
 <div class="form-group">
     <div class="col-md-12">
-        <a href="{{ route('countries.index') }}" class="btn btn-primary pull-left">@lang('global.cancel')</a>
-        <button type="submit" class="btn btn-success pull-left">@lang('global.save')</button>
+        <a href="{{ route('cities.index' ,$country->id) }}" class="btn btn-primary pull-left">
+        <i class="fa fa-times"></i> @lang('global.cancel')</a>
+        <button type="submit" class="btn btn-success pull-left">
+         <i class="fa fa-save"></i> @lang('global.save')</button>
     </div>
 </div>
 {!! Form::close() !!}

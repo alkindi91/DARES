@@ -1,3 +1,4 @@
+<fieldset>
 {{-- Form Input Group --}}
 <div class="form-group {{ $errors->first('name' ,'has-error') }}">
     {!! Form::label('name' ,trans('users::roles.name') ,['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
@@ -68,3 +69,4 @@
 </div>
 </div>
 </div>
+</fieldset>

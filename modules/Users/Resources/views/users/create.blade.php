@@ -1,5 +1,24 @@
 @extends('layouts.master')
 @section('content')
+
+{{-- Start breadcrumbs --}}
+<ol class="breadcrumb">
+  <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
+   <li>
+    النظام
+  </li>
+  <li>
+  <a href="{{ route('users.index')}}">
+    @lang('users::users.header')
+    </a>
+  </li>
+  <li class='active'>
+    @lang('users::users.create_user')
+    
+  </li>
+</ol>
+{{-- End breadcrumbs --}}
+
 <div class="x_panel" style="min-height:600px;">
     <div class="x_title">
         <h2>@lang('users::users.create_user')</h2>
@@ -8,15 +27,16 @@
     <br>
 
     {!! Form::open(['route'=>'users.store' ,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate','files'=>true]) !!}
-    <div class="from-group">
+    <div class="form-group">
     <div class="col-md-12">
      <a href="{{ route('users.index') }}" class="btn btn-primary pull-left">
         <i class="fa fa-close"></i> @lang('global.cancel')</a>
         <button type="submit" class="btn btn-success pull-left">
-        <i class="fa fa-save"></i> @lang('global.save')</button>
+        <i class="fa fa-save"></i> @lang('global.save')
+        </button>
     </div>
     </div>
-    <br>
+<div class="ln_solid"></div>
     @include('users::users._fields')
 <div class="ln_solid"></div>
 <div class="form-group">

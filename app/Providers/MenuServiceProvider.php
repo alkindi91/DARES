@@ -15,7 +15,7 @@ class MenuServiceProvider extends ServiceProvider
     {
         Menu::make('SidebarMenu' , function($menu){
 
-          $menu->add('الرئيسية' ,['route'=>'welcome'])->data('order' ,1);
+          $menu->add('الرئيسية' ,['route'=>'welcome'])->data('order' ,1)->prepend('<i class="fa fa-home"></i>');
          
 
         });

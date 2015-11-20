@@ -99,16 +99,16 @@ class UsersServiceProvider extends ServiceProvider {
 
 	public function registerMenu() {
 		$menu = Menu::get('SidebarMenu');
-		$sysmenu = $menu->add('<i class="fa fa-home"></i> النظام')
+		$sysmenu = $menu->add('<i class="fa fa-lock"></i> النظام')
 						->data('module' ,'users')
 						->data('permission' ,'view.users')
 						->data('order' ,2);
 		
 
 		
-		$sysmenu->add('المستخدمين' ,['route'=>'users.index']);
+		$sysmenu->add('المستخدمين' ,['route'=>'users.index'])->prepend('<i class="fa fa-user"></i>');
 
-		$sysmenu->add('المجموعات' ,['route'=>'roles.index']);
+		$sysmenu->add('المجموعات' ,['route'=>'roles.index'])->prepend('<i class="fa fa-users"></i>');
 
 
 		// foreach($menu->items as $item) 

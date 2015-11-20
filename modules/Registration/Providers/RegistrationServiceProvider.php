@@ -1,14 +1,16 @@
 <?php namespace Modules\Registration\Providers;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use Menu;
 
 class RegistrationServiceProvider extends ServiceProvider {
 
-	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
-	 */
+    /**
+    * Indicates if loading of the provider is deferred.
+    *
+    * @var bool
+    */
 	protected $defer = false;
 
 	/**
@@ -16,11 +18,13 @@ class RegistrationServiceProvider extends ServiceProvider {
 	 * 
 	 * @return void
 	 */
-	public function boot()
+	public function boot(Router $router)
 	{
+		$router->model('step' ,'\Modules\Registration\Entities\RegistrationStep');
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();
+		$this->registerMenu();
 	}
 
 	/**
@@ -90,6 +94,13 @@ class RegistrationServiceProvider extends ServiceProvider {
 	public function provides()
 	{
 		return array();
+	}
+
+	public function registerMenu()
+	{
+		$menu = Menu::get('SidebarMenu');
+		$submenu = $menu->add('القبول')->prepend('<i class="fa fa-check"></i>');
+		$submenu->add('مراحل القبول', ['route'=>'registration.steps.index'])->prepend('<i class="fa fa-recycle"></i>');
 	}
 
 }

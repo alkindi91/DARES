@@ -15,6 +15,7 @@ return [
 	'email'=>'البريد الإلكتروني',
 	'email_hint'=>'يستخدم لتسجيل الدخول',
 	'edit_user'=>'تعديل المستخدم :name',
+	'user_details'=>'تفاصيل المستخدم :name',
 	'birthday'=>'تاريخ الميلاد',
 	'password_confirmation'=>'تأكيد كلمة السر',
 	'create_success'=>'تم انشاء حساب للمستخدم :name بنجاح',

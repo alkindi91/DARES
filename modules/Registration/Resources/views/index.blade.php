@@ -1,11 +1,25 @@
-@extends('registration::layouts.master')
+@extends('layouts.master')
 
 @section('content')
-	
-	<h1>Hello World</h1>
-	
-	<p>
-		This view is loaded from module: {!! config('registration.name') !!}
-	</p>
 
+{{-- Start breadcrumbs --}}
+<ol class="breadcrumb">
+  <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
+  <li class='active'>
+  	@lang('registration::registration.header')
+  </li>
+ 
+</ol>
+{{-- End breadcrumbs --}}
+
+	<div class="x_panel" style="min-height:600px;">
+	<div class="x_title">
+		تحت الانشاء
+		<div class="clearfix"></div>
+	</div>
+		
+	<div class="x_content">
+		تحت الانشاء
+	</div>
+	</div>
 @stop

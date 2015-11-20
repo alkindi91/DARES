@@ -7,6 +7,6 @@ class City extends Model {
     protected $fillable = ['country_id' ,'name'];
     
     public function country() {
-    	return $this->hasBelongsTo('\Modules\Lists\Entities\Country');
+    	return $this->belongsTo('\Modules\Lists\Entities\Country');
     }
 }
