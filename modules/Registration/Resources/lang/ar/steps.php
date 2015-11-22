@@ -8,6 +8,7 @@ return [
     'next_steps'=>'المراحل التالية',
     'choose_next_steps'=>'اختر المراحل التي ستاتي بعد هذه المرحلة',
 	'create_step'=>'اضافة مرحلة',
+	'verify_email'=>'التحقق من الايمايل',
 	'edit_step'=>'تعديل المرحلة :name',
 	'email_template'=>'قالب المايل',
 	'sms_template'=>'قالب SMS',

@@ -19,6 +19,18 @@
 	</div>
 </div>
 {{-- Form Input Group --}}
+<div class="form-group {{ $errors->first('verify_email' ,'has-error') }}">
+	{!! Form::label('verify_email' ,trans('registration::steps.verify_email') ,['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
+	<div class="col-md-6 col-sm-6 col-xs-12">
+		<div class="checkbox">
+			<label>
+				{!! Form::checkbox('verify_email' ,1 ,null ,['class'=>'flat']) !!}
+			</label>
+		</div>
+		{!! $errors->first('verify_email' ,'<div class="label label-danger">:message</div>') !!}
+	</div>
+</div>
+{{-- Form Input Group --}}
 <div class="form-group {{ $errors->first('upload_files' ,'has-error') }}">
 	{!! Form::label('upload_files' ,trans('registration::steps.upload_files') ,['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
 	<div class="col-md-6 col-sm-6 col-xs-12">

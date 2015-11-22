@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder {
 		$users = User::all();
 
 		$users = [
-			['id'=>1,'name'=>'محسن بخيش' ,'email'=>'mouhsine.bakhich@gmail.com' ,'password'=>bcrypt("123456")],
+			['id'=>1,'name'=>'محسن بخيش' ,'email'=>'mbakhick@css.edu.om' ,'password'=>bcrypt("123456")],
 			['name'=>'هيثم' ,'email'=>'haitham.hamdy@css.edu.om ' ,'password'=>bcrypt("123456")],
 			['name'=>'سامي' ,'email'=>'samialmamari@css.edu.om ' ,'password'=>bcrypt("123456")],
 			['name'=>'احمد' ,'email'=>'aalkindi@css.edu.om ' ,'password'=>bcrypt("123456")]

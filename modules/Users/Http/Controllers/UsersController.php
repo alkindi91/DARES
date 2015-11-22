@@ -109,7 +109,7 @@ class UsersController extends Controller {
 		$user->fill($req->all());
 
 		if(!empty($req->input('password')))
-		$UserModel->password = bcrypt($req->input('password'));
+		$user->password = bcrypt($req->input('password'));
 
 		$user->save();
 

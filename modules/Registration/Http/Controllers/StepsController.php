@@ -34,15 +34,17 @@ class StepsController extends Controller
         return view('registration::steps.edit', compact('step' ,'steps'));
     }
 
-    public function store(CreateStepRequest $req, Step $Step)
+    public function store(CreateStepRequest $request, Step $Step)
     {
-        $step = $Step->fill($req->all());
+        $step = $Step->fill($request->all());
 
-        $step->edit_form = $req->has('edit_form') ? 1 : 0;
+        $step->edit_form = $request->has('edit_form') ? 1 : 0;
 
-        $step->upload_files = $req->has('upload_files') ? 1 : 0;
+        $step->upload_files = $request->has('upload_files') ? 1 : 0;
 
         $step->save();
+
+        $this->processVerifyEmail($step);
 
         if(request('next_steps')) {
 
@@ -52,15 +54,17 @@ class StepsController extends Controller
         return redirect()->route('registration.steps.index')->with('success', trans('registration::steps.create_success', ['name'=>$step->name]));
     }
 
-    public function update(UpdateStepRequest $req, Step $step)
+    public function update(UpdateStepRequest $request, Step $step)
     {
-        $step = $step->fill($req->all());
+        $step = $step->fill($request->all());
 
-        $step->edit_form = $req->has('edit_form') ? 1 : 0;
+        $step->edit_form = $request->has('edit_form') ? 1 : 0;
 
-        $step->upload_files = $req->has('upload_files') ? 1 : 0;
+        $step->upload_files = $request->has('upload_files') ? 1 : 0;
 
         $step->save();
+
+        $this->processVerifyEmail($step);
 
         $step->children()->detach();
 
@@ -81,18 +85,30 @@ class StepsController extends Controller
         ->route('registration.steps.index', trans('registration::steos.delete_success', ['name'=>$step->name]));
     }
 
-    public function deleteBulk(Request $req, Step $Step)
+    public function deleteBulk(Request $request, Step $Step)
     {
-        if (!$req->has('table_records')) {
+        if (!$request->has('table_records')) {
             return redirect()->route('cities.index');
         }
         
-        $ids = $req->input('table_records');
+        $ids = $request->input('table_records');
 
         $Step->destroy($ids);
         
         return redirect()
         ->route('registration.steps.index')
         ->with('success', trans('registration::steps.delete_bulk_success'));
+    }
+
+    public function processVerifyEmail($step) 
+    {
+        $StepModel = new Step;
+
+        if (request('verify_email')) {
+
+          $StepModel->where('id' ,'!=' ,$step->id)->update(['verify_email'=>0]);
+          $step->verify_email = 1;
+          $step->save();
+        }
     }
 }

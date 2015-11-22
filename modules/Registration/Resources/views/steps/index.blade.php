@@ -48,6 +48,9 @@
 				<i class="fa fa-upload"></i> @lang('registration::steps.upload_files')
 			</th>
 			<th>
+				<i class="fa fa-envelope"></i> @lang('registration::steps.verify_email')
+			</th>
+			<th>
 				<i class="fa fa-angle-double-left"></i> @lang('registration::steps.next_steps')
 			</th>
 			
@@ -72,6 +75,9 @@
 		</td>
 		<td class='text-center {!! $step->upload_files ? 'success' : 'danger' !!}'>
 			{!! $step->upload_files ? '<i class="glyphicon text-success glyphicon-ok"></i>' : '<i class="glyphicon text-danger glyphicon-remove"></i>' !!}
+		</td>
+		<td class='text-center {!! $step->verify_email ? 'success' : 'danger' !!}'>
+			{!! $step->verify_email ? '<i class="glyphicon text-success glyphicon-ok"></i>' : '<i class="glyphicon text-danger glyphicon-remove"></i>' !!}
 		</td>
 		<td>
 			@foreach($step->children as $nextstep)
