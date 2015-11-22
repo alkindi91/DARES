@@ -14,7 +14,8 @@
         "jenssegers/rollbar": "^1.4",
         "illuminate/html": "^5.0",
         "codesleeve/laravel-stapler": "1.0.*",
-        "kalnoy/nestedset": "^3.1"
+        "kalnoy/nestedset": "^3.1",
+        "guzzlehttp/guzzle": "~5.3|~6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

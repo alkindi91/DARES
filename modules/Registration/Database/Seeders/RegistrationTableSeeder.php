@@ -21,12 +21,16 @@ class RegistrationTableSeeder extends Seeder {
 			['name'=>'تعدل مرحلة قبول تسجيل' ,'slug'=>'edit.registration.steps'],
 			['name'=>'حذف مرحلة قبول تسجيل' ,'slug'=>'delete.registration.steps'],
 			['name'=>'مشاهدة مراحل التسجيل' ,'slug'=>'view.registration.steps'],
+			
 			['name'=>'اضافة عام جامعي تسجيل' ,'slug'=>'create.registration.years'],
 			['name'=>'تعدل عام جامعي تسجيل' ,'slug'=>'edit.registration.years'],
 			['name'=>'حذف عام جامعي تسجيل' ,'slug'=>'delete.registration.years'],
 			['name'=>'مشاهدة العام الجامعي التسجيل' ,'slug'=>'view.registration.years'],
-			
-			
+
+			['name'=>'اضافة فتؤة القبول' ,'slug'=>'create.registration.periods'],
+			['name'=>'تعدل فتؤة القبول' ,'slug'=>'edit.registration.periods'],
+			['name'=>'حذف فتؤة القبول' ,'slug'=>'delete.registration.periods'],
+			['name'=>'مشاهدة فترات القبول' ,'slug'=>'view.registration.periods'],
 		];
 
 		$slugs = array_map(function ($ar) {return $ar['slug'];}, $permissions);

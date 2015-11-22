@@ -8,30 +8,38 @@
   	@lang('registration::registration.header')
   	</a>
   </li>
+  <li><a href="{{ route('registration.index' ,$year->id) }}">
+  	@lang('registration::years.header')
+  	</a>
+  </li>
+  <li><a href="{{ route('registration.years.edit' ,$year->id) }}">
+  	{{ $year->name }}
+  	</a>
+  </li>
   <li class="active">
-	@lang('registration::years.header')
+	@lang('registration::periods.header')
   </li>
 </ol>
 {{-- End breadcrumbs --}}
  <div class="x_panel" style="min-height:600px;">
 <div class="x_title">
-    <h2><i class="fa fa-calendar"></i> @lang('registration::years.header')</h2>
+    <h2><i class="fa fa-calendar"></i> @lang('registration::periods.header')</h2>
 
 <div class="clearfix"></div>
 </div>
-@permission('create.registration.years')
-<a href="{{ route('registration.years.create') }}" class="btn btn-primary pull-left">
+@permission('create.registration.periods')
+<a href="{{ route('registration.periods.create' ,$year->id) }}" class="btn btn-primary pull-left">
 	<i class="fa fa-plus"></i> @lang('global.new')
 </a>
 @endif
 <div class="clearfix"></div>
 <br />
-@if($years->isEmpty())
+@if($periods->isEmpty())
 <div class="alert alert-info">
-	<i class="fa fa-info"></i> @lang('registration::years.no_items')
+	<i class="fa fa-info"></i> @lang('registration::periods.no_items')
 </div>
 @else
-{!! Form::open(['route'=>'registration.years.delete-bulk' ,'method'=>'GET']) !!}
+{!! Form::open(['route'=>'registration.periods.delete-bulk' ,'method'=>'GET']) !!}
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
 	<thead>
 		<tr class="headings">
@@ -39,13 +47,13 @@
 				<input type="checkbox" id='check-all' class="tableflat">
 			</th>
 			<th>
-				@lang('registration::years.name')
+				@lang('registration::periods.name')
 			</th>
 			<th>
-				<i class="fa fa-calendar"></i> @lang('registration::years.start_at')
+				<i class="fa fa-calendar"></i> @lang('registration::periods.start_at')
 			</th>
 			<th>
-				<i class="fa fa-calendar"></i> @lang('registration::years.finish_at')
+				<i class="fa fa-calendar"></i> @lang('registration::periods.finish_at')
 			</th>
 			
 			
@@ -57,30 +65,27 @@
 	</tr>
 </thead>
 <tbody>
-	@foreach($years as $year)
+	@foreach($periods as $period)
 	<tr class="even pointer">
 		<td class="a-center ">
-			<input type="checkbox" class="tableflat" value='{{ $year->id }}' name='table_records[]'>
+			<input type="checkbox" class="tableflat" value='{{ $period->id }}' name='table_records[]'>
 		</td>
 		<td>
-			{{ $year->name }}
+			{{ $period->name }}
 		</td>
-		<td class='text-center {!! $year->edit_form ? 'success' : 'danger' !!}'>
-			{{ $year->start_at }}
+		<td class='text-center {!! $period->edit_form ? 'success' : 'danger' !!}'>
+			{{ $period->start_at }}
 		</td>
-		<td class='text-center {!! $year->finish_at ? 'success' : 'danger' !!}'>
-			{{ $year->finish_at }}
+		<td class='text-center {!! $period->finish_at ? 'success' : 'danger' !!}'>
+			{{ $period->finish_at }}
 		</td>
 		
 		<td class=" last">
-			<a href="{{ route('registration.years.edit' ,$year->id)}}" class='btn btn-sm btn-success'>
+			<a href="{{ route('registration.periods.edit' ,$period->id)}}" class='btn btn-sm btn-success'>
 				<i class="fa fa-edit"></i> @lang('global.edit')
 			</a>
-			<a href="{{ route('registration.years.delete' ,$year->id)}}" class="btn btn-danger btn-sm">
+			<a href="{{ route('registration.periods.delete' ,$period->id)}}" class="btn btn-danger btn-sm">
 			<i class="fa fa-trash"></i> @lang('global.delete')
-			</a>
-			<a href="{{ route('registration.periods.index' ,$year->id)}}" class="btn btn-info btn-sm">
-			<i class="fa fa-arrows-h"></i> @lang('registration::periods.header')
 			</a>
 			
 	</td>

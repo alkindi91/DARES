@@ -103,7 +103,7 @@ class RegistrationServiceProvider extends ServiceProvider {
 		$submenu = $menu->add(trans('registration::registration.header'))->prepend('<i class="fa fa-check"></i>');
 		$submenu->add(trans('registration::steps.header'), ['route'=>'registration.steps.index'])->prepend('<i class="fa fa-recycle"></i>');
 		$submenu->add(trans('registration::years.header'), ['route'=>'registration.years.index'])->prepend('<i class="fa fa-calendar"></i>');
-		$submenu->add(trans('registration::periods.header'), ['route'=>'registration.periods.index'])->prepend('<i class="fa fa-arrows-h"></i>');
+		// $submenu->add(trans('registration::periods.header'), ['route'=>'registration.periods.index'])->prepend('<i class="fa fa-arrows-h"></i>');
 	}
 
 }

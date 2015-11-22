@@ -116,13 +116,13 @@ Route::group([
 
         Route::group(['prefix'=>'periods'], function () {
 
-            get('/', [
+            get('/{year}', [
                 'as'=>'registration.periods.index',
                 'uses'=>'PeriodsController@index' ,
                 'middleware'=>'permission:view.registration.periods'
                 ]);
 
-            get('create', [
+            get('create/{year}', [
                 'as'=>'registration.periods.create',
                 'uses'=>'PeriodsController@create',
                 'middleware'=>'permission:create.registration.periods'

@@ -58,6 +58,6 @@ class Handler extends ExceptionHandler
             return redirect()->back();
         }
 
-        return parent::render($request, $e);
+        return parent::render($request, $e)->with('error','ليست لديك صلاحية للقيام بهاته العملية');
     }
 }
