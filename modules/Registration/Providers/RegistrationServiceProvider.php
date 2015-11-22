@@ -99,8 +99,9 @@ class RegistrationServiceProvider extends ServiceProvider {
 	public function registerMenu()
 	{
 		$menu = Menu::get('SidebarMenu');
-		$submenu = $menu->add('القبول')->prepend('<i class="fa fa-check"></i>');
-		$submenu->add('مراحل القبول', ['route'=>'registration.steps.index'])->prepend('<i class="fa fa-recycle"></i>');
+		$submenu = $menu->add(trans('registration::registration.header'))->prepend('<i class="fa fa-check"></i>');
+		$submenu->add(trans('registration::steps.header'), ['route'=>'registration.steps.index'])->prepend('<i class="fa fa-recycle"></i>');
+		$submenu->add(trans('registration::years.header'), ['route'=>'registration.years.index'])->prepend('<i class="fa fa-calendar"></i>');
 	}
 
 }

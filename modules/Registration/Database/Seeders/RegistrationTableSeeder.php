@@ -17,10 +17,14 @@ class RegistrationTableSeeder extends Seeder {
 		Model::unguard();
 		
 		$permissions = [
-			['name'=>'اضافة مرحلة تسجيل' ,'slug'=>'create.registration.steps'],
-			['name'=>'تعدل مرحلة تسجيل' ,'slug'=>'edit.registration.steps'],
-			['name'=>'حذف مرحلة تسجيل' ,'slug'=>'delete.registration.steps'],
+			['name'=>'اضافة مرحلة قبول تسجيل' ,'slug'=>'create.registration.steps'],
+			['name'=>'تعدل مرحلة قبول تسجيل' ,'slug'=>'edit.registration.steps'],
+			['name'=>'حذف مرحلة قبول تسجيل' ,'slug'=>'delete.registration.steps'],
 			['name'=>'مشاهدة مراحل التسجيل' ,'slug'=>'view.registration.steps'],
+			['name'=>'اضافة عام جامعي تسجيل' ,'slug'=>'create.registration.years'],
+			['name'=>'تعدل عام جامعي تسجيل' ,'slug'=>'edit.registration.years'],
+			['name'=>'حذف عام جامعي تسجيل' ,'slug'=>'delete.registration.years'],
+			['name'=>'مشاهدة العام الجامعي التسجيل' ,'slug'=>'view.registration.years'],
 			
 			
 		];

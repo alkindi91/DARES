@@ -38,7 +38,21 @@
 		
 	</div>
 </div>
-<br>
+
+{{-- Form Input Group --}}
+<div class="form-group {{ $errors->first('email_template' ,'has-error') }}">
+	{!! Form::label('email_template' ,trans('registration::steps.email_template') ,['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
+	<div class="col-md-9 col-sm-9 col-xs-12">
+		
+			
+				{!! Form::textarea('email_template' ,config("registration::email_header") ,['id'=>'email_template','class'=>'form-control']) !!}
+			
+		<div class="help-block">
+			@lang('registration::steps.email_template_hint')
+		</div>
+		{!! $errors->first('email_template' ,'<div class="label label-danger">:message</div>') !!}
+	</div>
+</div>
 
 
 @section('footer')
@@ -51,13 +65,23 @@
   <!-- select2 -->
         <script src="{{ asset('template/js/select/select2.full.min.js') }}"></script>
         <script src="{{ asset('template/js/select/i18n/ar.js') }}"></script>
- <script>
 
-$(".select2_multiple").select2({
+<!-- richtext editor -->
+<script src="//cdn.ckeditor.com/4.5.5/full/ckeditor.js"></script>
+<script>
+jQuery(document).ready(function($) {
+
+  CKEDITOR.replace( 'email_template', {
+  	  language:'ar'
+  });
+
+    $(".select2_multiple").select2({
                     placeholder: "@lang('registration::steps.choose_next_steps')",
                      dir: "rtl",
                     allowClear: true
                 });
+});
+
 
  </script>
 @endsection
@@ -66,4 +90,6 @@ $(".select2_multiple").select2({
 <link href="{{ asset('template/css/icheck/flat/green.css') }}" rel="stylesheet">
 <!-- select2 -->
 <link href="{{ asset('template/css/select/select2.min.css') }}" rel="stylesheet">
+<!-- editor -->
+
 @endsection

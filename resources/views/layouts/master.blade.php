@@ -28,7 +28,9 @@
     <script src="{{ asset('template/js/jquery.min.js') }}"></script>
     <script src="{{ asset('template/js/nprogress.js') }}"></script>
     <script>
-        NProgress.start();
+        jQuery(document).ready(function($) {
+            NProgress.start();
+        });
     </script>
     
     <!--[if lt IE 9]>
@@ -70,16 +72,16 @@
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-left">
-                                    <li><a href="javascript:;">  Profile</a>
+                                    <li><a href="javascript:;">  الصفحة الشخصية</a>
                                     </li>
                                     <li>
                                         <a href="javascript:;">
                                             <span class="badge bg-red pull-left">50%</span>
-                                            <span>Settings</span>
+                                            <span>إعدادات</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="javascript:;">Help</a>
+                                        <a href="javascript:;">مساعدة</a>
                                     </li>
                                     <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out pull-left"></i> @lang('global.logout')</a>
                                     </li>
@@ -96,7 +98,7 @@
                                         <a>
                                         @if(user()->avatar->size())
                                             <span class="image">
-                                        <img src="{{ asset(user()->avatar->url()) }}" alt="Profile Image" />
+                                        <img src="{{ asset(user()->avatar->url('thumb')) }}" alt="Profile Image" />
                                     </span>
                                     @endif
                                             <span>
@@ -110,9 +112,12 @@
                                     </li>
                                     <li>
                                         <a>
+                                        
+                                            @if(user()->avatar->size())
                                             <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
+                                        <img src="{{ asset(user()->avatar->url('thumb')) }}" alt="Profile Image" />
                                     </span>
+                                    @endif
                                             <span>
                                         <span>John Smith</span>
                                             <span class="time">3 mins ago</span>
@@ -124,9 +129,11 @@
                                     </li>
                                     <li>
                                         <a>
+                                            @if(user()->avatar->size())
                                             <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
+                                        <img src="{{ asset(user()->avatar->url('thumb')) }}" alt="Profile Image" />
                                     </span>
+                                    @endif
                                             <span>
                                         <span>John Smith</span>
                                             <span class="time">3 mins ago</span>
@@ -138,9 +145,11 @@
                                     </li>
                                     <li>
                                         <a>
+                                            @if(user()->avatar->size())
                                             <span class="image">
-                                        <img src="images/img.jpg" alt="Profile Image" />
+                                        <img src="{{ asset(user()->avatar->url('thumb')) }}" alt="Profile Image" />
                                     </span>
+                                    @endif
                                             <span>
                                         <span>John Smith</span>
                                             <span class="time">3 mins ago</span>

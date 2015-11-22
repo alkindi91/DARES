@@ -62,4 +62,56 @@ Route::group([
     
         });
 
+        Route::group(['prefix'=>'years'], function () {
+
+            get('/', [
+                'as'=>'registration.years.index',
+                'uses'=>'YearsController@index' ,
+                'middleware'=>'permission:view.registration.years'
+                ]);
+
+            get('create', [
+                'as'=>'registration.years.create',
+                'uses'=>'YearsController@create',
+                'middleware'=>'permission:create.registration.years'
+                ]);
+
+            get('edit/{step}', [
+                'as'=>'registration.years.edit',
+                'uses'=>'YearsController@edit',
+                'middleware'=>'permission:edit.registration.years'
+                ]);
+
+            get('show/{step}', [
+                'as'=>'registration.years.show',
+                'uses'=>'YearsController@show',
+                'middleware'=>'permission:view.registration.years'
+                ]);
+
+            get('delete/{step}', [
+                'as'=>'registration.years.delete',
+                'uses'=>'YearsController@delete',
+                'middleware'=>'permission:delete.registration.years'
+                ]);
+
+            get('delete-bulk', [
+                'as'=>'registration.years.delete-bulk' ,
+                'uses'=>'YearsController@deleteBulk',
+                'middleware'=>'permission:delete.registration.years'
+                ]);
+            
+            post('store', [
+                'as'=>'registration.years.store',
+                'uses'=>'YearsController@store',
+                'middleware'=>'permission:create.registration.years'
+                ]);
+
+            post('update/{step}', [
+                'as'=>'registration.years.update',
+                'uses'=>'YearsController@update',
+                'middleware'=>'permission:edit.registration.years'
+                ]);
+    
+        });
+
     });

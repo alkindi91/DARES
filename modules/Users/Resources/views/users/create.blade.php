@@ -53,9 +53,12 @@
 @section('footer')
 <!-- daterangepicker -->
 <script type="text/javascript" src="{{ asset('template/js/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('template/js/datepicker/daterangepicker.js') }}"></script>
+<!-- validation -->
 <script type="text/javascript" src="{{ asset('template/js/parsley/parsley.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('template/js/parsley/ar.js') }}"></script>
-<script type="text/javascript" src="{{ asset('template/js/datepicker/daterangepicker.js') }}"></script><!-- switchery -->
+
+<!-- switchery -->
 <script src="{{ asset('template/js/switchery/switchery.min.js') }}"></script>
 <script type="text/javascript">
     $(document).ready(function () {

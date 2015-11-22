@@ -9,6 +9,8 @@ return [
     'choose_next_steps'=>'اختر المراحل التي ستاتي بعد هذه المرحلة',
 	'create_step'=>'اضافة مرحلة',
 	'edit_step'=>'تعديل المرحلة :name',
+	'email_template'=>'قالب المايل',
+	'email_template_hint'=>'بامكانك استخدام المتغيرات {name} و {tracking_number} في اي مكان بالرسالة، وسيتم تعويضها باسم المتقدم و رقم تتبعه.',
 	'create_success'=>'تم انشاء المرحلة :name بنجاح',
 	'update_success'=>'تم تحديث بيانات المرحلة :name بنجاح',
 	'delete_success'=>'تم حذف مرحلة القبول :name بنجاح',
