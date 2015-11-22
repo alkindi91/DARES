@@ -1,7 +1,7 @@
 <?php namespace Modules\Academystructure\Http\Controllers;
 
 use Pingpong\Modules\Routing\Controller;
-
+use Modules\Entities\AcademystructureFaculty;
 class AcademystructureController extends Controller {
 	
 	public function index()
@@ -11,6 +11,19 @@ class AcademystructureController extends Controller {
 	public function create_faculty()
 	{
 		return view('academystructure::index');
+	}
+	public function store_faculty(AcademystructureFaculty $faculty , Request $request)
+	{
+		
+				
+		$input = $request->all();
+		//dd($input);
+		$faculty->fill($input)->save();
+		return redirect()->back();
+		/*$input = Input::all();
+		return $input;
+		Academystructure::create( $input );
+		return view('academystructure::index');*/
 	}
 	public function delete_faculty()
 	{
