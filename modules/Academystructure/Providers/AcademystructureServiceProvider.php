@@ -1,7 +1,7 @@
 <?php namespace Modules\Academystructure\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Menu;
 class AcademystructureServiceProvider extends ServiceProvider {
 
 	/**
@@ -21,6 +21,7 @@ class AcademystructureServiceProvider extends ServiceProvider {
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();
+		$this->registerMenu();
 	}
 
 	/**
@@ -89,6 +90,17 @@ class AcademystructureServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
+		return array();
+	}
+	/**
+	 * Academy Structure.
+	 *
+	 * @return array
+	 */
+	public function registerMenu()
+	{
+		$menu = Menu::get('SidebarMenu');
+		$menu->add('الهيكل الاكاديمى' ,['route'=>'faculty.index']);
 		return array();
 	}
 
