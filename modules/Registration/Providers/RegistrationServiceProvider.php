@@ -21,6 +21,7 @@ class RegistrationServiceProvider extends ServiceProvider {
 	public function boot(Router $router)
 	{
 		$router->model('step' ,'\Modules\Registration\Entities\RegistrationStep');
+		$router->model('year' ,'\Modules\Registration\Entities\RegistrationYear');
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();
@@ -102,6 +103,7 @@ class RegistrationServiceProvider extends ServiceProvider {
 		$submenu = $menu->add(trans('registration::registration.header'))->prepend('<i class="fa fa-check"></i>');
 		$submenu->add(trans('registration::steps.header'), ['route'=>'registration.steps.index'])->prepend('<i class="fa fa-recycle"></i>');
 		$submenu->add(trans('registration::years.header'), ['route'=>'registration.years.index'])->prepend('<i class="fa fa-calendar"></i>');
+		$submenu->add(trans('registration::periods.header'), ['route'=>'registration.periods.index'])->prepend('<i class="fa fa-arrows-h"></i>');
 	}
 
 }

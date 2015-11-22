@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RegistrationStep extends Model {
 
-    protected $fillable = ['name' ,'email_template'];
+    protected $fillable = ['name' ,'email_template' ,'sms_template'];
 
     public function children(){
 

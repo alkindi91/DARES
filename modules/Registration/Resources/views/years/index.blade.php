@@ -42,10 +42,10 @@
 				@lang('registration::years.name')
 			</th>
 			<th>
-				<i class="fa fa-edit"></i> @lang('registration::years.start_at')
+				<i class="fa fa-calendar"></i> @lang('registration::years.start_at')
 			</th>
 			<th>
-				<i class="fa fa-upload"></i> @lang('registration::years.finish_at')
+				<i class="fa fa-calendar"></i> @lang('registration::years.finish_at')
 			</th>
 			
 			
@@ -66,10 +66,10 @@
 			{{ $year->name }}
 		</td>
 		<td class='text-center {!! $year->edit_form ? 'success' : 'danger' !!}'>
-			
+			{{ $year->start_at }}
 		</td>
 		<td class='text-center {!! $year->finish_at ? 'success' : 'danger' !!}'>
-		
+			{{ $year->finish_at }}
 		</td>
 		
 		<td class=" last">

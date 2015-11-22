@@ -40,12 +40,26 @@
 </div>
 
 {{-- Form Input Group --}}
+<div class="form-group {{ $errors->first('sms_template' ,'has-error') }}">
+	{!! Form::label('sms_template' ,trans('registration::steps.sms_template') ,['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
+	<div class="col-md-9 col-sm-9 col-xs-12">
+		
+			
+				{!! Form::textarea('sms_template' ,null ,['rows'=>4,'class'=>'form-control']) !!}
+			
+		<div class="help-block">
+			@lang('registration::steps.sms_template_hint')
+		</div>
+		{!! $errors->first('sms_template' ,'<div class="label label-danger">:message</div>') !!}
+	</div>
+</div>
+{{-- Form Input Group --}}
 <div class="form-group {{ $errors->first('email_template' ,'has-error') }}">
 	{!! Form::label('email_template' ,trans('registration::steps.email_template') ,['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
 	<div class="col-md-9 col-sm-9 col-xs-12">
 		
 			
-				{!! Form::textarea('email_template' ,config("registration::email_header") ,['id'=>'email_template','class'=>'form-control']) !!}
+				{!! Form::textarea('email_template' ,null ,['rows'=>4,'id'=>'email_template','class'=>'form-control']) !!}
 			
 		<div class="help-block">
 			@lang('registration::steps.email_template_hint')

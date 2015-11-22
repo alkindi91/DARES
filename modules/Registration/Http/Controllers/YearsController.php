@@ -25,7 +25,6 @@ class YearsController extends Controller
 
     public function edit(Year $year)
     {
-        $year->load('children');
 
         $YearModel = new Year;
 
@@ -38,16 +37,7 @@ class YearsController extends Controller
     {
         $year = $Year->fill($req->all());
 
-        $year->edit_form = $req->has('edit_form') ? 1 : 0;
-
-        $year->upload_files = $req->has('upload_files') ? 1 : 0;
-
         $year->save();
-
-        if(request('next_years')) {
-
-           $year->children()->attach(request('next_years'));
-        }
 
         return redirect()->route('registration.years.index')->with('success', trans('registration::years.create_success', ['name'=>$year->name]));
     }
@@ -56,13 +46,7 @@ class YearsController extends Controller
     {
         $year = $year->fill($req->all());
 
-        $year->edit_form = $req->has('edit_form') ? 1 : 0;
-
-        $year->upload_files = $req->has('upload_files') ? 1 : 0;
-
         $year->save();
-
-        $year->children()->detach();
 
         if(request('next_years')) {
            $year->children()->attach(request('next_years'));

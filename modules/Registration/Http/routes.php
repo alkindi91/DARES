@@ -76,19 +76,19 @@ Route::group([
                 'middleware'=>'permission:create.registration.years'
                 ]);
 
-            get('edit/{step}', [
+            get('edit/{year}', [
                 'as'=>'registration.years.edit',
                 'uses'=>'YearsController@edit',
                 'middleware'=>'permission:edit.registration.years'
                 ]);
 
-            get('show/{step}', [
+            get('show/{year}', [
                 'as'=>'registration.years.show',
                 'uses'=>'YearsController@show',
                 'middleware'=>'permission:view.registration.years'
                 ]);
 
-            get('delete/{step}', [
+            get('delete/{year}', [
                 'as'=>'registration.years.delete',
                 'uses'=>'YearsController@delete',
                 'middleware'=>'permission:delete.registration.years'
@@ -106,10 +106,62 @@ Route::group([
                 'middleware'=>'permission:create.registration.years'
                 ]);
 
-            post('update/{step}', [
+            post('update/{year}', [
                 'as'=>'registration.years.update',
                 'uses'=>'YearsController@update',
                 'middleware'=>'permission:edit.registration.years'
+                ]);
+    
+        });
+
+        Route::group(['prefix'=>'periods'], function () {
+
+            get('/', [
+                'as'=>'registration.periods.index',
+                'uses'=>'PeriodsController@index' ,
+                'middleware'=>'permission:view.registration.periods'
+                ]);
+
+            get('create', [
+                'as'=>'registration.periods.create',
+                'uses'=>'PeriodsController@create',
+                'middleware'=>'permission:create.registration.periods'
+                ]);
+
+            get('edit/{period}', [
+                'as'=>'registration.periods.edit',
+                'uses'=>'PeriodsController@edit',
+                'middleware'=>'permission:edit.registration.periods'
+                ]);
+
+            get('show/{period}', [
+                'as'=>'registration.periods.show',
+                'uses'=>'PeriodsController@show',
+                'middleware'=>'permission:view.registration.periods'
+                ]);
+
+            get('delete/{period}', [
+                'as'=>'registration.periods.delete',
+                'uses'=>'PeriodsController@delete',
+                'middleware'=>'permission:delete.registration.periods'
+                ]);
+
+            get('delete-bulk', [
+                'as'=>'registration.periods.delete-bulk' ,
+                'uses'=>'PeriodsController@deleteBulk',
+                'middleware'=>'permission:delete.registration.periods'
+                ]);
+            
+            post('store', [
+                'as'=>'registration.periods.store',
+                'uses'=>'PeriodsController@store',
+                'middleware'=>'permission:create.registration.periods'
+                ]);
+
+            post('update/{period}', [
+                'as'=>'registration.periods.update',
+                'uses'=>'PeriodsController@update',
+                'middleware'=>'permission:edit.registration.periods'
                 ]);
     
         });
