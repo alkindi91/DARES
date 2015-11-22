@@ -46,6 +46,10 @@ class Handler extends ExceptionHandler
     {
         if ($e instanceof ModelNotFoundException) {
             $e = new NotFoundHttpException($e->getMessage(), $e);
+            
+        }
+        if ($e instanceof NotFoundHttpException) {
+            return redirect()->route('welcome')->with('error' ,'404 السجل الذي تبحث عنه غير موجود');
         }
 
         if ($e instanceof \Bican\Roles\Exceptions\PermissionDeniedException) {

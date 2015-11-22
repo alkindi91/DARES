@@ -29,8 +29,4 @@ Route::group(['prefix'=>'ajax'], function () {
 		]);
 });
 
-if(!function_exists('user')) {
-	function user() {
-		return Auth::user();
-	}
-}
+require_once 'helpers.php';
