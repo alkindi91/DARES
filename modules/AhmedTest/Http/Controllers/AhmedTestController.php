@@ -14,7 +14,7 @@ class AhmedTestController extends Controller {
 		$tasks = Ahmedtest::all();
 		/*
 		OR send model as argument
-		
+
 		 */ 
     	return view('ahmedtest::index')->withTasks($tasks);
 	}
@@ -38,19 +38,31 @@ class AhmedTestController extends Controller {
 	public function show($id){
 
 		$task = Ahmedtest::findOrFail($id);
-
-		if(request('age')) {
-
-		}
-
 		
     	return view('ahmedtest::show')->withTask($task);
 		//return view('ahmedtest::show');
 		
 	}
-	public function edit(){
-
-    	return view('Ahmedtest::edit');
+	public function edit($id){
+		$task = Ahmedtest::findOrFail($id);
 		
+    	return view('ahmedtest::edit')->withTask($task);
+		
+	}
+	public function update($id, Request $req,AhmedTest $a){
+		$task = $a->findOrFail($id);
+
+    	$input = $req->all();
+
+    	$task->fill($input)->save();
+    	return redirect()->route('ahmedtest.index');
+
+		/*$input = $req->all();
+
+		$ahmed->find($id);
+		//dd($req->all());
+		$ahmed->update($input);
+		
+		return redirect()->back();*/
 	}
 }
