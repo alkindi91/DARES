@@ -1,0 +1,15 @@
+{
+    "name": "AhmedTest",
+    "alias": "ahmedtest",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\AhmedTest\\Providers\\AhmedTestServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}
