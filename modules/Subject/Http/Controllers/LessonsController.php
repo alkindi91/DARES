@@ -8,7 +8,6 @@ class LessonsController extends Controller {
 	
 	public function index()
 	{
-		dd('5');
 		$tasks = SubjectLesson::paginate(20);
 		/*
 		OR send model as argument
@@ -35,21 +34,32 @@ class LessonsController extends Controller {
 
 	public function edit_lesson($id)
 	{
-		//dd("sss");
-		$task = SubjectLesson::findOrFail($id);
+		$tasks = SubjectLesson::findOrFail($id);
 		
     	//return view('ahmedtest::edit')->withTask($task);
-		return view('subject::lesson.edit_lesson',compact('task'));
+		//return view('subject::lesson.edit_lesson')->withTask($task);
+		return view('subject::lessons.edit_lesson',compact('tasks'));
 	}
 
-	public function update_lesson()
+	public function update_lesson($id,SubjectLesson $sub, Request $req)
 	{
-		return view('subject::lesson.update_lesson');
+		$task = $sub->findOrFail($id);
+
+    	$input = $req->all();
+
+    	$task->fill($input)->save();
+    	return redirect()->route('subject.index');
+		//return view('subject::lesson.update_lesson');
 	}
 
-	public function delete_lesson()
+	public function delete_lesson($id,SubjectLesson $sub, Request $req)
 	{
-		return view('subject::lesson.delete_lesson');
+		$task = $sub->findOrFail($id);
+
+    	$input = $req->all();
+
+    	$task->fill($input)->delete();
+    	return redirect()->route('subject.index');
 	}
 	
 }
