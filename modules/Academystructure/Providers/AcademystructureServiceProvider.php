@@ -2,6 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 use Menu;
+use Illuminate\Routing\Router;
 class AcademystructureServiceProvider extends ServiceProvider {
 
 	/**
@@ -14,10 +15,11 @@ class AcademystructureServiceProvider extends ServiceProvider {
 	/**
 	 * Boot the application events.
 	 * 
-	 * @return void
+	 * @return void 
 	 */
-	public function boot()
+	public function boot(Router $router)
 	{
+		$router->model('faculty' ,'\Modules\Academystructure\Entities\AcademystructureFaculty');
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();
