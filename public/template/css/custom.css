@@ -5863,8 +5863,8 @@ form:after {
 #username { background-position: 10px 10px !important }
 #password { background-position: 10px -53px !important }
 .login_content form div a {
-    font-size: 12px;
-    margin: 10px 15px 0 0;
+    /*font-size: 12px;
+    margin: 10px 15px 0 0;*/
 }
 .reset_pass{margin-top:10px !important;}
 .login_content div .reset_pass{margin-top: 13px !important; margin-right: 39px; float: right;}

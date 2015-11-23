@@ -8,6 +8,7 @@ class LessonsController extends Controller {
 	
 	public function index()
 	{
+		dd('5');
 		$tasks = SubjectLesson::paginate(20);
 		/*
 		OR send model as argument

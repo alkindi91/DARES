@@ -49,7 +49,8 @@ class Handler extends ExceptionHandler
             
         }
         if ($e instanceof NotFoundHttpException) {
-            return redirect()->route('welcome')->with('error' ,'404 السجل الذي تبحث عنه غير موجود');
+            if(env('APP_ENV')=='production')
+           return redirect()->route('welcome')->with('error' ,'404 السجل الذي تبحث عنه غير موجود');
         }
 
         if ($e instanceof \Bican\Roles\Exceptions\PermissionDeniedException) {
@@ -58,6 +59,6 @@ class Handler extends ExceptionHandler
             return redirect()->back();
         }
 
-        return parent::render($request, $e)->with('error','ليست لديك صلاحية للقيام بهاته العملية');
+        return parent::render($request, $e);
     }
 }

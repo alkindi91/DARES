@@ -2,8 +2,10 @@
 
 Route::group([
     'prefix'=>'registration' ,
+    'middleware'=>'auth',
     'namespace'=>'Modules\Registration\Http\Controllers'
     ], function () {
+
 
         get('/', [
             'as'=>'registration.index',
@@ -216,6 +218,11 @@ Route::group([
                 'middleware'=>'permission:edit.registration.notes'
                 ]);
     
+        });
+
+        Route::group(['prefix'=>'registrar'] ,function() {
+            get('/' ,['as'=>'registration.registrar.index' ,'uses'=>'RegistrarController@index']);
+            get('apply' ,['as'=>'registration.registrar.apply' ,'uses'=>'RegistrarController@apply']);
         });
 
     });

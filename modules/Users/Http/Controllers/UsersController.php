@@ -20,7 +20,7 @@ class UsersController extends Controller {
 	public function index(User $UserModel ,Request $req)
 	{
 		// get an instance of the user model and order the query by id desc
-		$users = $UserModel->orderBy('id' ,'desc');
+		$users = $UserModel->admin()->orderBy('id' ,'desc');
 
 		// if theres any variables sent throught the request we use them as where arguments
 		if($req->has('email'))
@@ -51,6 +51,9 @@ class UsersController extends Controller {
 	 * @return \Illuminate\View\View       the user edit view edit.blade.php
 	 */
 	public function edit(User $user) {
+		if($user->type!='admin') {
+			return redirect()->route('welcome');
+		}
 		$roles = Role::lists('name' ,'id')->toArray();
 		return view('users::users.edit' ,compact('user' ,'roles'));
 	}
@@ -80,7 +83,9 @@ class UsersController extends Controller {
 	 */
 	public function delete(User $user) {
 		// we make the user with id 1 undeletable
-		if($user->id==1) return redirect()->route('users.index')->with('warning' ,trans('users::users.user_undeletable'));
+		if($user->id==1 || $user->type!='admin') {
+			return redirect()->route('users.index')->with('warning' ,trans('users::users.user_undeletable'));
+		}
 		// we delete the user
 		$user->delete();
 		// redirect to the users index
@@ -94,7 +99,7 @@ class UsersController extends Controller {
 		// we get all the ids and put them in a variable
 		$ids = array_filter($req->input('table_records') ,function($id) { return $id!=1; });
 		// we delete all the users with the ids $ids
-		$UserModel->destroy($ids);
+		$UserModel->where('type' ,'admin')->destroy($ids);
 		// we redirect to the user index view with a success message
 		return redirect()->route('users.index')->with('success' ,trans('users::users.delete_bulk_success'));
 	}
@@ -108,6 +113,10 @@ class UsersController extends Controller {
 	public function update(UpdateUserRequest $req ,User $user) {
 		$user->fill($req->all());
 
+		if($user->type!='admin') {
+			return redirect()->route('welcome');
+		}
+
 		if(!empty($req->input('password')))
 		$user->password = bcrypt($req->input('password'));
 
@@ -119,6 +128,9 @@ class UsersController extends Controller {
 	}
 
 	public function show(User $user) {
+		if($user->type!='admin') {
+			return redirect()->route('welcome');
+		}
 		return view('users::users.show' ,compact('user'));
 	}
 

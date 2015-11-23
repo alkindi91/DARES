@@ -4,11 +4,7 @@
     "description": "",
     "keywords": [],
     "active": 1,
-<<<<<<< Updated upstream
     "order": 7,
-=======
-    "order": 6,
->>>>>>> Stashed changes
     "providers": [
         "Modules\\Subject\\Providers\\SubjectServiceProvider"
     ],

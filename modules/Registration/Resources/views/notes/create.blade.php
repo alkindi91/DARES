@@ -8,34 +8,34 @@
     @lang('registration::registration.header')
     </a>
   </li>
-   <li><a href="{{ route('registration.index' ,$year->id) }}">
-    @lang('registration::years.header')
+   <li><a href="{{ route('registration.index' ,$step->id) }}">
+    @lang('registration::steps.header')
     </a>
   </li>
-  <li><a href="{{ route('registration.years.edit' ,$year->id) }}">
-    {{ $year->name }}
+  <li><a href="{{ route('registration.steps.edit' ,$step->id) }}">
+    {{ $step->name }}
     </a>
   </li>
-  <li><a href="{{ route('registration.periods.index') }}">
-    @lang('registration::periods.header')
+  <li><a href="{{ route('registration.notes.index') }}">
+    @lang('registration::notes.header')
     </a>
   </li>
   <li class="active">
-    @lang('registration::periods.create_period')
+    @lang('registration::notes.create_note')
   </li>
 </ol>
 {{-- End breadcrumbs --}}
 
 <div class="x_panel" style="min-height:600px;">
     <div class="x_title">
-        <h2><i class="fa fa-plus"></i>  @lang('registration::periods.create_period')</h2>
+        <h2><i class="fa fa-plus"></i>  @lang('registration::notes.create_note')</h2>
         <div class="clearfix"></div>
     </div>
     <br>
-    {!! Form::open(['route'=>['registration.periods.store' ,$year->id] ,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate']) !!}
+    {!! Form::open(['route'=>['registration.notes.store' ,$step->id] ,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate']) !!}
 
 
-    @include('registration::periods._fields')
+    @include('registration::notes._fields')
 
 
 {!! Form::close() !!}

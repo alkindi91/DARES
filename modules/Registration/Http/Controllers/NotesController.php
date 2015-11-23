@@ -1,10 +1,10 @@
 <?php namespace Modules\Registration\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Modules\Registration\Entities\RegistrationNote as Note;
 use Modules\Registration\Entities\RegistrationStep as Step;
-use Modules\Registration\Http\Requests\Note\CreateNoteRequest;
-use Modules\Registration\Http\Requests\Note\UpdateNoteRequest;
+use Modules\Registration\Entities\RegistrationStepNote as Note;
+use Modules\Registration\Http\Requests\Note\CreateRequest;
+use Modules\Registration\Http\Requests\Note\UpdateRequest;
 use Pingpong\Modules\Routing\Controller;
 
 class NotesController extends Controller
@@ -12,6 +12,7 @@ class NotesController extends Controller
 
     public function index(Step $step ,Note $Note)
     {
+
         $notes = $Note->all();
 
         return view('registration::notes.index' ,compact('notes' ,'step'));
@@ -20,11 +21,12 @@ class NotesController extends Controller
     public function create(Step $step)
     {
 
-        return view('registration::notes.create', compact('notes' ,'step'));
+        return view('registration::notes.create', compact('step'));
     }
 
     public function edit(Note $note)
     {
+
         $note->load('step');
 
         $step = $note->step;
@@ -32,13 +34,9 @@ class NotesController extends Controller
         return view('registration::notes.edit', compact('note' ,'step'));
     }
 
-    public function store(Step $step,CreateNoteRequest $request)
+    public function store(Step $step,CreateRequest $request)
     {
-        
-        if($this->checkOverlapingNotes()) {
-            return redirect()->back()->withInput()->with('warning' ,trans('registration::notes.overlaping'));
-        }
-
+       
         $note = new Note;
 
         $note = $note->fill($request->all());
@@ -50,15 +48,11 @@ class NotesController extends Controller
         return redirect()->route('registration.notes.index' ,$step->id)->with('success', trans('registration::notes.create_success', ['name'=>$note->name]));
     }
 
-    public function update(UpdateNoteRequest $request, Note $note)
+    public function update(UpdateRequest $request, Note $note)
     {
         $note = $note->fill($request->all());
 
         $note->save();
-
-        if(request('next_notes')) {
-           $note->children()->attach(request('next_notes'));
-        }
 
         return redirect()
         ->route('registration.notes.index' ,$note->registration_step_id)
@@ -88,17 +82,4 @@ class NotesController extends Controller
         ->with('success', trans('registration::notes.delete_bulk_success'));
     }
 
-    public function checkOverlapingNotes($note=null) {
-
-        $notes = Note::where(function($sql) {
-                $sql->where('start_at' ,'<=' ,request('finish_at'))
-                    ->where('finish_at' ,'>=' ,request('start_at'));
-        });
-        
-        if($note) {
-            $notes->whereNotIn('id' ,$note->id);
-        }
-
-        return $notes->count();
-    }
 }

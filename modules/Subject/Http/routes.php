@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'subject', 'namespace' => 'Modules\Subject\Http\Controllers'], function()
+Route::group(['prefix' => 'subjects', 'namespace' => 'Modules\Subject\Http\Controllers'], function()
 {
 	get('/', ['as'=>'subject.index','uses'=>"LessonsController@index"]);
 	get('create_lesson', ['as'=>'subject.create_lesson','uses'=>'LessonsController@create_lesson']);
