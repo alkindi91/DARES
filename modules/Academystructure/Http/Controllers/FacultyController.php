@@ -14,7 +14,7 @@ class FacultyController extends Controller {
 	}
 	public function create_faculty()
 	{
-		return view('academystructure::Faculty.create');
+		return view('academystructure::faculty.create');
 	}
 	public function store_faculty(AcademystructureFaculty $faculty , CreateRequest $request)
 	{

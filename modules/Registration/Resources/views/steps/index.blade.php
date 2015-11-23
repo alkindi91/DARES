@@ -93,6 +93,9 @@
 			<a href="{{ route('registration.steps.delete' ,$step->id)}}" class="btn btn-danger btn-sm">
 			<i class="fa fa-trash"></i> @lang('global.delete')
 			</a>
+			<a href="{{ route('registration.notes.index' ,$step->id)}}" class="btn btn-info btn-sm">
+			<i class="fa fa-comment"></i> @lang('registration::notes.header')
+			</a>
 			
 	</td>
 	@endforeach

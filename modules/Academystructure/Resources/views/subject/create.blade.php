@@ -2,15 +2,14 @@
 
 @section('content')
 
-{!! Form::open(['route'=>'faculty.store'  ,'method'=>'POST' , 'class'=>'form-horizontal']) !!}
+{!! Form::open(['route'=>'faculty.store' ] ,'method'=>'POST' , 'class'=>'form-horizontal') !!}
 <div class="form-group">
     <div class="col-md-12">
 	{!! Form::label('name', 'اسم الكلية', array('class' => 'awesome')) !!}
-	{!! Form::text('name', null, $attributes = array('class'=>'form-control')) !!}
+	{!! Form::text('name') !!}
     </div>
 </div>
-
-{{-- comment
+{{--
 <div class="ln_solid"></div>
     @include('Academystructure::faculties._fields')  
 <div class="ln_solid"></div>
