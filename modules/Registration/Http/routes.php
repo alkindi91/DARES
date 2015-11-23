@@ -146,7 +146,7 @@ Route::group([
                 'middleware'=>'permission:delete.registration.periods'
                 ]);
 
-            get('delete-bulk', [
+            get('delete-bulk/{year}', [
                 'as'=>'registration.periods.delete-bulk' ,
                 'uses'=>'PeriodsController@deleteBulk',
                 'middleware'=>'permission:delete.registration.periods'
@@ -162,6 +162,58 @@ Route::group([
                 'as'=>'registration.periods.update',
                 'uses'=>'PeriodsController@update',
                 'middleware'=>'permission:edit.registration.periods'
+                ]);
+    
+        });
+
+        Route::group(['prefix'=>'notes'], function () {
+
+            get('/{step}', [
+                'as'=>'registration.notes.index',
+                'uses'=>'StepsController@index' ,
+                'middleware'=>'permission:view.registration.notes'
+                ]);
+
+            get('create/{step}', [
+                'as'=>'registration.notes.create',
+                'uses'=>'StepsController@create',
+                'middleware'=>'permission:create.registration.notes'
+                ]);
+
+            get('edit/{note}', [
+                'as'=>'registration.notes.edit',
+                'uses'=>'StepsController@edit',
+                'middleware'=>'permission:edit.registration.notes'
+                ]);
+
+            get('show/{note}', [
+                'as'=>'registration.notes.show',
+                'uses'=>'StepsController@show',
+                'middleware'=>'permission:view.registration.notes'
+                ]);
+
+            get('delete/{note}', [
+                'as'=>'registration.notes.delete',
+                'uses'=>'StepsController@delete',
+                'middleware'=>'permission:delete.registration.notes'
+                ]);
+
+            get('delete-bulk/{step}', [
+                'as'=>'registration.notes.delete-bulk' ,
+                'uses'=>'StepsController@deleteBulk',
+                'middleware'=>'permission:delete.registration.notes'
+                ]);
+            
+            post('store/{step}', [
+                'as'=>'registration.notes.store',
+                'uses'=>'StepsController@store',
+                'middleware'=>'permission:create.registration.notes'
+                ]);
+
+            post('update/{note}', [
+                'as'=>'registration.notes.update',
+                'uses'=>'StepsController@update',
+                'middleware'=>'permission:edit.registration.notes'
                 ]);
     
         });

@@ -24,7 +24,6 @@ class CreateRegistrationStepsTable extends Migration {
             $table->boolean('upload_files')->default(0);
             // field to track the user that created this step
             $table->integer('created_by')->unsigned()->nullable();
-
             $table->foreign('created_by')->references('id')->on('users')->onDelete('SET NULL')->onUpdate('cascade');
             // time stamps to track the history of creation and update of this step
             $table->timestamps();

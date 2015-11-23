@@ -32,10 +32,16 @@ class PeriodsController extends Controller
         return view('registration::periods.edit', compact('period' ,'year'));
     }
 
-    public function store(Year $year,CreatePeriodRequest $request, Period $Period)
+    public function store(Year $year,CreatePeriodRequest $request)
     {
-       
-        $period = $Period->fill($request->all());
+        
+        if($this->checkOverlapingPeriods()) {
+            return redirect()->back()->withInput()->with('warning' ,trans('registration::periods.overlaping'));
+        }
+
+        $period = new Period;
+
+        $period = $period->fill($request->all());
 
         $period->registration_year_id = $year->id;
 
@@ -55,7 +61,7 @@ class PeriodsController extends Controller
         }
 
         return redirect()
-        ->route('registration.periods.index')
+        ->route('registration.periods.index' ,$period->registration_year_id)
         ->with('success', trans('registration::periods.update_success', ['name'=>$period->name]));
     }
 
@@ -67,7 +73,7 @@ class PeriodsController extends Controller
         ->route('registration.periods.index' ,$period->registration_year_id)->with('success', trans('registration::periods.delete_success', ['name'=>$period->name]));
     }
 
-    public function deleteBulk(Request $req, Period $Period)
+    public function deleteBulk(Request $req, Period $Period ,Year $year)
     {
         if (!$req->has('table_records')) {
             return redirect()->route('cities.index');
@@ -78,7 +84,21 @@ class PeriodsController extends Controller
         $Period->destroy($ids);
         
         return redirect()
-        ->route('registration.periods.index')
+        ->route('registration.periods.index' ,$year->id)
         ->with('success', trans('registration::periods.delete_bulk_success'));
+    }
+
+    public function checkOverlapingPeriods($period=null) {
+
+        $periods = Period::where(function($sql) {
+                $sql->where('start_at' ,'<=' ,request('finish_at'))
+                    ->where('finish_at' ,'>=' ,request('start_at'));
+        });
+        
+        if($period) {
+            $periods->whereNotIn('id' ,$period->id);
+        }
+
+        return $periods->count();
     }
 }

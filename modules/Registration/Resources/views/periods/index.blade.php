@@ -39,7 +39,7 @@
 	<i class="fa fa-info"></i> @lang('registration::periods.no_items')
 </div>
 @else
-{!! Form::open(['route'=>'registration.periods.delete-bulk' ,'method'=>'GET']) !!}
+{!! Form::open(['route'=>['registration.periods.delete-bulk' ,$year->id] ,'method'=>'GET']) !!}
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
 	<thead>
 		<tr class="headings">
