@@ -152,7 +152,7 @@ Route::group([
                 'middleware'=>'permission:delete.registration.periods'
                 ]);
             
-            post('store', [
+            post('store/{year}', [
                 'as'=>'registration.periods.store',
                 'uses'=>'PeriodsController@store',
                 'middleware'=>'permission:create.registration.periods'

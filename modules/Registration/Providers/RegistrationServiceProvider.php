@@ -21,6 +21,7 @@ class RegistrationServiceProvider extends ServiceProvider {
 	public function boot(Router $router)
 	{
 		$router->model('step' ,'\Modules\Registration\Entities\RegistrationStep');
+		$router->model('period' ,'\Modules\Registration\Entities\RegistrationPeriod');
 		$router->model('year' ,'\Modules\Registration\Entities\RegistrationYear');
 		$this->registerTranslations();
 		$this->registerConfig();

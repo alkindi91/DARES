@@ -6,3 +6,4 @@ Homestead.json
 /.phpintel
 .sass-cache
 /.sass-cache
+composer.lock

@@ -4,6 +4,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class AcademystructureFaculty extends Model {
 
-    protected $fillable = [];
+    protected $fillable = ['name'];
 
 }
