@@ -32,32 +32,12 @@
         <div class="clearfix"></div>
     </div>
     <br>
-    {!! Form::open(['route'=>'registration.periods.store' ,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate']) !!}
- <div class="form-group">
-    <div class="col-md-12">
-        <a href="{{ route('registration.periods.index') }}" class="pull-left btn btn-primary">
-          <i class="fa fa-times"></i> @lang('global.cancel')
-        </a>
-        <button type="submit" class="pull-left btn btn-success">
-          <i class="fa fa-save"></i> @lang('global.save')
-        </button>
-    </div>
-</div>  
-<div class="ln_solid"></div>
+    {!! Form::open(['route'=>['registration.periods.store' ,$year->id] ,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate']) !!}
+
 
     @include('registration::periods._fields')
 
-<div class="ln_solid"></div>
-<div class="form-group">
-    <div class="col-md-12">
-        <a href="{{ route('registration.periods.index') }}" class="pull-left btn btn-primary">
-          <i class="fa fa-times"></i> @lang('global.cancel')
-        </a>
-        <button type="submit" class="pull-left btn btn-success">
-          <i class="fa fa-save"></i> @lang('global.save')
-        </button>
-    </div>
-</div>
+
 {!! Form::close() !!}
 </div>
 @stop

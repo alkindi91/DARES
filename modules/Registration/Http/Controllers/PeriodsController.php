@@ -17,35 +17,36 @@ class PeriodsController extends Controller
         return view('registration::periods.index' ,compact('periods' ,'year'));
     }
 
-    public function create(Period $Period ,Year $year)
+    public function create(Year $year)
     {
-        $periods = $Period->lists('name', 'id')->toArray();
 
         return view('registration::periods.create', compact('periods' ,'year'));
     }
 
     public function edit(Period $period)
     {
+        $period->load('year');
 
-        $PeriodModel = new Period;
-
-        $periods = $PeriodModel->whereNotIn('id' ,[$period->id])->lists('name', 'id')->toArray();
-
-        return view('registration::periods.edit', compact('period' ,'periods'));
+        $year = $period->year;
+       
+        return view('registration::periods.edit', compact('period' ,'year'));
     }
 
-    public function store(CreatePeriodRequest $req, Period $Period)
+    public function store(Year $year,CreatePeriodRequest $request, Period $Period)
     {
-        $period = $Period->fill($req->all());
+       
+        $period = $Period->fill($request->all());
+
+        $period->registration_year_id = $year->id;
 
         $period->save();
 
-        return redirect()->route('registration.periods.index')->with('success', trans('registration::periods.create_success', ['name'=>$period->name]));
+        return redirect()->route('registration.periods.index' ,$year->id)->with('success', trans('registration::periods.create_success', ['name'=>$period->name]));
     }
 
-    public function update(UpdatePeriodRequest $req, Period $period)
+    public function update(UpdatePeriodRequest $request, Period $period)
     {
-        $period = $period->fill($req->all());
+        $period = $period->fill($request->all());
 
         $period->save();
 
@@ -63,7 +64,7 @@ class PeriodsController extends Controller
         $period->delete();
 
         return redirect()
-        ->route('registration.periods.index', trans('registration::steos.delete_success', ['name'=>$period->name]));
+        ->route('registration.periods.index' ,$period->registration_year_id)->with('success', trans('registration::periods.delete_success', ['name'=>$period->name]));
     }
 
     public function deleteBulk(Request $req, Period $Period)

@@ -1,3 +1,15 @@
+ <div class="form-group">
+    <div class="col-md-12">
+        <a href="{{ route('registration.periods.index' ,$year->id) }}" class="pull-left btn btn-primary">
+          <i class="fa fa-times"></i> @lang('global.cancel')
+        </a>
+        <button type="submit" class="pull-left btn btn-success">
+          <i class="fa fa-save"></i> @lang('global.save')
+        </button>
+    </div>
+</div>  
+<div class="ln_solid"></div>
+
 {{-- Form Input Group --}}
 <div class="form-group {{ $errors->first('name' ,'has-error') }}">
 	{!! Form::label('name' ,trans('registration::periods.name') ,['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
@@ -23,7 +35,17 @@
 	</div>
 </div>
 
-
+<div class="ln_solid"></div>
+<div class="form-group">
+    <div class="col-md-12">
+        <a href="{{ route('registration.periods.index' ,$year->id) }}" class="pull-left btn btn-primary">
+          <i class="fa fa-times"></i> @lang('global.cancel')
+        </a>
+        <button type="submit" class="pull-left btn btn-success">
+          <i class="fa fa-save"></i> @lang('global.save')
+        </button>
+    </div>
+</div>
 
 
 @section('footer')
