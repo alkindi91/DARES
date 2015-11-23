@@ -2,11 +2,11 @@
 
 Route::group(['prefix' => 'subject', 'namespace' => 'Modules\Subject\Http\Controllers'], function()
 {
-	get('/', ['as'=>'subject.index','use'=>'SubjectController@index']);
-	get('create_lessons', ['as'=>'subject.create_lessons','use'=>'SubjectController@create_lessons']);
-	get('store_lessons', ['as'=>'subject.store_lessons','use'=>'SubjectController@store_lessons']);
-	get('edit_lessons', ['as'=>'subject.edit_lessons','use'=>'SubjectController@edit_lessons']);
-	get('update_lessons', ['as'=>'subject.update_lessons','use'=>'SubjectController@update_lessons']);
-	get('delete_lessons', ['as'=>'subject.delete_lessons','use'=>'SubjectController@delete_lessons']);
+	get('/', ['as'=>'subject.index','uses'=>"LessonsController@index"]);
+	get('create_lesson', ['as'=>'subject.create_lesson','uses'=>'LessonsController@create_lesson']);
+	post('store_lesson', ['as'=>'subject.store_lesson','uses'=>'LessonsController@store_lesson']);
+	get('edit_lesson/{lesson}', ['as'=>'subject.edit_lesson','uses'=>'LessonsController@edit_lesson']);
+	get('update_lesson', ['as'=>'subject.update_lesson','uses'=>'LessonsController@update_lesson']);
+	get('delete_lesson', ['as'=>'subject.delete_lesson','uses'=>'LessonsController@delete_lesson']);
 	
 });

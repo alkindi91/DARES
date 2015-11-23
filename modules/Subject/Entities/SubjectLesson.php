@@ -2,10 +2,12 @@
    
 use Illuminate\Database\Eloquent\Model;
 
-class SubjectElement extends Model {
+class SubjectLesson extends Model {
 
     protected $fillable = [
-    	
-    ];
+    	'name',
+        'order',
+        'type',
+        'state'];
 
 }
