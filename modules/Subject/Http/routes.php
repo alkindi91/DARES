@@ -12,7 +12,7 @@ Route::group(['prefix' => 'subject', 'namespace' => 'Modules\Subject\Http\Contro
 	
 
 
-    get('element', ['as'=>'subject.element','uses'=>"ElementsController@element"]);
+    get('element/{lessonid}', ['as'=>'subject.element','uses'=>"ElementsController@element"]);
 	get('create_element', ['as'=>'subject.create_element','uses'=>'ElementsController@create_element']);
 	post('store_element', ['as'=>'subject.store_element','uses'=>'ElementsController@store_element']);
 	get('edit_element/{element}', ['as'=>'subject.edit_element','uses'=>'ElementsController@edit_element']);

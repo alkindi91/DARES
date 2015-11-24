@@ -6,10 +6,10 @@ use Pingpong\Modules\Routing\Controller;
 
 class ElementsController extends Controller {
 	
-	public function element()
-	{ 	
-		$elements = SubjectElement::paginate(20);
-		//echo "sami";
+	public function element($lessonid)
+	{ 	$elements = SubjectElement::findOrFail($lessonid)->paginate(20);
+		
+		
 		return view('subject::element.index_element', compact('elements'));
 	}
 	
