@@ -66,6 +66,9 @@
             <a href="{{ route('subject.delete_lesson' ,$task->id)}}" class="btn btn-danger btn-sm">
             <i class="fa fa-trash"></i> @lang('global.delete')
             </a>
+            <a href="{{ route('subject.element' ,$task->id)}}" class="btn btn-primary ">
+            <i class="fa fa-plus"></i> إضافة عنصر
+            </a>
         </td>
     @endforeach
 </tr>
