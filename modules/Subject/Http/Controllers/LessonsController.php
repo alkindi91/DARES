@@ -24,20 +24,13 @@ class LessonsController extends Controller {
 	public function store_lesson(SubjectLesson $sub, Request $req)
 	{
 		$input = $req->all();
-		//dd($input);
 		$sub->fill($input)->save();
-
-		//dd($input);
 		return redirect()->back();
-		//return view('subject::store_lesson');
 	}
 
 	public function edit_lesson($id)
 	{
 		$tasks = SubjectLesson::findOrFail($id);
-		
-    	//return view('ahmedtest::edit')->withTask($task);
-		//return view('subject::lesson.edit_lesson')->withTask($task);
 		return view('subject::lessons.edit_lesson',compact('tasks'));
 	}
 
@@ -49,7 +42,6 @@ class LessonsController extends Controller {
 
     	$task->fill($input)->save();
     	return redirect()->route('subject.index');
-		//return view('subject::lesson.update_lesson');
 	}
 
 	public function delete_lesson($id,SubjectLesson $sub, Request $req)
