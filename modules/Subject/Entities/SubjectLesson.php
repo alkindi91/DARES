@@ -7,7 +7,7 @@ class SubjectLesson extends Model {
     protected $fillable = [
     	'name',
         'order',
-        'type',
+        'lesson_order',
         'state'];
 
 }

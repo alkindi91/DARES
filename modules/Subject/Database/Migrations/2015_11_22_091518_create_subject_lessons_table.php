@@ -25,8 +25,18 @@ class CreateSubjectLessonsTable extends Migration {
                   ->on('academystructure_subjects')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
+
+            $table->integer('created_by')
+                  ->unsigned()
+                  ->nullable();
+
+            $table->foreign('created_by')
+                  ->references("id")
+                  ->on('users')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
             
-            $table->integer('order');
+            $table->integer('lesson_order');
             $table->integer('type');
             $table->integer('state');
         
