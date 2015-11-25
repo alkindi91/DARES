@@ -151,6 +151,7 @@ return [
         Illuminate\Html\HtmlServiceProvider::class,
         Codesleeve\LaravelStapler\Providers\L5ServiceProvider::class,
         Pingpong\Modules\ModulesServiceProvider::class,
+        Lord\Laroute\LarouteServiceProvider::class,
         // Our providers
         App\Providers\MenuServiceProvider::class,
     ],

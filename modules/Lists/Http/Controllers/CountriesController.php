@@ -1,5 +1,6 @@
 <?php namespace Modules\Lists\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Modules\Lists\Entities\Country;
 use Modules\Lists\Http\Requests\Country\CreateCountryRequest;
 use Modules\Lists\Http\Requests\Country\UpdateCountryRequest;
@@ -7,7 +8,7 @@ use Pingpong\Modules\Routing\Controller;
 
 class CountriesController extends Controller {
 	
-	public function index()
+	public function index(Request $request)
 	{
 		$countries = Country::orderBy('id' ,'desc');
 

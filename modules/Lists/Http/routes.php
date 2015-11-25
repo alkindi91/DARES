@@ -50,4 +50,10 @@ Route::group(['prefix' => 'lists', 'namespace' => 'Modules\Lists\Http\Controller
 	post('update/{lState}' ,['as'=>'states.update' ,'uses'=>'StatesController@update','middleware'=>'permission:edit.states']);
 	
 	});
+
+	Route::group(['prefix'=>'api'] ,function() {
+		
+			resource('cities' ,'Api\CitiesController@index');
+		
+	});
 });

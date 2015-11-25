@@ -24,7 +24,8 @@ class RegistrarController extends Controller {
 	public function apply(RegistrationPeriod $PeriodModel, Country $CountryModel)
 	{
 		$countries = $CountryModel->lists('name' ,'id')->toArray();
-
+		$stay_types = config('registration.stay_types');
+		
 		$period = $PeriodModel->orderBy('id' ,'desc')
 		                      ->with('year')
 		                      ->where(function($sql) {
@@ -33,7 +34,7 @@ class RegistrarController extends Controller {
 		                      })
 		                      ->first();
 
-		return view('registration::registrar.apply' ,compact('period' ,'countries'));
+		return view('registration::registrar.apply' ,compact('period' ,'countries' ,'stay_types'));
 	}
 	
 }
