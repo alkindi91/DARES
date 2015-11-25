@@ -378,7 +378,7 @@ dark,
 }
 
 body {
-    color: #73879C;
+    color: #333333;
     background: #2A3F54;
     /*#ECF0F1; #FCFCFC*/
     
@@ -5762,7 +5762,7 @@ form:after {
     padding: 25px 0 0;
     position: relative;
     text-align: center;
-    text-shadow: 0 1px 0 #fff;
+    /*text-shadow: 0 1px 0 #fff;*/
     min-width: 280px;
 }
 .login_content h1 {

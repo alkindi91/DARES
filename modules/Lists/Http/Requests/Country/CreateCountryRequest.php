@@ -22,7 +22,7 @@ class CreateCountryRequest extends FormRequest {
 	public function rules()
 	{
 		return [
-			'name'=>'required|max:255|min:2|unique:countries,name'
+			'name'=>'required|max:255|min:2|unique:lists_countries,name'
 		];
 	}
 

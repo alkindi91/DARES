@@ -25,28 +25,10 @@
         <div class="clearfix"></div>
     </div>
     <br>
-    {!! Form::model($user ,['route'=>['users.update' ,$user->id] ,'files'=>true,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate']) !!}
-    <div class="form-group">
-    <div class="col-md-12">
-       
- <a href="{{ route('users.index') }}" class="btn btn-primary pull-left">
- <i class="fa fa-close"></i> @lang('global.cancel')</a>
- <button type="submit" class="btn btn-success pull-left">
- <i class="fa fa-save"></i> @lang('global.save')</button>
- <div class="clearfix"></div>
-    </div>
-    </div>
-<div class="ln_solid"></div>
-    @include('users::users._fields')
-<div class="ln_solid"></div>
-<div class="form-group">
-    <div class="col-md-12">
-        <a href="{{ route('users.index') }}" class="btn btn-primary pull-left">
-        <i class="fa fa-close"></i> @lang('global.cancel')</a>
-        <button type="submit" class="btn btn-success pull-left">
-        <i class="fa fa-save"></i> @lang('global.save')</button>
-    </div>
-</div>
+{!! Form::model($user ,['route'=>['users.update' ,$user->id] ,'files'=>true,'method'=>'POST' ,'class'=>'form-horizontal']) !!}
+
+@include('users::users._fields')
+
 {!! Form::close() !!}
 </div>
 @stop

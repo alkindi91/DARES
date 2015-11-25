@@ -322,11 +322,11 @@ $(function () {
 /** ******  Accordion  *********************** **/
 /** ******  scrollview  *********************** **/
 $(document).ready(function () {
-  
+  if($('.scroll-view').length) {
             $(".scroll-view").niceScroll({
                 touchbehavior: true,
                 cursorcolor: "rgba(42, 63, 84, 0.35)"
             });
-
+}
 });
 /** ******  /scrollview  *********************** **/

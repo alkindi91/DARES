@@ -28,10 +28,16 @@ class CitiesController extends Controller {
 
 		$city = $City->fill($req->all());
 		$city->country_id = $country->id;
-		$city->save();
+		$city->save();	
 
-		return redirect()->route('cities.index' ,$country->id)
-						 ->with('success' ,trans('lists::cities.create_success', ['name'=>$city->name]));
+		$message = trans('lists::cities.create_success', ['name'=>$city->name]);
+
+		if(request('submit')=='save') {
+			return redirect()->back()->with('success' ,$message);
+		} else {
+			return redirect()->route('cities.index' ,$country->id)
+						 ->with('success' ,$message);
+		}
 	}
 
 	public function edit(City $city) {
@@ -44,8 +50,14 @@ class CitiesController extends Controller {
 
 		$City->fill($req->all())->save();
 
-		return redirect()->route('cities.index' ,$City->country_id)
-						 ->with('success' ,trans('lists::cities.update_success' ,['name'=>$City->name]));
+		$message = trans('lists::cities.update_success' ,['name'=>$City->name]);
+		
+		if(request('submit')=='save') {
+			return redirect()->back()->with('success' ,$message);
+		} else {
+			return redirect()->route('cities.index' ,$City->country_id)
+						 ->with('success' ,$message);
+		}
 
 	}
 

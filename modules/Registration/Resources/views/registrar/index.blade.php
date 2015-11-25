@@ -17,10 +17,12 @@
                         <div class="clearfix"></div>
                         @if($period)
                              <div class="separator">
-
-                            <p class="change_link">تقديم الطلبات متاح الان للعام الجامعي {{ $period->year->name }}
-                                <a href="#tologin" class="btn btn-primary btn-lg btn-block">تقديم طلب</a>
+                            <i style='font-size:40px' class="text-info glyphicon glyphicon-info-sign"></i>
+                            <p class="text-info change_link">تقديم الطلبات متاح الان للعام الجامعي 
+                            <b>{{ $period->year->name }}</b>
                             </p>
+                                <a class="btn btn-primary btn-lg btn-block" href='{{ route('registration.registrar.apply')}}'>تقديم طلب</a>
+                            
                             <div class="clearfix"></div>
                             <br />
                            

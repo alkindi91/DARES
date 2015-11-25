@@ -76,6 +76,9 @@
 			<a href="{{ route('cities.delete' ,$city->id)}}" class="btn btn-danger btn-sm">
 			<i class="fa fa-trash"></i> @lang('global.delete')
 			</a>
+			<a href="{{ route('states.index' ,$city->id)}}" class="btn btn-primary btn-md">
+				<i class="fa fa-map-marker"></i> @lang('lists::states.header')
+			</a>
 			
 	</td>
 	@endforeach

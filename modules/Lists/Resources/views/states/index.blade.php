@@ -1,7 +1,6 @@
 @extends('layouts.master')
 @section('content')
 
-
 {{-- Start breadcrumbs --}}
 <ol class="breadcrumb">
   <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
@@ -9,32 +8,48 @@
     @lang('lists::lists.header')
     </a>
   </li>
-  <li class='active'>
+  <li><a href="{{ route('countries.index') }}">
     @lang('lists::countries.header')
-   
+    </a>
+  </li>
+  <li><a href="{{ route('countries.edit' ,$city->country->id) }}">
+    {{ $city->country->name }}
+    </a>
+  </li>
+  <li><a href="{{ route('cities.index' ,$city->country->id) }}">
+    @lang('lists::cities.header')
+    </a>
+  </li>
+  <li><a href="{{ route('cities.edit' ,$city->id) }}">
+    {{ $city->name }}
+    </a>
+  </li>
+  <li class='active'>
+    @lang('lists::states.header')
   </li>
 </ol>
 {{-- End breadcrumbs --}}
 
  <div class="x_panel" style="min-height:600px;">
 <div class="x_title">
-    <h2><i class="fa fa-map-marker"></i> @lang('lists::countries.header')</h2>
+    <h2>@lang('lists::states.header')</h2>
 
 <div class="clearfix"></div>
 </div>
-@permission('create.countries')
-<a href="{{ route('countries.create') }}" class="btn btn-primary pull-left">
+@permission('create.states')
+<a href="{{ route('states.create' ,$city->id) }}" class="btn btn-primary pull-left">
 	<i class="fa fa-plus"></i> @lang('global.new')
 </a>
 @endif
 <div class="clearfix"></div>
 <br />
-@if(empty($countries) or $countries->isEmpty())
+@if(empty($states) or $states->isEmpty())
 <div class="alert alert-info">
-	<i class="fa fa-info"></i> @lang('lists::countries.no_items')
+	<i class="fa fa-info"></i>
+	@lang('lists::states.no_items', ['city_name'=>$city->name])
 </div>
 @else
-{!! Form::open(['route'=>'countries.delete-bulk' ,'method'=>'GET']) !!}
+{!! Form::open(['route'=>['states.delete-bulk' ,$city->id] ,'method'=>'GET']) !!}
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
 	<thead>
 		<tr class="headings">
@@ -42,7 +57,7 @@
 				<input type="checkbox" id='check-all' class="tableflat">
 			</th>
 			<th>
-				@lang('lists::countries.name')
+				@lang('lists::states.name')
 			</th>
 			
 			<th class=" no-link last"><span class="nobr">
@@ -53,32 +68,30 @@
 	</tr>
 </thead>
 <tbody>
-	@foreach($countries as $country)
+	@foreach($states as $city)
 	<tr class="even pointer">
 		<td class="a-center ">
-			<input type="checkbox" class="tableflat" value='{{ $country->id }}' name='table_records[]'>
+			<input type="checkbox" class="tableflat" value='{{ $city->id }}' name='table_records[]'>
 		</td>
 		<td>
-			{{ $country->name }}
+			{{ $city->name }}
 		</td>
 		
 		<td class=" last">
-			<a href="{{ route('countries.edit' ,$country->id)}}" class='btn btn-sm btn-success'>
+			<a href="{{ route('states.edit' ,$city->id)}}" class='btn btn-sm btn-success'>
 				<i class="fa fa-edit"></i> @lang('global.edit')
 			</a>
-			<a href="{{ route('countries.delete' ,$country->id)}}" class="btn btn-danger btn-sm">
+			<a href="{{ route('states.delete' ,$city->id)}}" class="btn btn-danger btn-sm">
 			<i class="fa fa-trash"></i> @lang('global.delete')
 			</a>
-			<a href="{{ route('cities.index' ,$country->id)}}" class="btn btn-primary btn-md">
-				<i class="fa fa-map-marker"></i> @lang('lists::cities.header')
-			</a>
+			
 	</td>
 	@endforeach
 </tr>
 </tbody>
 </table>
 <div class="bulk-actions">
-<button id='js-delete-all' href="{{ route('countries.delete')}}" class="btn btn-danger">
+<button id='js-delete-all' href="{{ route('states.delete')}}" class="btn btn-danger">
 <i class="fa fa-trash"></i> @lang('global.delete')
 </button>
 </div>
