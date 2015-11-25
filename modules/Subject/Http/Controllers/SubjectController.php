@@ -51,4 +51,11 @@ class SubjectController extends Controller {
 	}
 
 	// end block 
+
+	public function element()
+	{
+		echo "sami";
+		//return view('subject::element.index_element');
+	}
+	
 }

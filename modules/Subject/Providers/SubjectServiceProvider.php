@@ -1,7 +1,7 @@
 <?php namespace Modules\Subject\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Menu;
 class SubjectServiceProvider extends ServiceProvider {
 
 	/**
@@ -21,6 +21,7 @@ class SubjectServiceProvider extends ServiceProvider {
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();
+		$this->registerMenu();
 	}
 
 	/**
@@ -90,6 +91,13 @@ class SubjectServiceProvider extends ServiceProvider {
 	public function provides()
 	{
 		return array();
+	}
+
+	public function registerMenu() 
+	{
+		$menu = Menu::get('SidebarMenu');
+		$submenu = $menu->add('المواد' ,['route'=>'subject.index'])->prepend('<i class="fa fa-folder"></i>');
+		$submenu->add('الدروس' ,['route'=>'subject.index'])->prepend('<i class="fa fa-film"></i>');
 	}
 
 }

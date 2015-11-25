@@ -2,12 +2,14 @@
 
 use Illuminate\Http\Request;
 use Modules\Subject\Entities\SubjectLesson;
+use Modules\Subject\Http\Requests\Lesson\LessonRequest;
 use Pingpong\Modules\Routing\Controller;
 
 class LessonsController extends Controller {
 	
 	public function index()
 	{
+		//$tasks = SubjectLesson::where('academystructure_subject_id',$id)->paginate(20);
 		$tasks = SubjectLesson::paginate(20);
 		/*
 		OR send model as argument
@@ -21,27 +23,27 @@ class LessonsController extends Controller {
 		return view('subject::lessons.create_lesson');
 	}
 
-	public function store_lesson(SubjectLesson $sub, Request $req)
+	public function store_lesson(SubjectLesson $sub, LessonRequest $req)
 	{
+
 		$input = $req->all();
-		//dd($input);
 		$sub->fill($input)->save();
 
-		//dd($input);
-		return redirect()->back();
-		//return view('subject::store_lesson');
+		$message = 'تم اضافة الدرس بنجاح';
+
+		if(request('submit')=='save')
+		return redirect()->back()->with('success' ,$message);
+		else
+		return redirect()->route('subject.index')->with('success' ,$message);
 	}
 
 	public function edit_lesson($id)
 	{
-		$tasks = SubjectLesson::findOrFail($id);
-		
-    	//return view('ahmedtest::edit')->withTask($task);
-		//return view('subject::lesson.edit_lesson')->withTask($task);
-		return view('subject::lessons.edit_lesson',compact('tasks'));
+		$lesson = SubjectLesson::findOrFail($id);
+		return view('subject::lessons.edit_lesson',compact('lesson'));
 	}
 
-	public function update_lesson($id,SubjectLesson $sub, Request $req)
+	public function update_lesson($id,SubjectLesson $sub, LessonRequest $req)
 	{
 		$task = $sub->findOrFail($id);
 
@@ -49,7 +51,6 @@ class LessonsController extends Controller {
 
     	$task->fill($input)->save();
     	return redirect()->route('subject.index');
-		//return view('subject::lesson.update_lesson');
 	}
 
 	public function delete_lesson($id,SubjectLesson $sub, Request $req)

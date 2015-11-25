@@ -4,8 +4,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubjectElement extends Model {
 
-    protected $fillable = [
-    	
-    ];
+    protected $fillable = [ 'title','order', 'value' , 'type' ];
 
 }

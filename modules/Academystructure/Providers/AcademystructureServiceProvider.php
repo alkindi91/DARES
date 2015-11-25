@@ -19,7 +19,9 @@ class AcademystructureServiceProvider extends ServiceProvider {
 	 */
 	public function boot(Router $router)
 	{
-		$router->model('faculty' ,'\Modules\Academystructure\Entities\AcademystructureFaculty');
+		$router->model('asFaculty' ,'\Modules\Academystructure\Entities\AcademystructureFaculty');
+		$router->model('asYear' ,'\Modules\Academystructure\Entities\AcademystructureYear');
+		$router->model('asTerm' ,'\Modules\Academystructure\Entities\AcademystructureTerm');
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();

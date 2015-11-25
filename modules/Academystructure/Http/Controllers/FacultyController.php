@@ -6,17 +6,12 @@ use Modules\Academystructure\Http\Requests\Faculty\CreateRequest;
 use Modules\Academystructure\Http\Requests\Faculty\UpdateRequest;
 use Illuminate\Http\Request;
 
-class FacultyController extends Controller {
+class FacultyController extends Controller { 
 	
-	public function index(AcademystructureFaculty $FacultyModel)
+	public function index(AcademystructureFaculty $faculty)
 	{
-		// get an instance of the faculty model 
-		$faculties = $FacultyModel->orderBy('id' ,'desc');
+		$faculties = $faculty->get();
 		
-		// get our results with pagination with 20 faculty per page
-		$faculties = $faculties->paginate(20);
-
-		// return the index view of the faculties module with a collection of faculties objects
 		return view('academystructure::faculty.index' ,compact('faculties'));
 	}
 	public function create_faculty()
@@ -28,7 +23,7 @@ class FacultyController extends Controller {
 		$input = $request->all();			
 		$faculty->fill($input)->save();
 		
-		//return redirect()->route('faculty.index');
+		return redirect()->route('faculty.index');
 	}
 	public function edit_faculty(AcademystructureFaculty $faculty)
 	{
@@ -42,9 +37,10 @@ class FacultyController extends Controller {
 		
 		return redirect()->route('faculty.index');
 	}
-	public function delete_faculty()
+	public function delete_faculty(AcademystructureFaculty $faculty)
 	{
-		return view('academystructure::faculty.index');
+		$faculty->delete();
+		return redirect()->route('faculty.index');
 	}
 		
 }

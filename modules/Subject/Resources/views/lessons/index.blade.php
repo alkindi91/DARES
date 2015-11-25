@@ -1,6 +1,15 @@
 @extends('layouts.master')
 
 @section('content')
+<ol class="breadcrumb">
+  <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
+   <li>
+    الدرس
+  </li>
+  <li class='active'>
+    إضافة درس
+  </li>
+</ol>
 <a href="{{ route('subject.create_lesson') }}" class="btn btn-primary pull-left">
     <i class="fa fa-plus"></i> @lang('global.new')
 </a>
@@ -10,17 +19,20 @@
         <tr class="headings">
             <th>
                 <input type="checkbox" id='check-all' class="tableflat">
-                اسم العنصر
             </th>
             <th>
-            ترتيب العنصر
+                اسم الدرس
             </th>
             <th>
-            نوع العنصر
+            <i class="fa fa-reorder"></i>
+            ترتيب الدرس
             </th>
             <th>
-                <i class="fa fa-envelope"></i>
-                قيمة العنصر
+            نوع الدرس
+            </th>
+            <th>
+                <i class="fa fa-dot-circle-o"></i>
+                حالة الدرس
             </th>
             <th class=" no-link last"><span class="nobr">
             <i class="fa fa-cog"></i>
@@ -32,7 +44,10 @@
 <tbody>
     @foreach($tasks as $task)
     <tr class="even pointer">
-        <td>
+    <td class="a-center ">
+            <input type="checkbox" class="tableflat" value='{{ $task->id }}' name='table_records[]'>
+        </td>
+        <td class="a-center ">
             {{ $task->name }}
         </td>
         <td>
@@ -51,21 +66,17 @@
             <a href="{{ route('subject.delete_lesson' ,$task->id)}}" class="btn btn-danger btn-sm">
             <i class="fa fa-trash"></i> @lang('global.delete')
             </a>
+            <a href="{{ route('subject.create_element' ,$task->id)}}" class="btn btn-primary ">
+            <i class="fa fa-plus"></i> إضافة عنصر
+            </a>
         </td>
     @endforeach
 </tr>
 </tbody>
 </table>
-@foreach($tasks as $task)
-
-    <h3>{{ $task->title }}</h3>
-    <p>{{ $task->name}}</p>
-    <p>{{ $task->order}}</p>
-    <p>{{ $task->state}}</p>
-    <p>
-        <a href="{{ route('subject.index', $task->id) }}" class="btn btn-info">View Task</a>
-        <a href="{{ route('subject.edit_lesson', $task->id) }}" class="btn btn-primary">Edit Task</a>
-    </p>
-    <hr>
-@endforeach
+<div class="bulk-actions">
+<button id='js-delete-all' href="{{ route('subject.delete_lesson' ,$task->id)}}" class="btn btn-danger">
+<i class="fa fa-trash"></i> @lang('global.delete')
+</button>
+</div>
 @stop
