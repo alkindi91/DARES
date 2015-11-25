@@ -1,9 +1,8 @@
 <?php namespace Modules\Academystructure\Http\Controllers;
 
 use Pingpong\Modules\Routing\Controller;
-use Modules\Academystructure\Entities\AcademystructureFaculty;
-use Modules\Academystructure\Http\Requests\Subject\CreateRequest;
-use Modules\Academystructure\Http\Requests\Subject\UpdateRequest;
+use Modules\Academystructure\Entities\Faculty;
+use Modules\Academystructure\Http\Requests\Subject\validationRequest;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller {
@@ -12,15 +11,15 @@ class SubjectController extends Controller {
 	{
 		return view('academystructure::index');
 	}
-	public function create_subject()
+	public function create()
 	{
 		return view('academystructure::index');
 	}
-	public function delete_subject()
+	public function delete()
 	{
 		return view('academystructure::index');
 	}
-	public function edit_subject()
+	public function edit()
 	{
 		return view('academystructure::index');
 	}
