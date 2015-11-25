@@ -1,0 +1,15 @@
+{
+    "name": "MustafaTest",
+    "alias": "mustafatest",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\MustafaTest\\Providers\\MustafaTestServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}

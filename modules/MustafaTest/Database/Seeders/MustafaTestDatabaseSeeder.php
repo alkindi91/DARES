@@ -1,9 +1,9 @@
-<?php namespace Modules\Createsubjectelementtable\Database\Seeders;
+<?php namespace Modules\Mustafatest\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class CreateSubjectElementTableDatabaseSeeder extends Seeder {
+class MustafaTestDatabaseSeeder extends Seeder {
 
 	/**
 	 * Run the database seeds.

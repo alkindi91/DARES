@@ -1,8 +1,8 @@
-<?php namespace Modules\Createsubjectelementtable\Providers;
+<?php namespace Modules\Mustafatest\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class CreateSubjectElementTableServiceProvider extends ServiceProvider {
+class MustafaTestServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -41,10 +41,10 @@ class CreateSubjectElementTableServiceProvider extends ServiceProvider {
 	protected function registerConfig()
 	{
 		$this->publishes([
-		    __DIR__.'/../Config/config.php' => config_path('createsubjectelementtable.php'),
+		    __DIR__.'/../Config/config.php' => config_path('mustafatest.php'),
 		]);
 		$this->mergeConfigFrom(
-		    __DIR__.'/../Config/config.php', 'createsubjectelementtable'
+		    __DIR__.'/../Config/config.php', 'mustafatest'
 		);
 	}
 
@@ -55,7 +55,7 @@ class CreateSubjectElementTableServiceProvider extends ServiceProvider {
 	 */
 	public function registerViews()
 	{
-		$viewPath = base_path('resources/views/modules/createsubjectelementtable');
+		$viewPath = base_path('resources/views/modules/mustafatest');
 
 		$sourcePath = __DIR__.'/../Resources/views';
 
@@ -63,7 +63,7 @@ class CreateSubjectElementTableServiceProvider extends ServiceProvider {
 			$sourcePath => $viewPath
 		]);
 
-		$this->loadViewsFrom([$viewPath, $sourcePath], 'createsubjectelementtable');
+		$this->loadViewsFrom([$viewPath, $sourcePath], 'mustafatest');
 	}
 
 	/**
@@ -73,12 +73,12 @@ class CreateSubjectElementTableServiceProvider extends ServiceProvider {
 	 */
 	public function registerTranslations()
 	{
-		$langPath = base_path('resources/lang/modules/createsubjectelementtable');
+		$langPath = base_path('resources/lang/modules/mustafatest');
 
 		if (is_dir($langPath)) {
-			$this->loadTranslationsFrom($langPath, 'createsubjectelementtable');
+			$this->loadTranslationsFrom($langPath, 'mustafatest');
 		} else {
-			$this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'createsubjectelementtable');
+			$this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'mustafatest');
 		}
 	}
 

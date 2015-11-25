@@ -1,5 +1,5 @@
 {
-	"name": "pingpong-modules/createsubjectelementtable",
+	"name": "pingpong-modules/mustafatest",
 	"description": "",
 	"authors": [
 		{
@@ -9,7 +9,7 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"Modules\\CreateSubjectElementTable\\": ""
+			"Modules\\MustafaTest\\": ""
 		}
 	}
 }
