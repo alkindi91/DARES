@@ -30,6 +30,10 @@ class CreateRegistrationStepPivotsTable extends Migration {
                  ->on('registration_steps')
                  ->onDelete('CASCADE')
                  ->onUpdate('CASCADE');
+
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('SET NULL')->onUpdate('cascade');
+            
         });
     }
 

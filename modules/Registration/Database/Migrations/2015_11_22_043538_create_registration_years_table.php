@@ -19,6 +19,10 @@ class CreateRegistrationYearsTable extends Migration {
 			$table->date('start_at');
 			$table->date('finish_at');
 
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('SET NULL')->onUpdate('cascade');
+            
+            
             $table->timestamps();
         });
     }

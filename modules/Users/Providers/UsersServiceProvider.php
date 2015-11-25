@@ -20,8 +20,8 @@ class UsersServiceProvider extends ServiceProvider {
 	 */
 	public function boot(Router $router)
 	{
-		$router->model('user' ,'\Modules\Users\Entities\User');
-		$router->model('role' ,'\Bican\Roles\Models\Role');
+		$router->model('uuser' ,'\Modules\Users\Entities\User');
+		$router->model('urole' ,'\Bican\Roles\Models\Role');
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();

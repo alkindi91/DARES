@@ -17,20 +17,25 @@ class RegistrationTableSeeder extends Seeder {
 		Model::unguard();
 		
 		$permissions = [
-			['name'=>'اضافة مرحلة قبول تسجيل' ,'slug'=>'create.registration.steps'],
-			['name'=>'تعدل مرحلة قبول تسجيل' ,'slug'=>'edit.registration.steps'],
-			['name'=>'حذف مرحلة قبول تسجيل' ,'slug'=>'delete.registration.steps'],
-			['name'=>'مشاهدة مراحل التسجيل' ,'slug'=>'view.registration.steps'],
+			['name'=>'اضافة مرحلة قبول تسجيل' ,'slug'=>'create.registration.steps','module'=>'registration'],
+			['name'=>'تعدل مرحلة قبول تسجيل' ,'slug'=>'edit.registration.steps','module'=>'registration'],
+			['name'=>'حذف مرحلة قبول تسجيل' ,'slug'=>'delete.registration.steps','module'=>'registration'],
+			['name'=>'مشاهدة مراحل التسجيل' ,'slug'=>'view.registration.steps','module'=>'registration'],
 			
-			['name'=>'اضافة عام جامعي تسجيل' ,'slug'=>'create.registration.years'],
-			['name'=>'تعدل عام جامعي تسجيل' ,'slug'=>'edit.registration.years'],
-			['name'=>'حذف عام جامعي تسجيل' ,'slug'=>'delete.registration.years'],
-			['name'=>'مشاهدة العام الجامعي التسجيل' ,'slug'=>'view.registration.years'],
+			['name'=>'اضافة عام جامعي تسجيل' ,'slug'=>'create.registration.years','module'=>'registration'],
+			['name'=>'تعدل عام جامعي تسجيل' ,'slug'=>'edit.registration.years','module'=>'registration'],
+			['name'=>'حذف عام جامعي تسجيل' ,'slug'=>'delete.registration.years','module'=>'registration'],
+			['name'=>'مشاهدة العام الجامعي التسجيل' ,'slug'=>'view.registration.years','module'=>'registration'],
 
-			['name'=>'اضافة فتؤة القبول' ,'slug'=>'create.registration.periods'],
-			['name'=>'تعدل فتؤة القبول' ,'slug'=>'edit.registration.periods'],
-			['name'=>'حذف فتؤة القبول' ,'slug'=>'delete.registration.periods'],
-			['name'=>'مشاهدة فترات القبول' ,'slug'=>'view.registration.periods'],
+			['name'=>'اضافة فترة القبول' ,'slug'=>'create.registration.periods','module'=>'registration'],
+			['name'=>'تعدل فترة القبول' ,'slug'=>'edit.registration.periods','module'=>'registration'],
+			['name'=>'حذف فترة القبول' ,'slug'=>'delete.registration.periods','module'=>'registration'],
+			['name'=>'مشاهدة فترات القبول' ,'slug'=>'view.registration.periods','module'=>'registration'],
+
+			['name'=>'اضافة ملاحظة لمرحلة قبول' ,'slug'=>'create.registration.notes','module'=>'registration'],
+			['name'=>'تعدل ملاحظة لمرحلة قبول' ,'slug'=>'edit.registration.notes','module'=>'registration'],
+			['name'=>'حذف ملاحظة من مرحلة قبول' ,'slug'=>'delete.registration.notes','module'=>'registration'],
+			['name'=>'مشاهدة ملاحظات مراحل القبول' ,'slug'=>'view.registration.notes','module'=>'registration'],
 		];
 
 		$slugs = array_map(function ($ar) {return $ar['slug'];}, $permissions);

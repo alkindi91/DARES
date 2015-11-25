@@ -8,6 +8,7 @@ return [
 	'create_period'=>'اضافة فترة',
 	'edit_period'=>'تعديل الفترة :name',
 	'create_success'=>'تم انشاء الفترة :name بنجاح',
+	'overlaping'=>'هناك فترة قبول في نفس الحيز الزمني الذي اخترته',
 	'update_success'=>'تم تحديث بيانات الفترة :name بنجاح',
 	'delete_success'=>'تم حذف فترة القبول :name بنجاح',
 	'period_undeletable'=>'هذا فترة القبول غير قابل للحذف',

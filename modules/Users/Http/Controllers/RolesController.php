@@ -23,14 +23,28 @@ class RolesController extends Controller {
 		$role->name = $req->input('name');
 		$role->save();
 		$this->processPermissions($role);
-		return redirect()->route('roles.index')->with('success' ,'تم اضافة المجموعة بنجاح');
+
+		$message = 'تم اضافة المجموعة بنجاح';
+
+		if(request('submit')=='save') {
+			return redirect()->back()->with('success' ,$message);
+		}
+
+		return redirect()->route('roles.index')->with('success' ,$message);
 	}
 
 	public function update(UpdateRoleRequest $req ,Role $role) {
 		$role->name = $req->input('name');
 		$role->save();
 		$this->processPermissions($role);
-		return redirect()->route('roles.index')->with('success' ,'تم تحديث بيانات المجموعة بنجاح');
+
+		$message = 'تم تحديث بيانات المجموعة بنجاح';
+
+		if(request('submit')=='save') {
+			return redirect()->back()->with('success' ,$message);
+		}
+		
+		return redirect()->route('roles.index')->with('success' ,$message);
 	}
 
 	public function edit(Role $role) {

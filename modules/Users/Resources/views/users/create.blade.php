@@ -26,27 +26,10 @@
     </div>
     <br>
 
-    {!! Form::open(['route'=>'users.store' ,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate','files'=>true]) !!}
-    <div class="form-group">
-    <div class="col-md-12">
-     <a href="{{ route('users.index') }}" class="btn btn-primary pull-left">
-        <i class="fa fa-close"></i> @lang('global.cancel')</a>
-        <button type="submit" class="btn btn-success pull-left">
-        <i class="fa fa-save"></i> @lang('global.save')
-        </button>
-    </div>
-    </div>
-<div class="ln_solid"></div>
+    {!! Form::open(['route'=>'users.store' ,'method'=>'POST' ,'class'=>'form-horizontal','files'=>true]) !!}
+
     @include('users::users._fields')
-<div class="ln_solid"></div>
-<div class="form-group">
-    <div class="col-md-12">
-        <a href="{{ route('users.index') }}" class="btn btn-primary pull-left">
-        <i class="fa fa-close"></i> @lang('global.cancel')</a>
-        <button type="submit" class="btn btn-success pull-left">
-        <i class="fa fa-save"></i> @lang('global.save')</button>
-    </div>
-</div>
+
 {!! Form::close() !!}
 </div>
 @stop

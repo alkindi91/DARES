@@ -12,7 +12,7 @@ class CreateCountriesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('countries', function(Blueprint $table)
+        Schema::create('lists_countries', function(Blueprint $table)
         {
             $table->increments('id');
 
@@ -35,7 +35,7 @@ class CreateCountriesTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('countries');
+        Schema::drop('lists_countries');
     }
 
 }

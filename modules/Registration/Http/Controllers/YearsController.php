@@ -1,6 +1,7 @@
 <?php namespace Modules\Registration\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Mail;
 use Modules\Registration\Entities\RegistrationYear as Year;
 use Modules\Registration\Http\Requests\Year\CreateYearRequest;
 use Modules\Registration\Http\Requests\Year\UpdateYearRequest;

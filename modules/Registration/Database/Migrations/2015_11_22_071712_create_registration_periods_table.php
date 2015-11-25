@@ -31,6 +31,11 @@ class CreateRegistrationPeriodsTable extends Migration {
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
 
+
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('SET NULL')->onUpdate('cascade');
+            
+
             $table->timestamps();
         });
     }

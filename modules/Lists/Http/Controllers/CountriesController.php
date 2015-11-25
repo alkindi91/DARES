@@ -1,5 +1,6 @@
 <?php namespace Modules\Lists\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Modules\Lists\Entities\Country;
 use Modules\Lists\Http\Requests\Country\CreateCountryRequest;
 use Modules\Lists\Http\Requests\Country\UpdateCountryRequest;
@@ -7,11 +8,11 @@ use Pingpong\Modules\Routing\Controller;
 
 class CountriesController extends Controller {
 	
-	public function index()
+	public function index(Request $request)
 	{
 		$countries = Country::orderBy('id' ,'desc');
 
-		$countries = $countries->paginate(20);
+		$countries = $countries->get();
 		
 		return view('lists::countries.index' ,compact('countries'));
 
@@ -27,8 +28,15 @@ class CountriesController extends Controller {
 
 		$country = $Country->fill($req->all())->save();
 
-		return redirect()->route('countries.index')
-						 ->with('success' ,trans('lists::countries.create_success'));
+		$message = trans('lists::countries.create_success');
+
+		if(request('submit')=='save') {
+			return redirect()->back()
+						 ->with('success' ,$message);
+		} else {
+			return redirect()->route('countries.index')
+						 ->with('success' ,$message);
+		}
 	}
 
 	public function edit(Country $country) {
@@ -37,11 +45,18 @@ class CountriesController extends Controller {
 
 	public function update(UpdateCountryRequest $req ,Country $Country) {
 
+		
 		$Country->fill($req->all())->save();
 
-		return redirect()->route('countries.index')
-						 ->with('success' ,trans('lists::countries.update_success' ,['name'=>$Country->name]));
+		$message = trans('lists::countries.update_success' ,['name'=>$Country->name]);
 
+		if(request('submit')=='save') {
+			return redirect()->back()
+						 ->with('success' ,$message);
+		} else {
+			return redirect()->route('countries.index')
+						 ->with('success' ,$message);
+		}
 	}
 
 	public function delete(Country $country) {
