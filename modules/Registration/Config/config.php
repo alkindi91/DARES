@@ -17,5 +17,11 @@ EOF;
 return [
 	'name' => 'Registration',
 	'email_header'=>$email_header,
-	'email_footer'=>$email_footer
+	'email_footer'=>$email_footer,
+	'stay_types'=>[
+		'work'=>'عمل',
+		'companion'=>'مرافق',
+		'tourism'=>'سياحة',
+		'non_resident'=>'غير مقيم',
+	]
 ];

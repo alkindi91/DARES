@@ -29,7 +29,7 @@
 @endif
 <div class="clearfix"></div>
 <br />
-@if($countries->isEmpty())
+@if(empty($countries) or $countries->isEmpty())
 <div class="alert alert-info">
 	<i class="fa fa-info"></i> @lang('lists::countries.no_items')
 </div>

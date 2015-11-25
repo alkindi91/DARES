@@ -70,9 +70,17 @@ class UsersController extends Controller {
 		$UserModel->password = bcrypt($request->input('password'));
 		// save the user
 		$UserModel->save();
+		// we process the user permissions based on the new ones sent from the view
 		$this->processPermissions($UserModel);
+		// the message that will be sent back to the user
+		$message = trans('users::users.create_success' ,['name'=>$UserModel->name]);
 		// redirect back to the users index
-		return redirect()->route('users.index')->with('success' ,trans('users::users.create_success' ,['name'=>$UserModel->name]));
+		
+		if(request('submit')=='save') {
+			return redirect()->back()->with('success' ,$message);
+		}
+
+		return redirect()->route('users.index')->with('success' ,$message);
 
 	}
 
@@ -124,7 +132,13 @@ class UsersController extends Controller {
 
 		$this->processPermissions($user);
 
-		return redirect()->route('users.index')->with('success' ,trans('users::users.update_success' ,['name'=>$user->name]));
+		$message = trans('users::users.update_success' ,['name'=>$user->name]);
+		
+		if(request('submit')=='save') {
+			return redirect()->back()->with('success' ,$message);
+		}
+
+		return redirect()->route('users.index')->with('success' ,$message);
 	}
 
 	public function show(User $user) {

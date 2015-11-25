@@ -32,28 +32,11 @@
         <div class="clearfix"></div>
     </div>
     <br>
-    {!! Form::open(['route'=>['cities.store' ,$country->id] ,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate']) !!}
-<div class="form-group">
-    <div class="col-md-12">
-        <a href="{{ route('cities.index' ,$country->id) }}" class="btn btn-primary pull-left">
-        <i class="fa fa-times"></i> @lang('global.cancel')</a>
-        <button type="submit" class="btn btn-success pull-left">
-        <i class="fa fa-save"></i> @lang('global.save')</button>
-    </div>
-</div>
-<div class="ln_solid"></div>
+{!! Form::open(['route'=>['cities.store' ,$country->id] ,'method'=>'POST' ,'class'=>'form-horizontal']) !!}
 
     @include('lists::cities._fields')
 
-<div class="ln_solid"></div>
-<div class="form-group">
-    <div class="col-md-12">
-        <a href="{{ route('cities.index' ,$country->id) }}" class="btn btn-primary pull-left">
-        <i class="fa fa-times"></i> @lang('global.cancel')</a>
-        <button type="submit" class="btn btn-success pull-left">
-        <i class="fa fa-save"></i> @lang('global.save')</button>
-    </div>
-</div>
+
 
 {!! Form::close() !!}
 </div>

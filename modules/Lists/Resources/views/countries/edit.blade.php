@@ -24,29 +24,12 @@
         <div class="clearfix"></div>
     </div>
     <br>
-    {!! Form::model($country ,['route'=>['countries.update' ,$country->id] ,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate']) !!}
+{!! Form::model($country ,['route'=>['countries.update' ,$country->id] ,'method'=>'POST' ,'class'=>'form-horizontal']) !!}
 
-<div class="form-group">
-    <div class="col-md-12">
-        <a href="{{ route('countries.index') }}" class="btn btn-primary pull-left">
-        <i class="fa fa-times"></i> @lang('global.cancel')</a>
-        <button type="submit" class="btn btn-success pull-left">
-        <i class="fa fa-save"></i> @lang('global.save')</button>
-    </div>
-</div>
-<div class="ln_solid"></div>
 
     @include('lists::countries._fields')
     
-<div class="ln_solid"></div>
-<div class="form-group">
-    <div class="col-md-12">
-        <a href="{{ route('countries.index') }}" class="btn btn-primary pull-left">
-        <i class="fa fa-times"></i> @lang('global.cancel')</a>
-        <button type="submit" class="btn btn-success pull-left">
-        <i class="fa fa-save"></i> @lang('global.save')</button>
-    </div>
-</div>
+
 {!! Form::close() !!}
 </div>
 @stop

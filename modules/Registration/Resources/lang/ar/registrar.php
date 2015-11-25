@@ -2,6 +2,6 @@
 
 return [
 	'login'		=>	'دخول',
-	'username'	=>	'اسم المستخدم',
+	'username'	=>	'رقم تقديم الطلب',
 	'password'	=>	'كلمة السر'
 ];

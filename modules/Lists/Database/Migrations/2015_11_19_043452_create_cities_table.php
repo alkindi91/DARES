@@ -12,7 +12,7 @@ class CreateCitiesTable extends Migration {
      */
     public function up()
     {
-        Schema::create('cities', function(Blueprint $table)
+        Schema::create('lists_cities', function(Blueprint $table)
         {
             $table->increments('id');
 
@@ -20,7 +20,7 @@ class CreateCitiesTable extends Migration {
 
             $table->integer('country_id')->unsigned()->nullable();
 
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreign('country_id')->references('id')->on('lists_countries')->onDelete('CASCADE')->onUpdate('CASCADE');
 
             $table->boolean('status')->default(1);
 
@@ -39,7 +39,7 @@ class CreateCitiesTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('cities');
+        Schema::drop('lists_cities');
     }
 
 }

@@ -23,8 +23,9 @@ class ListsServiceProvider extends ServiceProvider {
 	 */
 	public function boot(Router $router)
 	{
-		$router->model('country' ,'\Modules\Lists\Entities\Country');
-		$router->model('city' ,'\Modules\Lists\Entities\City');
+		$router->model('lCountry' ,'\Modules\Lists\Entities\Country');
+		$router->model('lCity' ,'\Modules\Lists\Entities\City');
+		$router->model('lState' ,'\Modules\Lists\Entities\State');
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();
@@ -116,11 +117,11 @@ class ListsServiceProvider extends ServiceProvider {
 	public function registerEvents() {
 
 		City::creating(function($city) {
-			$city->created_by = user()->id;
+			$city->created_by = user() ? user()->id : 1;
 		});
 
 		Country::creating(function($country) {
-			$country->created_by = user()->id;
+			$country->created_by = user() ? user()->id : 1;
 		});
 	}
 
