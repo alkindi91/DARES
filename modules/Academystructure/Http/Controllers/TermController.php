@@ -9,47 +9,47 @@ use Illuminate\Http\Request;
 
 class TermController extends Controller {
 
-	public function index(AcademystructureYear $year )
+	public function index(Year $year)
 	{
 		$year->load('terms');
 		$terms = $year->terms;
-		//$faculty = Faculty::with('years' ,'photos')->paginate(10);
 		
 		return view('academystructure::terms.index' , compact('terms' , 'year'));
 	}
 	
-	public function create(Faculty $faculty)
+	public function create(Year $year)
 	{
-		return view('academystructure::years.create',compact('faculty'));
+		return view('academystructure::terms.create',compact('year'));
 	}	
-	public function store(Year $year , validationRequest $request)
+	public function store(Term $term , validationRequest $request)
 	{
 		$input = $request->all();			
-		$year->fill($input)->save();
+		$term->fill($input)->save();
 		
-		$faculty_id = $request->input('faculty_id');
-		return redirect()->route( 'year.index' , [$faculty_id] );
+		$year_id = $request->input('year_id');
+		return redirect()->route('as.terms.index' , [$year_id]);
 	}
 	
-	public function edit(Year $year)
+	public function edit(Term $term)
 	{		
-		return view('academystructure::years.edit',compact('year'));
+		return view('academystructure::terms.edit',compact('term'));
 	}
-	public function update(Year $year , validationRequest $request)
+	public function update(Term $term , validationRequest $request)
 	{
-		$year->name = $request->input('name');		
-		$year->save();
+		$term ->name = $request->input('name');		
+		$term ->save();
 		
-		$faculty_id = $request->input('faculty_id');	
+		$year_id = $request->input('year_id');	
 
-		return redirect()->route('year.index' , [$faculty_id]);
+		return redirect()->route('as.terms.index' , [$year_id]);
 	}
 	
-	public function delete(Year $year)
+	public function delete(Term $term)
 	{
-		$faculty_id = $year->faculty_id;
-		$year->delete();
-		return redirect()->route( 'year.index' , [$faculty_id] );
+		$term->delete();
+		
+		$year_id = $term->year_id;
+		return redirect()->route('as.terms.index' , [$year_id] );
 	}
 	
 }

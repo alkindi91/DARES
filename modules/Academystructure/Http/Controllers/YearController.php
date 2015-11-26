@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class YearController extends Controller {
 
-	public function index(Faculty $faculty )
+	public function index(Faculty $faculty)
 	{
+		
 		$faculty->load('years');
 		$years = $faculty->years;
-		//$faculty = Faculty::with('years' ,'photos')->paginate(10);
 		
 		return view('academystructure::years.index' , compact('years' , 'faculty'));
 	}

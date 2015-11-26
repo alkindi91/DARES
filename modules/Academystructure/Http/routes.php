@@ -38,7 +38,7 @@ Route::group(['prefix' => 'academystructure', 'namespace' => 'Modules\Academystr
 		Route::get('edit/{asTerm}', ['as' =>'as.terms.edit', 'uses' =>'TermController@edit']);
 		post('update/{asTerm}', ['as' =>'as.terms.update', 'uses' =>'TermController@update']);
 		
-		Route::get('delete/{asYear}', ['as' =>'as.terms.delete', 'uses' =>'TermController@delete']);
+		Route::get('delete/{asTerm}', ['as' =>'as.terms.delete', 'uses' =>'TermController@delete']);
 	});
 	
 });

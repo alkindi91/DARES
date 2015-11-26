@@ -2,18 +2,12 @@
 
 @section('content')
 
-{!! Form::open(['route'=>'faculty.store' ] ,'method'=>'POST' , 'class'=>'form-horizontal') !!}
-<div class="form-group">
-    <div class="col-md-12">
-	{!! Form::label('name', 'اسم الكلية', array('class' => 'awesome')) !!}
-	{!! Form::text('name') !!}
-    </div>
-</div>
-{{--
+{!! Form::open(['route'=>'as.terms.store' ,'method'=>'POST' , 'class'=>'form-horizontal']) !!}
+
 <div class="ln_solid"></div>
-    @include('Academystructure::faculties._fields')  
+    @include('academystructure::terms._fields')  
 <div class="ln_solid"></div>
---}}
+
 
 <div class="ln_solid"></div>
 <div class="form-group">
