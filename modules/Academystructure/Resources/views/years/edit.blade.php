@@ -1,14 +1,14 @@
 @extends('layouts.master')
 
 @section('content')
-{!! Form::modle($year, ['route'=>['as.years.update']  ,'method'=>'POST' , 'class'=>'form-horizontal']) !!}
+{!! Form::model($year, ['route'=>['as.years.update' , $year->id]  ,'method'=>'POST' , 'class'=>'form-horizontal']) !!}
 
 
-{{-- comment
+
 <div class="ln_solid"></div>
-    @include('Academystructure::years._fields')  
+    @include('academystructure::years._fields')  
 <div class="ln_solid"></div>
---}}
+
 
 <div class="ln_solid"></div>
 <div class="form-group">
