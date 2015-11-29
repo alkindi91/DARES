@@ -19,9 +19,9 @@ class AcademystructureServiceProvider extends ServiceProvider {
 	 */
 	public function boot(Router $router)
 	{
-		$router->model('asFaculty' ,'\Modules\Academystructure\Entities\AcademystructureFaculty');
-		$router->model('asYear' ,'\Modules\Academystructure\Entities\AcademystructureYear');
-		$router->model('asTerm' ,'\Modules\Academystructure\Entities\AcademystructureTerm');
+		$router->model('asFaculty' ,'\Modules\Academystructure\Entities\Faculty');
+		$router->model('asYear' ,'\Modules\Academystructure\Entities\Year');
+		$router->model('asTerm' ,'\Modules\Academystructure\Entities\Term');
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();
@@ -104,7 +104,7 @@ class AcademystructureServiceProvider extends ServiceProvider {
 	public function registerMenu()
 	{
 		$menu = Menu::get('SidebarMenu');
-		$menu->add('الهيكل الاكاديمى' ,['route'=>'faculty.index']);
+		$menu->add('الهيكل الاكاديمى' ,['route'=>'as.faculties.index']);
 		return array();
 	}
 
