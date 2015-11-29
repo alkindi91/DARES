@@ -4,6 +4,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class SubjectElement extends Model {
 
-    protected $fillable = [ 'title','order', 'value' , 'type' ];
+    protected $fillable = [ 'title','subject_lesson_id','element_order','state', 'value' , 'type' ];
 
 }

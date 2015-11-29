@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<a href="{{ route('subject.create_element') }}" class="btn btn-primary pull-left">
+<a href="{{ route('subject.create_element',$id) }}" class="btn btn-primary pull-left">
     <i class="fa fa-plus"></i> @lang('global.new')
 </a>
 

@@ -51,7 +51,7 @@
             {{ $task->name }}
         </td>
         <td>
-            {{ $task->order }}
+            {{ $task->lesson_order }}
         </td>
         <td>
             {{ $task->type }}

@@ -13,8 +13,8 @@ Route::group(['prefix' => 'subject','middleware'=>'auth', 'namespace' => 'Module
 
 
     get('element/{lessonid}', ['as'=>'subject.element','uses'=>"ElementsController@element"]);
-	get('create_element', ['as'=>'subject.create_element','uses'=>'ElementsController@create_element']);
-	post('store_element', ['as'=>'subject.store_element','uses'=>'ElementsController@store_element']);
+	get('create_element/{lessonid}', ['as'=>'subject.create_element','uses'=>'ElementsController@create_element']);
+	post('store_element/{lessonid}', ['as'=>'subject.store_element','uses'=>'ElementsController@store_element']);
 	get('edit_element/{element}', ['as'=>'subject.edit_element','uses'=>'ElementsController@edit_element']);
 	post('update_element/{element}', ['as'=>'subject.update_element','uses'=>'ElementsController@update_element']);
 	get('delete_element/{element}', ['as'=>'subject.delete_element','uses'=>'ElementsController@delete_element']);
