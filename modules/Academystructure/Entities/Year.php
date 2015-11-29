@@ -9,7 +9,7 @@ class Year extends Model {
 	protected $table = 'academystructure_years';
 	
 	public function terms() {
-    	return $this->hasMany('\Modules\Academystructure\Entities\Term' ,'term_id');
+    	return $this->hasMany('\Modules\Academystructure\Entities\Term' ,'year_id');
     }
 
 }

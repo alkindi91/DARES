@@ -1,8 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-<a href="{{ route('as.years.create',$faculty->id) }}" class="btn btn-primary pull-left">
-	<i class="fa fa-plus"></i> Craete
+<a href="{{ route('as.terms.create',$faculty->id) }}" class="btn btn-primary pull-left">
+	<i class="fa fa-plus"></i> @lang('academystructure::years.create_year')
 </a>
 <div class="clearfix"></div>
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
@@ -11,22 +11,22 @@
 			<th width="5%"> 
 				<input type="checkbox" id='check-all' class="tableflat">
 			</th>
-			<th width="70%">
-				year name
+			<th width="60%">
+				{{ trans('academystructure::years.name') }}
 			</th>
 			<th width="10%" class=" no-link last">
             <span class="nobr">
-			<i class="fa fa-edit"></i> Edit
+			<i class="fa fa-edit"></i> @lang('global.edit')
 			</span>
 			</th>
 			<th width="10%" class=" no-link last">
             <span class="nobr">
-			<i class="fa fa-trash"></i> Delete
+			<i class="fa fa-trash"></i> @lang('global.delete')
 			</span>
 			</th>
-			<th width="15%" class=" no-link last">
+			<th width="25%" class=" no-link last">
             <span class="nobr">
-			<i class="fa fa-table"></i> Terms
+			<i class="fa fa-table"></i> {{ trans('academystructure::terms.name') }}
 			</span>
 			</th>
 	</tr>
@@ -42,17 +42,17 @@
 		</td>
 		<td align="center">
 			<a href="{{ route('as.years.edit' ,$year->id)}}" class='btn btn-sm btn-success'>
-				<i class="fa fa-edit"></i> edit
+				<i class="fa fa-edit"></i> @lang('global.edit')
 			</a>
 		</td>
 		<td align="center">
 			<a href="{{ route('as.years.delete' ,$year->id)}}" class="btn btn-danger btn-sm">
-			<i class="fa fa-trash"></i> delete
+			<i class="fa fa-trash"></i> @lang('global.delete')
 			</a>
 		</td>
 		<td align="center">
 			<a href="{{ route('as.terms.index' ,$year->id)}}" class="btn btn-info btn-md">
-			<i class="fa fa-table"></i> term
+			<i class="fa fa-table"></i> {{ trans('academystructure::terms.name') }}
 			</a>
         </td>
     </tr>

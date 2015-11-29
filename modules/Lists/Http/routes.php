@@ -51,9 +51,12 @@ Route::group(['prefix' => 'lists', 'namespace' => 'Modules\Lists\Http\Controller
 	
 	});
 
-	Route::group(['prefix'=>'api'] ,function() {
+	Route::group(['prefix'=>'api' ,'namespace'=>'Api'] ,function() {
 		
-			resource('cities' ,'Api\CitiesController@index');
+			resource('countries' ,'CountriesController');
+			resource('states' ,'StatesController');
+			resource('cities' ,'CitiesController');
+			resource('regions' ,'RegionsController');
 		
 	});
 });

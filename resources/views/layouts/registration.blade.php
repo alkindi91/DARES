@@ -48,7 +48,7 @@
    
       
 
-        <div id="container" class='container' style='width: 1170px;'>
+        <div id="container" class='container' style='max-width: 1170px;'>
            <div class="row">
                <div class="col-md-12">
                <img src="{{ asset('assets/img/logo.png') }}" alt="@lang('global.title')" style='margin:20px auto 20px auto;display:block'>

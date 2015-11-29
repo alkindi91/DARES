@@ -2,7 +2,7 @@
 
 @section('content') 
 <a href="{{ route('as.faculties.create') }}" class="btn btn-primary pull-left">
-	<i class="fa fa-plus"></i> Craete
+	<i class="fa fa-plus"></i> @lang('academystructure::faculties.create_faculty')
 </a>
 <div class="clearfix"></div>
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
@@ -12,24 +12,24 @@
 				<input type="checkbox" id='check-all' class="tableflat">
 			</th>
 			<th width="60%">
-				faculty name
+				@lang('academystructure::faculties.name')
 			</th>
 			<th class=" no-link last" width="10%">
             <span class="nobr">
 			<i class="fa fa-cog"></i>
-			تعديل 
+			@lang('global.edit') 
 			</span>
 			</th>
 			<th class=" no-link last" width="10%">
             <span class="nobr">
 			<i class="fa fa-cog"></i>
-			حذف 
+			@lang('global.delete') 
 			</span>
 			</th>
 			<th class=" no-link last" width="15%">
             <span class="nobr">
 			<i class="fa fa-cog"></i>
-			السنوات الدراسية 
+			@lang('academystructure::years.name') 
 			</span>
 			</th>
 	</tr>
@@ -45,17 +45,17 @@
 		</td>
 		<td class=" last" align="center">
 			<a href="{{ route('as.faculties.edit' ,$faculty->id)}}" class='btn btn-sm btn-success'>
-				<i class="fa fa-edit"></i> edit
+				<i class="fa fa-edit"></i> @lang('global.edit')
 			</a>
 		</td>
 		<td class=" last" align="center">
 			<a href="{{ route('as.faculties.delete' ,$faculty->id)}}" class="btn btn-danger btn-sm">
-			<i class="fa fa-trash"></i> delete
+			<i class="fa fa-trash"></i> @lang('global.delete')
 			</a>
 		</td>
 		<td class=" last" align="center">
 			<a href="{{ route('as.years.index' ,$faculty->id)}}" class="btn btn-info btn-md">
-			<i class="fa fa-table"></i> years
+			<i class="fa fa-table"></i> @lang('academystructure::years.name')
 			</a>
         </td>
     </tr>
