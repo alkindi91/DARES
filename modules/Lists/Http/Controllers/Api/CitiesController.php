@@ -8,13 +8,17 @@ class CitiesController extends Controller {
 	
 	public function index(City $city ,Request $request)
 	{
+
 		$cities = $city->orderBy('id' ,'desc');
 
 		if($request->has('country_id')) {
+
 			$cities->where('country_id' ,$request->input('country_id'));
 		}
 
-		return $cities->get();
+		$cities = $cities->get();
+
+		return $cities;
 	}
 	
 }

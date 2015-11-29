@@ -7,7 +7,7 @@ use Modules\Lists\Entities\City;
 use Modules\Lists\Entities\Country;
 use Modules\Lists\Entities\State;
 use Modules\Users\Entities\User;
-
+use File;
 class ListsTableSeeder extends Seeder {
 
 	/**
@@ -19,44 +19,26 @@ class ListsTableSeeder extends Seeder {
 	{
 		Model::unguard();
 		
-		$countries = [
-			['name'=>'سلطنة عمان' ,'cities'=>[
-				['name'=>'مسقط'],
+		$countries = json_decode(File::get(__DIR__."/countries.json") ,true);
+
+
+		$cities = [
+			'OM'=>
+			[
+				['name'=>'مسقط','states'=>[
+					['name'=>'الخوير']
+				]],
 				['name'=>'البريمي'],
 				['name'=>'الباطنة شمال'],
 				['name'=>'الباطنة جنوب'],
 				['name'=>'الظاهرة'],
-				['name'=>'الداخلية ','states'=>[
-					['name'=>'لبخوير']
-				]],
+				['name'=>'الداخلية '],
 				['name'=>'الشرقية شمال'],
 				['name'=>'الشرقية جنوب'],
 				['name'=>'الوسطى'],
 				['name'=>'ظفار'],
 				['name'=>'مسندم'],
-			]],
-			['name'=>'أفغانستان'],
-			['name'=>'مصر'],
-			['name'=>'تونس'],
-			['name'=>'الجزائر'],
-			['name'=>'المغرب'],
-			['name'=>'ليبيا'],
-			['name'=>'السودان'],
-			['name'=>'موريتانيا'],
-			['name'=>'الصومال'],
-			['name'=>'جيبوتي'],
-		    ['name'=>'جزر القمر'],
-			['name'=>'السعوديه'],
-			['name'=>'الكويت'],
-			['name'=>'البحرين'],
-			['name'=>'قطر'],
-			['name'=>'الامارات'],
-			['name'=>'اليمن'],
-			['name'=>'العراق'],
-			['name'=>'الاردن'],
-			['name'=>'فلسطين'],
-			['name'=>'لبنان'],
-			['name'=>'سوريا'],
+			]
 		];
 		$permissions = [
 			['name'=>'اضافة دول' ,'slug'=>'create.countries', 'module'=>'lists'],
@@ -92,16 +74,16 @@ class ListsTableSeeder extends Seeder {
 		}
 		foreach($countries as $country){
 
-			$newCountry = Country::create(['name'=>$country['name']]);
+			$newCountry = Country::create(['name'=>isset($country['full_name']) ? $country['full_name'] : $country['name'] ,'calling_code'=>$country['calling_code']]);
 
-			if(isset($country['cities'])) {
-				foreach($country['cities'] as $city) {
+			if(isset($cities[$country['iso_3166_2']])) {
+				foreach($cities[$country['iso_3166_2']] as $city) {
 
 					$newCity = City::create(['name'=>$city['name'] ,'country_id'=>$newCountry->id]);
 					
 					if(isset($city['states'])) {
-						foreach($city['states'] as $governorate) {
-							State::create(['name'=>$governorate['name'] ,'city_id'=>$newCity->id]);
+						foreach($city['states'] as $state) {
+							State::create(['name'=>$state['name'] ,'city_id'=>$newCity->id]);
 						}
 					}
 				}
