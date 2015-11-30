@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Modules\Subject\Entities\SubjectElement;
+use Modules\Subject\Http\Requests\Element\ElementRequest;
 use Pingpong\Modules\Routing\Controller;
 
 class ElementsController extends Controller {
@@ -20,7 +21,7 @@ class ElementsController extends Controller {
 		return view('subject::elements.create_element',array('id'=>$lessonid)); 
 	}
 
-	public function store_element(SubjectElement $elelment, Request $req,$lessonid)
+	public function store_element(SubjectElement $elelment, ElementRequest $req,$lessonid)
 	{
 		$elelment->fill($req->all())->save();
 
@@ -40,7 +41,7 @@ class ElementsController extends Controller {
 		return view('subject::elements.edit_element',compact('elements'));
 	}
 
-	public function update_element($elementid,SubjectElement $element, Request $req)
+	public function update_element($elementid,SubjectElement $element, ElementRequest $req)
 	{
 		$element = $element->findOrFail($elementid);
     	
