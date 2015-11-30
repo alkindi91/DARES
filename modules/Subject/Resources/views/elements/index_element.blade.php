@@ -10,6 +10,8 @@
         <tr class="headings">
             <th>
                 <input type="checkbox" id='check-all' class="tableflat">
+            </th>
+            <th>
                 اسم العنصر
             </th>
             <th>
@@ -32,6 +34,9 @@
 <tbody>
     @foreach($elements as $element)
     <tr class="even pointer">
+    <td class="a-center ">
+            <input type="checkbox" class="tableflat" value='{{ $element->id }}' name='table_records[]'>
+        </td>
         <td>
             {{ $element->title }}
         </td>
@@ -56,5 +61,9 @@
 </tr>
 </tbody>
 </table>
-
+<div class="bulk-actions">
+<button id='js-delete-all' href="{{ route('subject.delete_lesson' ,$element->id)}}" class="btn btn-danger">
+<i class="fa fa-trash"></i> @lang('global.delete')
+</button>
+</div>
 @stop
