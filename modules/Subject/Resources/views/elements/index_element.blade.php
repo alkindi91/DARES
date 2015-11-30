@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<a href="{{ route('subject.create_element',$id) }}" class="btn btn-primary pull-left">
+<a href="{{ route('elements.create',$id) }}" class="btn btn-primary pull-left">
     <i class="fa fa-plus"></i> @lang('global.new')
 </a>
 {{ trans('subject::lessons.Lesson_name') }}
@@ -51,10 +51,10 @@
             {{ $element->value}}
         </td>
         <td class=" last">
-            <a href="{{ route('subject.edit_element' ,$element->id)}}" class='btn btn-sm btn-success'>
+            <a href="{{ route('elements.edit' ,$element->id)}}" class='btn btn-sm btn-success'>
                 <i class="fa fa-edit"></i> @lang('global.edit')
             </a>
-            <a href="{{ route('subject.delete_element' ,$element->id)}}" class="btn btn-danger btn-sm">
+            <a href="{{ route('elements.delete' ,$element->id)}}" class="btn btn-danger btn-sm">
             <i class="fa fa-trash"></i> @lang('global.delete')
             </a>
         </td>
@@ -63,7 +63,11 @@
 </tbody>
 </table>
 <div class="bulk-actions">
+<<<<<<< HEAD
 <button id='js-delete-all' href="{{ route('subject.delete_element' ,$element->id)}}" class="btn btn-danger">
+=======
+<button id='js-delete-all' href="{{ route('elements.delete' ,$element->id)}}" class="btn btn-danger">
+>>>>>>> 358697503b3822eb627f7cb498c9f0f7a9cda843
 <i class="fa fa-trash"></i> @lang('global.delete')
 </button>
 </div>

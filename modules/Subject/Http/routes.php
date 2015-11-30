@@ -4,20 +4,21 @@ Route::group(['prefix' => 'subject','middleware'=>'auth', 'namespace' => 'Module
 
 {
 	get('/', ['as'=>'subject.index','uses'=>"LessonsController@index"]);
-	get('create_lesson', ['as'=>'subject.create_lesson','uses'=>'LessonsController@create_lesson']);
-	post('store_lesson', ['as'=>'subject.store_lesson','uses'=>'LessonsController@store_lesson']);
-	get('edit_lesson/{lesson}', ['as'=>'subject.edit_lesson','uses'=>'LessonsController@edit_lesson']);
-	post('update_lesson/{lesson}', ['as'=>'subject.update_lesson','uses'=>'LessonsController@update_lesson']);
-	get('delete_lesson/{lesson}', ['as'=>'subject.delete_lesson','uses'=>'LessonsController@delete_lesson']);
+	get('create', ['as'=>'subject.create','uses'=>'LessonsController@create']);
+	post('store', ['as'=>'subject.store','uses'=>'LessonsController@store']);
+	get('edit/{slessonid}', ['as'=>'subject.edit','uses'=>'LessonsController@edit']);
+	post('update/{slessonid}', ['as'=>'subject.update','uses'=>'LessonsController@update']);
+	get('delete/{slessonid}', ['as'=>'subject.delete','uses'=>'LessonsController@delete']);
 	
 
-
-    get('element/{lessonid}', ['as'=>'subject.element','uses'=>"ElementsController@element"]);
-	get('create_element/{lessonid}', ['as'=>'subject.create_element','uses'=>'ElementsController@create_element']);
-	post('store_element/{lessonid}', ['as'=>'subject.store_element','uses'=>'ElementsController@store_element']);
-	get('edit_element/{element}', ['as'=>'subject.edit_element','uses'=>'ElementsController@edit_element']);
-	post('update_element/{element}', ['as'=>'subject.update_element','uses'=>'ElementsController@update_element']);
-	get('delete_element/{element}', ['as'=>'subject.delete_element','uses'=>'ElementsController@delete_element']);
+Route::group(['prefix'=>'elements'] ,function() {
+    get('/{selements}', ['as'=>'elements.index','uses'=>"ElementsController@index"]);
+	get('create/{selements}', ['as'=>'elements.create','uses'=>'ElementsController@create']);
+	post('store/{selements}', ['as'=>'elements.store','uses'=>'ElementsController@store']);
+	get('edit/{selements}', ['as'=>'elements.edit','uses'=>'ElementsController@edit']);
+	post('update/{selements}', ['as'=>'elements.update','uses'=>'ElementsController@update']);
+	get('delete/{selements}', ['as'=>'elements.delete','uses'=>'ElementsController@delete']);
 	
+});
 
 });
