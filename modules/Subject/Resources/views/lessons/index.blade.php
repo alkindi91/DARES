@@ -10,7 +10,7 @@
     إضافة درس
   </li>
 </ol>
-<a href="{{ route('subject.create_lesson') }}" class="btn btn-primary pull-left">
+<a href="{{ route('subject.create') }}" class="btn btn-primary pull-left">
     <i class="fa fa-plus"></i> @lang('global.new')
 </a>
 {!! Form::open(['route'=>'subject.index']) !!}
@@ -60,13 +60,13 @@
             {{ $task->state}}
         </td>
         <td class=" last">
-            <a href="{{ route('subject.edit_lesson' ,$task->id)}}" class='btn btn-sm btn-success'>
+            <a href="{{ route('subject.edit' ,$task->id)}}" class='btn btn-sm btn-success'>
                 <i class="fa fa-edit"></i> @lang('global.edit')
             </a>
-            <a href="{{ route('subject.delete_lesson' ,$task->id)}}" class="btn btn-danger btn-sm">
+            <a href="{{ route('subject.delete' ,$task->id)}}" class="btn btn-danger btn-sm">
             <i class="fa fa-trash"></i> @lang('global.delete')
             </a>
-            <a href="{{ route('subject.create_element' ,$task->id)}}" class="btn btn-primary ">
+            <a href="{{ route('subject.create' ,$task->id)}}" class="btn btn-primary ">
             <i class="fa fa-plus"></i> إضافة عنصر
             </a>
         </td>
@@ -75,7 +75,7 @@
 </tbody>
 </table>
 <div class="bulk-actions">
-<button id='js-delete-all' href="{{ route('subject.delete_lesson' ,$task->id)}}" class="btn btn-danger">
+<button id='js-delete-all' href="{{ route('subject.delete' ,$task->id)}}" class="btn btn-danger">
 <i class="fa fa-trash"></i> @lang('global.delete')
 </button>
 </div>

@@ -59,7 +59,7 @@
     <div class="ln_solid"></div>
     <div class="form-group">
         <div class="col-md-12">
-            <a href="{{ route('subject.element',$id) }}" class="pull-left btn btn-primary">
+            <a href="{{ route('elements.index',$id) }}" class="pull-left btn btn-primary">
             <i class="fa fa-times"></i> @lang('global.cancel')</a>
             <button value='save' name='submit' type="submit" class="pull-left btn btn-success">
             <i class="fa fa-save"></i> @lang('global.save')
