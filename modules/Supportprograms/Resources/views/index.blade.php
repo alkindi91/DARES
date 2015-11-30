@@ -18,7 +18,7 @@
 
 <div class="clearfix"></div>
 </div>
-<a href="{{ route('users.create') }}" class="btn btn-primary pull-left">
+<a href="{{ route('supportprograms.create') }}" class="btn btn-primary pull-left">
 	<i class="fa fa-plus"></i> @lang('global.new')
 </a>
 <div class="clearfix"></div>

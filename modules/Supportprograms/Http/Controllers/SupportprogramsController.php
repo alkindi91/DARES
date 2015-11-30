@@ -22,10 +22,25 @@ class SupportprogramsController extends Controller {
 		return view('supportprograms::create');
 
 	}
-	public function store(){
+	public function store(SupportprogramsApplication $SubProgModel, Request $req){
+dd("dddddd");
+		$input = $req->all();
 
-		
-		
+		$SubProgModel->fill($input)->save();
+
+		$message = 'تم اضافة البرنامج بنجاح';	
+
+		if(request('submit')=='save')
+		return redirect()->back()->with('success' ,$message);
+		else
+		return redirect()->route('supportprograms.index')->with('success' ,$message);
+
+	}
+	public function edit(SupportprogramsApplication $SubProgModel,$id){
+
+		$program = $SubProgModel->findOrFail($id);
+		return view('supportprograms::edit',compact('program'));
+
 	}
 	
 	
