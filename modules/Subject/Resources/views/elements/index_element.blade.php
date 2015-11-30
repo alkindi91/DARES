@@ -62,7 +62,7 @@
 </tbody>
 </table>
 <div class="bulk-actions">
-<button id='js-delete-all' href="{{ route('subject.delete_lesson' ,$element->id)}}" class="btn btn-danger">
+<button id='js-delete-all' href="{{ route('elements.delete' ,$element->id)}}" class="btn btn-danger">
 <i class="fa fa-trash"></i> @lang('global.delete')
 </button>
 </div>

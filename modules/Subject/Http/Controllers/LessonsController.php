@@ -34,7 +34,7 @@ class LessonsController extends Controller {
 		if(request('submit')=='save')
 		return redirect()->back()->with('success' ,$message);
 		else
-		return redirect()->route('lessons.index')->with('success' ,$message);
+		return redirect()->route('subject.index')->with('success' ,$message);
 	}
 
 	public function edit($id)
@@ -50,7 +50,7 @@ class LessonsController extends Controller {
     	$input = $req->all();
 
     	$task->fill($input)->save();
-    	return redirect()->route('lessons.index');
+    	return redirect()->route('subject.index');
 	}
 
 	public function delete($id,SubjectLesson $sub, Request $req)
@@ -60,7 +60,7 @@ class LessonsController extends Controller {
     	$input = $req->all();
 
     	$task->fill($input)->delete();
-    	return redirect()->route('lessons.index');
+    	return redirect()->route('subject.index');
 	}
 	
 }
