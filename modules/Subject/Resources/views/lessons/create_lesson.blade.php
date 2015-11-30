@@ -2,7 +2,7 @@
 
 @section('content')
 
-{!! Form::open(['route'=>'subject.store_lesson' ,'class'=>'form-horizontal form-label-left']) !!}
+{!! Form::open(['route'=>'subject.store' ,'class'=>'form-horizontal form-label-left']) !!}
    
    @include('subject::lessons._fields')
 

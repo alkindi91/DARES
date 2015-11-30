@@ -13,27 +13,27 @@
 
  <div class="form-group">
         <div class="form-group">
-        {!! Form::label('title', 'اسم العنصر', array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
+        {!! Form::label('title', trans('subject::subject.Element_name'), array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">
         {!! Form::text('title' ,null,['class'=>'form-control']) !!}
         </div>
         </div>
     </div>
     <div class="form-group">
-        {!! Form::label('element_order', 'الترتيب', array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
+        {!! Form::label('element_order', trans('subject::subject.Element_order'), array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">
         {!! Form::text('element_order' ,null,['class'=>'form-control']) !!}
         </div>
     </div>
     <div class="form-group">
-        {!! Form::label('type', 'النوع', array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
+        {!! Form::label('type', trans('subject::subject.Element_type'), array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">
         {!! Form::text('type' ,null,['class'=>'form-control']) !!}
         </div>
     </div>
     <div class="form-group">
 
-        {!! Form::label('value', 'القيمة', array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
+        {!! Form::label('value', trans('subject::subject.Element_value'), array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">
         {!! Form::text('value' ,null,['class'=>'form-control']) !!}
         
@@ -43,25 +43,29 @@
 
         <div class="col-md-6 col-xs-offset-0 col-md-offset-3 col-sm-6 col-xs-12">
         <label>
-           {!! Form::radio('state',0,null,['class'=>'form-control flat']) !!}  نشط
+           {!! Form::radio('state',0,null,['class'=>'form-control flat']) !!}  @lang('subject::subject.active')
         </label>
         <br>
         <label>
-        {!! Form::radio('state',1,null,['class'=>'form-control flat']) !!} غير نشط
+        {!! Form::radio('state',1,null,['class'=>'form-control flat']) !!} @lang('subject::subject.notactive')
         </label>
         </div>
     </div>
+           
+            @if($id == null)
+            $id = $elements -> subject_lesson_id 
+            @endif
 
     <div class="ln_solid"></div>
     <div class="form-group">
         <div class="col-md-12">
-            <a href="{{ route('subject.element') }}" class="pull-left btn btn-primary">
+            <a href="{{ route('elements.index',$id) }}" class="pull-left btn btn-primary">
             <i class="fa fa-times"></i> @lang('global.cancel')</a>
             <button value='save' name='submit' type="submit" class="pull-left btn btn-success">
             <i class="fa fa-save"></i> @lang('global.save')
             </button>
             <button value="exit" name="submit" type="submit" class="pull-left btn btn-primary">
-            <i class="fa fa-sign-out"></i> حفظ و خروج
+            <i class="fa fa-sign-out"></i> @lang('global.save_and_exit')
 
             </button>
         </div>

@@ -1,26 +1,38 @@
 @extends('layouts.master')
 
 @section('content')
-<a href="{{ route('subject.create_element',$id) }}" class="btn btn-primary pull-left">
+<ol class="breadcrumb">
+  <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
+   <li>
+    @lang('subject::subject.Element')
+  </li>
+  <li class='active'>
+    @lang('subject::subject.Add_element')
+  </li>
+</ol>
+<a href="{{ route('elements.create',$id) }}" class="btn btn-primary pull-left">
     <i class="fa fa-plus"></i> @lang('global.new')
 </a>
-
+{{ trans('subject::subject.Lesson_name') }}
+@lang('subject::subject.Lesson_name')
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
     <thead>
         <tr class="headings">
             <th>
                 <input type="checkbox" id='check-all' class="tableflat">
-                اسم العنصر
             </th>
             <th>
-            ترتيب العنصر
+                @lang('subject::subject.Element_name')
             </th>
             <th>
-            نوع العنصر
+            @lang('subject::subject.Element_order')
+            </th>
+            <th>
+            @lang('subject::subject.Element_type')
             </th>
             <th>
                 <i class="fa fa-envelope"></i>
-                قيمة العنصر
+                @lang('subject::subject.Element_value')
             </th>
             <th class=" no-link last"><span class="nobr">
             <i class="fa fa-cog"></i>
@@ -32,6 +44,9 @@
 <tbody>
     @foreach($elements as $element)
     <tr class="even pointer">
+    <td class="a-center ">
+            <input type="checkbox" class="tableflat" value='{{ $element->id }}' name='table_records[]'>
+        </td>
         <td>
             {{ $element->title }}
         </td>
@@ -45,10 +60,10 @@
             {{ $element->value}}
         </td>
         <td class=" last">
-            <a href="{{ route('subject.edit_element' ,$element->id)}}" class='btn btn-sm btn-success'>
+            <a href="{{ route('elements.edit' ,$element->id)}}" class='btn btn-sm btn-success'>
                 <i class="fa fa-edit"></i> @lang('global.edit')
             </a>
-            <a href="{{ route('subject.delete_element' ,$element->id)}}" class="btn btn-danger btn-sm">
+            <a href="{{ route('elements.delete' ,$element->id)}}" class="btn btn-danger btn-sm">
             <i class="fa fa-trash"></i> @lang('global.delete')
             </a>
         </td>
@@ -56,5 +71,8 @@
 </tr>
 </tbody>
 </table>
-
+<div class="bulk-actions">
+<button id='js-delete-all' href="{{ route('subject.delete' ,$element->id)}}" class="btn btn-danger">
+</button>
+</div>
 @stop

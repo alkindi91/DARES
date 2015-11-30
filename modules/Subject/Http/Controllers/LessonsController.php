@@ -18,12 +18,12 @@ class LessonsController extends Controller {
 		return view('subject::lessons.index',compact('tasks'));
 	}
 
-	public function create_lesson()
+	public function create()
 	{
 		return view('subject::lessons.create_lesson');
 	}
 
-	public function store_lesson(SubjectLesson $sub, LessonRequest $req)
+	public function store(SubjectLesson $sub, LessonRequest $req)
 	{
 
 		$input = $req->all();
@@ -37,13 +37,13 @@ class LessonsController extends Controller {
 		return redirect()->route('subject.index')->with('success' ,$message);
 	}
 
-	public function edit_lesson($id)
+	public function edit($id)
 	{
 		$lesson = SubjectLesson::findOrFail($id);
 		return view('subject::lessons.edit_lesson',compact('lesson'));
 	}
 
-	public function update_lesson($id,SubjectLesson $sub, LessonRequest $req)
+	public function update($id,SubjectLesson $sub, LessonRequest $req)
 	{
 		$task = $sub->findOrFail($id);
 
@@ -53,7 +53,7 @@ class LessonsController extends Controller {
     	return redirect()->route('subject.index');
 	}
 
-	public function delete_lesson($id,SubjectLesson $sub, Request $req)
+	public function delete($id,SubjectLesson $sub, Request $req)
 	{
 		$task = $sub->findOrFail($id);
 

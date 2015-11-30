@@ -1,8 +1,8 @@
-<?php namespace Modules\Subject\Http\Requests\Element;
+<?php namespace Modules\Academystructure\Http\Requests\Year;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateElementRequest extends FormRequest {
+class validationRequest extends FormRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
