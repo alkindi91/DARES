@@ -7,49 +7,55 @@ use Pingpong\Modules\Routing\Controller;
 class ElementsController extends Controller {
 	
 	public function element($lessonid)
-	{ 	$elements = SubjectElement::findOrFail($lessonid)->paginate(20);
+	{ 	
+
+		$elements = SubjectElement::where('subject_lesson_id',$lessonid)->paginate(20);
 		
-		
-		return view('subject::element.index_element', compact('elements'));
+		return view('subject::elements.index_element', array('elements'=>$elements,'id'=>$lessonid));
 	}
 	
-	public function create_element()
+	public function create_element($lessonid)
 	{
-		return view('subject::element.create_element');
+		
+		return view('subject::elements.create_element',array('id'=>$lessonid)); 
 	}
 
-	public function store_element(SubjectElement $elelment, Request $req)
+	public function store_element(SubjectElement $elelment, Request $req,$lessonid)
 	{
 		$elelment->fill($req->all())->save();
-		
-		return redirect()->back();
+
+		$message = 'تم اضافة العنصر بنجاح';
+
+		if(request('submit')=='save')
+		return redirect()->back()->with('success' ,$message);
+		else
+		return redirect()->route('subject.element',array('id'=>$lessonid))->with('success' ,$message);
+
 	}
 
-	public function edit_element($id)
+	public function edit_element($elementid)
 	{
-		$elements = SubjectElement::findOrFail($id);
-	
-		return view('subject::element.edit_element',compact('elements'));
+		$elements = SubjectElement::findOrFail($elementid);
+		//dd($elements);
+		return view('subject::elements.edit_element',compact('elements'));
 	}
 
-	public function update_element($id,SubjectLesson $sub, Request $req)
+	public function update_element($elementid,SubjectElement $element, Request $req)
 	{
-		$task = $sub->findOrFail($id);
+		$element = $element->findOrFail($elementid);
+    	
+    	$element->fill($req->all())->save();
 
-    	$input = $req->all();
-
-    	$task->fill($input)->save();
-    	return redirect()->route('subject.index');
-		//return view('subject::lesson.update_lesson');
+    	return redirect()->route('subject.element',$element->subject_lesson_id);
 	}
 
-	public function delete_element($id,SubjectLesson $sub, Request $req)
+	public function delete_element($elementid,SubjectElement $element)
 	{
-		$task = $sub->findOrFail($id);
+		$message = 'تم حذف العنصر بنجاح';
+		$element = $element->findOrFail($elementid);
+    	
+    	$element->delete();
 
-    	$input = $req->all();
-
-    	$task->fill($input)->delete();
-    	return redirect()->route('subject.index');
+    	return redirect()->route('subject.element',$element->subject_lesson_id)->with('success' ,$message);
 	}
 }

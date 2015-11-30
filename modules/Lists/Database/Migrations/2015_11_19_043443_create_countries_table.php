@@ -17,6 +17,8 @@ class CreateCountriesTable extends Migration {
             $table->increments('id');
 
             $table->string('name');
+
+            $table->string('calling_code')->nullable();
             
             $table->boolean('status')->default(1);
 

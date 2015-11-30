@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model {
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name' ,'calling_code'];
 
     protected $table = 'lists_countries';
     

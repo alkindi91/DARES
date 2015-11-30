@@ -10,24 +10,33 @@
 </ol>
 </div>
 @endif
+
  <div class="form-group">
         <div class="form-group">
-    	{!! Form::label('name', 'اسم الدرس', array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
+        {!! Form::label('title', 'اسم العنصر', array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">
-    	{!! Form::text('name' ,null,['class'=>'form-control']) !!}
+        {!! Form::text('title' ,null,['class'=>'form-control']) !!}
         </div>
         </div>
     </div>
     <div class="form-group">
-        {!! Form::label('lesson_order', 'الترتيب', array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
+        {!! Form::label('element_order', 'الترتيب', array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">
-        {!! Form::text('lesson_order' ,null,['class'=>'form-control']) !!}
+        {!! Form::text('element_order' ,null,['class'=>'form-control']) !!}
         </div>
     </div>
     <div class="form-group">
         {!! Form::label('type', 'النوع', array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">
         {!! Form::text('type' ,null,['class'=>'form-control']) !!}
+        </div>
+    </div>
+    <div class="form-group">
+
+        {!! Form::label('value', 'القيمة', array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
+        <div class="col-md-6 col-sm-6 col-xs-12">
+        {!! Form::text('value' ,null,['class'=>'form-control']) !!}
+        
         </div>
     </div>
     <div class="form-group">
@@ -46,7 +55,7 @@
     <div class="ln_solid"></div>
     <div class="form-group">
         <div class="col-md-12">
-            <a href="{{ route('subject.index') }}" class="pull-left btn btn-primary">
+            <a href="{{ route('subject.element') }}" class="pull-left btn btn-primary">
             <i class="fa fa-times"></i> @lang('global.cancel')</a>
             <button value='save' name='submit' type="submit" class="pull-left btn btn-success">
             <i class="fa fa-save"></i> @lang('global.save')
