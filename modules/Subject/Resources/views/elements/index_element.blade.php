@@ -1,11 +1,20 @@
 @extends('layouts.master')
 
 @section('content')
+<ol class="breadcrumb">
+  <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
+   <li>
+    @lang('subject::subject.Element')
+  </li>
+  <li class='active'>
+    @lang('subject::subject.Add_element')
+  </li>
+</ol>
 <a href="{{ route('elements.create',$id) }}" class="btn btn-primary pull-left">
     <i class="fa fa-plus"></i> @lang('global.new')
 </a>
-{{ trans('subject::lessons.Lesson_name') }}
-@lang('subject::lessons.Lesson_name')
+{{ trans('subject::subject.Lesson_name') }}
+@lang('subject::subject.Lesson_name')
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
     <thead>
         <tr class="headings">
@@ -13,17 +22,17 @@
                 <input type="checkbox" id='check-all' class="tableflat">
             </th>
             <th>
-                اسم العنصر
+                @lang('subject::subject.Element_name')
             </th>
             <th>
-            ترتيب العنصر
+            @lang('subject::subject.Element_order')
             </th>
             <th>
-            نوع العنصر
+            @lang('subject::subject.Element_type')
             </th>
             <th>
                 <i class="fa fa-envelope"></i>
-                قيمة العنصر
+                @lang('subject::subject.Element_value')
             </th>
             <th class=" no-link last"><span class="nobr">
             <i class="fa fa-cog"></i>
@@ -63,12 +72,7 @@
 </tbody>
 </table>
 <div class="bulk-actions">
-<<<<<<< HEAD
-<button id='js-delete-all' href="{{ route('subject.delete_element' ,$element->id)}}" class="btn btn-danger">
-=======
-<button id='js-delete-all' href="{{ route('elements.delete' ,$element->id)}}" class="btn btn-danger">
->>>>>>> 358697503b3822eb627f7cb498c9f0f7a9cda843
-<i class="fa fa-trash"></i> @lang('global.delete')
+<button id='js-delete-all' href="{{ route('subject.delete' ,$element->id)}}" class="btn btn-danger">
 </button>
 </div>
 @stop

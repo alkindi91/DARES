@@ -4,10 +4,10 @@
 <ol class="breadcrumb">
   <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
    <li>
-    الدرس
+    @lang('subject::subject.Lesson')
   </li>
   <li class='active'>
-    إضافة درس
+    @lang('subject::subject.Add_lesson')
   </li>
 </ol>
 <a href="{{ route('subject.create') }}" class="btn btn-primary pull-left">
@@ -21,18 +21,18 @@
                 <input type="checkbox" id='check-all' class="tableflat">
             </th>
             <th>
-                اسم الدرس
+                @lang('subject::subject.Lesson_name')
             </th>
             <th>
             <i class="fa fa-reorder"></i>
-            ترتيب الدرس
+            @lang('subject::subject.Lesson_order')
             </th>
             <th>
-            نوع الدرس
+            @lang('subject::subject.Lesson_type')
             </th>
             <th>
                 <i class="fa fa-dot-circle-o"></i>
-                حالة الدرس
+                @lang('subject::subject.Lesson_state')
             </th>
             <th class=" no-link last"><span class="nobr">
             <i class="fa fa-cog"></i>
@@ -66,8 +66,8 @@
             <a href="{{ route('subject.delete' ,$task->id)}}" class="btn btn-danger btn-sm">
             <i class="fa fa-trash"></i> @lang('global.delete')
             </a>
-            <a href="{{ route('subject.create' ,$task->id)}}" class="btn btn-primary ">
-            <i class="fa fa-plus"></i> إضافة عنصر
+             <a href="{{ route('elements.index' ,$task->id)}}" class="btn btn-info btn-md">
+            <i class="fa fa-table"></i> @lang('subject::subject.Show_elements')
             </a>
         </td>
     @endforeach
