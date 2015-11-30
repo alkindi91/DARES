@@ -4,7 +4,8 @@
 <a href="{{ route('subject.create_element',$id) }}" class="btn btn-primary pull-left">
     <i class="fa fa-plus"></i> @lang('global.new')
 </a>
-
+{{ trans('subject::lessons.Lesson_name') }}
+@lang('subject::lessons.Lesson_name')
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
     <thead>
         <tr class="headings">
@@ -62,7 +63,7 @@
 </tbody>
 </table>
 <div class="bulk-actions">
-<button id='js-delete-all' href="{{ route('subject.delete_lesson' ,$element->id)}}" class="btn btn-danger">
+<button id='js-delete-all' href="{{ route('subject.delete_element' ,$element->id)}}" class="btn btn-danger">
 <i class="fa fa-trash"></i> @lang('global.delete')
 </button>
 </div>
