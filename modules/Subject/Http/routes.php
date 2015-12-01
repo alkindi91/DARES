@@ -3,7 +3,9 @@
 Route::group(['prefix' => 'subject','middleware'=>'auth', 'namespace' => 'Modules\Subject\Http\Controllers'], function()
 
 {
-	get('/', ['as'=>'subject.index','uses'=>"LessonsController@index"]);
+	get('subject_create', ['as'=>'subject.subject_create','uses'=>'SubjectsController@subject_create']);
+
+	get('/', ['as'=>'subject.index','uses'=>"SubjectsController@index"]);
 	get('create', ['as'=>'subject.create','uses'=>'LessonsController@create']);
 	post('store', ['as'=>'subject.store','uses'=>'LessonsController@store']);
 	get('edit/{slessonid}', ['as'=>'subject.edit','uses'=>'LessonsController@edit']);
@@ -20,5 +22,6 @@ Route::group(['prefix'=>'elements'] ,function() {
 	get('delete/{selements}', ['as'=>'elements.delete','uses'=>'ElementsController@delete']);
 	
 });
+
 
 });
