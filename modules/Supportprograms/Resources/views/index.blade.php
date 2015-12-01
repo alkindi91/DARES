@@ -1,20 +1,21 @@
 @extends('layouts.master')
 
 @section('content')
+{{-- Start breadcrumbs --}}
 <ol class="breadcrumb">
   <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
    <li>
-    البرامج المساندة
+       @lang('supportprograms::programs.header')
   </li>
   <li class='active'>
-    إضافة برنامج
+   <a href="{{ route('supportprograms.create')}}">@lang('supportprograms::programs.create_program')</a>
   </li>
 </ol>
 {{-- End breadcrumbs --}}
 
  <div class="x_panel" style="min-height:600px;">
 <div class="x_title">
-    <h2>@lang('users::users.header')</h2>
+    <h2>@lang('supportprograms::programs.header')</h2>
 
 <div class="clearfix"></div>
 </div>
@@ -73,9 +74,7 @@
 			<a href="{{ route('supportprograms.delete' ,$program->id)}}" class="btn btn-danger btn-sm">
 			<i class="fa fa-trash"></i> @lang('global.delete')
 			</a>
-			<a href="{{ route('supportprograms.show' ,$program->id)}}" class="btn btn-info btn-md">
-			<i class="fa fa-table"></i> @lang('global.details')
-			</a>
+			
 	</td>
     @endforeach
 </tr>
