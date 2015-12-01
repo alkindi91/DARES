@@ -10,9 +10,13 @@
     @lang('subject::subject.Add_lesson')
   </li>
 </ol>
+
+@permission('subject.create.subject')
 <a href="{{ route('subject.create') }}" class="btn btn-primary pull-left">
     <i class="fa fa-plus"></i> @lang('global.new')
 </a>
+@endpermission
+
 {!! Form::open(['route'=>'subject.index']) !!}
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
     <thead>
@@ -42,41 +46,50 @@
     </tr>
 </thead>
 <tbody>
-    @foreach($tasks as $task)
+
+    @foreach($subjects as $subject)
     <tr class="even pointer">
     <td class="a-center ">
-            <input type="checkbox" class="tableflat" value='{{ $task->id }}' name='table_records[]'>
+            <input type="checkbox" class="tableflat" value='{{ $subject->id }}' name='table_records[]'>
         </td>
         <td class="a-center ">
-            {{ $task->name }}
+            {{ $subject->name }}
         </td>
         <td>
-            {{ $task->lesson_order }}
+            {{ $subject->term_id }}
         </td>
         <td>
-            {{ $task->type }}
+            {{ $subject->type }}
         </td>
         <td>
-            {{ $task->state}}
+            {{ $subject->code}}
         </td>
         <td class=" last">
-            <a href="{{ route('subject.edit' ,$task->id)}}" class='btn btn-sm btn-success'>
+          @permission('subject.edit.subject')
+            <a href="{{ route('subject.edit' ,$subject->id)}}" class='btn btn-sm btn-success'>
                 <i class="fa fa-edit"></i> @lang('global.edit')
             </a>
-            <a href="{{ route('subject.delete' ,$task->id)}}" class="btn btn-danger btn-sm">
+          @endpermission
+          @permission('subject.delete.subject')
+            <a href="{{ route('subject.delete' ,$subject->id)}}" class="btn btn-danger btn-sm">
             <i class="fa fa-trash"></i> @lang('global.delete')
             </a>
-             <a href="{{ route('elements.index' ,$task->id)}}" class="btn btn-info btn-md">
+          @endpermission
+          @permission('subject.view.subject')
+             <a href="{{ route('elements.index' ,$subject->id)}}" class="btn btn-info btn-md">
             <i class="fa fa-table"></i> @lang('subject::subject.Show_elements')
             </a>
+             @endpermission
         </td>
     @endforeach
 </tr>
 </tbody>
 </table>
 <div class="bulk-actions">
-<button id='js-delete-all' href="{{ route('subject.delete' ,$task->id)}}" class="btn btn-danger">
+@permission('subject.delete.subject')
+<button id='js-delete-all' href="{{ route('subject.delete' ,$subject->id)}}" class="btn btn-danger">
 <i class="fa fa-trash"></i> @lang('global.delete')
 </button>
+@endpermission
 </div>
 @stop
