@@ -16,6 +16,55 @@ class CreateRegistrationsTable extends Migration {
         {
             $table->increments('id');
 
+              $table->string("first_name");
+              $table->string("second_name");
+              $table->string("third_name");
+              $table->string("fourth_name")->nullable();
+              $table->string("last_name");
+              $table->string("last_name_latin");
+              $table->string("fourth_name_latin")->nullable();
+              $table->string("third_name_latin");
+              $table->string("second_name_latin");
+              $table->string("first_name_latin");
+              // accept values ( f for female ,m for male)
+              $table->enum("gender", ['f', "m"])->nullable();
+              // accept value date eg : 2015-05-05
+              $table->date("birthday");
+              // accept values : (O for omani , E for non omani)
+              $table->string("nationality_type");
+              $table->string("passeport_number");
+              // accept value date eg : 2015-05-05
+              $table->date("passeport_issued");
+               // accept value date eg : 2015-05-05
+              $table->date("passeport_expire");
+               // accept value date eg : 2015-05-05
+              $table->string("stay_expire");
+              $table->string("national_id");
+               // accept value date eg : 2015-05-05
+              $table->enum("religion" ,['I', 'J', 'C'])->default('I');
+              $table->string("contact_region");
+              $table->string("contact_postalbox");
+              $table->string("contact_street");
+              $table->string("contact_home_number");
+              $table->string("contact_email");
+              $table->string("contact_mobile");
+              $table->string("contact_phone");
+              $table->string("contact_fax");
+              $table->string("degree_speciality[]");
+              $table->string("degree_institution[]");
+              $table->string("degree_score[]");
+              $table->string("social_job_status");
+              $table->string("social_job_start");
+              $table->string("social_experience");
+              $table->string("social_job_employer");
+              $table->string("health_status");
+              $table->string("health_disabled_type");
+              $table->string("health_disabled_size");
+              $table->string("internet_link");
+              $table->string("cyber_cafe");
+              $table->string("computer_availability");
+              $table->string("reference_other");
+
             $table->timestamps();
         });
     }
