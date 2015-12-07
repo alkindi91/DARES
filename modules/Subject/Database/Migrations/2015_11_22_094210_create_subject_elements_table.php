@@ -24,9 +24,11 @@ class CreateSubjectElementsTable extends Migration {
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
 
-            $table->integer('order');
+            $table->integer('element_order');
             $table->string('type');
+            $table->integer('state');
             $table->text('value');
+
 
             $table->timestamps();
         });

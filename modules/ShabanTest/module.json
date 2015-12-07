@@ -1,0 +1,15 @@
+{
+    "name": "ShabanTest",
+    "alias": "shabantest",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\ShabanTest\\Providers\\ShabanTestServiceProvider"
+    ],
+    "aliases":{},
+    "files": [
+        "start.php"
+    ]
+}
