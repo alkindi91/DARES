@@ -68,6 +68,14 @@ class SupportprogramsController extends Controller {
 		return redirect()->route('supportprograms.index')->with('success', $message);
 	}
 
-	
+	public function deletebulk(SupportprogramsApplication $SubProgModel ,Request $req) {
+		
+		// if the table_records is empty we redirect to the support programs index
+		if(!$req->has('table_records')) return redirect()->route('supportprograms.index');
+		// we delete all the users with the ids $ids
+		$SubProgModel->destroy($req->input('table_records'));
+		// we redirect to the user index view with a success message
+		return redirect()->route('supportprograms.index')->with('success' ,trans('users::users.delete_bulk_success'));
+	}
 	
 }

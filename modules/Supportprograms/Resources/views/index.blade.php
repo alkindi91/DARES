@@ -4,12 +4,10 @@
 {{-- Start breadcrumbs --}}
 <ol class="breadcrumb">
   <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
-   <li>
+   <li class='active'>
        @lang('supportprograms::programs.header')
   </li>
-  <li class='active'>
-   <a href="{{ route('supportprograms.create')}}">@lang('supportprograms::programs.create_program')</a>
-  </li>
+ 
 </ol>
 {{-- End breadcrumbs --}}
 
@@ -19,11 +17,20 @@
 
 <div class="clearfix"></div>
 </div>
+
+@permission('create.supportprograms')
 <a href="{{ route('supportprograms.create') }}" class="btn btn-primary pull-left">
 	<i class="fa fa-plus"></i> @lang('global.new')
 </a>
+@endpermission
+
 <div class="clearfix"></div>
-{!! Form::open(['route'=>'supportprograms.index']) !!}
+@if($programs->isEmpty())
+ <div class="alert alert-info">
+     <i class="fa fa-info"></i> لا يوجد اي برامج مساندة ، بامكانك اضافة برامج جديدة من الزر جانبه.
+ </div>
+@else
+{!! Form::open(['route'=>'supportprograms.deletebulk']) !!}
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
     <thead>
         <tr class="headings">
@@ -62,10 +69,12 @@
             {{ $program->comment }}
         </td>
         <td>
-        <a href="{{ $program->program_link }}" style="color:#ff0000" class="">تنزيل</a>
+        <a href="{{ $program->program_link }}"  class="btn btn-primary btn-sm">
+        <i class="fa fa-download"></i> تنزيل</a>
         </td>
         <td>
-         <a href="{{ $program->guide_link}}" style="color:#ff0000">تنزيل</a>
+         <a href="{{ $program->guide_link}}" class='btn btn-primary btn-sm'>
+         <i class="fa fa-download"></i> تنزيل</a>
         </td>
         <td class=" last">
 			<a href="{{ route('supportprograms.edit' ,$program->id)}}" class='btn btn-sm btn-success'>
@@ -81,7 +90,11 @@
 </tbody>
 </table>
 <div class="bulk-actions">
-
+<button id='js-delete-all'  class="btn btn-danger">
+<i class="fa fa-trash"></i> @lang('global.delete')
+</button>
 </div>
+{!! Form::close() !!}
+@endif
 </div>
 @stop
