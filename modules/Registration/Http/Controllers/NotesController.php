@@ -15,7 +15,7 @@ class NotesController extends Controller
 
         $notes = $Note->all();
 
-        return view('registration::notes.index' ,compact('notes' ,'step'));
+        return view('registration::notes.index' ,compact('notes'));
     }
 
     public function create(Step $step)
@@ -26,7 +26,7 @@ class NotesController extends Controller
 
     public function edit(Note $note)
     {
-
+        
         $note->load('step');
 
         $step = $note->step;

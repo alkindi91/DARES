@@ -1,14 +1,15 @@
 <?php namespace Modules\Registration\Http\Controllers;
 
+use DomDocument;
 use Modules\Lists\Entities\Country;
 use Modules\Registration\Entities\RegistrationPeriod;
+use Modules\Registration\Http\Requests\RegisterRequest;
 use Pingpong\Modules\Routing\Controller;
-use DomDocument;
 class RegistrarController extends Controller {
 	
 	public function index(RegistrationPeriod $PeriodModel)
 	{
-		//dd(get_input_tags(file_get_contents(route('registration.registrar.apply'))));
+		
 
 		$period = $PeriodModel->orderBy('id' ,'desc')
 		                      ->with('year')
@@ -23,6 +24,7 @@ class RegistrarController extends Controller {
 
 	public function apply(RegistrationPeriod $PeriodModel, Country $CountryModel)
 	{
+		
 		$countries = $CountryModel->all();
 
 		$countries_list = [""=>""]+$countries->lists('name' ,'id')->toArray();
@@ -53,60 +55,9 @@ class RegistrarController extends Controller {
 
 		return view('registration::registrar.apply' ,compact('period' ,'countries' ,'stay_types' ,'countries_list' ,'references','computer_skills','codes_list' ,'social_job_types','social_status' ,'social_jobs'));
 	}
+
+	public function store(RegisterRequest $request) {
+		
+	}
 	
 }
-
-/*
-    Generic function to fetch all input tags (name and value) on a page
-Useful when writing automatic login bots/scrapers
-*/
-function get_input_tags($html)
-{
-    $post_data = array();
-     
-    // a new dom object
-    $dom = new DomDocument; 
-     
-    //load the html into the object
-    $dom->loadHTML($html); 
-    //discard white space
-    $dom->preserveWhiteSpace = false; 
-     
-    //all input tags as a list
-    $input_tags = $dom->getElementsByTagName('input'); 
- 
-    //get all rows from the table
-    for ($i = 0; $i < $input_tags->length; $i++) 
-    {
-        if( is_object($input_tags->item($i)) )
-        {
-            $name = $value = '';
-            $name_o = $input_tags->item($i)->attributes->getNamedItem('name');
-            if(is_object($name_o))
-            {
-                $name = $name_o->value;
-                 
-                $value_o = $input_tags->item($i)->attributes->getNamedItem('value');
-                if(is_object($value_o))
-                {
-                    $value = $input_tags->item($i)->attributes->getNamedItem('value')->value;
-                }
-                 
-                $post_data[$name] = $value;
-            }
-        }
-    }
-     
-    return $post_data;
-}
- 
-/*
-    Usage
-*/
- 
-error_reporting(~E_WARNING);
-$html = file_get_contents("https://accounts.google.com/ServiceLoginAuth");
- 
-echo "<pre>";
-print_r(get_input_tags($html));
-echo "</pre>";

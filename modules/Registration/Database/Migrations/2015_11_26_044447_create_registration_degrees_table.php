@@ -26,7 +26,7 @@ class CreateRegistrationDegreesTable extends Migration {
 
             $table->integer('score');
 
-            $table->integer('country_id')->unsigned()->onullable();
+            $table->integer('country_id')->unsigned()->nullable();
 
             $table->foreign('country_id')->references('id')->on('lists_countries')->onDelete('SET NULL')->onUpdate('CASCADE');
 

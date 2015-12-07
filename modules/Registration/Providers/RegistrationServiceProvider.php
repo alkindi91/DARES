@@ -24,6 +24,7 @@ class RegistrationServiceProvider extends ServiceProvider {
 		$router->model('period' ,'\Modules\Registration\Entities\RegistrationPeriod');
 		$router->model('year' ,'\Modules\Registration\Entities\RegistrationYear');
 		$router->model('note' ,'\Modules\Registration\Entities\RegistrationStepNote');
+		
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();

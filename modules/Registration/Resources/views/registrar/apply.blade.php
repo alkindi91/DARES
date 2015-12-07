@@ -1,6 +1,18 @@
 @extends('layouts.registration')
 @section('content')
-<form action="" class='registration-form' id='registrationForm' data-parsley-validate data-parsley-excluded=".novalidate,input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled]">
+
+@if(!empty($errors->all()))
+<div class='alert alert-danger'>
+<ul>
+@foreach($errors->all() as $error)
+	<li>
+		{{ $error }}
+	</li>
+@endforeach
+</ul>
+</div>
+@endif
+{!! Form::open(['route'=>'registration.registrar.apply','data-parsley-validate'=>'data-parsley-validate' ,'class'=>'registration-form', 'id'=>'registrationForm', 'data-parsley-excluded'=>'.novalidate,input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled]']) !!}
 	<div class='panel panel-primary'>
 		<div class="panel-heading">
 			<h2>البيانات الشخصية</h2>
@@ -147,10 +159,10 @@
 				<div class="form-group">
 					<label for="nationality_type">الجنسية<i class="fa text-danger fa-asterisk"></i></label><br>
 					<label>
-						عماني : {!! Form::radio('nationality_type' ,"O" ,true ,['class'=>'flat','required'=>'required']) !!}
+						عماني : {!! Form::radio('nationality_type' ,"omani" ,true ,['class'=>'flat','required'=>'required']) !!}
 					</label>
 					<label>
-						غير عماني : {!! Form::radio('nationality_type' ,"E" ,false ,['class'=>'flat','required'=>'required']) !!}
+						غير عماني : {!! Form::radio('nationality_type' ,"expat" ,false ,['class'=>'flat','required'=>'required']) !!}
 					</label>
 				</div>
 			</div>
@@ -205,7 +217,7 @@
 						نوع الإقامة <i class="fa text-danger fa-asterisk"></i>:
 					</label>
 					
-					{!! Form::select('stay_type' ,$stay_types ,null ,['class'=>'select2_single form-control' ,'id'=>'stay_type']) !!}
+					{!! Form::select('stay_type' ,$stay_types ,!old('stay_type') ? 'non_resident' :old('stay_type') ,['class'=>'select2_single form-control' ,'id'=>'stay_type']) !!}
 				</div>
 			</div>
 			<div class="col-sm-4 col-xs-12">
@@ -262,15 +274,15 @@
 				<div class="form-group">
 					<label for="religion">الديانة<i class="fa text-danger fa-asterisk"></i></label><br>
 					<label>
-						مسلم : {!! Form::radio('religion' ,"m" ,true ,['class'=>'flat','id'=>'religionM','required'=>'required']) !!}
+						مسلم : {!! Form::radio('religion' ,"muslim" ,true ,['class'=>'flat','id'=>'religionM','required'=>'required']) !!}
 						
 					</label>
 					<label>
-						مسيحي : {!! Form::radio('religion' ,"c" ,true ,['class'=>'flat','id'=>'religionC','required'=>'required']) !!}
+						مسيحي : {!! Form::radio('religion' ,"christian" ,true ,['class'=>'flat','id'=>'religionC','required'=>'required']) !!}
 						
 					</label>
 					<label>
-						يهودي : {!! Form::radio('religion' ,"j" ,true ,['class'=>'flat','id'=>'religionJ','required'=>'required']) !!}
+						يهودي : {!! Form::radio('religion' ,"jew" ,true ,['class'=>'flat','id'=>'religionJ','required'=>'required']) !!}
 					</label>
 				</div>
 			</div>
@@ -422,30 +434,30 @@
 			<div class="row">
 				<div class="col-sm-4 col-xs-12">
 					<div class="form-group">
-						<label for="degree_name[]">
+						<label for="degree_name">
 							المؤهل <i class="fa text-danger fa-asterisk"></i>:
 						</label>
 						
-						{!! Form::select('degree_name[]' ,["high_school"=>"ثانوي"] ,null,['class'=>' form-control','disabled'=>'disabled' ,'required'=>'required']) !!}
+						{!! Form::select('degree_name' ,["high_school"=>"ثانوي"] ,null,['class'=>' form-control','disabled'=>'disabled' ,'required'=>'required']) !!}
 					</div>
 				</div>
 				<div class="col-sm-4 col-xs-12">
 					<div class="form-group">
-						<label for="degree_country_id[]">
+						<label for="degree_country_id">
 							الدولة <i class="fa text-danger fa-asterisk"></i>:
 						</label>
 						
-						{!! Form::select('degree_country_id[]' ,$countries_list ,null ,['data-parsley-errors-container'=>"#degreeCountry_1",'class'=>'select2_single form-control' ,'id'=>'degree_country_id[]','required'=>'required']) !!}
-						<div id="degreeCountry_1"></div>
+						{!! Form::select('degree_country_id' ,$countries_list ,null ,['data-parsley-errors-container'=>"#degreeCountry_1",'class'=>'select2_single form-control' ,'id'=>'degree_country_id','required'=>'required']) !!}
+						<div class='parsleyjs-error-container' id="degreeCountry_1"></div>
 					</div>
 				</div>
 				<div class="col-sm-4 col-xs-12">
 					<div class="form-group">
-						<label for="degree_speciality[]">
+						<label for="degree_speciality">
 							التخصص الدراسي <i class="fa text-danger fa-asterisk"></i>:
 						</label>
 						
-						{!! Form::text('degree_speciality[]' ,null ,['class'=>'form-control' ,'id'=>'degree_speciality[]','required'=>'required']) !!}
+						{!! Form::text('degree_speciality' ,null ,['class'=>'form-control' ,'id'=>'degree_speciality','required'=>'required']) !!}
 					</div>
 				</div>
 				
@@ -454,36 +466,36 @@
 			<div class="row">
 				<div class="col-sm-4 col-xs-12">
 					<div class="form-group">
-						<label for="degree_institution[]">
+						<label for="degree_institution">
 							اسم المدرسة<i class="fa text-danger fa-asterisk"></i>:
 						</label>
 						
-						{!! Form::text('degree_institution[]' ,null ,['class'=>'form-control' ,'id'=>'degree_institution[]','required'=>'required']) !!}
+						{!! Form::text('degree_institution' ,null ,['class'=>'form-control' ,'id'=>'degree_institution','required'=>'required']) !!}
 					</div>
 				</div>
 				<div class="col-sm-4 col-xs-12">
 					<div class="form-group">
-						<label for="degree_graduation_year[]">
+						<label for="degree_graduation_year">
 							سنة التخرج <i class="fa text-danger fa-asterisk"></i>:
 						</label>
 						
-						{!! Form::select('degree_graduation_year[]' ,[""=>""]+range(date('Y') ,date("Y")-80) ,null ,['data-parsley-errors-container'=>"#degreeYear_1",'class'=>' select2_single form-control','required'=>'required']) !!}
-						<div id="degreeYear_1"></div>
+						{!! Form::select('degree_graduation_year' ,[""=>""]+range(date('Y') ,date("Y")-80) ,null ,['data-parsley-errors-container'=>"#degreeYear_1",'class'=>' select2_single form-control','required'=>'required']) !!}
+						<div class='parsleyjs-error-container' id="degreeYear_1"></div>
 					</div>
 				</div>
 				<div class="col-sm-4 col-xs-12">
 					<div class="form-group">
-						<label for="degree_score[]">
+						<label for="degree_score">
 							المعدل <i class="fa text-danger fa-asterisk"></i>:
 						</label>
 						<div class="form-group">
 							<label class="sr-only" for="contact_fax">المعدل</label>
 							<div class="input-group">
-								{!! Form::text('degree_score[]',null ,['data-parsley-errors-container'=>"#degreeScore_1","type"=>"numeric",'class'=>'form-control' ,'id'=>'degree_score[]','required'=>'required']) !!}
+								{!! Form::text('degree_score',null ,['data-parsley-errors-container'=>"#degreeScore_1","type"=>"numeric",'class'=>'form-control' ,'id'=>'degree_score','required'=>'required']) !!}
 								<div class="input-group-addon">%</div>
 							</div>
 						</div>
-						<div id="degreeScore_1"></div>
+						<div class='parsleyjs-error-container' id="degreeScore_1"></div>
 						
 					</div>
 				</div>
@@ -734,7 +746,7 @@
 					<label for="reference_other">
 						كيف عرفتنا <i class="fa text-danger fa-asterisk"></i>:
 					</label>
-					{!! Form::text('reference_other' ,null ,['placeholder'=>"",'class'=>'form-control' ,'id'=>'reference_other','required'=>'required']) !!}
+					{!! Form::text('reference_other' ,null ,['placeholder'=>"",'class'=>'novalidate form-control' ,'id'=>'reference_other','required'=>'required']) !!}
 					
 				</div>
 			</div>
@@ -748,7 +760,7 @@
 		</button>
 	</div>
 </div>
-</form>
+{!! Form::close() !!}
 @stop
 @section('heading')
 <b class="text-info">{{ $period->year->name }}</b>
@@ -800,7 +812,7 @@ $('body').on('ifChanged', 'input[name="nationality_type"]', function(event) {
 	
 	
 	var $this = $(this);
-	if($this.val()=='O') {
+	if($this.val()=='omani') {
 	  $('.registration-form__nationality').addClass('omani');
 	  $('.registration-form__outsider').removeClass('active');
 	} else {
@@ -822,8 +834,10 @@ $('body').on('change', '#reference', function(event) {
 
 	if($this.val()=="other") {
 		$referenceOther.show();
+		$referenceOther.find('input').removeClass('novalidate');
 	}else{
 		$referenceOther.hide();
+		$referenceOther.find('input').addClass('novalidate');
 	}
 
 });
@@ -882,17 +896,29 @@ $('body').on('click' ,"#addExtraDegrees" ,function() {
 	$mainClone.attr('id',false).addClass('js-degree-clone');
 	$mainClone.append('<button class="btn pull-left btn-danger js-remove-degree"><i class="fa fa-times"></i> حذف</button><div class="clearfix"></div>');
 	$mainClone.find('.select2-container').remove();
-	$select = $('<select/>' ,{name:"degree_name[]" ,class:'form-control'});
+	$select = $('<select/>' ,{name:"degree_name" ,class:'form-control'});
 	$select.html("");
 	$.each({'graduate':'إجازة / بكالوريوس / ليسانس','majester':'ماجستير' ,'doctorat':'دكتوراه'}, function(index, val) {
 		 $select.append("<option value='"+index+"'>"+val+"</option>");
 	});
 	
 
-	$mainClone.find("select[name='degree_name[]']").replaceWith($select);
-	$mainClone.find("input[name='degree_institution[]']").siblings('label').html('معهد / كلية / جامعة <i class="fa text-danger fa-asterisk"></i>');
+	$mainClone.find("select[name='degree_name']").replaceWith($select);
+	$mainClone.find("input[name='degree_institution']").siblings('label').html('معهد / كلية / جامعة <i class="fa text-danger fa-asterisk"></i>');
 	$mainClone.find('input[type="text"]').val("");
 	$mainClone.find('select').css({display:"block"});
+	var timestamp = new Date().getUTCMilliseconds();
+
+	$mainClone.find('input,select').each(function(index, val) {
+		 /* iterate through array or object */
+		 var $clonedInput = $(val),originalName = $clonedInput.attr('name') ,clonedName =originalName+timestamp,
+		 	$errorContainer;
+
+		$clonedInput.attr('name' ,clonedName);
+		$clonedInput.attr('id' ,clonedName);
+		$clonedInput.attr('data-parsley-errors-container' ,"Container"+clonedName);
+		$errorContainer = $clonedInput.closest('.col-sm-4').find('.parsleyjs-error-container').attr('id' ,"Container"+clonedName);
+	});
 	$extra.append($mainClone);
 	$mainClone.find('.select2_single').select2({
 			placeholder: "حدد اختيار",
@@ -1013,6 +1039,11 @@ function applyFetchStates(targetId ,currentCity) {
 			$('#'+targetId).html($options).change();
 		});
 	}
+});
+
+window.Parsley.on('field:error', function() {
+  // This global callback will be called for any field that fails validation.
+  console.log('Validation failed for: ', this.$element);
 });
 </script>
 @stop

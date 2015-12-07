@@ -44,10 +44,6 @@
 </head>
 
 <body style="background:#F7F7F7;">
-    
-   
-      
-
         <div id="container" class='container' style='max-width: 1170px;'>
            <div class="row">
                <div class="col-md-12">
