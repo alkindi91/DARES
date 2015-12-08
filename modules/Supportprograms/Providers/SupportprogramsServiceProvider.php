@@ -1,7 +1,7 @@
 <?php namespace Modules\Supportprograms\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Menu;
 class SupportprogramsServiceProvider extends ServiceProvider {
 
 	/**
@@ -21,6 +21,7 @@ class SupportprogramsServiceProvider extends ServiceProvider {
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();
+		$this->registerMenus();
 	}
 
 	/**
@@ -90,6 +91,14 @@ class SupportprogramsServiceProvider extends ServiceProvider {
 	public function provides()
 	{
 		return array();
+	}
+
+	public function registerMenus()
+	{
+		$menu = Menu::get('SidebarMenu');
+		$submenu = $menu->add("البرامج المساندة", ['route'=>'supportprograms.index'])
+			 ->prepend('<i class="fa fa-info"></i>');
+
 	}
 
 }
