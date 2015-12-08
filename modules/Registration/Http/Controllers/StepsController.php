@@ -33,7 +33,7 @@ class StepsController extends Controller
 
         return view('registration::steps.edit', compact('step' ,'steps'));
     }
-
+   
     public function store(CreateStepRequest $request, Step $Step)
     {
         $step = $Step->fill($request->all());
@@ -53,7 +53,12 @@ class StepsController extends Controller
 
         return redirect()->route('registration.steps.index')->with('success', trans('registration::steps.create_success', ['name'=>$step->name]));
     }
-
+    /**
+     * this method update the data in the steps table
+     * @param  UpdateStepRequest $request the form request responsible for validating the data sent from the form
+     * @param  Step              $step    this is an instance from the Step model injected from the route
+     * @return [type]                     redirect to the steps index page
+     */
     public function update(UpdateStepRequest $request, Step $step)
     {
         $step = $step->fill($request->all());

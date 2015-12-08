@@ -31,8 +31,7 @@
 {{-- Form Input Group --}}
 <div class="form-group">
     {!! Form::label('password_confirmation' ,trans('users::users.password_confirmation') ,['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
-{!! !!}
-<?php  ?>
+
     <div class="col-md-6 col-sm-6 col-xs-12">
 
         <input type="password" name='password_confirmation' {{ empty($user) ? 'required' : null }} class='form-control col-md-7 col-xs-12'>

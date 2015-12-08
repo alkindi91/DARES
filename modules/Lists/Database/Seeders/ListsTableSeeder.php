@@ -8,6 +8,7 @@ use Modules\Lists\Entities\Country;
 use Modules\Lists\Entities\State;
 use Modules\Users\Entities\User;
 use File;
+use Stichoza\GoogleTranslate\TranslateClient;
 class ListsTableSeeder extends Seeder {
 
 	/**
@@ -72,9 +73,13 @@ class ListsTableSeeder extends Seeder {
 			foreach($users as $user)
 				$user->attachPermission($perm);
 		}
-		foreach($countries as $country){
+		
+		$tr = new TranslateClient('en', 'ar');
 
-			$newCountry = Country::create(['name'=>isset($country['full_name']) ? $country['full_name'] : $country['name'] ,'calling_code'=>$country['calling_code']]);
+		foreach($countries as $country){
+			$name  = $tr->translate($country['name']);
+			
+			$newCountry = Country::create(['name'=>$name ,'calling_code'=>$country['calling_code']]);
 
 			if(isset($cities[$country['iso_3166_2']])) {
 				foreach($cities[$country['iso_3166_2']] as $city) {

@@ -223,6 +223,7 @@ Route::group([
         Route::group(['prefix'=>'registrar'] ,function() {
             get('/' ,['as'=>'registration.registrar.index' ,'uses'=>'RegistrarController@index']);
             get('apply' ,['as'=>'registration.registrar.apply' ,'uses'=>'RegistrarController@apply']);
+            post('apply' ,['as'=>'registration.registrar.apply' ,'uses'=>'RegistrarController@store']);
         });
 
     });

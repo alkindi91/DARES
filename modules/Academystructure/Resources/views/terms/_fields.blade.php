@@ -6,4 +6,8 @@
       {!! Form::hidden('year_id', !empty($term->year_id)  ? $term->year_id : null, array('class'=>'form-control')) !!}
       </div>
     </div>
+<<<<<<< HEAD
 </div> 
+=======
+</div>
+>>>>>>> 6aa81d4623ed1f015cfe5ca325b5360046b6bde2

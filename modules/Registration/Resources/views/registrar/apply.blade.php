@@ -1,6 +1,18 @@
 @extends('layouts.registration')
 @section('content')
-<form action="" class='registration-form'>
+
+@if(!empty($errors->all()))
+<div class='alert alert-danger'>
+<ul>
+@foreach($errors->all() as $error)
+	<li>
+		{{ $error }}
+	</li>
+@endforeach
+</ul>
+</div>
+@endif
+{!! Form::open(['route'=>'registration.registrar.apply','data-parsley-validate'=>'data-parsley-validate' ,'class'=>'registration-form', 'id'=>'registrationForm', 'data-parsley-excluded'=>'.novalidate,input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled]']) !!}
 	<div class='panel panel-primary'>
 		<div class="panel-heading">
 			<h2>البيانات الشخصية</h2>
@@ -18,8 +30,8 @@
 						<label for="first_name">
 							الأول<i class="fa text-danger fa-asterisk"></i>
 						</label>
-						
-					<input name='fir</div>st_name' id='first_name' type="text" class='form-control'>
+					{!! Form::text('first_name' ,null ,['class'=>'form-control', 'id'=>'first_name', 'required'=>'required']) !!}
+					
 					
 					
 				</div>
@@ -29,8 +41,7 @@
 					<label for="second_name">
 						الثاني<i class="fa text-danger fa-asterisk"></i>
 					</label>
-					
-					<input name='second_name' id='second_name' type="text" class='form-control'>
+					{!! Form::text('second_name' ,null ,['class'=>'form-control', 'id'=>'second_name', 'required'=>'required']) !!}
 				</div>
 			</div>
 			<div class="col-lg-2 col-sm-3 col-xs-12">
@@ -38,8 +49,8 @@
 					<label for="third_name">
 						الثالث<i class="fa text-danger fa-asterisk"></i>
 					</label>
+					{!! Form::text('third_name' ,null ,['class'=>'form-control', 'id'=>'third_name', 'required'=>'required']) !!}
 					
-					<input name='third_name' id='third_name'  type="text" class='form-control'>
 				</div>
 			</div>
 			<div class="col-lg-2 col-sm-3 col-xs-12">
@@ -47,8 +58,8 @@
 					<label for="fourth_name" >
 						الرابع
 					</label>
+					{!! Form::text('fourth_name' ,null ,['class'=>'form-control', 'id'=>'fourth_name']) !!}
 					
-					<input name='fourth_name' id='fourth_name'  type="text" class='form-control'>
 				</div>
 			</div>
 			<div class="col-lg-4 col-sm-3 col-xs-12">
@@ -56,7 +67,7 @@
 					القبيلة<i class="fa text-danger fa-asterisk"></i>
 				</label>
 				
-				<input name='last_name' id='last_name'  type="text" class='form-control'>
+			{!! Form::text('last_name' ,null ,['class'=>'form-control', 'id'=>'last_name', 'required'=>'required']) !!}
 				
 			</div>
 		</div>
@@ -72,26 +83,19 @@
 				<label for="last_name_latin">
 					القبيلة<i class="fa text-danger fa-asterisk"></i>
 				</label>
-				
-				<input name='last_name' id='last_name_latin'  type="text" class='form-control'>
+				{!! Form::text('last_name_latin' ,null ,['class'=>'form-control', 'id'=>'last_name_latin', 'required'=>'required']) !!}
 				
 			</div>
+			
+			
+			
 			<div class="col-lg-2 col-sm-3 col-xs-12">
 				<div class="form-group">
-					<label for="first_name_latin">
-						الأول<i class="fa text-danger fa-asterisk"></i>
+					<label for="fourth_name_latin">
+						الرابع
 					</label>
+					{!! Form::text('fourth_name_latin' ,null ,['class'=>'form-control', 'id'=>'fourth_name_latin']) !!}
 					
-					<input name='first_name_latin' id='first_name_latin' type="text" class='form-control'>
-				</div>
-			</div>
-			<div class="col-lg-2 col-sm-3 col-xs-12">
-				<div class="form-group">
-					<label for="second_name_latin">
-						الثاني<i class="fa text-danger fa-asterisk"></i>
-					</label>
-					
-					<input name='second_name_latin' id='second_name_latin' type="text" class='form-control'>
 				</div>
 			</div>
 			<div class="col-lg-2 col-sm-3 col-xs-12">
@@ -99,17 +103,26 @@
 					<label for="third_name_latin">
 						الثالث<i class="fa text-danger fa-asterisk"></i>
 					</label>
+					{!! Form::text('third_name_latin' ,null ,['class'=>'form-control', 'id'=>'third_name_latin', 'required'=>'required']) !!}
 					
-					<input name='third_name_latin' id='third_name_latin'  type="text" class='form-control'>
 				</div>
 			</div>
 			<div class="col-lg-2 col-sm-3 col-xs-12">
 				<div class="form-group">
-					<label for="fourth_name_latin">
-						الرابع
+					<label for="second_name_latin">
+						الثاني<i class="fa text-danger fa-asterisk"></i>
 					</label>
+					{!! Form::text('second_name_latin' ,null ,['class'=>'form-control', 'id'=>'second_name_latin', 'required'=>'required']) !!}
 					
-					<input name='fourth_name_latin' id='fourth_name_latin'  type="text" class='form-control'>
+				</div>
+			</div>
+			<div class="col-lg-2 col-sm-3 col-xs-12">
+				<div class="form-group">
+					<label for="first_name_latin">
+						الأول<i class="fa text-danger fa-asterisk"></i>
+					</label>
+					{!! Form::text('first_name_latin' ,null ,['class'=>'form-control', 'id'=>'first_name_latin', 'required'=>'required']) !!}
+					
 				</div>
 			</div>
 		</div>
@@ -121,17 +134,19 @@
 				<div class="form-group">
 					<label for="gender">الجنس<i class="fa text-danger fa-asterisk"></i></label><br>
 					<label>
-						ذكر : <input type="radio" class="flat" name="gender" id="genderM" value="M"  required />
+						ذكر : {!! Form::radio('gender' ,"m",true ,['class'=>'flat', 'id'=>'genderM', 'required'=>'required']) !!}
+						
 					</label>
 					<label>
-						أنثى : <input type="radio" class="flat" name="gender" id="genderF" value="F" />
+						أنثى : {!! Form::radio('gender' ,"f",false ,['class'=>'flat', 'id'=>'genderF', 'required'=>'required']) !!}
 					</label>
 				</div>
 			</div>
 			<div class="col-sm-6 col-xs-12">
 				<div class="form-group">
 					<label for="gender">تاريخ الميلاد<i class="fa text-danger fa-asterisk"></i></label><br>
-					<input name="birthday" class='form-control date-picker' id="birthday" type='text'>
+					{!! Form::text('birthday' ,null ,['class'=>'form-control date-picker', 'id'=>'birthday', 'required'=>'required']) !!}
+					
 				</div>
 			</div>
 			
@@ -144,10 +159,10 @@
 				<div class="form-group">
 					<label for="nationality_type">الجنسية<i class="fa text-danger fa-asterisk"></i></label><br>
 					<label>
-						عماني : {!! Form::radio('nationality_type' ,"O" ,true ,['class'=>'flat']) !!}
+						عماني : {!! Form::radio('nationality_type' ,"omani" ,true ,['class'=>'flat','required'=>'required']) !!}
 					</label>
 					<label>
-						غير عماني : {!! Form::radio('nationality_type' ,"E" ,false ,['class'=>'flat']) !!}
+						غير عماني : {!! Form::radio('nationality_type' ,"expat" ,false ,['class'=>'flat','required'=>'required']) !!}
 					</label>
 				</div>
 			</div>
@@ -169,7 +184,8 @@
 						دولة الميلاد <i class="fa text-danger fa-asterisk"></i>:
 					</label>
 					
-					{!! Form::select('birth_country' ,$countries_list ,null ,['class'=>'select2_single form-control' ,'id'=>'birth_country']) !!}
+					{!! Form::select('birth_country' ,$countries_list ,null ,['data-parsley-errors-container'=>"#birthCountryContainer",'class'=>'select2_single form-control' ,'id'=>'birth_country','required'=>'required']) !!}
+					<div id="birthCountryContainer"></div>
 				</div>
 			</div>
 			<div class="col-sm-4 col-xs-12 omani">
@@ -178,7 +194,8 @@
 						المحافظة :
 					</label>
 					
-					{!! Form::select('nationality_city' ,[] ,null ,['class'=>'select2_single form-control' ,'id'=>'nationality_city']) !!}
+					{!! Form::select('nationality_city' ,[] ,null ,['data-parsley-errors-container'=>"#birthCityContainer",'class'=>'select2_single form-control' ,'id'=>'nationality_city']) !!}
+					<div id="birthCityContainer"></div>
 				</div>
 			</div>
 			<div class="col-sm-4 col-xs-12 omani">
@@ -187,7 +204,8 @@
 						الولاية :
 					</label>
 					
-					{!! Form::select('nationality_state' ,[] ,null ,['class'=>'select2_single form-control' ,'id'=>'nationality_state']) !!}
+					{!! Form::select('nationality_state' ,[] ,null ,['data-parsley-errors-container'=>"#birthStateContainer",'class'=>'select2_single form-control' ,'id'=>'nationality_state']) !!}
+					<div id="birthStateContainer"></div>
 				</div>
 			</div>
 			</div>
@@ -199,25 +217,27 @@
 						نوع الإقامة <i class="fa text-danger fa-asterisk"></i>:
 					</label>
 					
-					{!! Form::select('stay_type' ,$stay_types ,null ,['class'=>'select2_single form-control' ,'id'=>'stay_type']) !!}
+					{!! Form::select('stay_type' ,$stay_types ,!old('stay_type') ? 'non_resident' :old('stay_type') ,['class'=>'select2_single form-control' ,'id'=>'stay_type']) !!}
 				</div>
 			</div>
 			<div class="col-sm-4 col-xs-12">
 				<div class="form-group">
 					<label for="passeport_number">رقم جواز السفر<i class="fa text-danger fa-asterisk resident-required"></i></label><br>
-					<input name="passeport_number" class='form-control' id="passeport_number" type='text'>
+					
+					{!! Form::text('passeport_number' ,null ,['class'=>'form-control', 'id'=>'passeport_number']) !!}
 				</div>
 			</div>
 			<div class="col-sm-4 col-xs-12">
 				<div class="form-group">
 					<label for="passeport_issued">تاريخ الصدور<i class="fa text-danger fa-asterisk resident-required"></i></label><br>
-					<input name="passeport_issued" class='form-control date-picker' id="passeport_issued" type='text'>
+					{!! Form::text('passeport_issued' ,null ,['class'=>'form-control date-picker', 'id'=>'passeport_issued']) !!}
 				</div>
 			</div>
 			<div class="col-sm-4 col-xs-12">
 				<div class="form-group">
 					<label for="passeport_expire">تاريخ الانتهاء<i class="fa text-danger fa-asterisk resident-required"></i></label><br>
-					<input name="passeport_expire" class='form-control date-picker' id="passeport_expire" type='text'>
+					
+					{!! Form::text('passeport_expire' ,null ,['class'=>'form-control date-picker', 'id'=>'passeport_expire']) !!}
 				</div>
 			</div>
 			<div class="col-sm-4 col-xs-12">
@@ -233,7 +253,8 @@
 			<div class="col-sm-4 col-xs-12">
 				<div class="form-group">
 					<label for="stay_expire">تاريخ انتهاء الاقامة<i class="fa text-danger fa-asterisk resident-required"></i></label><br>
-					<input name="stay_expire" class='form-control date-picker' id="stay_expire" type='text'>
+					{!! Form::text('stay_expire' ,null ,['class'=>'form-control date-picker', 'id'=>'stay_expire']) !!}
+					
 				</div>
 			</div>
 		</div>
@@ -243,8 +264,7 @@
 					<label for="national_id">
 						رقم البطاقة المدنية<i class="fa text-danger fa-asterisk"></i>
 					</label>
-					
-					<input name='national_id' id='national_id' type="text" class='form-control'>
+					{!! Form::text('national_id' ,null ,['class'=>'form-control', 'id'=>'national_id' ,'required'=>'required']) !!}
 					<div class="label label-info">
 						<i class="fa fa-info-circle"></i> بدقة كما هو مسجل في البطاقة المدنية
 					</div>
@@ -254,13 +274,15 @@
 				<div class="form-group">
 					<label for="religion">الديانة<i class="fa text-danger fa-asterisk"></i></label><br>
 					<label>
-						مسلم : <input type="radio" class="flat" checked='' name="religion" id="religionM" value="M"  required />
+						مسلم : {!! Form::radio('religion' ,"muslim" ,true ,['class'=>'flat','id'=>'religionM','required'=>'required']) !!}
+						
 					</label>
 					<label>
-						مسيحي : <input type="radio" class="flat" name="religion" id="religionC" value="C" />
+						مسيحي : {!! Form::radio('religion' ,"christian" ,true ,['class'=>'flat','id'=>'religionC','required'=>'required']) !!}
+						
 					</label>
 					<label>
-						يهودي : <input type="radio" class="flat" name="religion" id="religionJ" value="J" />
+						يهودي : {!! Form::radio('religion' ,"jew" ,true ,['class'=>'flat','id'=>'religionJ','required'=>'required']) !!}
 					</label>
 				</div>
 			</div>
@@ -273,7 +295,7 @@
 	<div class="panel-heading">
 		<h2><i class="fa fa-phone"></i> بيانات الإقامة ومعلومات الاتصال</h2>
 	</div>
-	<div class="panel-body">
+	<div class="panel-body js-social-country">
 		<div class="clearfix"></div>
 		<div class="row">
 			<div class="col-sm-3 col-xs-12">
@@ -282,7 +304,8 @@
 						الدولة <i class="fa text-danger fa-asterisk"></i>:
 					</label>
 					
-					{!! Form::select('contact_country' ,$countries_list ,null ,['class'=>'select2_single form-control' ,'id'=>'contact_country']) !!}
+					{!! Form::select('contact_country' ,$countries_list ,null ,['data-parsley-errors-container'=>"#contactCountryErrors",'class'=>'select2_single form-control' ,'id'=>'contact_country']) !!}
+					<div id="contactCountryErrors"></div>
 				</div>
 			</div>
 			<div class="col-sm-3 col-xs-12">
@@ -291,22 +314,24 @@
 						المحافظة <i class="fa text-danger fa-asterisk"></i>:
 					</label>
 					
-					{!! Form::select('contact_city' ,[] ,null ,['class'=>'select2_single form-control' ,'id'=>'contact_city']) !!}
+					{!! Form::select('contact_city' ,[] ,null ,['data-parsley-errors-container'=>"#contactCityErrors",'class'=>'select2_single form-control' ,'id'=>'contact_city','required'=>'required']) !!}
+					<div id="contactCityErrors"></div>
 				</div>
 			</div>
 			<div class="col-sm-3 col-xs-12">
-				<div class="form-group">
+				<div class="form-group js-social-country-required">
 					<label for="contact_state">
-						الولاية <i class="fa text-danger fa-asterisk"></i>:
+						الولاية <i class="fa text-danger fa-asterisk "></i>:
 					</label>
 					
-					{!! Form::select('contact_state' ,[] ,null ,['class'=>'select2_single form-control' ,'id'=>'contact_state']) !!}
+					{!! Form::select('contact_state' ,[] ,null ,['data-parsley-errors-container'=>"#contactStateErrors",'class'=>' select2_single form-control' ,'id'=>'contact_state','required'=>'required']) !!}
+					<div id="contactStateErrors"></div>
 				</div>
 			</div>
 			<div class="col-sm-3 col-xs-12">
-				<div class="form-group">
-					<label for="contact_region">المنطقة<i class="fa text-danger fa-asterisk"></i></label><br>
-					<input name="contact_region" class='form-control' id="contact_region" type='text'>
+				<div class="form-group js-social-country-required">
+					<label for="contact_region">المنطقة<i class="fa text-danger fa-asterisk "></i></label><br>
+					{!! Form::text('contact_region' ,null ,['class'=>' form-control', 'id'=>'contact_region' ,'required'=>'required']) !!}
 				</div>
 			</div>
 		</div>
@@ -315,19 +340,21 @@
 			<div class="col-xs-12 col-sm-4">
 				<div class="form-group">
 					<label for="contact_postalbox">صندوق البريد<i class="fa text-danger fa-asterisk"></i></label><br>
-					<input name="contact_postalbox" class='form-control' id="contact_postalbox" type='text'>
+					{!! Form::text('contact_postalbox' ,null ,['class'=>'form-control', 'id'=>'contact_postalbox' ,'required'=>'required']) !!}
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-4">
 				<div class="form-group">
 					<label for="contact_street">الشارع<i class="fa text-danger fa-asterisk"></i></label><br>
-					<input name="contact_street" class='form-control' id="contact_street" type='text'>
+					{!! Form::text('contact_street' ,null ,['class'=>'form-control', 'id'=>'contact_street' ,'required'=>'required']) !!}
+					
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-4">
 				<div class="form-group">
 					<label for="contact_home_number">رقم المنزل<i class="fa text-danger fa-asterisk"></i></label><br>
-					<input name="contact_home_number" class='form-control' id="contact_home_number" type='text'>
+					{!! Form::text('contact_home_number' ,null ,['class'=>'form-control', 'id'=>'contact_home_number' ,'required'=>'required']) !!}
+					
 				</div>
 			</div>
 		</div>
@@ -337,9 +364,10 @@
 				<div class="form-group">
 					<label for="contact_email">البريد الإلكتروني<i class="fa text-danger fa-asterisk"></i></label>
 					<div class="has-feedback">
-						<input name="contact_email" class='form-control has-feedback-right' id="contact_email" type='text'>
+						{!! Form::email('contact_email' ,null ,['data-parsley-errors-container'=>"#contactEmailErrors",'class'=>'form-control has-feedback-right', 'id'=>'contact_email' ,'required'=>'required']) !!}
 						<span class="fa fa-envelope form-control-feedback right" aria-hidden="true"></span>
 					</div>
+					<div id="contactEmailErrors"></div>
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-3">
@@ -348,11 +376,12 @@
 					<label class="sr-only" for="contact_mobile">هاتف المحمول</label>
 					<div class="input-group">
 						<div class="has-feedback">
-							<input type="text" class="form-control has-feedback-right" id="contact_mobile" placeholder="هاتف المحمول">
+						{!! Form::text('contact_mobile' ,null ,['data-parsley-type'=>"integer",'data-parsley-errors-container'=>"#contactMobileErrors",'class'=>'form-control has-feedback-right', 'id'=>'contact_mobile' ,'required'=>'required']) !!}
 							<span class="fa fa-mobile form-control-feedback right" aria-hidden="true"></span>
 						</div>
 						<div class="input-group-addon calling_code" dir='ltr'>+968</div>
 					</div>
+					<div id="contactMobileErrors"></div>
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-3">
@@ -362,11 +391,12 @@
 						<label class="sr-only" for="contact_phone">هاتف المنزل</label>
 						<div class="input-group">
 							<div class="has-feedback">
-								<input type="text" class="form-control  has-feedback-right" id="contact_phone" placeholder="هاتف المنزل">
+							{!! Form::text('contact_phone' ,null ,['data-parsley-errors-container'=>"#contactPhoneErrors","data-parsley-type"=>"integer",'placeholder'=>'هاتف المنزل','class'=>'form-control has-feedback-right', 'id'=>'contact_phone']) !!}
 								<span class="fa fa-phone form-control-feedback right" aria-hidden="true"></span>
 							</div>
 							<div class="input-group-addon calling_code" dir='ltr'>+968</div>
 						</div>
+						<div id="contactPhoneErrors"></div>
 					</div>
 				</div>
 			</div>
@@ -376,10 +406,11 @@
 					<div class="form-group">
 						<label class="sr-only" for="contact_fax">فاكس</label>
 						<div class="input-group">
+							{!! Form::text('contact_fax' ,null ,['data-parsley-errors-container'=>"#contactFaxErrors",'class'=>'form-control',"data-parsley-type"=>"integer", 'id'=>'contact_fax']) !!}
 							
-							<input type="text" class="form-control" id="contact_fax" placeholder="فاكس">
 							<div class="input-group-addon calling_code" dir='ltr'>+968</div>
 						</div>
+						<div id="contactFaxErrors"></div>
 					</div>
 				</div>
 			</div>
@@ -389,37 +420,44 @@
 </div>
 <div class="panel panel-primary">
 	<div class="panel-heading">
-		<h2><i class="fa fa-graduation-cap"></i> المؤهل الدراسي</h2>
+		<h2><i class="fa fa-graduation-cap"></i> المؤهلات الدراسية</h2>
 	</div>
 	<div class="panel-body">
 		<div class="clearfix"></div>
+		<div class="label label-danger" style='font-size:16px'>
+			1 - بيانات الشهادة الثانوية ( إجباري )
+		</div>
+		<br>
+		<br>
+		<br>
 		<div id="mainDegreeFields">
 			<div class="row">
 				<div class="col-sm-4 col-xs-12">
 					<div class="form-group">
-						<label for="degree_name[]">
+						<label for="degree_name">
 							المؤهل <i class="fa text-danger fa-asterisk"></i>:
 						</label>
 						
-						{!! Form::text('degree_name[]' ,"ثانوية" ,['class'=>' form-control','disabled'=>'disabled']) !!}
+						{!! Form::select('degree_name' ,["high_school"=>"ثانوي"] ,null,['class'=>' form-control','disabled'=>'disabled' ,'required'=>'required']) !!}
 					</div>
 				</div>
 				<div class="col-sm-4 col-xs-12">
 					<div class="form-group">
-						<label for="degree_country_id[]">
+						<label for="degree_country_id">
 							الدولة <i class="fa text-danger fa-asterisk"></i>:
 						</label>
 						
-						{!! Form::select('degree_country_id[]' ,$countries_list ,null ,['class'=>'select2_single form-control' ,'id'=>'degree_country_id[]']) !!}
+						{!! Form::select('degree_country_id' ,$countries_list ,null ,['data-parsley-errors-container'=>"#degreeCountry_1",'class'=>'select2_single form-control' ,'id'=>'degree_country_id','required'=>'required']) !!}
+						<div class='parsleyjs-error-container' id="degreeCountry_1"></div>
 					</div>
 				</div>
 				<div class="col-sm-4 col-xs-12">
 					<div class="form-group">
-						<label for="degree_speciality[]">
+						<label for="degree_speciality">
 							التخصص الدراسي <i class="fa text-danger fa-asterisk"></i>:
 						</label>
 						
-						{!! Form::text('degree_speciality[]' ,null ,['class'=>'form-control' ,'id'=>'degree_speciality[]']) !!}
+						{!! Form::text('degree_speciality' ,null ,['class'=>'form-control' ,'id'=>'degree_speciality','required'=>'required']) !!}
 					</div>
 				</div>
 				
@@ -428,34 +466,36 @@
 			<div class="row">
 				<div class="col-sm-4 col-xs-12">
 					<div class="form-group">
-						<label for="degree_institution[]">
-							اسم الجهة الدراسية (المدرسة/ المعهد)<i class="fa text-danger fa-asterisk"></i>:
+						<label for="degree_institution">
+							اسم المدرسة<i class="fa text-danger fa-asterisk"></i>:
 						</label>
 						
-						{!! Form::text('degree_institution[]' ,null ,['class'=>'form-control' ,'id'=>'degree_institution[]']) !!}
+						{!! Form::text('degree_institution' ,null ,['class'=>'form-control' ,'id'=>'degree_institution','required'=>'required']) !!}
 					</div>
 				</div>
 				<div class="col-sm-4 col-xs-12">
 					<div class="form-group">
-						<label for="degree_graduation_year[]">
+						<label for="degree_graduation_year">
 							سنة التخرج <i class="fa text-danger fa-asterisk"></i>:
 						</label>
 						
-						{!! Form::select('degree_graduation_year[]' ,range(date('Y') ,date("Y")-80) ,null ,['class'=>' select2_single form-control']) !!}
+						{!! Form::select('degree_graduation_year' ,[""=>""]+range(date('Y') ,date("Y")-80) ,null ,['data-parsley-errors-container'=>"#degreeYear_1",'class'=>' select2_single form-control','required'=>'required']) !!}
+						<div class='parsleyjs-error-container' id="degreeYear_1"></div>
 					</div>
 				</div>
 				<div class="col-sm-4 col-xs-12">
 					<div class="form-group">
-						<label for="degree_score[]">
+						<label for="degree_score">
 							المعدل <i class="fa text-danger fa-asterisk"></i>:
 						</label>
 						<div class="form-group">
 							<label class="sr-only" for="contact_fax">المعدل</label>
 							<div class="input-group">
-								{!! Form::text('degree_score[]',null ,["type"=>"numeric",'class'=>'form-control' ,'id'=>'degree_score[]']) !!}
+								{!! Form::text('degree_score',null ,['data-parsley-errors-container'=>"#degreeScore_1","type"=>"numeric",'class'=>'form-control' ,'id'=>'degree_score','required'=>'required']) !!}
 								<div class="input-group-addon">%</div>
 							</div>
 						</div>
+						<div class='parsleyjs-error-container' id="degreeScore_1"></div>
 						
 					</div>
 				</div>
@@ -481,16 +521,18 @@
 						الحالة الاجتماعية <i class="fa text-danger fa-asterisk"></i>:
 					</label>
 					
-					{!! Form::select('social_status' ,$social_status ,null ,['class'=>'select2_single form-control' ,'id'=>'social_status']) !!}
+					{!! Form::select('social_status' ,$social_status ,null ,['data-parsley-errors-container'=>"#socialStatusContainer",'class'=>'select2_single form-control' ,'id'=>'social_status','required'=>'required']) !!}
+					<div id="socialStatusContainer"></div>
 				</div>
 			</div>
 			<div class="col-sm-3 col-xs-12">
 				<div class="form-group">
-					<label for="social_jobs">
+					<label for="social_job">
 						الحالة الوظيفية <i class="fa text-danger fa-asterisk"></i>:
 					</label>
 					
-					{!! Form::select('social_jobs' ,$social_jobs ,null ,['class'=>'select2_single form-control' ,'id'=>'social_jobs']) !!}
+					{!! Form::select('social_job' ,$social_jobs ,null ,['data-parsley-errors-container'=>"#socialJobContainer",'class'=>'select2_single form-control' ,'id'=>'social_job','required'=>'required']) !!}
+					<div id="socialJobContainer"></div>
 				</div>
 			</div>
 		</div>
@@ -502,7 +544,7 @@
 						الوظيفة <i class="fa text-danger fa-asterisk"></i>:
 					</label>
 					
-					{!! Form::text('social_job_status' ,null ,['placeholder'=>"مثال : شرطي ،مدرس ،موظف حكومي ...",'class'=>'form-control' ,'id'=>'social_job_status']) !!}
+					{!! Form::text('social_job_status' ,null ,['required'=>'required','placeholder'=>"مثال : شرطي ،مدرس ،موظف حكومي ...",'class'=>'form-control' ,'id'=>'social_job_status']) !!}
 				</div>
 			</div>
 			<div class="col-sm-4 col-xs-12">
@@ -511,7 +553,7 @@
 						تاريخ البدء <i class="fa text-danger fa-asterisk"></i>:
 					</label>
 					
-					{!! Form::text('social_job_start' ,null ,['class'=>'date-picker form-control' ,'id'=>'social_job_start']) !!}
+					{!! Form::text('social_job_start' ,null ,['required'=>'required','class'=>'date-picker form-control' ,'id'=>'social_job_start']) !!}
 				</div>
 			</div>
 			<div class="col-sm-4 col-xs-12">
@@ -522,7 +564,7 @@
 					<div class="form-group">
 						<label class="sr-only" for="contact_fax">عدد سنوات الخبرة</label>
 						<div class="input-group">
-							{!! Form::text('social_experience' ,null ,['placeholder'=>0,'class'=>'form-control' ,'id'=>'social_experience']) !!}
+							{!! Form::text('social_experience' ,null ,['required'=>'required','placeholder'=>0,'class'=>'form-control' ,'id'=>'social_experience']) !!}
 							<div class="input-group-addon">سنة</div>
 						</div>
 					</div>
@@ -534,7 +576,7 @@
 					<label for="social_job_employer">
 						إسم جهة العمل <i class="fa text-danger fa-asterisk"></i>:
 					</label>
-					{!! Form::text('social_job_employer' ,null ,['placeholder'=>"مثال : وزارة التربية و التعليم ..",'class'=>'form-control' ,'id'=>'social_job_employer']) !!}
+					{!! Form::text('social_job_employer' ,null ,['required'=>'required','placeholder'=>"مثال : وزارة التربية و التعليم ..",'class'=>'form-control' ,'id'=>'social_job_employer']) !!}
 					
 				</div>
 			</div>
@@ -544,7 +586,7 @@
 						قطاع <i class="fa text-danger fa-asterisk"></i>:
 					</label>
 					
-					{!! Form::select('social_job_type' ,$social_job_types ,null ,['class'=>'select2_single form-control' ,'id'=>'social_job_type']) !!}
+					{!! Form::select('social_job_type' ,$social_job_types ,null ,['required'=>'required','class'=>'select2_single form-control' ,'id'=>'social_job_type']) !!}
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -554,7 +596,7 @@
 						الدولة <i class="fa text-danger fa-asterisk"></i>:
 					</label>
 					
-					{!! Form::select('social_job_country' ,$countries_list ,null ,['class'=>'select2_single form-control' ,'id'=>'social_job_country']) !!}
+					{!! Form::select('social_job_country' ,$countries_list ,null ,['required'=>'required','class'=>'select2_single form-control' ,'id'=>'social_job_country']) !!}
 				</div>
 			</div>
 			<div class="col-sm-4 col-xs-12">
@@ -563,7 +605,7 @@
 						المحافظة <i class="fa text-danger fa-asterisk"></i>:
 					</label>
 					
-					{!! Form::select('social_job_city' ,[] ,null ,['class'=>'select2_single form-control' ,'id'=>'social_job_city']) !!}
+					{!! Form::select('social_job_city' ,[] ,null ,['required'=>'required','class'=>'select2_single form-control' ,'id'=>'social_job_city']) !!}
 				</div>
 			</div>
 		</div>
@@ -580,11 +622,11 @@
 					<label for="health_status">الحالة الصحية<i class="fa text-danger fa-asterisk"></i></label><br>
 					<label>
 						سليم بدنيا و صحيا : 
-						{!! Form::radio('health_status' ,"healthy" ,true ,['class'=>'flat']) !!}
+						{!! Form::radio('health_status' ,"healthy" ,true ,['class'=>'flat' ,'required'=>'required']) !!}
 						
 					</label>
 					<label>
-						أعاني من اعاقة : {!! Form::radio('health_status' ,"disabled" ,null ,['class'=>'flat']) !!}
+						أعاني من اعاقة : {!! Form::radio('health_status' ,"disabled" ,null ,['class'=>'flat','required'=>'required']) !!}
 					</label>
 				</div>
 			</div>
@@ -632,14 +674,15 @@
 			<div class="col-xs-12 col-sm-4">
 				<div class="form-group">
 					<label for="computer_skills">القدرة الشخصية استخدام الحاسب الآلي<i class="fa text-danger fa-asterisk"></i></label><br>
-					{!! Form::select('computer_skills' ,$computer_skills ,null ,['class'=>'select2_single form-control']) !!}
-					
+					{!! Form::select('computer_skills' ,$computer_skills ,null ,['data-parsley-errors-container'=>"#computerSkillsContainer",'class'=>'select2_single form-control','required'=>'required']) !!}
+					<div id="computerSkillsContainer"></div>
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-4">
 				<div class="form-group">
 					<label for="internet_skills">القدرة الشخصية استخدام الانترنت<i class="fa text-danger fa-asterisk"></i></label><br>
-					{!! Form::select('internet_skills' ,$computer_skills ,null ,['class'=>'select2_single form-control']) !!}
+					{!! Form::select('internet_skills' ,$computer_skills ,null ,['data-parsley-errors-container'=>"#internetSkillsContainer",'class'=>'select2_single form-control','required'=>'required']) !!}
+					<div id="internetSkillsContainer"></div>
 				</div>
 			</div>
 			
@@ -651,11 +694,11 @@
 					<label for="internet_link">توافر جهاز (كمبيوتر / لاب) بحالة جيدة<i class="fa text-danger fa-asterisk"></i></label><br>
 					<label>
 						يوجد : 
-						{!! Form::radio('internet_link' ,1 ,true ,['class'=>'flat']) !!}
+						{!! Form::radio('internet_link' ,1 ,true ,['class'=>'flat','required'=>'required']) !!}
 						
 					</label>
 					<label>
-						لا يوجد : {!! Form::radio('internet_link' ,0 ,null ,['class'=>'flat']) !!}
+						لا يوجد : {!! Form::radio('internet_link' ,0 ,null ,['class'=>'flat','required'=>'required']) !!}
 					</label>
 				</div>
 			</div>
@@ -664,11 +707,11 @@
 					<label for="cyber_cafe">توافر جهاز (كمبيوتر / لاب) بحالة جيدة<i class="fa text-danger fa-asterisk"></i></label><br>
 					<label>
 						يوجد : 
-						{!! Form::radio('cyber_cafe' ,1 ,true ,['class'=>'flat']) !!}
+						{!! Form::radio('cyber_cafe' ,1 ,true ,['class'=>'flat','required'=>'required']) !!}
 						
 					</label>
 					<label>
-						لا يوجد : {!! Form::radio('cyber_cafe' ,0 ,null ,['class'=>'flat']) !!}
+						لا يوجد : {!! Form::radio('cyber_cafe' ,0 ,null ,['class'=>'flat','required'=>'required']) !!}
 					</label>
 				</div>
 				
@@ -678,11 +721,11 @@
 					<label for="computer_availability">توافر جهاز (كمبيوتر / لاب) بحالة جيدة<i class="fa text-danger fa-asterisk"></i></label><br>
 					<label>
 						يوجد : 
-						{!! Form::radio('computer_availability' ,1 ,true ,['class'=>'flat']) !!}
+						{!! Form::radio('computer_availability' ,1 ,true ,['class'=>'flat','required'=>'required']) !!}
 						
 					</label>
 					<label>
-						لا يوجد : {!! Form::radio('computer_availability' ,0 ,null ,['class'=>'flat']) !!}
+						لا يوجد : {!! Form::radio('computer_availability' ,0 ,null ,['class'=>'flat','required'=>'required']) !!}
 					</label>
 				</div>
 			</div>
@@ -693,24 +736,31 @@
 				<div class="col-xs-12 col-sm-4">
 				<div class="form-group">
 					<label for="reference">كيف عرفت عن مركز التعليم عن بعد بالكلية<i class="fa text-danger fa-asterisk"></i></label><br>
-					{!! Form::select('reference' ,$references ,null ,['class'=>'select2_single form-control']) !!}
+					{!! Form::select('reference' ,$references ,null ,['data-parsley-errors-container'=>"#referenceContainer",'id'=>'reference','class'=>'select2_single form-control','required'=>'required']) !!}
+					<div id="referenceContainer"></div>
 				</div>
 			</div>
 			
-			<div class="col-sm-4 col-xs-12">
+			<div class="col-sm-4 col-xs-12 js-reference-other" style='display:none'>
 				<div class="form-group">
 					<label for="reference_other">
 						كيف عرفتنا <i class="fa text-danger fa-asterisk"></i>:
 					</label>
-					{!! Form::text('reference_other' ,null ,['placeholder'=>"",'class'=>'form-control' ,'id'=>'reference_other']) !!}
+					{!! Form::text('reference_other' ,null ,['placeholder'=>"",'class'=>'novalidate form-control' ,'id'=>'reference_other','required'=>'required']) !!}
 					
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
-</form>
+<div class="row">
+	<div class="col-xs-12 col-sm-4 col-sm-offset-4">
+		<button class='btn btn-primary btn-block btn-lg'>
+			<i class="fa fa-send"></i> ارسال
+		</button>
+	</div>
+</div>
+{!! Form::close() !!}
 @stop
 @section('heading')
 <b class="text-info">{{ $period->year->name }}</b>
@@ -762,7 +812,7 @@ $('body').on('ifChanged', 'input[name="nationality_type"]', function(event) {
 	
 	
 	var $this = $(this);
-	if($this.val()=='O') {
+	if($this.val()=='omani') {
 	  $('.registration-form__nationality').addClass('omani');
 	  $('.registration-form__outsider').removeClass('active');
 	} else {
@@ -776,6 +826,21 @@ drawSelect2();
 
 });
 
+
+$('body').on('change', '#reference', function(event) {
+	event.preventDefault();
+	/* Act on the event */
+	var $this = $(this) ,$referenceOther = $('.js-reference-other');
+
+	if($this.val()=="other") {
+		$referenceOther.show();
+		$referenceOther.find('input').removeClass('novalidate');
+	}else{
+		$referenceOther.hide();
+		$referenceOther.find('input').addClass('novalidate');
+	}
+
+});
 function drawSelect2() {
 	
 	$(".select2_single").select2({
@@ -788,6 +853,18 @@ $('body').on('change', '#contact_country', function(event) {
 	event.preventDefault();
 	var $this = $(this);
 	/* Act on the event */
+	
+	if($this.find('option:selected').text()=="سلطنة عمان") {
+		$this.closest('.js-social-country').find('.js-social-country-required i').show();
+		$this.closest('.js-social-country').find('.js-social-country-required input,.js-social-country-required select').removeClass('novalidate');
+		$this.closest('.js-social-country').find('.js-social-country-required i').show();
+	}else {
+		$this.closest('.js-social-country').find('.js-social-country-required i').hide();
+		$this.closest('.js-social-country').find('.js-social-country-required input,.js-social-country-required select').addClass('novalidate');
+	}
+
+	$('#registrationForm').parsley().validate();
+
 	applyFetchCities('contact_city' ,$this.val() ,'contact_state');
 	changeCallingCode($this.val());
 });
@@ -813,18 +890,41 @@ $('body').on('change', '#contact_city', function(event) {
 $('body').on('click' ,"#addExtraDegrees" ,function() {
 	var $mainClone = $('#mainDegreeFields').clone() ,$extra = $('#extraDegreeContainer');
 	
+	$('#registrationForm').parsley('destroy');
+
 	$mainClone.css({position:"relative",margin:"25px 0"  ,boxShadow:"#fff 0 0 0 5px ,#1a82c3  0 0 0 8px" ,borderRadius:4});
 	$mainClone.attr('id',false).addClass('js-degree-clone');
 	$mainClone.append('<button class="btn pull-left btn-danger js-remove-degree"><i class="fa fa-times"></i> حذف</button><div class="clearfix"></div>');
 	$mainClone.find('.select2-container').remove();
-	$mainClone.find("input[name='degree_name[]']").attr('disabled' ,false);
+	$select = $('<select/>' ,{name:"degree_name" ,class:'form-control'});
+	$select.html("");
+	$.each({'graduate':'إجازة / بكالوريوس / ليسانس','majester':'ماجستير' ,'doctorat':'دكتوراه'}, function(index, val) {
+		 $select.append("<option value='"+index+"'>"+val+"</option>");
+	});
+	
+
+	$mainClone.find("select[name='degree_name']").replaceWith($select);
+	$mainClone.find("input[name='degree_institution']").siblings('label').html('معهد / كلية / جامعة <i class="fa text-danger fa-asterisk"></i>');
 	$mainClone.find('input[type="text"]').val("");
 	$mainClone.find('select').css({display:"block"});
+	var timestamp = new Date().getUTCMilliseconds();
+
+	$mainClone.find('input,select').each(function(index, val) {
+		 /* iterate through array or object */
+		 var $clonedInput = $(val),originalName = $clonedInput.attr('name') ,clonedName =originalName+timestamp,
+		 	$errorContainer;
+
+		$clonedInput.attr('name' ,clonedName);
+		$clonedInput.attr('id' ,clonedName);
+		$clonedInput.attr('data-parsley-errors-container' ,"Container"+clonedName);
+		$errorContainer = $clonedInput.closest('.col-sm-4').find('.parsleyjs-error-container').attr('id' ,"Container"+clonedName);
+	});
 	$extra.append($mainClone);
 	$mainClone.find('.select2_single').select2({
 			placeholder: "حدد اختيار",
 			allowClear: true
 		});
+	$('#registrationForm').parsley();
 });
 $('body').on('click', '.js-remove-degree', function(event) {
 	event.preventDefault();
@@ -832,21 +932,26 @@ $('body').on('click', '.js-remove-degree', function(event) {
 	$(this).closest('.js-degree-clone').remove();
 });
 
-
-$('body').on('change', '#social_jobs', function(event) {
+/** social jobs logic */
+$('body').on('change', '#social_job', function(event) {
 	event.preventDefault();
 	/* Act on the event */
 	var $this = $(this) ,$jobDetails = $('.social-job-details');
 
 	if($this.val()=='employed') {
+		$('.social-job-details').find('input,select').attr('disabled',false);
 		$jobDetails.slideDown();
+
 		drawSelect2();
 	} else {
+		$('.social-job-details').find('input,select').attr('disabled',true);
 		$jobDetails.slideUp();
 	}
 
 });
+$('.social-job-details').find('input,select').attr('disabled',true);
 
+/** end social jobs logic */
 $('body').on('change', '#stay_type', function(event) {
 	event.preventDefault();
 	/* Act on the event */
@@ -934,6 +1039,11 @@ function applyFetchStates(targetId ,currentCity) {
 			$('#'+targetId).html($options).change();
 		});
 	}
+});
+
+window.Parsley.on('field:error', function() {
+  // This global callback will be called for any field that fails validation.
+  console.log('Validation failed for: ', this.$element);
 });
 </script>
 @stop

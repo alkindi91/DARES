@@ -6419,3 +6419,13 @@ select.form-control {
 .health-disabled-fields.active {
     display: block;
 }
+
+ul.parsley-errors-list  {
+    padding: 0;
+    margin: 0;
+}
+
+.parsley-error + .select2, .parsley-error + .select2  {
+    border-color: #E85445 !important;
+    background-color: #FAEDEC !important;
+}
