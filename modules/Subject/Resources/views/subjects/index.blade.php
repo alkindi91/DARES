@@ -4,11 +4,9 @@
 <ol class="breadcrumb">
   <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
    <li>
-    @lang('subject::subject.Lesson')
+    @lang('subject::subject.Subjects')
   </li>
-  <li class='active'>
-    @lang('subject::subject.Add_lesson')
-  </li>
+  
 </ol>
 
 @permission('subject.create.subject')
@@ -25,7 +23,7 @@
                 <input type="checkbox" id='check-all' class="tableflat">
             </th>
             <th>
-                @lang('subject::subject.Lesson_name')
+                @lang('subject::subject.Subject_name')
             </th>
             <th>
             <i class="fa fa-reorder"></i>
@@ -87,7 +85,7 @@
 </table>
 <div class="bulk-actions">
 @permission('subject.delete.subject')
-<button id='js-delete-all' href="{{ route('subject.delete' ,$subject->id)}}" class="btn btn-danger">
+<button id='js-delete-all' href="{{ route('subject.delete' )}}" class="btn btn-danger">
 <i class="fa fa-trash"></i> @lang('global.delete')
 </button>
 @endpermission
