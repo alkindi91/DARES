@@ -48,15 +48,9 @@
            <div class="row">
                <div class="col-md-12">
                <img src="{{ asset('assets/img/logo.png') }}" alt="@lang('global.title')" style='margin:20px auto 20px auto;display:block'>
-                   <div class="panel panel-white">
-                       <div class="panel-heading text-center">
-                           <h3>طلب التحاق بالتعليم عن بعد</h3>
-                           <h2>@section('heading') @show</h2>
-                       </div>
-                       <div class="panel-body">
+                   
                           @yield('content')
-                       </div>
-                   </div>
+                       
                </div>
            </div>
         </div>

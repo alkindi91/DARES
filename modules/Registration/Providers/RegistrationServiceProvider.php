@@ -20,10 +20,9 @@ class RegistrationServiceProvider extends ServiceProvider {
 	 */
 	public function boot(Router $router)
 	{
-		$router->model('step' ,'\Modules\Registration\Entities\RegistrationStep');
-		$router->model('period' ,'\Modules\Registration\Entities\RegistrationPeriod');
-		$router->model('year' ,'\Modules\Registration\Entities\RegistrationYear');
-		$router->model('note' ,'\Modules\Registration\Entities\RegistrationStepNote');
+		$router->model('registrationStep' ,'\Modules\Registration\Entities\RegistrationStep');
+		$router->model('registrationPeriod' ,'\Modules\Registration\Entities\RegistrationPeriod');
+		$router->model('registrationNote' ,'\Modules\Registration\Entities\RegistrationStepNote');
 		
 		$this->registerTranslations();
 		$this->registerConfig();
@@ -105,8 +104,7 @@ class RegistrationServiceProvider extends ServiceProvider {
 		$menu = Menu::get('SidebarMenu');
 		$submenu = $menu->add(trans('registration::registration.header'))->prepend('<i class="fa fa-check"></i>');
 		$submenu->add(trans('registration::steps.header'), ['route'=>'registration.steps.index'])->prepend('<i class="fa fa-recycle"></i>');
-		$submenu->add(trans('registration::years.header'), ['route'=>'registration.years.index'])->prepend('<i class="fa fa-calendar"></i>');
-		// $submenu->add(trans('registration::periods.header'), ['route'=>'registration.periods.index'])->prepend('<i class="fa fa-arrows-h"></i>');
+		$submenu->add(trans('registration::periods.header'), ['route'=>'registration.periods.index'])->prepend('<i class="fa fa-arrows-h"></i>');
 	}
 
 }

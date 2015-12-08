@@ -22,11 +22,6 @@ class RegistrationTableSeeder extends Seeder {
 			['name'=>'حذف مرحلة قبول تسجيل' ,'slug'=>'delete.registration.steps','module'=>'registration'],
 			['name'=>'مشاهدة مراحل التسجيل' ,'slug'=>'view.registration.steps','module'=>'registration'],
 			
-			['name'=>'اضافة عام جامعي تسجيل' ,'slug'=>'create.registration.years','module'=>'registration'],
-			['name'=>'تعدل عام جامعي تسجيل' ,'slug'=>'edit.registration.years','module'=>'registration'],
-			['name'=>'حذف عام جامعي تسجيل' ,'slug'=>'delete.registration.years','module'=>'registration'],
-			['name'=>'مشاهدة العام الجامعي التسجيل' ,'slug'=>'view.registration.years','module'=>'registration'],
-
 			['name'=>'اضافة فترة القبول' ,'slug'=>'create.registration.periods','module'=>'registration'],
 			['name'=>'تعدل فترة القبول' ,'slug'=>'edit.registration.periods','module'=>'registration'],
 			['name'=>'حذف فترة القبول' ,'slug'=>'delete.registration.periods','module'=>'registration'],

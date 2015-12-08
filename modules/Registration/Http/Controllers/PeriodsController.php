@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Modules\Registration\Entities\RegistrationPeriod as Period;
-use Modules\Registration\Entities\RegistrationYear as Year;
+use Modules\Academycycle\Entities\AcademycycleYear as Year;
 use Modules\Registration\Http\Requests\Period\CreatePeriodRequest;
 use Modules\Registration\Http\Requests\Period\UpdatePeriodRequest;
 use Pingpong\Modules\Routing\Controller;
@@ -12,27 +12,40 @@ class PeriodsController extends Controller
 
     public function index(Year $year ,Period $Period)
     {
-        $periods = $Period->all();
+        $periods = $Period->orderBy('id' ,'desc');
 
-        return view('registration::periods.index' ,compact('periods' ,'year'));
+        if($yearId = request('academycycle_year_id')) {
+            $periods->where('academycycle_year_id' ,$yearId);
+        }
+
+        if(request('running')) {
+            $periods->current();
+        }
+
+        $periods = $periods->get();
+
+        $years = $year->lists('name' ,'id')->toArray();
+
+
+        return view('registration::periods.index' ,compact('periods', 'years'));
     }
 
     public function create(Year $year)
     {
-
-        return view('registration::periods.create', compact('periods' ,'year'));
+        $years = $year->notFinished()->lists('name' ,'id')->toArray();
+        return view('registration::periods.create', compact('periods' ,'years'));
     }
 
-    public function edit(Period $period)
+    public function edit(Period $period ,Year $year)
     {
-        $period->load('year');
-
-        $year = $period->year;
        
-        return view('registration::periods.edit', compact('period' ,'year'));
+        $years = $year->notFinished()->lists('name' ,'id')->toArray();
+       
+       
+        return view('registration::periods.edit', compact('period' ,'years'));
     }
 
-    public function store(Year $year,CreatePeriodRequest $request)
+    public function store(CreatePeriodRequest $request)
     {
         
         if($this->checkOverlapingPeriods()) {
@@ -43,11 +56,9 @@ class PeriodsController extends Controller
 
         $period = $period->fill($request->all());
 
-        $period->registration_year_id = $year->id;
-
         $period->save();
 
-        return redirect()->route('registration.periods.index' ,$year->id)->with('success', trans('registration::periods.create_success', ['name'=>$period->name]));
+        return redirect()->route('registration.periods.index')->with('success', trans('registration::periods.create_success', ['name'=>$period->name]));
     }
 
     public function update(UpdatePeriodRequest $request, Period $period)
@@ -61,7 +72,7 @@ class PeriodsController extends Controller
         }
 
         return redirect()
-        ->route('registration.periods.index' ,$period->registration_year_id)
+        ->route('registration.periods.index')
         ->with('success', trans('registration::periods.update_success', ['name'=>$period->name]));
     }
 
@@ -70,10 +81,10 @@ class PeriodsController extends Controller
         $period->delete();
 
         return redirect()
-        ->route('registration.periods.index' ,$period->registration_year_id)->with('success', trans('registration::periods.delete_success', ['name'=>$period->name]));
+        ->route('registration.periods.index')->with('success', trans('registration::periods.delete_success', ['name'=>$period->name]));
     }
 
-    public function deleteBulk(Request $req, Period $Period ,Year $year)
+    public function deleteBulk(Request $req, Period $Period)
     {
         if (!$req->has('table_records')) {
             return redirect()->route('cities.index');
@@ -84,7 +95,7 @@ class PeriodsController extends Controller
         $Period->destroy($ids);
         
         return redirect()
-        ->route('registration.periods.index' ,$year->id)
+        ->route('registration.periods.index')
         ->with('success', trans('registration::periods.delete_bulk_success'));
     }
 

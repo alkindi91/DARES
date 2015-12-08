@@ -8,6 +8,7 @@ return [
 	'delete'	=> 'حذف',
 	'new'		=> 'جديد',
 	'save'		=> 'حفظ',
+	'filter'	=> 'فلترة',
 	'save_and_exit'		=> 'حفظ و خروج',
 	'update'	=> 'تحديث',
 	'cancel'	=> 'الغاء',

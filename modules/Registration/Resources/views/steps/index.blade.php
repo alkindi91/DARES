@@ -65,10 +65,12 @@
 	@foreach($steps as $step)
 	<tr class="even pointer">
 		<td class="a-center ">
+			@if($step->id!=1)
 			<input type="checkbox" class="tableflat" value='{{ $step->id }}' name='table_records[]'>
+			@endif
 		</td>
 		<td>
-			{{ $stesp->name }}
+			{{ $step->name }}
 		</td>
 		<td class='text-center {!! $step->edit_form ? 'success' : 'danger' !!}'>
 			{!! $step->edit_form ? '<i class="glyphicon text-success glyphicon-ok"></i>' : '<i class="glyphicon text-danger glyphicon-remove"></i>' !!}

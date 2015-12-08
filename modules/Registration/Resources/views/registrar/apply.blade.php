@@ -1,6 +1,13 @@
 @extends('layouts.registration')
 @section('content')
-
+ <div class="panel panel-white">
+                       <div class="panel-heading text-center">
+                           <h3>طلب التحاق بالتعليم عن بعد</h3>
+                           <h2>@section('heading') @show</h2>
+                       </div>
+                       <div class="panel-body">
+                         
+                     
 @if(!empty($errors->all()))
 <div class='alert alert-danger'>
 <ul>
@@ -761,6 +768,8 @@
 	</div>
 </div>
 {!! Form::close() !!}
+  </div>
+	</div>
 @stop
 @section('heading')
 <b class="text-info">{{ $period->year->name }}</b>

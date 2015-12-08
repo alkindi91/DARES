@@ -14,6 +14,8 @@ class RegistrationStep extends Model {
     		'child_id');
     }
 
-
+    public function scopeVerifyEmail($query) {
+    	return $query->where('verify_email' ,1);
+    }
 
 }
