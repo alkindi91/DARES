@@ -18,19 +18,19 @@ Route::group(['prefix' => 'academycycle', 'namespace' => 'Modules\Academycycle\H
                 'middleware'=>'permission:create.academycycle.years'
                 ]);
 
-            get('edit/{year}', [
+            get('edit/{academycycleYear}', [
                 'as'=>'academycycle.years.edit',
                 'uses'=>'YearsController@edit',
                 'middleware'=>'permission:edit.academycycle.years'
                 ]);
 
-            get('show/{year}', [
+            get('show/{academycycleYear}', [
                 'as'=>'academycycle.years.show',
                 'uses'=>'YearsController@show',
                 'middleware'=>'permission:view.academycycle.years'
                 ]);
 
-            get('delete/{year}', [
+            get('delete/{academycycleYear}', [
                 'as'=>'academycycle.years.delete',
                 'uses'=>'YearsController@delete',
                 'middleware'=>'permission:delete.academycycle.years'
@@ -48,7 +48,7 @@ Route::group(['prefix' => 'academycycle', 'namespace' => 'Modules\Academycycle\H
                 'middleware'=>'permission:create.academycycle.years'
                 ]);
 
-            post('update/{year}', [
+            post('update/{academycycleYear}', [
                 'as'=>'academycycle.years.update',
                 'uses'=>'YearsController@update',
                 'middleware'=>'permission:edit.academycycle.years'

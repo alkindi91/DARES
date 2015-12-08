@@ -24,7 +24,7 @@
         <div class="clearfix"></div>
     </div>
     <br>
-    {!! Form::open(['route'=>'academycycle.years.store' ,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate']) !!}
+    {!! Form::open(['route'=>'academycycle.years.store' ,'method'=>'POST' ,'class'=>'form-horizontal']) !!}
  <div class="form-group">
     <div class="col-md-12">
         <a href="{{ route('academycycle.years.index') }}" class="pull-left btn btn-primary">

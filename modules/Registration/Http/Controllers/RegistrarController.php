@@ -4,6 +4,7 @@ use DomDocument;
 use Modules\Lists\Entities\Country;
 use Modules\Registration\Entities\Registration;
 use Modules\Registration\Entities\RegistrationPeriod;
+use Modules\Registration\Entities\RegistrationStep;
 use Modules\Registration\Http\Requests\RegisterRequest;
 use Pingpong\Modules\Routing\Controller;
 class RegistrarController extends Controller {
@@ -61,16 +62,23 @@ class RegistrarController extends Controller {
 		return view('registration::registrar.apply' ,compact('period' ,'countries' ,'stay_types' ,'countries_list' ,'references','computer_skills','codes_list' ,'social_job_types','social_status' ,'social_jobs'));
 	}
 
-	public function store(RegisterRequest $request ,Registration $registration ,RegistrationPeriod $PeriodModel) {
+	public function store(RegisterRequest $request ,
+		Registration $registration ,
+		RegistrationPeriod $PeriodModel,
+		RegistrationStep $StepModel
+		)
+	{
 		
 		$registration->fill($request->all());
 
-		$period = $PeriodModel->orderBy('id' ,'desc')
-		                      ->with('year')
-		                      ->current()
+		$step = $StepModel->verifyEmail()
+		                    ->first();
+        
+		$period = $PeriodModel->current()
 		                      ->first();
 
         $registration->registration_period_id = $period->id;
+        $registration->registration_step_id = $step->id;
 
 		if($registration->save()) {
 			return view('registration::registrar.signup_success');

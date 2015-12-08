@@ -24,7 +24,7 @@
         <div class="clearfix"></div>
     </div>
     <br>
-    {!! Form::model($year ,['route'=>['academycycle.years.update' ,$year->id] ,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate']) !!}
+    {!! Form::model($year ,['route'=>['academycycle.years.update' ,$year->id] ,'method'=>'POST' ,'class'=>'form-horizontal']) !!}
 <div class="form-group">
     <div class="col-md-12">
         <a href="{{ route('academycycle.years.index') }}" class="pull-left btn btn-primary">

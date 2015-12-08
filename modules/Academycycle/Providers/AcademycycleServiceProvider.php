@@ -1,5 +1,6 @@
 <?php namespace Modules\Academycycle\Providers;
 
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Menu;
 class AcademycycleServiceProvider extends ServiceProvider {
@@ -16,8 +17,10 @@ class AcademycycleServiceProvider extends ServiceProvider {
 	 * 
 	 * @return void
 	 */
-	public function boot()
+	public function boot(Router $router)
 	{
+		$router->model('academycycleYear' ,'\Modules\Academycycle\Entities\AcademycycleYear');
+
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();

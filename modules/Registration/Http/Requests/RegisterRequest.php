@@ -46,7 +46,7 @@ class RegisterRequest extends FormRequest {
 				'contact_postalbox'     =>'required|max:255',
 				'contact_street'        =>'required|max:255',
 				'contact_home_number'   =>'required|max:255',
-				'contact_email'         =>'required|max:255',
+				'contact_email'         =>'required|unique:registrations,contact_email|max:255',
 				'contact_mobile'        =>'required|numeric',
 				'contact_phone'         =>'numeric',
 				'contact_fax'           =>'numeric',

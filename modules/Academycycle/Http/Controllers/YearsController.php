@@ -21,6 +21,10 @@ class YearsController extends Controller
     {
         $years = $Year->lists('name', 'id')->toArray();
 
+        if(request('redirectTo')) {
+            session()->put('redirectTo' ,request('redirectTo'));
+        }
+
         return view('academycycle::years.create', compact('years'));
     }
 
@@ -40,7 +44,15 @@ class YearsController extends Controller
 
         $year->save();
 
-        return redirect()->route('academycycle.years.index')->with('success', trans('academycycle::years.create_success', ['name'=>$year->name]));
+        $message = trans('academycycle::years.create_success', ['name'=>$year->name]);
+
+        if(session()->has('redirectTo')) {
+            $redirectTo = session()->get('redirectTo');
+            session()->remove('redirectTo');
+            return redirect()->route($redirectTo)->with('success', $message);
+        }
+
+        return redirect()->route('academycycle.years.index')->with('success', $message);
     }
 
     public function update(UpdateYearRequest $req, Year $year)
@@ -63,7 +75,7 @@ class YearsController extends Controller
         $year->delete();
 
         return redirect()
-        ->route('academycycle.years.index', trans('academycycle::steos.delete_success', ['name'=>$year->name]));
+        ->route('academycycle.years.index')->with('success' ,trans('academycycle::years.delete_success', ['name'=>$year->name]));
     }
 
     public function deleteBulk(Request $req, Year $Year)

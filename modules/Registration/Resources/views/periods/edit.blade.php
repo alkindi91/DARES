@@ -8,14 +8,7 @@
     @lang('registration::registration.header')
     </a>
   </li>
-   <li><a href="{{ route('registration.index' ,$year->id) }}">
-    @lang('registration::years.header')
-    </a>
-  </li>
-  <li><a href="{{ route('registration.years.edit' ,$year->id) }}">
-    {{ $year->name }}
-    </a>
-  </li>
+  
   <li><a href="{{ route('registration.periods.index') }}">
     @lang('registration::periods.header')
     </a>
@@ -32,7 +25,7 @@
         <div class="clearfix"></div>
     </div>
     <br>
-    {!! Form::model($period ,['route'=>['registration.periods.update' ,$period->id] ,'method'=>'POST' ,'class'=>'form-horizontal' ,'data-parsley-validate']) !!}
+    {!! Form::model($period ,['route'=>['registration.periods.update' ,$period->id] ,'method'=>'POST' ,'class'=>'form-horizontal']) !!}
 
 
     @include('registration::periods._fields')

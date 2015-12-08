@@ -69,7 +69,7 @@ Route::group([
 
         Route::group(['prefix'=>'periods'], function () {
 
-            get('/{year}', [
+            get('/', [
                 'as'=>'registration.periods.index',
                 'uses'=>'PeriodsController@index' ,
                 'middleware'=>'permission:view.registration.periods'
@@ -99,13 +99,13 @@ Route::group([
                 'middleware'=>'permission:delete.registration.periods'
                 ]);
 
-            get('delete-bulk/{year}', [
+            get('delete-bulk', [
                 'as'=>'registration.periods.delete-bulk' ,
                 'uses'=>'PeriodsController@deleteBulk',
                 'middleware'=>'permission:delete.registration.periods'
                 ]);
             
-            post('store/{year}', [
+            post('store', [
                 'as'=>'registration.periods.store',
                 'uses'=>'PeriodsController@store',
                 'middleware'=>'permission:create.registration.periods'
