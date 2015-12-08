@@ -26,15 +26,18 @@
                 @lang('subject::subject.Subject_name')
             </th>
             <th>
-            <i class="fa fa-reorder"></i>
-            @lang('subject::subject.Lesson_order')
+            @lang('subject::subject.Subject_code')
             </th>
             <th>
-            @lang('subject::subject.Lesson_type')
+            <i class="fa fa-reorder"></i>
+            @lang('subject::subject.Subject_hour')
             </th>
+            <th>
+                @lang('subject::subject.Subject_type')
+            </th>              
             <th>
                 <i class="fa fa-dot-circle-o"></i>
-                @lang('subject::subject.Lesson_state')
+                @lang('subject::subject.Subject_description')
             </th>
             <th class=" no-link last"><span class="nobr">
             <i class="fa fa-cog"></i>
@@ -54,13 +57,16 @@
             {{ $subject->name }}
         </td>
         <td>
-            {{ $subject->term_id }}
+            {{ $subject->code }}
+        </td>
+        <td>
+            {{ $subject->hour }}
         </td>
         <td>
             {{ $subject->type }}
         </td>
         <td>
-            {{ $subject->code}}
+            {{ $subject->description}}
         </td>
         <td class=" last">
           @permission('subject.edit.subject')
@@ -74,8 +80,8 @@
             </a>
           @endpermission
           @permission('subject.view.subject')
-             <a href="{{ route('elements.index' ,$subject->id)}}" class="btn btn-info btn-md">
-            <i class="fa fa-table"></i> @lang('subject::subject.Show_elements')
+             <a href="{{ route('lessons.index' ,$subject->id)}}" class="btn btn-info btn-md">
+            <i class="fa fa-table"></i> عرض الدروس
             </a>
              @endpermission
         </td>

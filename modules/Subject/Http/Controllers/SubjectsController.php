@@ -4,6 +4,7 @@
 use Illuminate\Http\Request;
 use Modules\Academystructure\Entities\Term;
 use Modules\Subject\Entities\SubjectSubject;
+use Modules\Subject\Http\Requests\subject\subjectRequest;
 use Pingpong\Modules\Routing\Controller;
 
 class SubjectsController extends Controller {
@@ -19,14 +20,16 @@ class SubjectsController extends Controller {
 
 	public function create(Term $term){
 		
-		$terms = $term->lists('name' ,'id')->toArray();
+		
 
-		return view('subject::subjects.create',compact('terms'));
+		$types=config('subject.types');
+
+		return view('subject::subjects.create',compact('types'));
 
 	}//
 
 	 //this block for subject
-	public function store(SubjectSubject $subject, Request $req)
+	public function store(SubjectSubject $subject, subjectRequest $req)
 	{   
 		$subject->fill($req->all())->save();
 
@@ -43,12 +46,12 @@ class SubjectsController extends Controller {
 	public function edit(Term $term,$id){
 		$subjects = SubjectSubject::findOrFail($id);
 
-		$terms = $term->lists('name' ,'id')->toArray();
-
-		return view('subject::subjects.edit' ,compact('terms','subjects'));
+		$types=config('subject.types');
+		
+		return view('subject::subjects.edit' ,compact('subjects','types'));
 
 	}
-	public function update(SubjectSubject $subject,Request $req, $id)
+	public function update(SubjectSubject $subject,subjectRequest $req, $id)
 	{   
 		$subject = $subject->findOrFail($id);
 

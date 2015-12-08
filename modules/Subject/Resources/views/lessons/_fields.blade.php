@@ -28,10 +28,11 @@
     <div class="form-group">
         {!! Form::label('type', trans('subject::subject.Lesson_type'), array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">
-        {!! Form::text('type' ,null,['class'=>'form-control']) !!}
-        </div>
-        <div>
-            {!! Form::select('type')!!}
+        {!! Form::select('type',[
+        0=>'محتوى',
+        1=>'مقدمة'],
+        null,
+        ['class'=>'form-control'])!!}
         </div>
     </div>
     <div class="form-group">
@@ -47,10 +48,11 @@
         </div>
     </div>
 
+
     <div class="ln_solid"></div>
     <div class="form-group">
         <div class="col-md-12">
-            <a href="{{ route('subject.index') }}" class="pull-left btn btn-primary">
+            <a href="{{ route('lessons.index') }}" class="pull-left btn btn-primary">
             <i class="fa fa-times"></i> @lang('global.cancel')</a>
             <button value='save' name='submit' type="submit" class="pull-left btn btn-success">
             <i class="fa fa-save"></i> @lang('global.save')
