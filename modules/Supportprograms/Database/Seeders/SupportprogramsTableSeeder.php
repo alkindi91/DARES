@@ -3,6 +3,7 @@
 use Bican\Roles\Models\Permission;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Modules\Supportprograms\Entities\SupportprogramsApplication as Program;
 use Modules\Users\Entities\User;
 
 class SupportprogramsTableSeeder extends Seeder {
@@ -43,7 +44,20 @@ class SupportprogramsTableSeeder extends Seeder {
 				]
 		];
 
-		
+		$programs = [
+			[
+			'name'=>'اي شيء',
+			'comment'=>'رابط اي شيء',
+			'program_link'=>'http://google.com',
+			'guide_link'=>'http://google.com',
+			],
+			[
+			'name'=>'اي شيء 2',
+			'comment'=>'رابط اي شيء 2',
+			'program_link'=>'http://google.com',
+			'guide_link'=>'http://google.com',
+			],
+		];
 
 		$users = User::all();
 
@@ -53,6 +67,11 @@ class SupportprogramsTableSeeder extends Seeder {
 			foreach ($users as $user) {
 				$user->attachPermission($perm);
 			}
+		}
+
+		foreach($programs as $program)
+		{
+			Program::create($program);
 		}
 		
 
