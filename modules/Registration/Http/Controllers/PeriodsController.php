@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Modules\Registration\Entities\RegistrationPeriod as Period;
-use Modules\Registration\Entities\RegistrationYear as Year;
+use Modules\Academycycle\Entities\AcademycycleYear as Year;
 use Modules\Registration\Http\Requests\Period\CreatePeriodRequest;
 use Modules\Registration\Http\Requests\Period\UpdatePeriodRequest;
 use Pingpong\Modules\Routing\Controller;
@@ -14,7 +14,7 @@ class PeriodsController extends Controller
     {
         $periods = $Period->all();
 
-        return view('registration::periods.index' ,compact('periods' ,'year'));
+        return view('registration::periods.index' ,compact('periods'));
     }
 
     public function create(Year $year)
@@ -73,7 +73,7 @@ class PeriodsController extends Controller
         ->route('registration.periods.index' ,$period->registration_year_id)->with('success', trans('registration::periods.delete_success', ['name'=>$period->name]));
     }
 
-    public function deleteBulk(Request $req, Period $Period ,Year $year)
+    public function deleteBulk(Request $req, Period $Period)
     {
         if (!$req->has('table_records')) {
             return redirect()->route('cities.index');
@@ -84,7 +84,7 @@ class PeriodsController extends Controller
         $Period->destroy($ids);
         
         return redirect()
-        ->route('registration.periods.index' ,$year->id)
+        ->route('registration.periods.index')
         ->with('success', trans('registration::periods.delete_bulk_success'));
     }
 

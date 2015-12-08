@@ -4,23 +4,23 @@
 {{-- Start breadcrumbs --}}
 <ol class="breadcrumb">
   <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
-  <li><a href="{{ route('registration.index') }}">
-  	@lang('registration::registration.header')
+  <li><a href="{{ route('academycycle.index') }}">
+  	@lang('academycycle::academycycle.header')
   	</a>
   </li>
   <li class="active">
-	@lang('registration::years.header')
+	@lang('academycycle::years.header')
   </li>
 </ol>
 {{-- End breadcrumbs --}}
  <div class="x_panel" style="min-height:600px;">
 <div class="x_title">
-    <h2><i class="fa fa-calendar"></i> @lang('registration::years.header')</h2>
+    <h2><i class="fa fa-calendar"></i> @lang('academycycle::years.header')</h2>
 
 <div class="clearfix"></div>
 </div>
-@permission('create.registration.years')
-<a href="{{ route('registration.years.create') }}" class="btn btn-primary pull-left">
+@permission('create.academycycle.years')
+<a href="{{ route('academycycle.years.create') }}" class="btn btn-primary pull-left">
 	<i class="fa fa-plus"></i> @lang('global.new')
 </a>
 @endif
@@ -28,10 +28,10 @@
 <br />
 @if($years->isEmpty())
 <div class="alert alert-info">
-	<i class="fa fa-info"></i> @lang('registration::years.no_items')
+	<i class="fa fa-info"></i> @lang('academycycle::years.no_items')
 </div>
 @else
-{!! Form::open(['route'=>'registration.years.delete-bulk' ,'method'=>'GET']) !!}
+{!! Form::open(['route'=>'academycycle.years.delete-bulk' ,'method'=>'GET']) !!}
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
 	<thead>
 		<tr class="headings">
@@ -39,13 +39,13 @@
 				<input type="checkbox" id='check-all' class="tableflat">
 			</th>
 			<th>
-				@lang('registration::years.name')
+				@lang('academycycle::years.name')
 			</th>
 			<th>
-				<i class="fa fa-calendar"></i> @lang('registration::years.start_at')
+				<i class="fa fa-calendar"></i> @lang('academycycle::years.start_at')
 			</th>
 			<th>
-				<i class="fa fa-calendar"></i> @lang('registration::years.finish_at')
+				<i class="fa fa-calendar"></i> @lang('academycycle::years.finish_at')
 			</th>
 			
 			
@@ -73,15 +73,13 @@
 		</td>
 		
 		<td class=" last">
-			<a href="{{ route('registration.years.edit' ,$year->id)}}" class='btn btn-sm btn-success'>
+			<a href="{{ route('academycycle.years.edit' ,$year->id)}}" class='btn btn-sm btn-success'>
 				<i class="fa fa-edit"></i> @lang('global.edit')
 			</a>
-			<a href="{{ route('registration.years.delete' ,$year->id)}}" class="btn btn-danger btn-sm">
+			<a href="{{ route('academycycle.years.delete' ,$year->id)}}" class="btn btn-danger btn-sm">
 			<i class="fa fa-trash"></i> @lang('global.delete')
 			</a>
-			<a href="{{ route('registration.periods.index' ,$year->id)}}" class="btn btn-info btn-sm">
-			<i class="fa fa-arrows-h"></i> @lang('registration::periods.header')
-			</a>
+			
 			
 	</td>
 	@endforeach

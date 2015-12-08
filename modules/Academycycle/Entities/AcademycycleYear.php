@@ -1,8 +1,8 @@
-<?php namespace Modules\Registration\Entities;
+<?php namespace Modules\Academycycle\Entities;
    
 use Illuminate\Database\Eloquent\Model;
 
-class RegistrationYear extends Model {
+class AcademycycleYear extends Model {
 
     protected $fillable = ['start_at', 'finish_at', 'name'];
 

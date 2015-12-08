@@ -66,7 +66,8 @@ class CreateRegistrationsTable extends Migration {
               $table->string("computer_availability");
               $table->string("reference");
               $table->string("reference_other");
-
+              $table->integer('registration_period_id')->unsigned()->nullable();
+              $table->foreign('registration_period_id')->references('id')->on('registration_periods')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->timestamps();
         });
     }

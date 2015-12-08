@@ -2,11 +2,12 @@
 
 Route::group([
     'prefix'=>'registration' ,
-    'middleware'=>'auth',
     'namespace'=>'Modules\Registration\Http\Controllers'
     ], function () {
 
+        Route::group(['prefix'=>'radmin', 'middleware'=>'auth'], function (){
 
+       
         get('/', [
             'as'=>'registration.index',
             'uses'=>'RegistrationController@index'
@@ -26,19 +27,19 @@ Route::group([
                 'middleware'=>'permission:create.registration.steps'
                 ]);
 
-            get('edit/{step}', [
+            get('edit/{registrationStep}', [
                 'as'=>'registration.steps.edit',
                 'uses'=>'StepsController@edit',
                 'middleware'=>'permission:edit.registration.steps'
                 ]);
 
-            get('show/{step}', [
+            get('show/{registrationStep}', [
                 'as'=>'registration.steps.show',
                 'uses'=>'StepsController@show',
                 'middleware'=>'permission:view.registration.steps'
                 ]);
 
-            get('delete/{step}', [
+            get('delete/{registrationStep}', [
                 'as'=>'registration.steps.delete',
                 'uses'=>'StepsController@delete',
                 'middleware'=>'permission:delete.registration.steps'
@@ -56,7 +57,7 @@ Route::group([
                 'middleware'=>'permission:create.registration.steps'
                 ]);
 
-            post('update/{step}', [
+            post('update/{registrationStep}', [
                 'as'=>'registration.steps.update',
                 'uses'=>'StepsController@update',
                 'middleware'=>'permission:edit.registration.steps'
@@ -64,57 +65,7 @@ Route::group([
     
         });
 
-        Route::group(['prefix'=>'years'], function () {
-
-            get('/', [
-                'as'=>'registration.years.index',
-                'uses'=>'YearsController@index' ,
-                'middleware'=>'permission:view.registration.years'
-                ]);
-
-            get('create', [
-                'as'=>'registration.years.create',
-                'uses'=>'YearsController@create',
-                'middleware'=>'permission:create.registration.years'
-                ]);
-
-            get('edit/{year}', [
-                'as'=>'registration.years.edit',
-                'uses'=>'YearsController@edit',
-                'middleware'=>'permission:edit.registration.years'
-                ]);
-
-            get('show/{year}', [
-                'as'=>'registration.years.show',
-                'uses'=>'YearsController@show',
-                'middleware'=>'permission:view.registration.years'
-                ]);
-
-            get('delete/{year}', [
-                'as'=>'registration.years.delete',
-                'uses'=>'YearsController@delete',
-                'middleware'=>'permission:delete.registration.years'
-                ]);
-
-            get('delete-bulk', [
-                'as'=>'registration.years.delete-bulk' ,
-                'uses'=>'YearsController@deleteBulk',
-                'middleware'=>'permission:delete.registration.years'
-                ]);
-            
-            post('store', [
-                'as'=>'registration.years.store',
-                'uses'=>'YearsController@store',
-                'middleware'=>'permission:create.registration.years'
-                ]);
-
-            post('update/{year}', [
-                'as'=>'registration.years.update',
-                'uses'=>'YearsController@update',
-                'middleware'=>'permission:edit.registration.years'
-                ]);
-    
-        });
+        
 
         Route::group(['prefix'=>'periods'], function () {
 
@@ -130,19 +81,19 @@ Route::group([
                 'middleware'=>'permission:create.registration.periods'
                 ]);
 
-            get('edit/{period}', [
+            get('edit/{registrationPeriod}', [
                 'as'=>'registration.periods.edit',
                 'uses'=>'PeriodsController@edit',
                 'middleware'=>'permission:edit.registration.periods'
                 ]);
 
-            get('show/{period}', [
+            get('show/{registrationPeriod}', [
                 'as'=>'registration.periods.show',
                 'uses'=>'PeriodsController@show',
                 'middleware'=>'permission:view.registration.periods'
                 ]);
 
-            get('delete/{period}', [
+            get('delete/{registrationPeriod}', [
                 'as'=>'registration.periods.delete',
                 'uses'=>'PeriodsController@delete',
                 'middleware'=>'permission:delete.registration.periods'
@@ -160,7 +111,7 @@ Route::group([
                 'middleware'=>'permission:create.registration.periods'
                 ]);
 
-            post('update/{period}', [
+            post('update/{registrationPeriod}', [
                 'as'=>'registration.periods.update',
                 'uses'=>'PeriodsController@update',
                 'middleware'=>'permission:edit.registration.periods'
@@ -170,55 +121,56 @@ Route::group([
 
         Route::group(['prefix'=>'notes'], function () {
 
-            get('/{step}', [
+            get('/{registrationStep}', [
                 'as'=>'registration.notes.index',
                 'uses'=>'NotesController@index' ,
                 'middleware'=>'permission:view.registration.notes'
                 ]);
 
-            get('create/{step}', [
+            get('create/{registrationStep}', [
                 'as'=>'registration.notes.create',
                 'uses'=>'NotesController@create',
                 'middleware'=>'permission:create.registration.notes'
                 ]);
 
-            get('edit/{note}', [
+            get('edit/{registrationNote}', [
                 'as'=>'registration.notes.edit',
                 'uses'=>'NotesController@edit',
                 'middleware'=>'permission:edit.registration.notes'
                 ]);
 
-            get('show/{note}', [
+            get('show/{registrationNote}', [
                 'as'=>'registration.notes.show',
                 'uses'=>'NotesController@show',
                 'middleware'=>'permission:view.registration.notes'
                 ]);
 
-            get('delete/{note}', [
+            get('delete/{registrationNote}', [
                 'as'=>'registration.notes.delete',
                 'uses'=>'NotesController@delete',
                 'middleware'=>'permission:delete.registration.notes'
                 ]);
 
-            get('delete-bulk/{step}', [
+            get('delete-bulk/{registrationStep}', [
                 'as'=>'registration.notes.delete-bulk' ,
                 'uses'=>'NotesController@deleteBulk',
                 'middleware'=>'permission:delete.registration.notes'
                 ]);
             
-            post('store/{step}', [
+            post('store/{registrationStep}', [
                 'as'=>'registration.notes.store',
                 'uses'=>'NotesController@store',
                 'middleware'=>'permission:create.registration.notes'
                 ]);
 
-            post('update/{note}', [
+            post('update/registrationNnote}', [
                 'as'=>'registration.notes.update',
                 'uses'=>'NotesController@update',
                 'middleware'=>'permission:edit.registration.notes'
                 ]);
     
         });
+         });
 
         Route::group(['prefix'=>'registrar'] ,function() {
             get('/' ,['as'=>'registration.registrar.index' ,'uses'=>'RegistrarController@index']);

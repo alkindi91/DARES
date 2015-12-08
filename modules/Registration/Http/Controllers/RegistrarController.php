@@ -2,6 +2,7 @@
 
 use DomDocument;
 use Modules\Lists\Entities\Country;
+use Modules\Registration\Entities\Registration;
 use Modules\Registration\Entities\RegistrationPeriod;
 use Modules\Registration\Http\Requests\RegisterRequest;
 use Pingpong\Modules\Routing\Controller;
@@ -13,10 +14,7 @@ class RegistrarController extends Controller {
 
 		$period = $PeriodModel->orderBy('id' ,'desc')
 		                      ->with('year')
-		                      ->where(function($sql) {
-		                      	$sql->where('start_at','<=' ,date('Y-m-d'))
-		                      	    ->where('finish_at','>=' ,date('Y-m-d'));
-		                      })
+		                      ->current()
 		                      ->first();
        
 		return view('registration::registrar.index' ,compact('period'));
@@ -24,7 +22,14 @@ class RegistrarController extends Controller {
 
 	public function apply(RegistrationPeriod $PeriodModel, Country $CountryModel)
 	{
-		
+		$period = $PeriodModel->orderBy('id' ,'desc')
+		                      ->with('year')
+		                      ->current()
+		                      ->first();
+		if(!$period) {
+			return redirect()->route('welcome');
+		}
+
 		$countries = $CountryModel->all();
 
 		$countries_list = [""=>""]+$countries->lists('name' ,'id')->toArray();
@@ -56,8 +61,23 @@ class RegistrarController extends Controller {
 		return view('registration::registrar.apply' ,compact('period' ,'countries' ,'stay_types' ,'countries_list' ,'references','computer_skills','codes_list' ,'social_job_types','social_status' ,'social_jobs'));
 	}
 
-	public function store(RegisterRequest $request) {
+	public function store(RegisterRequest $request ,Registration $registration ,RegistrationPeriod $PeriodModel) {
 		
+		$registration->fill($request->all());
+
+		$period = $PeriodModel->orderBy('id' ,'desc')
+		                      ->with('year')
+		                      ->current()
+		                      ->first();
+
+        $registration->registration_period_id = $period->id;
+
+		if($registration->save()) {
+			return view('registration::registrar.signup_success');
+		} else {
+			return redirect()->back()->with('error', 'لم يتم تسجيل طلبك ، المرجو التواصل مع الدعم الفني للمزيد من المعلومات');
+		}
+
 	}
 	
 }

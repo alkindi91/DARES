@@ -1,4 +1,4 @@
-<?php namespace Modules\Registration\Http\Requests\Year;
+<?php namespace Modules\Academycycle\Http\Requests\Year;
 
 use Illuminate\Foundation\Http\FormRequest;
 

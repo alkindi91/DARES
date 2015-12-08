@@ -21,13 +21,13 @@ class CreateRegistrationPeriodsTable extends Migration {
 
             $table->boolean('active')->default(1);
 
-            $table->integer('registration_year_id')
+            $table->integer('academycycle_year_id')
                   ->unsigned()
                   ->nullable();
 
-            $table->foreign('registration_year_id')
+            $table->foreign('academycycle_year_id')
                   ->references('id')
-                  ->on('registration_years')
+                  ->on('academycycle_years')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
 

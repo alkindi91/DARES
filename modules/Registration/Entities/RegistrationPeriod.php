@@ -9,4 +9,12 @@ class RegistrationPeriod extends Model {
     public function year() {
     	return $this->belongsTo('\Modules\Registration\Entities\RegistrationYear' ,'registration_year_id');
     }
+
+    public function scopeCurrent($query)
+    {
+    	return $query->where(function($sql) {
+		                      	$sql->where('start_at','<=' ,date('Y-m-d'))
+		                      	    ->where('finish_at','>=' ,date('Y-m-d'));
+		                    });
+    }
 }

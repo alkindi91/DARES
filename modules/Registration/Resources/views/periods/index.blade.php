@@ -8,14 +8,7 @@
   	@lang('registration::registration.header')
   	</a>
   </li>
-  <li><a href="{{ route('registration.index' ,$year->id) }}">
-  	@lang('registration::years.header')
-  	</a>
-  </li>
-  <li><a href="{{ route('registration.years.edit' ,$year->id) }}">
-  	{{ $year->name }}
-  	</a>
-  </li>
+
   <li class="active">
 	@lang('registration::periods.header')
   </li>
@@ -28,7 +21,7 @@
 <div class="clearfix"></div>
 </div>
 @permission('create.registration.periods')
-<a href="{{ route('registration.periods.create' ,$year->id) }}" class="btn btn-primary pull-left">
+<a href="{{ route('registration.periods.create') }}" class="btn btn-primary pull-left">
 	<i class="fa fa-plus"></i> @lang('global.new')
 </a>
 @endif
@@ -39,7 +32,7 @@
 	<i class="fa fa-info"></i> @lang('registration::periods.no_items')
 </div>
 @else
-{!! Form::open(['route'=>['registration.periods.delete-bulk' ,$year->id] ,'method'=>'GET']) !!}
+{!! Form::open(['route'=>['registration.periods.delete-bulk'] ,'method'=>'GET']) !!}
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
 	<thead>
 		<tr class="headings">

@@ -1,10 +1,10 @@
-<?php namespace Modules\Registration\Http\Controllers;
+<?php namespace Modules\Academycycle\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Mail;
-use Modules\Registration\Entities\RegistrationYear as Year;
-use Modules\Registration\Http\Requests\Year\CreateYearRequest;
-use Modules\Registration\Http\Requests\Year\UpdateYearRequest;
+use Modules\Academycycle\Entities\AcademycycleYear as Year;
+use Modules\Academycycle\Http\Requests\Year\CreateYearRequest;
+use Modules\Academycycle\Http\Requests\Year\UpdateYearRequest;
 use Pingpong\Modules\Routing\Controller;
 
 class YearsController extends Controller
@@ -14,14 +14,14 @@ class YearsController extends Controller
     {
         $years = $Year->all();
 
-        return view('registration::years.index' ,compact('years'));
+        return view('academycycle::years.index' ,compact('years'));
     }
 
     public function create(Year $Year)
     {
         $years = $Year->lists('name', 'id')->toArray();
 
-        return view('registration::years.create', compact('years'));
+        return view('academycycle::years.create', compact('years'));
     }
 
     public function edit(Year $year)
@@ -31,7 +31,7 @@ class YearsController extends Controller
 
         $years = $YearModel->whereNotIn('id' ,[$year->id])->lists('name', 'id')->toArray();
 
-        return view('registration::years.edit', compact('year' ,'years'));
+        return view('academycycle::years.edit', compact('year' ,'years'));
     }
 
     public function store(CreateYearRequest $req, Year $Year)
@@ -40,7 +40,7 @@ class YearsController extends Controller
 
         $year->save();
 
-        return redirect()->route('registration.years.index')->with('success', trans('registration::years.create_success', ['name'=>$year->name]));
+        return redirect()->route('academycycle.years.index')->with('success', trans('academycycle::years.create_success', ['name'=>$year->name]));
     }
 
     public function update(UpdateYearRequest $req, Year $year)
@@ -54,8 +54,8 @@ class YearsController extends Controller
         }
 
         return redirect()
-        ->route('registration.years.index')
-        ->with('success', trans('registration::years.update_success', ['name'=>$year->name]));
+        ->route('academycycle.years.index')
+        ->with('success', trans('academycycle::years.update_success', ['name'=>$year->name]));
     }
 
     public function delete(Year $year)
@@ -63,7 +63,7 @@ class YearsController extends Controller
         $year->delete();
 
         return redirect()
-        ->route('registration.years.index', trans('registration::steos.delete_success', ['name'=>$year->name]));
+        ->route('academycycle.years.index', trans('academycycle::steos.delete_success', ['name'=>$year->name]));
     }
 
     public function deleteBulk(Request $req, Year $Year)
@@ -77,7 +77,7 @@ class YearsController extends Controller
         $Year->destroy($ids);
         
         return redirect()
-        ->route('registration.years.index')
-        ->with('success', trans('registration::years.delete_bulk_success'));
+        ->route('academycycle.years.index')
+        ->with('success', trans('academycycle::years.delete_bulk_success'));
     }
 }
