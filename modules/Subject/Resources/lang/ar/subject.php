@@ -1,6 +1,7 @@
 <?php
 return[
 'Subject'	    	 => 'المادة',
+'Subjects'	    	 => 'المواد',
 'Subject_name'  	 => 'اسم المادة',
 'SubjectTerm_id'	 => 'الفصل',
 'Subject_hour'  	 => 'عدد الساعات',
