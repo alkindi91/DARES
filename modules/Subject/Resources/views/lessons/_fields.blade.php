@@ -30,6 +30,9 @@
         <div class="col-md-6 col-sm-6 col-xs-12">
         {!! Form::text('type' ,null,['class'=>'form-control']) !!}
         </div>
+        <div>
+            {!! Form::select('type')!!}
+        </div>
     </div>
     <div class="form-group">
 
