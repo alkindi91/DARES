@@ -2,12 +2,14 @@
 
 Route::group(['prefix' => 'users','middleware'=>'auth', 'namespace' => 'Modules\Users\Http\Controllers'], function()
 {
+
 	get('/', ['as'=>'users.index','uses'=>'UsersController@index' ,'middleware'=>'permission:view.users']);
 	get('create' ,['as'=>'users.create' ,'uses'=>'UsersController@create','middleware'=>'permission:create.users']);
 	get('edit/{uuser}' ,['as'=>'users.edit' ,'uses'=>'UsersController@edit','middleware'=>'permission:edit.users']);
 	get('show/{uuser}' ,['as'=>'users.show' ,'uses'=>'UsersController@show','middleware'=>'permission:view.users']);
 	get('delete/{uuser?}' ,['as'=>'users.delete' ,'uses'=>'UsersController@delete','middleware'=>'permission:delete.users']);
 	get('delete-bulk' ,['as'=>'users.delete-bulk' ,'uses'=>'UsersController@deleteBulk','middleware'=>'permission:delete.users']);
+
 	
 	post('store' ,['as'=>'users.store' ,'uses'=>'UsersController@store','middleware'=>'permission:create.users']);
 	post('update/{uuser}' ,['as'=>'users.update' ,'uses'=>'UsersController@update','middleware'=>'permission:edit.users']);

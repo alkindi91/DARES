@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-@section('content')
 {{-- Start breadcrumbs --}}
 <ol class="breadcrumb">
   <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
