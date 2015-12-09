@@ -12,26 +12,26 @@
 @endif
  <div class="form-group">
         <div class="form-group">
-        {!! Form::label('program_name', 'اسم البرنامج', array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
+        {!! Form::label('program_name', trans('supportprograms::programs.name'), array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">
         {!! Form::text('name' ,null,['class'=>'form-control']) !!}
         </div>
         </div>
     </div>
     <div class="form-group">
-        {!! Form::label('program_discription', 'الوصف', array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
+        {!! Form::label('program_discription', trans('supportprograms::programs.comment'), array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">
         {!! Form::text('comment' ,null,['class'=>'form-control']) !!}
         </div>
     </div>
     <div class="form-group">
-        {!! Form::label('program_link', 'رابط البرنامج', array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
+        {!! Form::label('program_link', trans('supportprograms::programs.program_link'), array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">
         {!! Form::text('program_link' ,null,['class'=>'form-control']) !!}
         </div>
     </div>
     <div class="form-group">
-        {!! Form::label('guide_link', 'رابط الشرح', array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
+        {!! Form::label('guide_link', trans('supportprograms::programs.guide_link'), array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">
         {!! Form::text('guide_link' ,null,['class'=>'form-control']) !!}
         </div>
@@ -47,7 +47,7 @@
             <i class="fa fa-save"></i> @lang('global.save')
             </button>
             <button value="exit" name="submit" type="submit" class="pull-left btn btn-primary">
-            <i class="fa fa-sign-out"></i> حفظ و خروج
+            <i class="fa fa-sign-out"></i> @lang('supportprograms::programs.exit')
 
             </button>
         </div>
