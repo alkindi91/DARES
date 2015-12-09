@@ -19,7 +19,7 @@
     لا يوجد اي دروس.
 </div>
 @else
-{!! Form::open(['route'=>'lessons.deleteBulk']) !!}
+{!! Form::open(['route'=>['lessons.deleteBulk',$sid]]) !!}
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
     <thead>
         <tr class="headings">
@@ -81,7 +81,7 @@
 </tbody>
 </table>
 <div class="bulk-actions">
-<button id='js-delete-all' class="btn btn-danger">
+<button id='js-delete-all' href="{{ route('lessons.deleteBulk' )}}" class="btn btn-danger">
 <i class="fa fa-trash"></i> @lang('global.delete')
 </button>
 </div>

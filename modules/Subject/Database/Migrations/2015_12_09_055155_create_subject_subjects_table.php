@@ -22,6 +22,16 @@ class CreateSubjectSubjectsTable extends Migration {
             $table->longText('description');
             $table->enum('type', array_keys(config('subject.types')));
 
+            $table->Integer('pre_request')
+                  ->unsigned()
+                  ->nullable();
+                  
+            $table->foreign('pre_request')
+                  ->references("id")
+                  ->on('subject_subjects');
+            
+
+
             $table->timestamps();
         });
     }

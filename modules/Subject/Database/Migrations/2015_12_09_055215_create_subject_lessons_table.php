@@ -27,8 +27,8 @@ class CreateSubjectLessonsTable extends Migration {
                   ->onUpdate('cascade');
             
             $table->integer('lesson_order');
-            $table->integer('type');
-            $table->integer('state');
+            $table->enum('type', array_keys(config('subject.lesson_type')));
+            $table->enum('state', array_keys(config('subject.state')));
         
             $table->timestamps();
         });

@@ -1,8 +1,8 @@
-<?php namespace Modules\Subject\Http\Requests\Lesson;
+<?php namespace Modules\Subject\Http\Requests\Subject;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LessonRequest extends FormRequest {
+class SubjectRequest extends FormRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -21,23 +21,21 @@ class LessonRequest extends FormRequest {
 	 */
 	public function rules()
 	{
-		$types = implode(',',array_keys(config("subject.lesson_type")));
-		$state = implode(',',array_keys(config("subject.state")));
+		$types = implode(',',array_keys(config("subject.types")));
 		return [
 			'name'=>'required|min:3|max:255',
-			'lesson_order'=>'required|numeric',
-			'type'=>'required',
-			'state'=>'required',
-			'subject_subject_id'=>'exists:subject_subjects,id'
+			'hour'=>'required|numeric|min:0|max:6',
+			'code'=>'required',
+			'type'=>"required|in:$types"
 		];
 	}
-
 	public function attributes() 
 	{
 		return [
-			'lesson_order'=>'ترتيب الدرس',
-			'type'=>'النوع',
-			'state'=>'الحالة'
+			'name'=>'الاسم',
+			'hour'=>'عدد الساعات',
+			'code'=>'رمز المادة',
+			'type'=>'النوع'
 		];
 	}
 	public function messages() 

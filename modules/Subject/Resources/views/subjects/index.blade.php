@@ -14,8 +14,13 @@
     <i class="fa fa-plus"></i> @lang('global.new')
 </a>
 @endpermission
-
-{!! Form::open(['route'=>'subject.index']) !!}
+<div class="clearfix"></div>
+@if($subjects->isEmpty())
+<div class="alert alert-info">
+    لا توجد مواد.
+</div>
+@else
+{!! Form::open(['route'=>'subject.deleteBulk']) !!}
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
     <thead>
         <tr class="headings">
@@ -91,9 +96,10 @@
 </table>
 <div class="bulk-actions">
 @permission('subject.delete.subject')
-<button id='js-delete-all' href="{{ route('subject.delete' )}}" class="btn btn-danger">
+<button id='js-delete-all' href="{{ route('subject.deleteBulk')}}" class="btn btn-danger">
 <i class="fa fa-trash"></i> @lang('global.delete')
 </button>
 @endpermission
 </div>
+@endif
 @stop

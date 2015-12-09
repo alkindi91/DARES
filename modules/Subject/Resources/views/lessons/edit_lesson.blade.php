@@ -2,7 +2,7 @@
 
 @section('content')
 
-{!! Form::model($lesson,$types,['route'=>['subject.update', $lesson->id],'class'=>'form-horizontal form-label-left'])!!}
+{!! Form::model($lesson,['route'=>['lessons.update', $lesson->id],'class'=>'form-horizontal form-label-left'])!!}
 
 @include('subject::lessons._fields')
 

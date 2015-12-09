@@ -26,7 +26,7 @@ class CreateSubjectElementsTable extends Migration {
 
             $table->integer('element_order');
             $table->string('type');
-            $table->integer('state');
+            $table->enum('state', array_keys(config('subject.state')));
             $table->text('value');
 
 

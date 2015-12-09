@@ -13,7 +13,8 @@ class LessonsController extends Controller {
 	public function index($sid)
 	{
 		//$tasks = SubjectLesson::where('academystructure_subject_id',$id)->paginate(20);
-		$lessons = SubjectLesson::paginate(20);
+		$lessons=SubjectLesson::where('subject_subject_id',$sid)->paginate(20);
+//		$lessons = SubjectLesson::paginate(20);
 		/*
 		OR send model as argument
 
@@ -23,50 +24,59 @@ class LessonsController extends Controller {
 
 	public function create($sid)
 	{
-		return view('subject::lessons.create_lesson',compact('sid'));
+		$types=config('subject.lesson_type');
+		$state=config('subject.state');
+		return view('subject::lessons.create_lesson',compact('sid','types','state'));
 	}
 
 	public function store($sid,SubjectLesson $sub, LessonRequest $req)
 	{
 
 		$input = $req->all();
-	
-		$sub->fill($input)->save();
+			$sub->fill($input)->save();
 
 		$message = 'تم اضافة الدرس بنجاح';
 
 		if(request('submit')=='save')
 		return redirect()->back()->with('success' ,$message);
 		else
-		return redirect()->route('subject.index')->with('success' ,$message);
+		return redirect()->route('lessons.index',$sid)->with('success' ,$message);
 	}
 
 	public function edit($id)
 	{
+		$types=config('subject.lesson_type');
+		$state=config('subject.state');
 		$lesson = SubjectLesson::findOrFail($id);
-		return view('subject::lessons.edit_lesson',compact('lesson'));
+		return view('subject::lessons.edit_lesson',compact('lesson','types','state'));
 	}
 
 	public function update($id,SubjectLesson $sub, LessonRequest $req)
 	{
-		$task = $sub->findOrFail($id);
+		$lesson = $sub->findOrFail($id);
 
     	$input = $req->all();
 
-    	$task->fill($input)->save();
-    	return redirect()->route('subject.index');
+    	$lesson->fill($input)->save();
+    	$message = 'تم تعديل الدرس بنجاح';
+
+		if(request('submit')=='save')
+		return redirect()->back()->with('success' ,$message);
+		else
+		return redirect()->route('lessons.index',$lesson->subject_subject_id)->with('success' ,$message);
+
 	}
 
 	public function delete($id,SubjectLesson $sub, Request $req)
 	{
-		$task = $sub->findOrFail($id);
+		$lesson = $sub->findOrFail($id);
 
     	$input = $req->all();
 
-    	$task->fill($input)->delete();
-    	return redirect()->route('subject.index');
+    	$lesson->fill($input)->delete();
+    	return redirect()->route('lessons.index',$lesson->subject_subject_id);
 	}
-	public function deleteBulk(Request $req ,SubjectLesson $UserModel) {
+	public function deleteBulk($id,Request $req ,SubjectLesson $UserModel) {
 		// if the table_records is empty we redirect to the users index
 		if(!$req->has('table_records')) return redirect()->route('lessons.index');
 
@@ -75,7 +85,7 @@ class LessonsController extends Controller {
 		// we delete all the lessons with the ids $ids
 		$UserModel->destroy($ids);
 		// we redirect to the user index view with a success message
-		return redirect()->route('lessons.index')->with('success');
+		return redirect()->route('lessons.index',$id)->with('success');
 	}
 	
 }

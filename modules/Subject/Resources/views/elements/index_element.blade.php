@@ -10,11 +10,16 @@
     @lang('subject::subject.Add_element')
   </li>
 </ol>
-<a href="{{ route('elements.create',$id) }}" class="btn btn-primary pull-left">
+<a href="{{ route('elements.create',$lessonid) }}" class="btn btn-primary pull-left">
     <i class="fa fa-plus"></i> @lang('global.new')
 </a>
-{{ trans('subject::subject.Lesson_name') }}
-@lang('subject::subject.Lesson_name')
+<div class="clearfix"></div>
+@if($elements->isEmpty())
+<div class="alert alert-info">
+    لا توجد عناصر.
+</div>
+@else
+{!! Form::open(['route'=>['elements.deleteBulk',$lessonid]]) !!}
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
     <thead>
         <tr class="headings">
@@ -34,6 +39,9 @@
                 <i class="fa fa-envelope"></i>
                 @lang('subject::subject.Element_value')
             </th>
+            <th>
+            @lang('subject::subject.Element_state')
+            </th>
             <th class=" no-link last"><span class="nobr">
             <i class="fa fa-cog"></i>
             @lang('global.actions')
@@ -51,13 +59,16 @@
             {{ $element->title }}
         </td>
         <td>
-            {{ $element->order }}
+            {{ $element->element_order }}
         </td>
         <td>
             {{ $element->type }}
         </td>
         <td>
             {{ $element->value}}
+        </td>
+        <td>
+            {{ $element->state}}
         </td>
         <td class=" last">
             <a href="{{ route('elements.edit' ,$element->id)}}" class='btn btn-sm btn-success'>
@@ -72,8 +83,9 @@
 </tbody>
 </table>
 <div class="bulk-actions">
-<button id='js-delete-all' href="{{ route('subject.delete' ,$element->id)}}" class="btn btn-danger">
+<button id='js-delete-all' href="{{ route('elements.deleteBulk')}}" class="btn btn-danger">
 <i class="fa fa-trash"></i> @lang('global.delete')
 </button>
 </div>
+@endif
 @stop
