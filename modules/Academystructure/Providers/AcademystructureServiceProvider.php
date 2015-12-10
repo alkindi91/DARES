@@ -107,7 +107,9 @@ class AcademystructureServiceProvider extends ServiceProvider {
 	public function registerMenu()
 	{
 		$menu = Menu::get('SidebarMenu');
-		$menu->add('الهيكل الاكاديمى' ,['route'=>'as.faculties.index'])->prepend('<i class="fa fa-tree"></i>');
+		$main_academy = $menu->add('الشؤن الاكاديمية' ,['route'=>'as.faculties.index'])->prepend('<i class="fa fa-tree"></i>');
+		$main_academy->add('الهيكل الاكاديميى' ,['route'=>'as.faculties.index'])->prepend('<i class="fa fa-tree"></i>');
+		$main_academy->add('التخصصات الدراسية' ,['route'=>'as.specialties.index'])->prepend('<i class="fa fa-tree"></i>');
 		return array();
 	}
 

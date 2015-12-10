@@ -5,6 +5,7 @@ use Modules\Academystructure\Entities\Faculty;
 use Modules\Academystructure\Entities\Year;
 use Modules\Academystructure\Entities\Term;
 use Modules\Academystructure\Entities\Department;
+use Modules\Academystructure\Entities\Specialty;
 use Modules\Academystructure\Http\Requests\Department\validationRequest;
 use Illuminate\Http\Request;
 
@@ -18,11 +19,13 @@ class DepartmentController extends Controller {
 		return view('academystructure::departments.index' , compact('departments' , 'term'));
 	}
 	
-	public function create(Term $term , Department $department)
+	public function create(Term $term , Department $department ,Specialty $specialty)
 	{		
+		$specialties = $specialty->get();
 	    $menu = $department->menu()->get();
 	    //$menu = $department->menu()->where()->get();
-		return view('academystructure::departments.create',compact('term' , 'menu'));
+		dd($menu->toArray());
+		return view('academystructure::departments.create',compact('term' , 'specialties'));
 	}	
 	public function store(Department $department , validationRequest $request)
 	{
@@ -37,7 +40,7 @@ class DepartmentController extends Controller {
 	/////////////////////////////////////////////////////////////////////////////	
 	public function edit(Department $department)
 	{		
-	    $menu = $department->menu()->get();
+	    //$menu = $department->menu()->get();
 		return view('academystructure::departments.edit',compact('department', 'menu'));
 	}
 	public function update(Department $department , validationRequest $request)
