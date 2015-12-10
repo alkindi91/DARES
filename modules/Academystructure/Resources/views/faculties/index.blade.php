@@ -1,6 +1,19 @@
 @extends('layouts.master')
 
 @section('content') 
+
+{{-- Start breadcrumbs --}}
+<ol class="breadcrumb">
+  <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
+   <li>
+  	{{ trans('academystructure::menu.academy') }}
+  </li>
+  <li class='active'>
+  	{{ trans('academystructure::menu.academystructure') }}	
+  </li>
+</ol>
+{{-- End breadcrumbs --}}
+
 <a href="{{ route('as.faculties.create') }}" class="btn btn-primary pull-left">
 	<i class="fa fa-plus"></i> @lang('academystructure::faculties.create_faculty')
 </a>
