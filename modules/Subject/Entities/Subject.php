@@ -2,7 +2,7 @@
    
 use Illuminate\Database\Eloquent\Model;
 
-class SubjectSubject extends Model {
+class Subject extends Model {
 
     protected $fillable = ['name','hour','code','description','type'];
 
