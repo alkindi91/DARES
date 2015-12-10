@@ -24,7 +24,7 @@ class SubjectsController extends Controller {
 		
 
 		$types=config('subject.types');
-		$pre_request=SubjectSubject::lists('name' ,'id')->toArray();
+		$pre_request=Subject::lists('name' ,'id')->toArray();
 		return view('subject::subjects.create',compact('types','pre_request'));
 
 	}//
@@ -49,7 +49,7 @@ class SubjectsController extends Controller {
 
 		$types=config('subject.types');
 
-		$pre_request=SubjectSubject::lists('name' ,'id')->toArray();
+		$pre_request=Subject::lists('name' ,'id')->toArray();
 		
 		return view('subject::subjects.edit' ,compact('subjects','types','pre_request'));
 
