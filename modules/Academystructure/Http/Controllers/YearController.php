@@ -3,18 +3,21 @@
 use Pingpong\Modules\Routing\Controller;
 use Modules\Academystructure\Entities\Faculty;
 use Modules\Academystructure\Entities\Year;
+use Modules\Academystructure\Entities\Department;
 use Modules\Academystructure\Http\Requests\Year\validationRequest;
 use Illuminate\Http\Request;
 
 class YearController extends Controller {
 
-	public function index(Faculty $faculty)
+	public function index(Faculty $faculty, Department $department)
 	{
 		
 		$faculty->load('years');
 		$years = $faculty->years;
 		
-		return view('academystructure::years.index' , compact('years' , 'faculty'));
+		//$menu = $department->menu()->->where('year_id', '=', $term->id)->get();
+		
+		return view('academystructure::years.index' , compact('years' , 'faculty' , 'menu'));
 	}
 	
 	public function create(Faculty $faculty)

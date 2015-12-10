@@ -11,10 +11,9 @@ use Illuminate\Http\Request;
 
 class DepartmentController extends Controller {
 
-	public function index(Term $term)
-	{
-		$term->load('departments');
-		$departments = $term->departments;
+	public function index(Term $term , Department $department)
+	{		
+	    $departments = $department->menu()->with('parent_department')->where('term_id', '=', $term->id)->get();
 		
 		return view('academystructure::departments.index' , compact('departments' , 'term'));
 	}
@@ -23,8 +22,7 @@ class DepartmentController extends Controller {
 	{		
 		$specialties = $specialty->get();
 	    $menu = $department->menu()->get();
-	    //$menu = $department->menu()->where()->get();
-		//dd($menu->toArray());
+
 		return view('academystructure::departments.create',compact('term' , 'specialties' , 'menu'));
 	}	
 	public function store(Department $department , validationRequest $request)
@@ -38,14 +36,18 @@ class DepartmentController extends Controller {
 		return redirect()->route('as.departments.index' , [$term_id]);
 	}
 	/////////////////////////////////////////////////////////////////////////////	
-	public function edit(Department $department)
+	public function edit(Department $department, Specialty $specialty)
 	{		
-	    //$menu = $department->menu()->get();
-		return view('academystructure::departments.edit',compact('department', 'menu'));
+	    //$department_info = $department->menu()->whereRaw('academystructure_departments.id='.$department->id)->first();		
+	    $menu = $department->menu()->get();
+		$specialties = $specialty->get();
+		
+		return view('academystructure::departments.edit',compact('department' ,'menu', 'specialties'));
 	}
 	public function update(Department $department , validationRequest $request)
 	{
-		$department ->name = $request->input('name');		
+		$department ->spec_id = $request->input('spec_id');
+		$department ->parent_id = $request->input('parent_id');	
 		$department ->save(); 
 		
 		$term_id = $request->input('term_id');	
