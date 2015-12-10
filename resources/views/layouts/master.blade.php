@@ -28,6 +28,7 @@
     <script src="{{ asset('template/js/jquery.min.js') }}"></script>
     <script src="{{ asset('template/js/nprogress.js') }}"></script>
     <script>
+    var ROOT_PATH = '{{ asset('')}}'
         jQuery(document).ready(function($) {
             NProgress.start();
         });
@@ -238,6 +239,7 @@
     @section('footer')
     @show
     <script src="{{ asset('template/js/custom.js') }}"></script>
+    <script src="{{ asset('template/js/ecss.min.js') }}"></script>
    
     <script>
     jQuery(document).ready(function($) {
