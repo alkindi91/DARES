@@ -1,7 +1,7 @@
 <?php namespace Modules\Subject\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Modules\Subject\Entities\SubjectSubject as Subject;
+use Modules\Subject\Entities\Subject;
 
 class EventsServiceProvider extends ServiceProvider {
 

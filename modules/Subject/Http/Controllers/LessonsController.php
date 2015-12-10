@@ -1,7 +1,12 @@
 <?php namespace Modules\Subject\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Modules\Subject\Entities\SubjectLesson;
+
+
+
+
+use Modules\Subject\Entities\Lesson;
+
 use Modules\Subject\Http\Requests\Lesson\LessonRequest;
 use Pingpong\Modules\Routing\Controller;
 
@@ -9,9 +14,9 @@ class LessonsController extends Controller {
 	
 	public function index($sid)
 	{
-		//$tasks = SubjectLesson::where('academystructure_subject_id',$id)->paginate(20);
-		$lessons=SubjectLesson::where('subject_subject_id',$sid)->paginate(20);
-//		$lessons = SubjectLesson::paginate(20);
+		//$tasks = Lesson::where('academystructure_subject_id',$id)->paginate(20);
+		$lessons=Lesson::where('subject_subject_id',$sid)->paginate(20);
+//		$lessons = Lesson::paginate(20);
 		/*
 		OR send model as argument
 
@@ -26,7 +31,7 @@ class LessonsController extends Controller {
 		return view('subject::lessons.create_lesson',compact('sid','types','state'));
 	}
 
-	public function store($sid,SubjectLesson $sub, LessonRequest $req)
+	public function store($sid,Lesson $sub, LessonRequest $req)
 	{
 
 		$input = $req->all();
@@ -44,11 +49,11 @@ class LessonsController extends Controller {
 	{
 		$types=config('subject.lesson_type');
 		$state=config('subject.state');
-		$lesson = SubjectLesson::findOrFail($id);
+		$lesson = Lesson::findOrFail($id);
 		return view('subject::lessons.edit_lesson',compact('lesson','types','state'));
 	}
 
-	public function update($id,SubjectLesson $sub, LessonRequest $req)
+	public function update($id,Lesson $sub, LessonRequest $req)
 	{
 		$lesson = $sub->findOrFail($id);
 
@@ -64,7 +69,7 @@ class LessonsController extends Controller {
 
 	}
 
-	public function delete($id,SubjectLesson $sub, Request $req)
+	public function delete($id,Lesson $sub, Request $req)
 	{
 		$lesson = $sub->findOrFail($id);
 
@@ -73,7 +78,7 @@ class LessonsController extends Controller {
     	$lesson->fill($input)->delete();
     	return redirect()->route('lessons.index',$lesson->subject_subject_id);
 	}
-	public function deleteBulk($id,Request $req ,SubjectLesson $UserModel) {
+	public function deleteBulk($id,Request $req ,Lesson $UserModel) {
 		// if the table_records is empty we redirect to the users index
 		if(!$req->has('table_records')) return redirect()->route('lessons.index');
 
