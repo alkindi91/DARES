@@ -36,6 +36,12 @@
         {!! Form::select('type',$types,null,['class'=>'form-control'])!!}
         </div>
     </div>
+    <div class="form-group">
+        {!! Form::label('pre_request', trans('subject::subject.Subject_pre_request'), array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
+        <div class="col-md-6 col-sm-6 col-xs-12">
+        {!! Form::select('pre_request',[NULL=>'لا يوجد متطلب سابق'] + $pre_request,null,['class'=>'form-control'])!!}
+        </div>
+    </div>
      <div class="form-group">
         {!! Form::label('description', trans('subject::subject.Subject_description'), array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">

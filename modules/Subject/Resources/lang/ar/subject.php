@@ -8,6 +8,7 @@ return[
 'Subject_code'  	 => 'الرمز',
 'Subject_description'=> 'وصف',
 'Subject_type'	     => 'النوع',
+'Subject_pre_request'=> 'متطلب سابق',
 
 'Lesson'        => 'الدروس',
 'Lesson_name'   => 'اسم الدرس',

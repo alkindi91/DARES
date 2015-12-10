@@ -39,7 +39,10 @@
             </th>
             <th>
                 @lang('subject::subject.Subject_type')
-            </th>              
+            </th>
+            <th>
+                @lang('subject::subject.Subject_pre_request')
+            </th>               
             <th>
                 <i class="fa fa-dot-circle-o"></i>
                 @lang('subject::subject.Subject_description')
@@ -60,6 +63,7 @@
         </td>
         <td class="a-center ">
             {{ $subject->name }}
+
         </td>
         <td>
             {{ $subject->code }}
@@ -69,6 +73,11 @@
         </td>
         <td>
             {{ $subject->type }}
+        </td>
+        <td  @if($subject->prerequest) class='info' @endif>
+        @if($subject->prerequest)
+            {{ $subject->prerequest->name }}
+        @endif
         </td>
         <td>
             {{ $subject->description}}

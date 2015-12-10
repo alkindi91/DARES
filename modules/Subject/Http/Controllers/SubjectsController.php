@@ -13,8 +13,10 @@ class SubjectsController extends Controller {
 	// this block for subject
 	public function index()
 	{   	
-		$subjects = SubjectSubject::paginate(20);
-	
+		$subjects = SubjectSubject::with('prerequest' ,'children')->paginate(20);
+		
+
+		
 		return view('subject::subjects.index',compact('subjects'));
 	}
 
@@ -23,8 +25,8 @@ class SubjectsController extends Controller {
 		
 
 		$types=config('subject.types');
-
-		return view('subject::subjects.create',compact('types'));
+		$pre_request=SubjectSubject::lists('name' ,'id')->toArray();
+		return view('subject::subjects.create',compact('types','pre_request'));
 
 	}//
 
@@ -47,8 +49,10 @@ class SubjectsController extends Controller {
 		$subjects = SubjectSubject::findOrFail($id);
 
 		$types=config('subject.types');
+
+		$pre_request=SubjectSubject::lists('name' ,'id')->toArray();
 		
-		return view('subject::subjects.edit' ,compact('subjects','types'));
+		return view('subject::subjects.edit' ,compact('subjects','types','pre_request'));
 
 	}
 	public function update(SubjectSubject $subject,SubjectRequest $req, $id)

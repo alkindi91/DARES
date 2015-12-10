@@ -1,9 +1,6 @@
 <?php namespace Modules\Subject\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-
-
 use Modules\Subject\Entities\SubjectLesson;
 use Modules\Subject\Http\Requests\Lesson\LessonRequest;
 use Pingpong\Modules\Routing\Controller;
