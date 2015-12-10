@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Session;
 
 class SideMenuController extends Controller
 {
@@ -14,14 +15,15 @@ class SideMenuController extends Controller
     
     public function toggle(Request $request)
     {
-        if($request->session()->has('sidebar_hidden')) {
-            $request->session()->forget('sidebar_hidden');
+        Session::put('sidebar' ,'toggeled');
+        if(Session::has('sidebar')) {
+            Session::forget('sidebar');
         } else {
-             $request->session()->put('sidebar_hidden' ,1);
+             Session::put('sidebar' ,'toggeled');
         }
 
         if($request->ajax()) {
-            return response()->json(1);
+            return response()->json(Session::has('sidebar'));
         }
 
         return redirect()->route('welcome');
