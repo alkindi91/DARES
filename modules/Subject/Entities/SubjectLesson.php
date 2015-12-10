@@ -8,6 +8,8 @@ class SubjectLesson extends Model {
     	'name',
         'order',
         'lesson_order',
-        'state'];
+        'state',
+        'subject_subject_id',
+        'type'];
 
 }

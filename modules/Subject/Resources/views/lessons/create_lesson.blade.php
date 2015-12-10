@@ -2,9 +2,10 @@
 
 @section('content')
 
-{!! Form::open(['route'=>'subject.store' ,'class'=>'form-horizontal form-label-left']) !!}
+{!! Form::open(['route'=>['lessons.store',$sid ],'class'=>'form-horizontal form-label-left']) !!}
    
    @include('subject::lessons._fields')
+   {!! Form::hidden('subject_subject_id', $sid) !!}
 
 {!! Form::close() !!}
 @stop

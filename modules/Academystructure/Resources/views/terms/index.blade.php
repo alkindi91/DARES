@@ -27,7 +27,7 @@
 			</th>
 			<th width="25%" class=" no-link last">
             <span class="nobr">
-			<i class="fa fa-table"></i> {{ trans('academystructure::terms.name') }}
+			<i class="fa fa-table"></i> {{ trans('academystructure::departments.name') }}
 			</span>
 			</th>
 	</tr>
@@ -36,24 +36,24 @@
 	@foreach($terms as $term)
 	<tr class="even pointer">
 		<td class="a-center ">
-			<input type="checkbox" class="tableflat" value='{{ $year->id }}' name='table_records[]'>
+			<input type="checkbox" class="tableflat" value='{{ $term->id }}' name='table_records[]'>
 		</td>
 		<td>
 			{{ $term->name }}
 		</td>
 		<td align="center">
-			<a href="{{ route('as.terms.edit' ,$year->id)}}" class='btn btn-sm btn-success'>
+			<a href="{{ route('as.terms.edit' ,$term->id)}}" class='btn btn-sm btn-success'>
 				<i class="fa fa-edit"></i> @lang('global.edit')
 			</a>
 		</td>
 		<td align="center">
-			<a href="{{ route('as.terms.delete' ,$year->id)}}" class="btn btn-danger btn-sm">
+			<a href="{{ route('as.terms.delete' ,$term->id)}}" class="btn btn-danger btn-sm">
 			<i class="fa fa-trash"></i> @lang('global.delete')
 			</a>
 		</td>
 		<td align="center">
-			<a href="{{ route('as.terms.index' ,$year->id)}}" class="btn btn-info btn-md">
-			<i class="fa fa-table"></i> {{ trans('academystructure::terms.name') }}
+			<a href="{{ route('as.departments.index' ,$term->id)}}" class="btn btn-info btn-md">
+			<i class="fa fa-table"></i> {{ trans('academystructure::departments.name') }}
 			</a>
         </td>
     </tr>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="Department.php" server="C:/wamp/www/DARES3/modules/" local="130929022361484978" remote="130929022360000000" Dst="0" />
-<file name="Faculty.php" server="C:/wamp/www/DARES3/modules/" local="130929858032032599" remote="130929858030000000" Dst="0" />
-<file name="Subject.php" server="C:/wamp/www/DARES3/modules/" local="130929854326980683" remote="130929854320000000" Dst="0" />
-<file name="Term.php" server="C:/wamp/www/DARES3/modules/" local="130930036872681700" remote="130930036870000000" Dst="0" />
-<file name="Year.php" server="C:/wamp/www/DARES3/modules/" local="130930006408309237" remote="130930006400000000" Dst="0" />
+<file name="Department.php" server="C:/wamp/www/DARES3/modules/" local="130941189453452140" remote="130941189450000000" Dst="0" />
+<file name="Faculty.php" server="C:/wamp/www/DARES3/modules/" local="130939382776067865" remote="130939382770000000" Dst="0" />
+<file name="Term.php" server="C:/wamp/www/DARES3/modules/" local="130941122579907192" remote="130941122570000000" Dst="0" />
+<file name="Year.php" server="C:/wamp/www/DARES3/modules/" local="130939382776277877" remote="130939382770000000" Dst="0" />
+<file name="specialty.php" server="C:/wamp/www/DARES3/modules/" local="130941265582206455" remote="130941265580000000" Dst="0" />
+<file name="Specialty.php" server="C:/wamp/www/DARES3/modules/" local="130941285462343534" remote="130941285460000000" Dst="0" />
 </dwsync>

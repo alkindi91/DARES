@@ -22,6 +22,9 @@ class AcademystructureServiceProvider extends ServiceProvider {
 		$router->model('asFaculty' ,'\Modules\Academystructure\Entities\Faculty');
 		$router->model('asYear' ,'\Modules\Academystructure\Entities\Year');
 		$router->model('asTerm' ,'\Modules\Academystructure\Entities\Term');
+		$router->model('asDepart' ,'\Modules\Academystructure\Entities\Department');
+		$router->model('asSpec' ,'\Modules\Academystructure\Entities\Specialty');
+		
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();
@@ -104,7 +107,9 @@ class AcademystructureServiceProvider extends ServiceProvider {
 	public function registerMenu()
 	{
 		$menu = Menu::get('SidebarMenu');
-		$menu->add('الهيكل الاكاديمى' ,['route'=>'as.faculties.index']);
+		$main_academy = $menu->add('الشؤن الاكاديمية' ,['route'=>'as.faculties.index'])->prepend('<i class="fa fa-tree"></i>');
+		$main_academy->add('الهيكل الاكاديميى' ,['route'=>'as.faculties.index'])->prepend('<i class="fa fa-tree"></i>');
+		$main_academy->add('التخصصات الدراسية' ,['route'=>'as.specialties.index'])->prepend('<i class="fa fa-tree"></i>');
 		return array();
 	}
 

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubjectTable extends Migration {
+class CreateSubjectSubjectsTable extends Migration {
 
     /**
      * Run the migrations.
@@ -12,17 +12,25 @@ class CreateSubjectTable extends Migration {
      */
     public function up()
     {
-        Schema::create('academystructure_subjects', function(Blueprint $table)
+        Schema::create('subject_subjects', function(Blueprint $table)
         {
+           
             $table->increments('id');
             $table->string('name');
-            $table->integer('term_id')->unsigned()->nullable();
-            $table->foreign('term_id')->references('id')->on('academystructure_terms');
-
             $table->smallInteger('hour');
             $table->string('code');
             $table->longText('description');
-            $table->enum('type', ['شفوى', 'نظرى', 'عملى']);
+            $table->enum('type', array_keys(config('subject.types')));
+
+            $table->Integer('pre_request')
+                  ->unsigned()
+                  ->nullable();
+                  
+            $table->foreign('pre_request')
+                  ->references("id")
+                  ->on('subject_subjects');
+            
+
 
             $table->timestamps();
         });
@@ -35,7 +43,7 @@ class CreateSubjectTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('academystructure_subjects');
+        Schema::drop('subject_subjects');
     }
 
 }

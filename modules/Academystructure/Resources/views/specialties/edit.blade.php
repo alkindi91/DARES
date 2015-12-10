@@ -1,11 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
+{!! Form::model($specialty, ['route'=>['as.specialties.update' ,$specialty->id]  ,'method'=>'POST' , 'class'=>'form-horizontal']) !!}
 
-{!! Form::open(['route'=>'as.terms.store' ,'method'=>'POST' , 'class'=>'form-horizontal']) !!}
+
 
 <div class="ln_solid"></div>
-    @include('academystructure::terms._fields')  
+    @include('academystructure::specialties._fields')  
 <div class="ln_solid"></div>
 
 

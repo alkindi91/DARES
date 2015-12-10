@@ -27,7 +27,7 @@
 <div class="clearfix"></div>
 @if($programs->isEmpty())
  <div class="alert alert-info">
-     <i class="fa fa-info"></i> لا يوجد اي برامج مساندة ، بامكانك اضافة برامج جديدة من الزر جانبه.
+     <i class="fa fa-info"></i>@lang('supportprograms::programs.no_programs')
  </div>
 @else
 {!! Form::open(['route'=>'supportprograms.deletebulk']) !!}
@@ -70,11 +70,11 @@
         </td>
         <td>
         <a href="{{ $program->program_link }}"  class="btn btn-primary btn-sm">
-        <i class="fa fa-download"></i> تنزيل</a>
+        <i class="fa fa-download"></i>@lang('supportprograms::programs.download')</a>
         </td>
         <td>
          <a href="{{ $program->guide_link}}" class='btn btn-primary btn-sm'>
-         <i class="fa fa-download"></i> تنزيل</a>
+         <i class="fa fa-download"></i>@lang('supportprograms::programs.download')</a>
         </td>
         <td class=" last">
 			<a href="{{ route('supportprograms.edit' ,$program->id)}}" class='btn btn-sm btn-success'>

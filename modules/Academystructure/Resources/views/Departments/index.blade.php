@@ -2,28 +2,75 @@
 
 @section('content')
 
-{!! Form::open(['route'=>'faculty.store' ,'method'=>'POST']) !!}
-<div class="form-group">
-    <div class="col-md-12">
-	{!! Form::label('name', 'اسم الكلية', array('class' => 'awesome')) !!}
-	{!! Form::text('name') !!}
-    </div>
-</div>
-{{--
-<div class="ln_solid"></div>
-    @include('Academystructure::faculties._fields')  
-<div class="ln_solid"></div>
---}}
+<a href="{{ route('as.departments.create',$term->id) }}" class="btn btn-primary pull-left">
+	<i class="fa fa-plus"></i> @lang('academystructure::departments.create_term')
+</a>
+<div class="clearfix"></div>
+<table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
+	<thead>
+		<tr class="headings">
+			<th width="5%"> 
+				<input type="checkbox" id='check-all' class="tableflat">
+			</th>
+			<th width="30%">
+				{{ trans('academystructure::departments.name') }}
+			</th>
+			<th width="10%">
+				{{ trans('academystructure::departments.code') }}
+			</th>
+			<th width="20%">
+				{{ trans('academystructure::departments.parent_id') }}
+			</th>
+			<th width="10%" class=" no-link last">
+            <span class="nobr">
+			<i class="fa fa-edit"></i> @lang('global.edit')
+			</span>
+			</th>
+			<th width="10%" class=" no-link last">
+            <span class="nobr">
+			<i class="fa fa-trash"></i> @lang('global.delete')
+			</span>
+			</th>
+<!--			<th width="25%" class=" no-link last">
+            <span class="nobr">
+			<i class="fa fa-table"></i> {{ trans('academystructure::departments.name') }}
+			</span>
+			</th>-->
+	</tr>
+</thead> 
+<tbody>
+	@foreach($departments as $department)
+	<tr class="even pointer">
+		<td class="a-center ">
+			<input type="checkbox" class="tableflat" value='{{ $department->id }}' name='table_records[]'>
+		</td>
+		<td>
+			{{ $department->name }}
+		</td>
+		<td>
+			{{ $department->code }}
+		</td>
+		<td>
+			{{ $department->parent_id }}
+		</td>
+		<td align="center">
+			<a href="{{ route('as.departments.edit' ,$department->id)}}" class='btn btn-sm btn-success'>
+				<i class="fa fa-edit"></i> @lang('global.edit')
+			</a>
+		</td>
+		<td align="center">
+			<a href="{{ route('as.departments.delete' ,$department->id)}}" class="btn btn-danger btn-sm">
+			<i class="fa fa-trash"></i> @lang('global.delete')
+			</a>
+		</td>
+<!--		<td align="center">
+			<a href="{{ route('as.departments.index' ,$term->id)}}" class="btn btn-info btn-md">
+			<i class="fa fa-table"></i> {{ trans('academystructure::departments.name') }}
+			</a>
+        </td>-->
+    </tr>
+	@endforeach
+</tbody>
+</table>
 
-<div class="ln_solid"></div>
-<div class="form-group">
-    <div class="col-md-12">
-        <a href="{{ route('roles.index') }}" class="pull-left btn btn-primary">
-        <i class="fa fa-times"></i> @lang('global.cancel')</a>
-        <button type="submit" class="pull-left btn btn-success">
-        <i class="fa fa-save"></i> @lang('global.save')</button>
-    </div>
-</div>
-
-{!! Form::close() !!}
 @stop

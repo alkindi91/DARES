@@ -22,11 +22,12 @@ class ElementRequest extends FormRequest {
 	
 	public function rules()
 	{
+		$state = implode(',',array_keys(config("subject.state")));
 		return [
 			'title'=>'required|min:3|max:255',
 			'element_order'=>'required|numeric',
-			'type'=>'required|in:0,1',
-			'state' =>'required|in:0,1',
+			'type'=>'required',
+			'state' =>'required',
 			'value' => 'required',
 			'subject_lesson_id'=>'exists:subject_lessons,id'		];
 	}

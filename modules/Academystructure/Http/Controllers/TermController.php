@@ -16,20 +16,20 @@ class TermController extends Controller {
 		
 		return view('academystructure::terms.index' , compact('terms' , 'year'));
 	}
-	
+	/////////////////////////////////////////////////////////////////////////////
 	public function create(Year $year)
 	{
 		return view('academystructure::terms.create',compact('year'));
 	}	
 	public function store(Term $term , validationRequest $request)
 	{
-		$input = $request->all();			
+		$input = $request->all();
 		$term->fill($input)->save();
 		
 		$year_id = $request->input('year_id');
 		return redirect()->route('as.terms.index' , [$year_id]);
 	}
-	
+	/////////////////////////////////////////////////////////////////////////////	
 	public function edit(Term $term)
 	{		
 		return view('academystructure::terms.edit',compact('term'));
@@ -37,13 +37,13 @@ class TermController extends Controller {
 	public function update(Term $term , validationRequest $request)
 	{
 		$term ->name = $request->input('name');		
-		$term ->save();
+		$term ->save(); 
 		
 		$year_id = $request->input('year_id');	
 
 		return redirect()->route('as.terms.index' , [$year_id]);
 	}
-	
+	/////////////////////////////////////////////////////////////////////////////	
 	public function delete(Term $term)
 	{
 		$term->delete();

@@ -8,12 +8,9 @@ class Term extends Model {
 	
 	protected $table = 'academystructure_terms';
 		
-	public function subjects() {
-    	return $this->hasMany('\Modules\Academystructure\Entities\Subject' ,'sub_id');
-    }	
-		
 	public function Departments() {
-    	return $this->hasMany('\Modules\Academystructure\Entities\Department' ,'sub_id');
+    	return $this->hasMany('\Modules\Academystructure\Entities\Department' ,'term_id');
     }
+
 
 }

@@ -15,7 +15,12 @@ class CreateDepartmentTable extends Migration {
         Schema::create('academystructure_departments', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->string('name');
+			
+            $table->integer('spec_id')->unsigned()->nullable();
+            $table->foreign('spec_id')->references('id')->on('academystructure_specialties');
+			
+            $table->integer('parent_id')->nullable();
+			
             $table->integer('term_id')->unsigned()->nullable();
             $table->foreign('term_id')->references('id')->on('academystructure_terms');
 

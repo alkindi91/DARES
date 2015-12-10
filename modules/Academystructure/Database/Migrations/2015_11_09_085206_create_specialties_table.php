@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateYearTable extends Migration {
+class CreateSpecialtiesTable extends Migration {
 
     /**
      * Run the migrations.
@@ -12,13 +12,11 @@ class CreateYearTable extends Migration {
      */
     public function up()
     {
-        Schema::create('academystructure_years', function(Blueprint $table)
+        Schema::create('academystructure_specialties', function(Blueprint $table)
         {
             $table->increments('id');
             $table->string('name');
-
-            $table->integer('faculty_id')->unsigned()->nullable();
-            $table->foreign('faculty_id')->references('id')->on('academystructure_faculties');
+            $table->char('code',5);
 
             $table->timestamps();
         });
@@ -31,7 +29,7 @@ class CreateYearTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('academystructure_years');
+        Schema::drop('academystructure_specialties');
     }
 
 }

@@ -16,29 +16,19 @@ class CreateSubjectLessonsTable extends Migration {
         {
            $table->increments('id');
             $table->string('name');
-            $table->integer('academystructure_subject_id')
+            $table->integer('subject_subject_id')
                   ->unsigned()
                   ->nullable();
 
-            $table->foreign('academystructure_subject_id')
+            $table->foreign('subject_subject_id')
                   ->references("id")
-                  ->on('academystructure_subjects')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
-
-            $table->integer('created_by')
-                  ->unsigned()
-                  ->nullable();
-
-            $table->foreign('created_by')
-                  ->references("id")
-                  ->on('users')
+                  ->on('subject_subjects')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
             
             $table->integer('lesson_order');
-            $table->integer('type');
-            $table->integer('state');
+            $table->enum('type', array_keys(config('subject.lesson_type')));
+            $table->enum('state', array_keys(config('subject.state')));
         
             $table->timestamps();
         });
