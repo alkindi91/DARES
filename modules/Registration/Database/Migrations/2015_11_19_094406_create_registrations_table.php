@@ -27,21 +27,27 @@ class CreateRegistrationsTable extends Migration {
               $table->string("second_name_latin");
               $table->string("first_name_latin");
               // accept values ( f for female ,m for male)
-              $table->enum("gender", ['f', "m"])->nullable();
+              $table->enum("gender", ['f', "m"])->nullable()->comment = 'The gender of the student (m) for male and (f) for female';
+              // 4 : slef paid ,5 with family
+              $table->enum("housing_type", ['1', "2"])->default(1)->comment = "How the student pay for his housing ,4 he pays for it ,5 his familly pays";
+              // who funds the student studies
+              $table->enum("funding_type", ['1'])->default(1)->comment = "How the student fund his studies ,1 for himself";
+              // the statu of the user in higher education
+              $table->boolean('higher_education')->default(0)->comment = 'Does the student have a higher education 0 for no 1 for yes';
               // accept value date eg : 2015-05-05
               $table->date("birthday");
               // accept values : (O for omani , E for non omani)
-              $table->string("nationality_type");
+              $table->string("nationality_type")->comment = "The nationality (O) for omani ,E for and an outsider";
               $table->string("passeport_number");
               // accept value date eg : 2015-05-05
               $table->date("passeport_issued");
                // accept value date eg : 2015-05-05
               $table->date("passeport_expire");
                // accept value date eg : 2015-05-05
-              $table->string("stay_expire");
+              $table->date("stay_expire");
               $table->string("national_id");
                // accept value date eg : 2015-05-05
-              $table->enum("religion" ,['I', 'J', 'C'])->default('I');
+              $table->enum("religion" ,['I', 'J', 'C'])->default('I')->comment = "The religion (I) for islam,(J) for jew and (C) for christian";
               $table->string("contact_region");
               $table->string("contact_postalbox");
               $table->string("contact_street");
@@ -54,6 +60,8 @@ class CreateRegistrationsTable extends Migration {
               $table->string("degree_institution");
               $table->integer("degree_score");
               $table->string("social_job");
+              $table->boolean('email_verified')->default(0)->comment = "check if the student verified his email (0) not verified ,(1) verified";
+              $table->string('verification_token', 100)->comment = 'This used to store the code we use to verify the student email';
               $table->string("social_job_status");
               $table->date("social_job_start");
               $table->float("social_experience");
@@ -71,6 +79,14 @@ class CreateRegistrationsTable extends Migration {
               
               $table->integer('registration_step_id')->unsigned()->nullable();
               $table->foreign('registration_step_id')->references('id')->on('registration_steps')->onDelete('CASCADE')->onUpdate('CASCADE');
+
+              $table->integer('registration_type_id')->unsigned()->nullable();
+              $table->foreign('registration_type_id')
+                    ->references('id')
+                    ->on('registration_types')
+                    ->onDelete('SET NULL')
+                    ->onUpdate('SET NULL');
+
             $table->timestamps();
         });
     }

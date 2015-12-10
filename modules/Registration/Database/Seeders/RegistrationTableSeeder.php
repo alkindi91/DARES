@@ -3,6 +3,7 @@
 use Bican\Roles\Models\Permission;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Modules\Registration\Entities\RegistrationType;
 use Modules\Users\Entities\User;
 
 class RegistrationTableSeeder extends Seeder {
@@ -32,6 +33,15 @@ class RegistrationTableSeeder extends Seeder {
 			['name'=>'حذف ملاحظة من مرحلة قبول' ,'slug'=>'delete.registration.notes','module'=>'registration'],
 			['name'=>'مشاهدة ملاحظات مراحل القبول' ,'slug'=>'view.registration.notes','module'=>'registration'],
 		];
+
+		$types = [
+			['title'=>'دبلوم','code'=>'D'],
+			['title'=>'بكالوريوس','code'=>'B'],
+			['title'=>'تكميلي','code'=>'C'],
+		];
+		
+		foreach($types as $type)
+		RegistrationType::create($type);
 
 		$slugs = array_map(function ($ar) {return $ar['slug'];}, $permissions);
 
