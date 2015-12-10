@@ -2,6 +2,25 @@
 
 @section('content')
 
+{{-- Start breadcrumbs --}}
+<ol class="breadcrumb">
+  <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
+   <li>
+  	{{ trans('academystructure::menu.academy') }}
+  </li>
+  <li class='active'>
+  	<a href="{{ route('as.faculties.index')}}">{{ trans('academystructure::menu.academystructure') }}  </a>	
+  </li>
+  
+  <li class='active'>
+  		{{ $year->name }}
+  </li>  
+  <li class='active'>
+  		{{ $year->name }}
+  </li>
+</ol>
+{{-- End breadcrumbs --}} 
+
 <a href="{{ route('as.terms.create',$year->id) }}" class="btn btn-primary pull-left">
 	<i class="fa fa-plus"></i> @lang('academystructure::terms.create_term')
 </a>
