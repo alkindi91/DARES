@@ -37,7 +37,7 @@
 			</span>
 			</th>-->
 	</tr>
-</thead>
+</thead> 
 <tbody>
 	@foreach($departments as $department)
 	<tr class="even pointer">

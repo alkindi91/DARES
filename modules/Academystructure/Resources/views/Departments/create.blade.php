@@ -20,4 +20,4 @@
 </div>
 
 {!! Form::close() !!}
-@stop
+@stop 

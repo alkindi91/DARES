@@ -24,8 +24,8 @@ class DepartmentController extends Controller {
 		$specialties = $specialty->get();
 	    $menu = $department->menu()->get();
 	    //$menu = $department->menu()->where()->get();
-		dd($menu->toArray());
-		return view('academystructure::departments.create',compact('term' , 'specialties'));
+		//dd($menu->toArray());
+		return view('academystructure::departments.create',compact('term' , 'specialties' , 'menu'));
 	}	
 	public function store(Department $department , validationRequest $request)
 	{
