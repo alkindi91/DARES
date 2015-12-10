@@ -12,13 +12,13 @@
 			<th width="5%"> 
 				<input type="checkbox" id='check-all' class="tableflat">
 			</th>
-			<th width="30%">
+			<th width="25%">
 				{{ trans('academystructure::departments.name') }}
 			</th>
 			<th width="10%">
 				{{ trans('academystructure::departments.code') }}
 			</th>
-			<th width="20%">
+			<th width="45%">
 				{{ trans('academystructure::departments.parent_id') }}
 			</th>
 			<th width="10%" class=" no-link last">
@@ -31,11 +31,6 @@
 			<i class="fa fa-trash"></i> @lang('global.delete')
 			</span>
 			</th>
-<!--			<th width="25%" class=" no-link last">
-            <span class="nobr">
-			<i class="fa fa-table"></i> {{ trans('academystructure::departments.name') }}
-			</span>
-			</th>-->
 	</tr>
 </thead> 
 <tbody>
@@ -45,13 +40,18 @@
 			<input type="checkbox" class="tableflat" value='{{ $department->id }}' name='table_records[]'>
 		</td>
 		<td>
-			{{ $department->name }}
+			{{ $department->sname }}
 		</td>
 		<td>
-			{{ $department->code }}
+			{{ $department->scode }}
 		</td>
 		<td>
-			{{ $department->parent_id }}
+        @if(!empty($department->parent_department))
+			{{ $department->parent_department->fname.' - '.
+              $department->parent_department->yname.' - '.
+              $department->parent_department->tname.' - '.
+              $department->parent_department->sname }}
+        @endif
 		</td>
 		<td align="center">
 			<a href="{{ route('as.departments.edit' ,$department->id)}}" class='btn btn-sm btn-success'>
