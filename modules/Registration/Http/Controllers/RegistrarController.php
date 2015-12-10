@@ -5,6 +5,8 @@ use Modules\Lists\Entities\Country;
 use Modules\Registration\Entities\Registration;
 use Modules\Registration\Entities\RegistrationPeriod;
 use Modules\Registration\Entities\RegistrationStep;
+use Modules\Registration\Entities\RegistrationType;
+use Modules\Registration\Events\RegistrationCreated;
 use Modules\Registration\Http\Requests\RegisterRequest;
 use Pingpong\Modules\Routing\Controller;
 class RegistrarController extends Controller {
@@ -21,7 +23,7 @@ class RegistrarController extends Controller {
 		return view('registration::registrar.index' ,compact('period'));
 	}
 
-	public function apply(RegistrationPeriod $PeriodModel, Country $CountryModel)
+	public function apply(RegistrationPeriod $PeriodModel, Country $CountryModel ,RegistrationType $type)
 	{
 		$period = $PeriodModel->orderBy('id' ,'desc')
 		                      ->with('year')
@@ -30,6 +32,8 @@ class RegistrarController extends Controller {
 		if(!$period) {
 			return redirect()->route('welcome');
 		}
+
+		$registration_types = $type->lists('title', 'id')->toArray();
 
 		$countries = $CountryModel->all();
 
@@ -59,7 +63,7 @@ class RegistrarController extends Controller {
 		                      })
 		                      ->first();
 
-		return view('registration::registrar.apply' ,compact('period' ,'countries' ,'stay_types' ,'countries_list' ,'references','computer_skills','codes_list' ,'social_job_types','social_status' ,'social_jobs'));
+		return view('registration::registrar.apply' ,compact('registration_types', 'period' ,'countries' ,'stay_types' ,'countries_list' ,'references','computer_skills','codes_list' ,'social_job_types','social_status' ,'social_jobs'));
 	}
 
 	public function store(RegisterRequest $request ,
@@ -79,11 +83,14 @@ class RegistrarController extends Controller {
 
         $registration->registration_period_id = $period->id;
         $registration->registration_step_id = $step->id;
-
+        $registration->verification_token = str_random(20);
 		if($registration->save()) {
-			return view('registration::registrar.signup_success');
+			 var_dump($registration->toArray());
+			event(new RegistrationCreated($registration));
+			$registration->delete();
+			//return view('registration::registrar.signup_success');
 		} else {
-			return redirect()->back()->with('error', 'لم يتم تسجيل طلبك ، المرجو التواصل مع الدعم الفني للمزيد من المعلومات');
+			//return redirect()->back()->with('error', 'لم يتم تسجيل طلبك ، المرجو التواصل مع الدعم الفني للمزيد من المعلومات');
 		}
 
 	}

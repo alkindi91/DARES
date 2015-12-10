@@ -45,9 +45,11 @@ class Registration extends Model {
 		'health_disabled_size',
 		'internet_link',
 		'cyber_cafe',
+		'housing_type',
 		'computer_availability',
 		'reference',
 		'reference_other',
+		'registration_type_id',
     ];
 
     public function histories() {
