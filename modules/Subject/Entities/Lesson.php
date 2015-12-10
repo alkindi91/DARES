@@ -2,7 +2,9 @@
    
 use Illuminate\Database\Eloquent\Model;
 
-class SubjectLesson extends Model {
+class Lesson extends Model {
+
+	 protected $table = 'subject_lessons';
 
     protected $fillable = [
     	'name',

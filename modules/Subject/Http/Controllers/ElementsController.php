@@ -1,7 +1,7 @@
 <?php namespace Modules\Subject\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Modules\Subject\Entities\SubjectElement;
+use Modules\Subject\Entities\Element;
 use Modules\Subject\Http\Requests\Element\ElementRequest;
 use Pingpong\Modules\Routing\Controller;
 
@@ -10,7 +10,7 @@ class ElementsController extends Controller {
 	public function index($lessonid)
 	{ 	
 
-		$elements = SubjectElement::where('subject_lesson_id',$lessonid)->paginate(20);
+		$elements = Element::where('subject_lesson_id',$lessonid)->paginate(20);
 		
 		return view('subject::elements.index_element', compact('elements','lessonid'));
 	}
@@ -21,7 +21,7 @@ class ElementsController extends Controller {
 		return view('subject::elements.create_element',compact('lessonid','state')); 
 	}
 
-	public function store(SubjectElement $elelment, ElementRequest $req,$lessonid)
+	public function store(Element $elelment, ElementRequest $req,$lessonid)
 	{
 		$elelment->fill($req->all())->save();
 
@@ -36,13 +36,13 @@ class ElementsController extends Controller {
 
 	public function edit($elementid)
 	{
-		$elements = SubjectElement::findOrFail($elementid);
+		$elements = Element::findOrFail($elementid);
 		$state=config('subject.state');
 		//dd($elements);
 		return view('subject::elements.edit_element',compact('elements','state'));
 	}
 
-	public function update($elementid,SubjectElement $element, ElementRequest $req)
+	public function update($elementid,Element $element, ElementRequest $req)
 	{
 		$element = $element->findOrFail($elementid);
     	
@@ -51,7 +51,7 @@ class ElementsController extends Controller {
     	return redirect()->route('elements.index',$element->subject_lesson_id);
 	}
 
-	public function delete($elementid,SubjectElement $element)
+	public function delete($elementid,Element $element)
 	{
 		$message = 'تم حذف العنصر بنجاح';
 		$element = $element->findOrFail($elementid);
@@ -61,7 +61,7 @@ class ElementsController extends Controller {
     	return redirect()->route('elements.index',$element->subject_lesson_id)->with('success' ,$message);
 	}
 
-		public function deleteBulk($lessonid,Request $req ,SubjectElement $ElementModel) {
+		public function deleteBulk($lessonid,Request $req ,Element $ElementModel) {
 		// if the table_records is empty we redirect to the users index
 		if(!$req->has('table_records')) return redirect()->route('elements.index');
 
