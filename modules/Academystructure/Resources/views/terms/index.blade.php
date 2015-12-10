@@ -19,7 +19,7 @@
   		{{ $year->name }}
   </li>
 </ol>
-{{-- End breadcrumbs --}} 
+{{-- End breadcrumbs --}}
 
 <a href="{{ route('as.terms.create',$year->id) }}" class="btn btn-primary pull-left">
 	<i class="fa fa-plus"></i> @lang('academystructure::terms.create_term')
