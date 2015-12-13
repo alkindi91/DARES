@@ -2,6 +2,32 @@
 
 @section('content')
 
+{{-- Start breadcrumbs --}}
+<ol class="breadcrumb">
+  <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
+   <li>
+  	{{ trans('academystructure::menu.academy') }}
+  </li>
+  <li class='active'>
+  	<a href="{{ route('as.faculties.index')}}">{{ trans('academystructure::menu.academystructure') }}  </a>	
+  </li>
+  
+  <li class='active'>
+  <a href="{{ route('as.years.index' , $breadcrumbs->fid)}}">
+  		{{ $breadcrumbs->fname }}
+  </a>
+  </li>  
+  <li class='active'>
+  <a href="{{ route('as.terms.index' , $breadcrumbs->tid)}}">
+  		{{ $breadcrumbs->yname }}
+  </a>
+  </li> 
+  <li class='active'>
+  		{{ $breadcrumbs->tname }}
+  </li>
+</ol>
+{{-- End breadcrumbs --}}
+
 <a href="{{ route('as.departments.create',$term->id) }}" class="btn btn-primary pull-left">
 	<i class="fa fa-plus"></i> @lang('academystructure::departments.create_term')
 </a>
@@ -12,13 +38,13 @@
 			<th width="5%"> 
 				<input type="checkbox" id='check-all' class="tableflat">
 			</th>
-			<th width="25%">
+			<th width="20%">
 				{{ trans('academystructure::departments.name') }}
 			</th>
 			<th width="10%">
 				{{ trans('academystructure::departments.code') }}
 			</th>
-			<th width="45%">
+			<th width="50%">
 				{{ trans('academystructure::departments.parent_id') }}
 			</th>
 			<th width="10%" class=" no-link last">
@@ -42,7 +68,7 @@
 		<td>
 			{{ $department->sname }}
 		</td>
-		<td>
+		<td align="center">
 			{{ $department->scode }}
 		</td>
 		<td>
