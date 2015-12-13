@@ -14,4 +14,9 @@ class Lesson extends Model {
         'subject_subject_id',
         'type'];
 
+    public function subject_name()
+    {
+    	return $this->belongsTo('\Modules\Subject\Entities\Subject', "subject_subject_id");
+    }
+
 }

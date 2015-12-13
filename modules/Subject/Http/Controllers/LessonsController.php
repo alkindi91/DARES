@@ -1,12 +1,8 @@
 <?php namespace Modules\Subject\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-
-
-
 use Modules\Subject\Entities\Lesson;
-
+use Modules\Subject\Entities\Subject;
 use Modules\Subject\Http\Requests\Lesson\LessonRequest;
 use Pingpong\Modules\Routing\Controller;
 
@@ -15,13 +11,15 @@ class LessonsController extends Controller {
 	public function index($sid)
 	{
 		//$tasks = Lesson::where('academystructure_subject_id',$id)->paginate(20);
+		$subject_name=Subject::lists('name' ,'id')->toArray();
+		//dd($subject_name);
 		$lessons=Lesson::where('subject_subject_id',$sid)->paginate(20);
 //		$lessons = Lesson::paginate(20);
 		/*
 		OR send model as argument
 
 		 */ 
-		return view('subject::lessons.index',compact('lessons','sid'));
+		return view('subject::lessons.index',compact('lessons','sid','subject_name'));
 	}
 
 	public function create($sid)
@@ -76,7 +74,10 @@ class LessonsController extends Controller {
     	$input = $req->all();
 
     	$lesson->fill($input)->delete();
-    	return redirect()->route('lessons.index',$lesson->subject_subject_id);
+
+    	$message = 'تم الحذف بنجاح';
+
+    	return redirect()->route('lessons.index',$lesson->subject_subject_id)->with('success' ,$message);
 	}
 	public function deleteBulk($id,Request $req ,Lesson $UserModel) {
 		// if the table_records is empty we redirect to the users index

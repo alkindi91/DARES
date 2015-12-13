@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Modules\Subject\Entities\Element;
+use Modules\Subject\Entities\Lesson;
 use Modules\Subject\Http\Requests\Element\ElementRequest;
 use Pingpong\Modules\Routing\Controller;
 
@@ -11,14 +12,19 @@ class ElementsController extends Controller {
 	{ 	
 
 		$elements = Element::where('subject_lesson_id',$lessonid)->paginate(20);
+
+		$lesson_name=Lesson::lists('name','id')->toArray();
+
 		
-		return view('subject::elements.index_element', compact('elements','lessonid'));
+
+		return view('subject::elements.index_element', compact('elements','lessonid','lesson_name'));
 	}
 	
 	public function create($lessonid)
 	{
+		$types=config('subject.element_type');
 		$state=config('subject.state');
-		return view('subject::elements.create_element',compact('lessonid','state')); 
+		return view('subject::elements.create_element',compact('lessonid','state','types')); 
 	}
 
 	public function store(Element $elelment, ElementRequest $req,$lessonid)
@@ -38,8 +44,9 @@ class ElementsController extends Controller {
 	{
 		$elements = Element::findOrFail($elementid);
 		$state=config('subject.state');
+		$types=config('subject.element_type');
 		//dd($elements);
-		return view('subject::elements.edit_element',compact('elements','state'));
+		return view('subject::elements.edit_element',compact('elements','state','types'));
 	}
 
 	public function update($elementid,Element $element, ElementRequest $req)
@@ -48,7 +55,9 @@ class ElementsController extends Controller {
     	
     	$element->fill($req->all())->save();
 
-    	return redirect()->route('elements.index',$element->subject_lesson_id);
+    	$message = 'تم التعديل بنجاح';
+
+    	return redirect()->route('elements.index',$element->subject_lesson_id)->with('success' ,$message);
 	}
 
 	public function delete($elementid,Element $element)
