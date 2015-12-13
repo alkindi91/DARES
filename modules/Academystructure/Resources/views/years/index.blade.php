@@ -17,7 +17,11 @@
   </li>
 </ol>
 {{-- End breadcrumbs --}}
-
+{{--
+@permission('sfsf')
+sdfsfsdf
+@endpermission
+--}}
 <a href="{{ route('as.years.create',$faculty->id) }}" class="btn btn-primary pull-left">
 	<i class="fa fa-plus"></i> @lang('academystructure::years.create_year')
 </a>

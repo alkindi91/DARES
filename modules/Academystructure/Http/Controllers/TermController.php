@@ -4,17 +4,19 @@ use Pingpong\Modules\Routing\Controller;
 use Modules\Academystructure\Entities\Faculty;
 use Modules\Academystructure\Entities\Year;
 use Modules\Academystructure\Entities\Term;
+use Modules\Academystructure\Entities\Department;
 use Modules\Academystructure\Http\Requests\Term\validationRequest;
 use Illuminate\Http\Request;
 
 class TermController extends Controller {
 
-	public function index(Year $year)
+	public function index(Year $year, Department $department)
 	{
 		$year->load('terms');
 		$terms = $year->terms;
+		$breadcrumbs = $department->menu()->where('year_id', '=', $year->id)->first();
 		
-		return view('academystructure::terms.index' , compact('terms' , 'year'));
+		return view('academystructure::terms.index' , compact('terms' , 'year' , 'breadcrumbs'));
 	}
 	/////////////////////////////////////////////////////////////////////////////
 	public function create(Year $year)
