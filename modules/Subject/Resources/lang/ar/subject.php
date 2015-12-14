@@ -25,6 +25,7 @@ return[
 'Add_element'   => 'إضافة عنصر',
 'Show_elements' => 'عرض العناصر',
 'active'        => 'نشط',
-'notactive'     => 'غير نشط'
+'notactive'     => 'غير نشط',
+'return'		=>'رجوع'
 ];
 ?>

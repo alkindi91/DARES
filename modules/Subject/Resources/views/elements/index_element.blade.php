@@ -14,6 +14,12 @@
 <a href="{{ route('elements.create',$lessonid) }}" class="btn btn-primary pull-left">
     <i class="fa fa-plus"></i> @lang('global.new')
 </a>
+<div class="x_title">
+    @foreach ($elements as $element )
+        <h2>{{$element->lesson_name->name}}</h2>
+    @endforeach
+<div class="clearfix"></div>
+</div>
 <div class="clearfix"></div>
 @if($elements->isEmpty())
 <div class="alert alert-info">

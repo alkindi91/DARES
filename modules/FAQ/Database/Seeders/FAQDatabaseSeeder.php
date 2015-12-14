@@ -1,9 +1,9 @@
-<?php namespace Modules\Mustafatest\Database\Seeders;
+<?php namespace Modules\Faq\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class MustafaTestDatabaseSeeder extends Seeder {
+class FAQDatabaseSeeder extends Seeder {
 
 	/**
 	 * Run the database seeds.

@@ -96,8 +96,8 @@ class SubjectServiceProvider extends ServiceProvider {
 	public function registerMenu() 
 	{
 		$menu = Menu::get('SidebarMenu');
-		$submenu = $menu->add('المواد' ,['route'=>'subject.index'])->prepend('<i class="fa fa-folder"></i>');
-		$submenu->add('الدروس' ,['route'=>'subject.index'])->prepend('<i class="fa fa-film"></i>');
+		$submenu = $menu->add('المواد' ,['route'=>'subject.index'])->prepend('<i class="fa fa-film"></i>');
+		//$submenu->add('الدروس' ,['route'=>'subject.index'])->prepend('<i class="fa fa-film"></i>');<i class="fa fa-folder"></i>
 	}
 
 }

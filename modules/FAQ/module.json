@@ -1,12 +1,12 @@
 {
-    "name": "MustafaTest",
-    "alias": "mustafatest",
+    "name": "FAQ",
+    "alias": "faq",
     "description": "",
     "keywords": [],
     "active": 1,
     "order": 0,
     "providers": [
-        "Modules\\MustafaTest\\Providers\\MustafaTestServiceProvider"
+        "Modules\\FAQ\\Providers\\FAQServiceProvider"
     ],
     "aliases":{},
     "files": [

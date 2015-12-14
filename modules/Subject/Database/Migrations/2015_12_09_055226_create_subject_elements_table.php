@@ -25,8 +25,9 @@ class CreateSubjectElementsTable extends Migration {
                   ->onUpdate('cascade');
 
             $table->integer('element_order');
-            $table->string('type');
             $table->enum('state', array_keys(config('subject.state')));
+            $table->enum('type', array_keys(config('subject.element_type')));
+
             $table->text('value');
 
 

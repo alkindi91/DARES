@@ -15,7 +15,9 @@ class DepartmentController extends Controller {
 	{		
 	    $departments = $department->menu()->with('parent_department')->where('term_id', '=', $term->id)->get();
 		
-		return view('academystructure::departments.index' , compact('departments' , 'term'));
+		$breadcrumbs = $department->menu()->where('term_id', '=', $term->id)->first();
+		
+		return view('academystructure::departments.index' , compact('departments' , 'term' , 'breadcrumbs'));
 	}
 	
 	public function create(Term $term , Department $department ,Specialty $specialty)
