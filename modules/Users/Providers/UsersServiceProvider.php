@@ -101,14 +101,13 @@ class UsersServiceProvider extends ServiceProvider {
 		$menu = Menu::get('SidebarMenu');
 		$sysmenu = $menu->add('<i class="fa fa-lock"></i> النظام')
 						->data('module' ,'users')
-						->data('permission' ,'view.users')
+						->data('permission' ,['view.roles', 'view.users'])
 						->data('order' ,2);
 		
 
 		
-		$sysmenu->add('المستخدمين' ,['route'=>'users.index'])->prepend('<i class="fa fa-user"></i>');
-
-		$sysmenu->add('المجموعات' ,['route'=>'roles.index'])->prepend('<i class="fa fa-users"></i>');
+		$sysmenu->add('المستخدمين' ,['route'=>'users.index'])->prepend('<i class="fa fa-user"></i>')->data('permission', ['view.users']);
+		$sysmenu->add('المجموعات' ,['route'=>'roles.index'])->prepend('<i class="fa fa-users"></i>')->data('permission', ['view.roles']);
 
 
 		// foreach($menu->items as $item) 

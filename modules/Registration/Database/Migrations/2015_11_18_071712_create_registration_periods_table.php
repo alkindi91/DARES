@@ -20,7 +20,7 @@ class CreateRegistrationPeriodsTable extends Migration {
             $table->date('finish_at');
 
             $table->boolean('active')->default(1);
-
+            $table->char('code', 5);
             $table->integer('academycycle_year_id')
                   ->unsigned()
                   ->nullable();

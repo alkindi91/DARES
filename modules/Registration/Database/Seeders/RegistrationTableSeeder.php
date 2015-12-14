@@ -3,6 +3,8 @@
 use Bican\Roles\Models\Permission;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Modules\Registration\Entities\RegistrationPeriod;
+use Modules\Registration\Entities\RegistrationStep;
 use Modules\Registration\Entities\RegistrationType;
 use Modules\Users\Entities\User;
 
@@ -40,6 +42,24 @@ class RegistrationTableSeeder extends Seeder {
 			['title'=>'تكميلي','code'=>'C'],
 		];
 		
+		$period = [
+			'start_at'=>date('Y-m-d'),
+			'finish_at'=>date("Y-m-d" ,strtotime('+1 month' ,strtotime(date('Y-m-d')))),
+			'code'=>'161',
+			'academycycle_year_id'=>'1',
+		];
+
+		$step = [
+			'name'=>'التحقق من البريد الإلكتروني',
+			'verify_email'=>1,
+			'email_template'=>view('registration::steps.templates.verify_email')
+		];
+
+		RegistrationStep::create($step);
+
+		RegistrationPeriod::whereNotNull('id')->delete();
+		RegistrationPeriod::create($period);
+
 		foreach($types as $type)
 		RegistrationType::create($type);
 

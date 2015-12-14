@@ -11,8 +11,14 @@ class EventServiceProvider extends ServiceProvider {
      * @var array
      */
     protected $listen = [
-        'Modules\Registration\Events\RegistrationCreated' => [
+       'Modules\Registration\Events\RegistrationCreated' => [
             'Modules\Registration\Listeners\EmailVerificationToken',
+        ],
+       'Modules\Registration\Events\RegistrationUpdated' => [
+            'Modules\Registration\Listeners\VerifyCode',
+        ],
+       'Modules\Registration\Events\RegistrarLogin' => [
+            'Modules\Registration\Listeners\LogoutUser',
         ],
     ];
 

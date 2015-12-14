@@ -21,8 +21,9 @@ jQuery(document).ready(function($) {
 		
 	});
 
-	$('.go-full-screen').on('click', '.selector', function(event) {
+	$('body').on('click', '.go-full-screen', function(event) {
 		event.preventDefault();
+		console.log('going full screen');
 		/* Act on the event */
 		launchIntoFullscreen(document.documentElement);
 	});

@@ -99,9 +99,13 @@ class AcademycycleServiceProvider extends ServiceProvider {
 	public function registerMenu() 
 	{
 		$menu = Menu::get('SidebarMenu');
-		$submenu = $menu->add(trans('academycycle::academycycle.header'))->prepend('<i class="fa fa-refresh"></i>');
+		$submenu = $menu->add(trans('academycycle::academycycle.header'))
+		                ->data('permission', ['view.academycycle.years'])
+		                ->prepend('<i class="fa fa-refresh"></i>');
 		
-		$submenu->add(trans('academycycle::years.header'), ['route'=>'academycycle.years.index'])->prepend('<i class="fa fa-calendar"></i>');
+		$submenu->add(trans('academycycle::years.header'), ['route'=>'academycycle.years.index'])
+		        ->data('permission', ['view.academycycle.years'])
+		        ->prepend('<i class="fa fa-calendar"></i>');
 		
 	}
 

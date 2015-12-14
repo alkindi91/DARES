@@ -6,7 +6,8 @@
     "active": 1,
     "order": 4,
     "providers": [
-        "Modules\\Registration\\Providers\\RegistrationServiceProvider"
+        "Modules\\Registration\\Providers\\RegistrationServiceProvider",
+        "Modules\\Registration\\Providers\\EventServiceProvider"
     ],
     "aliases":{},
     "files": [

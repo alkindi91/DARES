@@ -5,6 +5,7 @@
     Generic function to fetch all input tags (name and value) on a page
 Useful when writing automatic login bots/scrapers
 */
+if(!function_exists('get_input_tags')) {
 function get_input_tags($html)
 {
     $post_data = array();
@@ -43,4 +44,31 @@ function get_input_tags($html)
     }
      
     return $post_data;
+}
+}
+
+if(!function_exists('daress_generate_username')) {
+    function daress_generate_username() {
+       
+        do {
+            $first_letter = range('A', 'Z')[mt_rand(0,25)];
+            $second_letter = range('A', 'Z')[mt_rand(0,25)];
+            $numbers = str_pad(mt_rand(1,999),3,'0',STR_PAD_LEFT);
+            $username = $first_letter.$second_letter.$numbers;
+        }while(\Modules\Registration\Entities\Registration::where('username', '!=', $username)->count()>0);
+
+        return $username;
+    }
+}
+
+if(!function_exists('daress_registerd()')){
+    function daress_registerd() {
+        return session()->get('registration');
+    }
+}
+
+if(!function_exists('student_registered()')){
+    function student_registered() {
+        return false;
+    }
 }
