@@ -22,6 +22,7 @@ class SubjectTableSeeder extends Seeder {
 				array('name'=>'إضافة مادة' ,'slug'=>'subject.create.subject','module'=>'subject'),
 				array('name'=>'تعديل مادة' ,'slug'=>'subject.edit.subject','module'=>'subject'),
 				array('name'=>'حذف مادة' ,'slug'=>'subject.delete.subject','module'=>'subject'),
+				array('name'=>'حذف مادة' ,'slug'=>'subject.detail.subject','module'=>'subject'),
 
 				array('name'=>'عرض درس' ,'slug'=>'subject.view.lesson','module'=>'subject'),
 				array('name'=>'إضافة درس' ,'slug'=>'subject.create.lesson','module'=>'subject'),

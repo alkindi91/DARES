@@ -2,9 +2,10 @@
    
 use Illuminate\Database\Eloquent\Model;
 
-class Lesson extends Model {
+class Lesson extends Model
+{
 
-	 protected $table = 'subject_lessons';
+	protected $table = 'subject_lessons';
 
     protected $fillable = [
     	'name',
@@ -13,6 +14,8 @@ class Lesson extends Model {
         'state',
         'subject_subject_id',
         'type'];
+
+    
 
     public function subject_name()
     {

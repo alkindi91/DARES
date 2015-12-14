@@ -7,21 +7,16 @@
     @lang('subject::subject.Lesson')
   </li>
   <li class='active'>
-    @lang('subject::subject.Add_lesson')
+    {{$subject_name['name']}}
   </li>
 </ol>
 <a href="{{ route('lessons.create',$sid) }}" class="btn btn-primary pull-left">
     <i class="fa fa-plus"></i> @lang('global.new')
 </a>
 <a href="{{ route('subject.index') }}" class="btn btn-primary pull-left">
+<i class="fa fa-reply"></i>
 @lang('subject::subject.return')
 </a>
-<div class="x_title">
-    @foreach ($lessons as $lesson )
-        <h2>{{$lesson->subject_name->name}}</h2>
-    @endforeach
-<div class="clearfix"></div>
-</div>
 <div class="clearfix"></div>
 @if($lessons->isEmpty())
 <div class="alert alert-info">
@@ -36,22 +31,24 @@
                 <input type="checkbox" id='check-all' class="tableflat">
             </th>
             <th>
+                <i class="fa fa-pencil-square-o"></i>
                 @lang('subject::subject.Lesson_name')
             </th>
             <th>
-            <i class="fa fa-reorder"></i>
-            @lang('subject::subject.Lesson_order')
+                <i class="fa fa-tasks"></i>
+                @lang('subject::subject.Lesson_order')
             </th>
             <th>
-            @lang('subject::subject.Lesson_type')
+                <i class="fa fa-cubes"></i>
+                @lang('subject::subject.Lesson_type')
             </th>
             <th>
                 <i class="fa fa-dot-circle-o"></i>
                 @lang('subject::subject.Lesson_state')
             </th>
             <th class=" no-link last"><span class="nobr">
-            <i class="fa fa-cog"></i>
-            @lang('global.actions')
+                <i class="fa fa-cog"></i>
+                @lang('global.actions')
             </span>
         </th>
     </tr>

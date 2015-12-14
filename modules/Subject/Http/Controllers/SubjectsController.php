@@ -49,7 +49,7 @@ class SubjectsController extends Controller {
 
 		$types=config('subject.types');
 
-		$pre_request=Subject::lists('name' ,'id')->toArray();
+		$pre_request=Subject::where('id','!=',$subjects->id)->lists('name' ,'id')->toArray();
 		
 		return view('subject::subjects.edit' ,compact('subjects','types','pre_request'));
 
@@ -76,6 +76,13 @@ class SubjectsController extends Controller {
     	return redirect()->route('subject.index')->with('success' ,$message);
 		
 	}
+
+	public function detail($sid)
+	{   	
+		$subjects = Subject::where('id',$sid)->findOrFail($sid)->toArray();
+		//dd($subjects);
+		return view('subject::subjects.detail',compact('subjects'));
+	}
 	
 	public function deleteBulk(Request $req ,Subject $SubjectModel) {
 
@@ -89,6 +96,5 @@ class SubjectsController extends Controller {
 		// we redirect to the user index view with a success message
 		return redirect()->route('subject.index')->with('success');
 	}
-
 	
 }
