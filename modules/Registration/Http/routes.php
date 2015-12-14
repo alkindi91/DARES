@@ -172,10 +172,19 @@ Route::group([
         });
          });
 
-        Route::group(['prefix'=>'registrar'] ,function() {
-            get('/' ,['as'=>'registration.registrar.index' ,'uses'=>'RegistrarController@index']);
-            get('apply' ,['as'=>'registration.registrar.apply' ,'uses'=>'RegistrarController@apply']);
-            post('apply' ,['as'=>'registration.registrar.apply' ,'uses'=>'RegistrarController@store']);
+        Route::group(['prefix'=>'registrar','namespace'=>'Registrar'] ,function() {
+            get('/' ,['as'=>'registration.registrar.index','middleware'=>'authregister' ,'uses'=>'RegistrarController@index']);
+
+            get('verify-email/{token}' ,['as'=>'registration.registrar.verifyEmail','middleware'=>'guestregister' ,'uses'=>'AuthController@verifyEmail']);
+            get('apply' ,['as'=>'registration.registrar.apply' ,'middleware'=>'guestregister','uses'=>'AuthController@apply']);
+            post('apply' ,['as'=>'registration.registrar.apply' ,'middleware'=>'guestregister','uses'=>'AuthController@store']);
+            get('login' ,['as'=>'registration.registrar.login' ,'middleware'=>'guestregister','uses'=>'AuthController@getLogin']);
+            post('login' ,['as'=>'registration.registrar.login' ,'middleware'=>'guestregister','uses'=>'AuthController@postLogin']);
+
+            get('portal',['uses'=>'RegistrarController@portal' ,'as'=>'registration.registrar.portal', 'middleware'=>'authregister']);
+            get('status',['uses'=>'RegistrarController@status' ,'as'=>'registration.registrar.status', 'middleware'=>'authregister']);
+            get('files',['uses'=>'RegistrarController@files' ,'as'=>'registration.registrar.files', 'middleware'=>'authregister']);
+            get('form',['uses'=>'RegistrarController@form' ,'as'=>'registration.registrar.form', 'middleware'=>'authregister']);
         });
 
     });

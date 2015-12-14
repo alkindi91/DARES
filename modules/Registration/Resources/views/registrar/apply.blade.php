@@ -30,13 +30,23 @@
 			<div class='x_content'>
 			<div class='row'>
 					
-					<div class="col-lg-2 col-sm-3 col-xs-12">
+					<div class="col-lg-3 col-sm-4 col-xs-12">
 						<div class="form-group">
 							
 							<label for="registration_type_id">
 								أرغب في دراسة<i class="fa text-danger fa-asterisk"></i>
 							</label>
-							{!! Form::select('registration_type_id', $registration_types,null ,['class'=>'form-control', 'id'=>'registration_type_id', 'required'=>'required']) !!}
+							{!! Form::select('registration_type_id', $registration_types,null ,['class'=>'select2_single form-control', 'id'=>'registration_type_id', 'required'=>'required']) !!}
+						
+						</div>
+					</div>
+					<div class="col-lg-3 col-sm-4 col-xs-12">
+						<div class="form-group">
+							
+							<label for="academystructure_specialty_id">
+								التخصص<i class="fa text-danger fa-asterisk"></i>
+							</label>
+							{!! Form::select('academystructure_specialty_id', $specialties,null ,['class'=>' select2_single form-control', 'id'=>'academystructure_specialty_id', 'required'=>'required']) !!}
 							
 							
 							

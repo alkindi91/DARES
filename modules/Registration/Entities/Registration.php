@@ -50,6 +50,7 @@ class Registration extends Model {
 		'reference',
 		'reference_other',
 		'registration_type_id',
+		'academystructure_specialty_id',
     ];
 
     public function histories() {
@@ -57,4 +58,51 @@ class Registration extends Model {
     		'\Modules\Registration\Entities\RegistrationStep');
     }
 
+    public function getFullnameAttribute() {
+    	return $this->first_name." ".$this->second_name." ".$this->third_name." ".$this->fourth_name." ".$this->last_name;
+    }
+
+    public function getCodeAttribute() {
+    	return $this->username_prefix.$this->username;
+    }
+
+    public function step()
+    {
+    	return $this->belongsTo('\Modules\Registration\Entities\RegistrationStep', 'registration_step_id');
+    }
+
+    public function type()
+    {
+    	return $this->belongsTo('\Modules\Registration\Entities\RegistrationType', 'registration_type_id');
+    }
+
+    public function speciality()
+    {
+    	return $this->belongsTo('\Modules\Academystructure\Entities\Specialty', 'academystructure_specialty_id');
+    }
+
+    public function period()
+    {
+    	return $this->belongsTo('\Modules\Registration\Entities\RegistrationPeriod', 'registration_period_id');
+    }
+
+    public function verifyCode()
+    {
+    	$this->load('type' ,'period','speciality');
+        $prefix  = $this->type->code;
+        $prefix .= $this->speciality->code;
+        $prefix .= $this->period->code;
+        $prefix .= $this->gender;
+        $this->username_prefix = strtoupper($prefix);
+        $this->save();
+    }
+
+    public function scopeLogin($query ,$input)
+    {
+
+    	if(isset($input['username']) && isset($input['password'])) {
+
+    		$query->where('username', $input['username'])->where('contact_mobile', $input['password']);
+    	}
+    }
 }

@@ -20,6 +20,14 @@
     </div>
 </div>
 {{-- Form Input Group --}}
+<div class="form-group {{ $errors->first('code' ,'has-error') }}">
+    {!! Form::label('code' ,trans('registration::periods.code') ,['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        {!! Form::text('code' ,null ,['required'=>'required','placeholder'=>'151' ,'class'=>'form-control col-md-7 col-xs-12 ']) !!}
+        {!! $errors->first('code' ,'<div class="label label-danger">:message</div>') !!}
+    </div>
+</div>
+{{-- Form Input Group --}}
 <div class="form-group {{ $errors->first('academycycle_year_id' ,'has-error') }}">
 	{!! Form::label('academycycle_year_id' ,trans('registration::periods.academycycle_year_id') ,['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
 	<div class="col-md-6 col-sm-6 col-xs-12">

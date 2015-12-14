@@ -232,10 +232,6 @@
     <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('template/js/nicescroll/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('template/js/icheck/icheck.min.js') }}"></script>
-     <!-- PNotify -->
-    <script type="text/javascript" src="{{ asset('template/js/notify/pnotify.core.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('template/js/notify/pnotify.buttons.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('template/js/notify/pnotify.nonblock.js') }}"></script>
     @section('footer')
     @show
     <script src="{{ asset('template/js/custom.js') }}"></script>

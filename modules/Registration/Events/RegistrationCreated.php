@@ -21,7 +21,7 @@ class RegistrationCreated extends Event
      */
     public function __construct(Registration $registration)
     {
-        var_dump($this->registration);
+       
         $this->registration = $registration;
     }
 }

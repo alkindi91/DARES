@@ -59,6 +59,9 @@
             </div>
         </div>
     </div>
+@include('partials.notifications')
+@section('footer')
+@show
 
 </body>
 

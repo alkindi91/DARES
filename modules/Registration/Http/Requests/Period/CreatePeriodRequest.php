@@ -22,6 +22,7 @@ class CreatePeriodRequest extends FormRequest {
 	public function rules()
 	{
 		return [
+		    'code'		=>  'required|min:2|max:5|unique:registration_periods,code',
 			'name'		=>	'required|max:255|min:3',
 			'start_at'	=>	'date|required',
 			'finish_at'	=>	'date|required|after:start_at',
@@ -30,6 +31,7 @@ class CreatePeriodRequest extends FormRequest {
 
 	public function attributes() {
 		return  [
+			'code'		=>	trans('registration::periods.code'),
 			'name'		=>	trans('registration::periods.name'),
 			'start_at'	=>	trans('registration::periods.start_at'),
 			'finish_at'	=>	trans('registration::periods.finish_at'),

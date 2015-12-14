@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserAuthenticated;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -104,9 +105,13 @@ class AuthController extends Controller
         if ($throttles) {
             $this->clearLoginAttempts($request);
         }
+        
+        $user = Auth::user();
+
+        event(new UserAuthenticated($user));
 
         if (method_exists($this, 'authenticated')) {
-            return $this->authenticated($request, Auth::user());
+            return $this->authenticated($request, $user);
         }
 
         return redirect()->intended($this->redirectPath());
