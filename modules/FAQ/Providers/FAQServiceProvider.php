@@ -1,8 +1,8 @@
-<?php namespace Modules\Mustafatest\Providers;
+<?php namespace Modules\Faq\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class MustafaTestServiceProvider extends ServiceProvider {
+class FAQServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -41,10 +41,10 @@ class MustafaTestServiceProvider extends ServiceProvider {
 	protected function registerConfig()
 	{
 		$this->publishes([
-		    __DIR__.'/../Config/config.php' => config_path('mustafatest.php'),
+		    __DIR__.'/../Config/config.php' => config_path('faq.php'),
 		]);
 		$this->mergeConfigFrom(
-		    __DIR__.'/../Config/config.php', 'mustafatest'
+		    __DIR__.'/../Config/config.php', 'faq'
 		);
 	}
 
@@ -55,7 +55,7 @@ class MustafaTestServiceProvider extends ServiceProvider {
 	 */
 	public function registerViews()
 	{
-		$viewPath = base_path('resources/views/modules/mustafatest');
+		$viewPath = base_path('resources/views/modules/faq');
 
 		$sourcePath = __DIR__.'/../Resources/views';
 
@@ -63,7 +63,7 @@ class MustafaTestServiceProvider extends ServiceProvider {
 			$sourcePath => $viewPath
 		]);
 
-		$this->loadViewsFrom([$viewPath, $sourcePath], 'mustafatest');
+		$this->loadViewsFrom([$viewPath, $sourcePath], 'faq');
 	}
 
 	/**
@@ -73,12 +73,12 @@ class MustafaTestServiceProvider extends ServiceProvider {
 	 */
 	public function registerTranslations()
 	{
-		$langPath = base_path('resources/lang/modules/mustafatest');
+		$langPath = base_path('resources/lang/modules/faq');
 
 		if (is_dir($langPath)) {
-			$this->loadTranslationsFrom($langPath, 'mustafatest');
+			$this->loadTranslationsFrom($langPath, 'faq');
 		} else {
-			$this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'mustafatest');
+			$this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'faq');
 		}
 	}
 
