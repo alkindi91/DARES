@@ -2,11 +2,23 @@
    
 use Illuminate\Database\Eloquent\Model;
 
-class Element extends Model {
+use Codesleeve\Stapler\ORM\StaplerableInterface;
+use Codesleeve\Stapler\ORM\EloquentTrait;
 
-	 protected $table = 'subject_elements';
+class Element extends Model implements StaplerableInterface
+{
 
-    protected $fillable = [ 'title','subject_lesson_id','element_order','state', 'value' , 'type' ];
+	use EloquentTrait;
+	
+	protected $table = 'subject_elements';
+
+    protected $fillable = [ 'file','title','subject_lesson_id','element_order','state', 'value' , 'type' ];
+
+    public function __construct(array $attributes = array()) {
+        $this->hasAttachedFile('file');
+
+        parent::__construct($attributes);
+    }
 
     public function lesson_name()
     {

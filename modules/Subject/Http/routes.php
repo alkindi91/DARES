@@ -9,6 +9,7 @@ Route::group(['prefix' => 'subject','middleware'=>'auth', 'namespace' => 'Module
 	get('edit/{sSubject}', ['as'=>'subject.edit','uses'=>'SubjectsController@edit','middleware'=>'permission:subject.edit.subject']);
 	post('update/{sSubjectsSubject}', ['as'=>'subject.update','uses'=>'SubjectsController@update','middleware'=>'permission:subject.edit.subject']);
 	get('delete/{sSubject}', ['as'=>'subject.delete','uses'=>'SubjectsController@delete','middleware'=>'permission:subject.delete.subject']);
+	get('detail/{sSubject}', ['as'=>'subject.detail','uses'=>'SubjectsController@detail','middleware'=>'permission:subject.detail.subject']);
 	
 	post('delete-bulk', ['as'=>'subject.deleteBulk','uses'=>'SubjectsController@deleteBulk','middleware'=>'permission:subject.delete.subject']);
 

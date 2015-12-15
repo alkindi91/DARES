@@ -13,10 +13,7 @@ class ElementsController extends Controller {
 
 		$elements = Element::where('subject_lesson_id',$lessonid)->paginate(20);
 
-		$lesson_name=Lesson::lists('name','id')->toArray();
-
-		
-
+		$lesson_name=Lesson::findOrFail($lessonid)->toArray();
 		return view('subject::elements.index_element', compact('elements','lessonid','lesson_name'));
 	}
 	
@@ -57,7 +54,12 @@ class ElementsController extends Controller {
 
     	$message = 'تم التعديل بنجاح';
 
-    	return redirect()->route('elements.index',$element->subject_lesson_id)->with('success' ,$message);
+		if(request('submit')=='save')
+		return redirect()->back()->with('success' ,$message);
+		else
+		return redirect()->route('elements.index',$element->subject_lesson_id)->with('success' ,$message);
+
+		
 	}
 
 	public function delete($elementid,Element $element)

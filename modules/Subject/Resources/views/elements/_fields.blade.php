@@ -10,7 +10,6 @@
 </ol>
 </div>
 @endif
-
  <div class="form-group">
         <div class="form-group">
         {!! Form::label('title', trans('subject::subject.Element_name'), array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
@@ -28,14 +27,22 @@
     <div class="form-group">
         {!! Form::label('type', trans('subject::subject.Element_type'), array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">
-        {!! Form::select('type',$types,null,['class'=>'form-control'])!!}
+        {!! Form::select('type',$types,null,['class'=>'form-control js-element-type'])!!}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group js-element-file" style="{{ (empty($elements->id) || (!empty($elements->id) and in_array($elements->type, ['PDF', 'فيديو', 'صوت']))) ? 'display:block' : 'display:none'}}">
+   
+    {!! Form::label('file' ,"للرفع" ,['class'=>'control-label col-md-3 col-sm-3 col-xs-12']) !!}
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        {!! Form::file('file',['class'=>'form-control col-md-7 col-xs-12']) !!}
 
+        {!! $errors->first('file' ,'<div class="label label-danger">:message</div>') !!}
+    </div>
+    </div>
+    <div class="form-group">
         {!! Form::label('value', trans('subject::subject.Element_value'), array('class' => 'control-label col-md-3 col-sm-3 col-xs-12')) !!}
         <div class="col-md-6 col-sm-6 col-xs-12">
-        {!! Form::text('value' ,null,['class'=>'form-control']) !!}
+        {!! Form::textarea('value' ,null,['class'=>'form-control']) !!}
         </div>
     </div>
     <div class="form-group">
@@ -65,3 +72,22 @@
             </button>
         </div>
     </div>
+
+@section('footer')
+<script>
+    jQuery(document).ready(function($) {
+
+        $('body').on('change', '.js-element-type', function(event) {
+            event.preventDefault();
+            /* Act on the event */
+            var $this = $(this), $file = $(".js-element-file"), values = ['فيديو' , 'صوت' ,'PDF'], chosen = $this.val();
+            
+            if(values.indexOf(chosen)>=0) {
+                $file.show();
+            } else {
+                $file.hide();
+            }
+        });
+    });
+</script>
+@stop

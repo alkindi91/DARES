@@ -11,7 +11,8 @@ class LessonsController extends Controller {
 	public function index($sid)
 	{
 		//$tasks = Lesson::where('academystructure_subject_id',$id)->paginate(20);
-		$subject_name=Subject::lists('name' ,'id')->toArray();
+		$subject_name=Subject::findOrFail($sid)->toArray();
+		//$lesson_name=Lesson::findOrFail($lessonid)->toArray();
 		//dd($subject_name);
 		$lessons=Lesson::where('subject_subject_id',$sid)->paginate(20);
 //		$lessons = Lesson::paginate(20);
