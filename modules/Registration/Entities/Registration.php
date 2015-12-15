@@ -23,6 +23,12 @@ class Registration extends Model {
 		'passeport_expire',
 		'stay_expire',
 		'national_id',
+		'birth_country_id',
+		'nationality_city_id',
+		'nationality_state_id',
+		'contact_country_id',
+		'contact_city_id',
+		'contact_state_id',
 		'religion',
 		'contact_region',
 		'contact_postalbox',
@@ -32,6 +38,8 @@ class Registration extends Model {
 		'contact_mobile',
 		'contact_phone',
 		'contact_fax',
+		'degree_country_id',
+		'degree_graduation_year',
 		'degree_speciality',
 		'degree_institution',
 		'degree_score',
@@ -46,6 +54,8 @@ class Registration extends Model {
 		'internet_link',
 		'cyber_cafe',
 		'housing_type',
+		'computer_skills',
+		'internet_skills',
 		'computer_availability',
 		'reference',
 		'reference_other',
@@ -86,7 +96,7 @@ class Registration extends Model {
     	return $this->belongsTo('\Modules\Registration\Entities\RegistrationPeriod', 'registration_period_id');
     }
 
-    public function verifyCode()
+    public function generateCode()
     {
     	$this->load('type' ,'period','speciality');
         $prefix  = $this->type->code;
@@ -104,5 +114,25 @@ class Registration extends Model {
 
     		$query->where('username', $input['username'])->where('contact_mobile', $input['password']);
     	}
+    }
+
+    public function birthcountry()
+    {
+    	return $this->belongsTo('\Modules\Lists\Entities\Country', 'birth_country_id');
+    }
+
+    public function contactcountry()
+    {
+    	return $this->belongsTo('\Modules\Lists\Entities\Country', 'contact_country_id');
+    }
+
+    public function contactcity()
+    {
+    	return $this->belongsTo('\Modules\Lists\Entities\City', 'contact_city_id');
+    }
+
+    public function nationalitycity()
+    {
+    	return $this->belongsTo('\Modules\Lists\Entities\City', 'nationality_city_id');
     }
 }

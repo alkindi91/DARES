@@ -17,6 +17,10 @@ class EventServiceProvider extends ServiceProvider {
        'Modules\Registration\Events\RegistrationUpdated' => [
             'Modules\Registration\Listeners\VerifyCode',
         ],
+       'Modules\Registration\Events\RegistrationStepChanged' => [
+            'Modules\Registration\Listeners\AddRegistrationStepToHistory',
+            'Modules\Registration\Listeners\EmailStepChanged',
+        ],
        'Modules\Registration\Events\RegistrarLogin' => [
             'Modules\Registration\Listeners\LogoutUser',
         ],

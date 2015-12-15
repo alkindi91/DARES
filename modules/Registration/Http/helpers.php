@@ -63,7 +63,7 @@ if(!function_exists('daress_generate_username')) {
 
 if(!function_exists('daress_registerd()')){
     function daress_registerd() {
-        return session()->get('registration');
+        return session()->get(config('registration.session_key'));
     }
 }
 

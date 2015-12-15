@@ -26,7 +26,7 @@ class DeleteRegistrationSession
      */
     public function handle(UserAuthenticated $event)
     {
-        session()->forget('registration');
+        session()->forget(config('registration.session_key'));
         
     }
 }

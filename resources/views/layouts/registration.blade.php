@@ -40,7 +40,8 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-
+@section('head')
+@show
 </head>
 
 <body style="background:#F7F7F7;">

@@ -7,6 +7,7 @@ use Modules\Lists\Entities\Country;
 use Modules\Registration\Entities\Registration;
 use Modules\Registration\Entities\RegistrationPeriod;
 use Modules\Registration\Entities\RegistrationStep;
+use Modules\Registration\Entities\RegistrationHistory as History;
 use Modules\Registration\Entities\RegistrationType;
 use Modules\Registration\Events\RegistrationCreated;
 use Modules\Registration\Events\RegistrationUpdated;
@@ -31,9 +32,11 @@ class RegistrarController extends Controller {
 		return view('registration::registrar.portal');
 	}
 
-	public function status()
+	public function status(History $History)
 	{
-		return view('registration::registrar.status');
+		$histories = $History->with('creator', 'step', 'registration')->where('registration_id', daress_registerd()->id)->get();
+
+		return view('registration::registrar.status' ,compact('histories'));
 	}
 
 	public function files()
@@ -41,9 +44,40 @@ class RegistrarController extends Controller {
 		return view('registration::registrar.files');
 	}
 
-	public function form()
+	public function form(RegistrationPeriod $PeriodModel,
+	 Country $CountryModel ,
+	 Specialty $Specialty ,
+	 Registration $Registration ,
+	 RegistrationType $type)
 	{
-		return view('registration::registrar.form');
+		$registration = $Registration->with('contactcountry', 'contactcity', 'birthcountry', 'nationalitycity')->find(daress_registerd()->id);
+
+		$specialties = $Specialty->lists('name', 'id');
+
+		$registration_types = $type->lists('title', 'id')->toArray();
+
+		$countries = $CountryModel->all();
+
+		$countries_list = [""=>""]+$countries->lists('name' ,'id')->toArray();
+
+		$codes_list = [""=>""]+$countries->lists('calling_code' ,'id')->toArray();
+		
+		$stay_types = config('registration.stay_types');
+		
+		$social_status = [""=>""]+config('registration.social_status');
+
+		$social_job_status = [""=>"",'unemployed'=>'بدون عمل' ,'employed'=>'أعمل' ,'retired'=>'متقاعد'];
+
+		$computer_skills = [""=>"",'excellent'=>'ممتاز' ,'great'=>'جيد جدا' ,'very_low'=>'ضعيف جدا' ,'low'=>'ضعيف' ,'good'=>'جيد'];
+
+		$social_job_types = [""=>"",'government'=>'عام' ,'private'=>'خاص' ,'free'=>'حر'];
+
+		$social_jobs = [""=>"",'unemployed'=>'بدون عمل' ,'employed'=>'أعمل' ,'retired'=>'متقاعد'];
+
+		$references = [""=>"",'iiswebsite'=>'موقع كلية العلوم الشرعية','iisewebsite'=>'موقع مركز التعليم عن بعد','iisfriend'=>'صديق يدرس بالكلية','iisefriend'=>'صديق يدرس بمركز التعليم عن بعد','other'=>'أخرى'];
+
+		return view('registration::registrar.form' ,compact('registration','specialties','registration_types', 'period' ,'countries' ,'stay_types' ,'countries_list' ,'references','computer_skills','codes_list' ,'social_job_types','social_status' ,'social_jobs'));
+
 	}
 
 }

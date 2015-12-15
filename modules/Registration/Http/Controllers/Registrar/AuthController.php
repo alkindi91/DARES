@@ -1,9 +1,17 @@
 <?php namespace Modules\Registration\Http\Controllers\Registrar;
 
 use Illuminate\Support\Facades\Auth;
+use Modules\Academystructure\Entities\Specialty;
+use Modules\Lists\Entities\Country;
 use Modules\Registration\Entities\Registration;
 use Modules\Registration\Entities\RegistrationPeriod;
+use Modules\Registration\Entities\RegistrationStep;
+use Modules\Registration\Entities\RegistrationType;
 use Modules\Registration\Events\RegistrarLogin;
+use Modules\Registration\Events\RegistrationCreated;
+use Modules\Registration\Events\RegistrationStepChanged;
+use Modules\Registration\Events\RegistrationUpdated;
+use Modules\Registration\Http\Requests\RegisterRequest;
 use Modules\Registration\Http\Requests\Registrar\LoginRequest;
 use Pingpong\Modules\Routing\Controller;
 
@@ -23,7 +31,7 @@ class AuthController extends Controller {
 
 		event(new RegistrarLogin($registration));
 		
-		session()->put('registration', $registration);
+		session()->put(config('registration.session_key'), $registration);
 
 		return redirect()->route('registration.registrar.index');
 	}
@@ -39,6 +47,12 @@ class AuthController extends Controller {
 		                      ->first();
        
 		return view('registration::registrar.auth.login' ,compact('period'));
+	}
+
+	public function getLogout()
+	{
+		session()->forget(config('registration.session_key'));
+		return redirect()->route('registration.registrar.index');
 	}
 
 	public function apply(RegistrationPeriod $PeriodModel,
@@ -107,15 +121,17 @@ class AuthController extends Controller {
         $registration->username = $username;
         $registration->registration_period_id = $period->id;
         $registration->registration_step_id = $step->id;
-        $registration->verification_token = str_random(20);
+        
+
 		if($registration->save()) {
 			
 			event(new RegistrationCreated($registration));
 			event(new RegistrationUpdated($registration));
-			// $registration->delete();
-			//return view('registration::registrar.signup_success');
+			event(new RegistrationStepChanged($registration, ['comment'=>'تفعيل البريد الإلكتروني']));
+
+			return view('registration::registrar.signup_success');
 		} else {
-			//return redirect()->back()->with('error', 'لم يتم تسجيل طلبك ، المرجو التواصل مع الدعم الفني للمزيد من المعلومات');
+			return redirect()->back()->with('error', 'لم يتم تسجيل طلبك ، المرجو التواصل مع الدعم الفني للمزيد من المعلومات');
 		}
 
 	}
@@ -129,10 +145,13 @@ class AuthController extends Controller {
 		if($registration->email_verified) {
 			return redirect()->route('registration.registrar.index')->with('success', trans('registration::registrar.already_verified_email'));
 		}
+		$nextStep = $registration->step->children()->first();
 		
 		$registration->email_verified = 1;
-
+		$registration->registration_step_id = $nextStep->id;
 		$registration->save();
+		// event(new RegistrationUpdated($registration));
+		event(new RegistrationStepChanged($registration, ['comment'=>'يرجى تحميل ملفاتك']));
 
 		return redirect()->route('registration.registrar.index')->with('success', trans('registration::registrar.email_verified', ['name'=>$registration->fullname]));
 	}

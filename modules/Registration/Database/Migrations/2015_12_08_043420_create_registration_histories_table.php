@@ -18,10 +18,22 @@ class CreateRegistrationHistoriesTable extends Migration {
             
             $table->string('comment', 1000);
 
-            $table->integer('registration_id')->unsigned()->nullable();
-            $table->foreign('registration_id')->references('id')->on('registrations')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->integer('registration_id')
+                  ->unsigned()
+                  ->index()
+                  ->nullable();
 
-            $table->integer('registration_step_id')->unsigned()->nullable();
+            $table->foreign('registration_id')
+                  ->references('id')
+                  ->on('registrations')
+                  ->onDelete('CASCADE')
+                  ->onUpdate('CASCADE');
+
+            $table->integer('registration_step_id')
+                  ->unsigned()
+                  ->index()
+                  ->nullable();
+
             $table->foreign('registration_step_id')
                   ->references('id')
                   ->on('registration_steps')
@@ -33,6 +45,16 @@ class CreateRegistrationHistoriesTable extends Migration {
                   ->references('id')
                   ->on('registration_step_notes')
                   ->onDelete('CASCADE')
+                  ->onUpdate('CASCADE');
+
+            $table->integer('created_by')
+                  ->index()
+                  ->unsigned()
+                  ->nullable();
+
+            $table->foreign('created_by')->references('id')
+                  ->on('users')
+                  ->onDelete('SET NULL')
                   ->onUpdate('CASCADE');
 
             $table->timestamps();

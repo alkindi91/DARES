@@ -4426,6 +4426,7 @@ ul.messages {
 
 ul.messages li,
 .tasks li {
+    list-style-type: none;
     border-bottom: 1px dotted #e6e6e6;
     padding: 8px 0;
 }
@@ -4434,7 +4435,7 @@ ul.messages li img.avatar,
 img.avatar {
     height: 32px;
     width: 32px;
-    float: left;
+    float: right;
     display: inline-block;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
@@ -4445,13 +4446,13 @@ img.avatar {
 }
 
 ul.messages li .message_date {
-    float: right;
-    text-align: right;
+    float: left;
+    text-align: left;
 }
 
 ul.messages li .message_wrapper {
-    margin-left: 50px;
-    margin-right: 40px;
+    margin-left: 40px;
+    margin-right: 50px;
 }
 
 ul.messages li .message_wrapper h4.heading {
@@ -4465,7 +4466,7 @@ ul.messages li .message_wrapper h4.heading {
 ul.messages li .message_wrapper blockquote {
     padding: 0px 10px;
     margin: 0;
-    border-left: 5px solid #eee;
+    border-right: 5px solid #eee;
 }
 
 ul.user_data li {
