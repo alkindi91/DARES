@@ -4,6 +4,7 @@ Route::group(['prefix' => 'questionbank', 'namespace' => 'Modules\Questionbank\H
 {
     get('/', ['as'=>' .index','uses'=>'QuestionbankController@index']);
     get('index_lesson/{qquestionbank}', ['as'=>'questionbank.index_lesson','uses'=>'QuestionbankController@index_lesson']);
+    get('questionlist/{qblessonid}', ['as'=>'questionbank.questionlist','uses'=>'QuestionbankController@questionlist']);
 
     get('create/{qblessonid}', ['as'=>'questionbank.create','uses'=>'QuestionbankController@create']);
     post('store', ['as'=>'questionbank.store','uses'=>'QuestionbankController@store']);

@@ -1,6 +1,9 @@
 <?php namespace Modules\Questionbank\Http\Controllers;
 
 
+use Illuminate\Http\Request;
+use Modules\Questionbank\Entities\choice;
+use Modules\Questionbank\Entities\question;
 use Modules\Subject\Entities\Lesson;
 use Modules\Subject\Entities\Subject;
 use Pingpong\Modules\Routing\Controller;
@@ -14,12 +17,17 @@ class QuestionbankController extends Controller {
 		return view('questionbank::index',compact('subjects'));
 	}
 
-public function index_lesson ($subjectid){
+	public function index_lesson ($subjectid){
 
 		$lessons=Lesson::where('subject_subject_id',$subjectid)->paginate(20);
 		return view('questionbank::lesson',compact('lessons'));
 
-}
+	}
+
+	public function questionlist($lessonid){
+		$questions = question::paginate(20);
+		return view('questionbank::questionlist',compact('questions'));
+	}
 
 	public function create($id)
 
@@ -30,9 +38,18 @@ public function index_lesson ($subjectid){
 		return view('questionbank::create', compact('id','type','difficulty','level'));
 	}
 
-	public function store()
+	public function store(question $question, Request $req)
 	{
-		return view('questionbank::index');
+		
+	$question->fill($req->all())->save();
+
+	
+		$message = 'تم اضافة السؤال بنجاح';
+		if(request('submit')=='save')
+		return redirect()->back()->with('success' ,$message);
+		else
+		return redirect()->route('elements.index',array('id'=>$lessonid))->with('success' ,$message);
+
 	}
 
 	public function update()

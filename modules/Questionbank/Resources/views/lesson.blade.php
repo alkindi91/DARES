@@ -69,7 +69,7 @@
            <a href="{{ route('questionbank.create',$lesson->id) }}" class="btn btn-primary pull-md">
              <i class="fa fa-plus"></i> إضافة سؤال جديد 
             </a>
-             <a href="{{ route('elements.index' ,$lesson->id)}}" class="btn btn-info btn-md">
+             <a href="{{ route('questionbank.questionlist' ,$lesson->id)}}" class="btn btn-info btn-md">
             <i class="fa fa-table"></i> عرض اﻷسئلة 
             </a>
         </td>

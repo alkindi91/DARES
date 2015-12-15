@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 
 class choice extends Model {
-
-    protected $fillable = [];
+protected $table = 'questionbank_choices';
+    protected $fillable = ['choice','question_id','isactive'];
 
 }
