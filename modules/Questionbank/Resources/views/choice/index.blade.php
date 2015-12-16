@@ -4,78 +4,63 @@
 <ol class="breadcrumb">
   <li><a href="{{ route('welcome')}}">@lang('global.home')</a></li>
    <li>
-   
+    @lang('subject::subject.Subjects')
   </li>
   
 </ol>
 
 
 <div class="clearfix"></div>
-@if($questions->isEmpty())
+@if($choices->isEmpty())
 <div class="alert alert-info">
     لا توجد مواد.
 </div>
 @else
+{!! Form::open(['route'=>'choice.deleteBulk']) !!}
 <table  class="table table-hover table-striped table-bordered responsive-utilities bulk_action jambo_table">
     <thead>
         <tr class="headings">
             <th>
                 <input type="checkbox" id='check-all' class="tableflat">
             </th>
-            
             <th>
-             السؤال
+               الاجابة
             </th>
-            
             <th>
-           نوع السؤال
+            حالة الإجابة
             </th>
-            
-            <th>
-            درجة الصعوبة
-              </th>
            
-            <th>
-            <i class="fa fa-reorder"></i>
-            القياس
-            </th>
            
             <th class=" no-link last"><span class="nobr">
             <i class="fa fa-cog"></i>
-           العمليات
+            @lang('global.actions')
             </span>
         </th>
     </tr>
 </thead>
 <tbody>
 
-    @foreach($questions as $question)
+    @foreach($choices as $choice)
     <tr class="even pointer">
     <td class="a-center ">
-            <input type="checkbox" class="tableflat" value='{{ $question->id }}' name='table_records[]'>
+            <input type="checkbox" class="tableflat" value='{{ $choice->id }}' name='table_records[]'>
         </td>
         <td class="a-center ">
-            {{ $question->question }}
+            {{ $choice->choice }}
 
         </td>
         <td>
-            {{ $question->type }}
-        </td>
-        <td>
-            {{ $question->difficulty }}
-        </td>
-        <td>
-            {{ $question->level }}
+            {{ $choice->isactive }}
         </td>
        
         <td class=" last">
          
-            <a href="{{ route('choice.index' ,$question->id)}}" class="btn btn-success btn-md">
-            <i class="fa fa-table"></i> عرض الإجابات
+            <a href="{{ route('choice.edit',$choice->id)}}" class="btn btn-success btn-md">
+            <i class="fa fa-table"></i> تعديل
             </a>
 
-            <a href="{{ route('choice.create',$question->id) }}" class="btn btn-primary pull-md">
-   			 <i class="fa fa-plus"></i> إضافة اجابة جديدة 
+            <a href="{{ route('choice.delete',$choice->id) }}" class="btn btn-danger pull-md">
+   			 <i class="fa fa-plus"></i> حذف
 			</a>
         </td>
     @endforeach
@@ -83,7 +68,9 @@
 </tbody>
 </table>
 <div class="bulk-actions">
-
+<button id='js-delete-all' href="{{ route('choice.deleteBulk')}}" class="btn btn-danger">
+<i class="fa fa-trash"></i> @lang('global.delete')
+</button>
 </div>
 @endif
 @stop

@@ -23,9 +23,16 @@ class QuestionbankController extends Controller {
 		return view('questionbank::lesson',compact('lessons'));
 
 	}
+	public function questionlistsub($id){
+		$question = Subject::with('questions')->find($id);
 
+		//var_dump($subject->toArray());
+		
+		return view('questionbank::questionlistsub',compact('question'));		
+
+	}
 	public function questionlist($lessonid){
-		$questions = question::paginate(20);
+		$questions = question::paginate(20)->where('lesson_id',$lessonid);
 		return view('questionbank::questionlist',compact('questions'));
 	}
 
@@ -65,7 +72,7 @@ class QuestionbankController extends Controller {
 
 	public function delete()
 	{
-		return view('questionbank::index');
+		
 	}
 
 	

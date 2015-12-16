@@ -26,7 +26,9 @@
             <th>
              السؤال
             </th>
-            
+             <th>
+             المادة
+            </th>
             <th>
            نوع السؤال
             </th>
@@ -58,6 +60,11 @@
             {{ $question->question }}
 
         </td>
+
+         <td>
+            {{ $question->level }}
+        </td>
+
         <td>
             {{ $question->type }}
         </td>

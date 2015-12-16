@@ -19,5 +19,11 @@ class Subject extends Model {
    	return $this->hasMany('\Modules\Subject\Entities\Subject' ,'pre_request');
    }
 
+   public function questions()
+   {
+      return $this->hasManyThrough('\Modules\Questionbank\Entities\Question',
+        '\Modules\Subject\Entities\Lesson','subject_subject_id', 'lesson_id');
+   }
+
    
 }

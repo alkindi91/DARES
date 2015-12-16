@@ -61,7 +61,7 @@
        
         <td class=" last">
          
-            <a href="{{ route('lessons.index' ,$subject->id)}}" class="btn btn-success btn-md">
+            <a href="{{ route('questionbank.questionlistsub' ,$subject->id)}}" class="btn btn-success btn-md">
             <i class="fa fa-table"></i> عرض اﻷسئلة
             </a>
 
