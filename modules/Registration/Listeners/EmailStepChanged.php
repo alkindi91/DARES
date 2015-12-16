@@ -6,9 +6,9 @@ namespace Modules\Registration\Listeners;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Mail;
-use Modules\Registration\Events\RegistrationCreated;
+use Modules\Registration\Events\RegistrationStepChanged;
 
-class EmailVerificationToken
+class EmailStepChanged
 {
     /**
      * Create the event listener.
@@ -23,17 +23,18 @@ class EmailVerificationToken
     /**
      * Handle the event.
      *
-     * @param  RegistrationCreated  $event
+     * @param  RegistrationStepChanged  $event
      * @return void
      */
-    public function handle(RegistrationCreated $event)
+    public function handle(RegistrationStepChanged $event)
     {
-        if(empty($registration->verification_token)) {
-        $registration->verification_token = md5(uniqid(rand(), true));
         $registration = $event->registration;
+        
+        if(empty($registration->email_template)) return true;
+
         $registration->load('step', 'period', 'period.year', 'type');
         $step = $registration->step;
-        $registration->generateCode();
+        
         $template = str_replace(['{name}', '{tracking_number}','{password}','{username}', '{year}','{nid}'],
          [
              $registration->fullname,
@@ -46,7 +47,6 @@ class EmailVerificationToken
          $step->email_template);
 
         $data = [
-        'verification_token'=>$registration->verification_token,
         'fullname'          =>$registration->fullname,
         'template'          =>$template
         ];
@@ -54,12 +54,11 @@ class EmailVerificationToken
        
 
         if(!empty($registration)) {
-            Mail::send('registration::emails.email_verification_token' ,$data, function($message) use($registration){
-            	$message->to($registration->contact_email)
+            Mail::send('registration::emails.email_step' ,$data, function ($message) use ($registration, $step) {
+            	$message->to($registration->contact_email, $registration->fullname)
                         ->from('postmaster@sandbox7261de34372449bc8d2cd758a277cdc5.mailgun.org')
-                        ->subject(trans('registration::registrar.email_verification'));
+                        ->subject($step->name);
             });
         }
-    }
     }
 }

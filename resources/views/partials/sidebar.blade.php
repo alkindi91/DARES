@@ -43,8 +43,14 @@
     <a data-toggle="tooltip" data-placement="top" title="قفل">
         <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
     </a>
-    <a data-toggle="tooltip" href='{{ route('logout')}}' data-placement="top" title="تسجيل الخروج">
+    @if(daress_registerd())
+    <a data-toggle="tooltip" href='{{ route('registration.registrar.logout')}}' data-placement="top" title="تسجيل الخروج">
         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
     </a>
+    @else
+     <a data-toggle="tooltip" href='{{ route('logout')}}' data-placement="top" title="تسجيل الخروج">
+        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+    </a>
+    @endif
 </div>
 <!-- /menu footer buttons -->

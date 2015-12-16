@@ -179,6 +179,7 @@ Route::group([
             get('apply' ,['as'=>'registration.registrar.apply' ,'middleware'=>'guestregister','uses'=>'AuthController@apply']);
             post('apply' ,['as'=>'registration.registrar.apply' ,'middleware'=>'guestregister','uses'=>'AuthController@store']);
             get('login' ,['as'=>'registration.registrar.login' ,'middleware'=>'guestregister','uses'=>'AuthController@getLogin']);
+            get('logout' ,['as'=>'registration.registrar.logout' ,'middleware'=>'authregister','uses'=>'AuthController@getLogout']);
             post('login' ,['as'=>'registration.registrar.login' ,'middleware'=>'guestregister','uses'=>'AuthController@postLogin']);
 
             get('portal',['uses'=>'RegistrarController@portal' ,'as'=>'registration.registrar.portal', 'middleware'=>'authregister']);

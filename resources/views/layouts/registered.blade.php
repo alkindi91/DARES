@@ -62,7 +62,7 @@
                         <div class="nav toggle">
                             <a id="menu_toggle" href="{{ route('ajax.togglesidebar')}}"><i class="fa fa-bars"></i></a>
                         </div>
-
+-
                         <ul class="nav navbar-nav navbar-left">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -73,7 +73,7 @@
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-left">
-                                    <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out pull-left"></i> @lang('global.logout')</a>
+                                    <li><a href="{{ route('registration.registrar.logout') }}"><i class="fa fa-sign-out pull-left"></i> @lang('global.logout')</a>
                                     </li>
                                 </ul>
                             </li>
@@ -114,10 +114,17 @@
                 <div class="left_col {{ session('sidebar_hidden') ? null : 'scroll-view' }}">
 
                     <div class="navbar nav_title" style="border: 0;">
+                    @if(daress_registerd())
+                        <a href="{{ route('registration.registrar.index') }}" class="site_title">
+                        <i class="fa fa-university"></i>
+                        <span>دارس</span>
+                        </a>
+                    @elseif(user())
                         <a href="{{ route('welcome') }}" class="site_title">
                         <i class="fa fa-university"></i>
                         <span>دارس</span>
                         </a>
+                    @endif
                     </div>
                     <div class="clearfix"></div>
 

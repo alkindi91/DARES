@@ -36,7 +36,7 @@ class VerifyCode
             OR $registration->getOriginal('gender')!=$registration->gender
             )  {
 
-        $registration->verifyCode();
+        $registration->generateCode();
         }
     }
 }

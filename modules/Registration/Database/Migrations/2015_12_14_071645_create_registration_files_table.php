@@ -14,21 +14,25 @@ class CreateRegistrationFilesTable extends Migration {
     {
         $types = array_keys(config('registration.files.types'));
 
-        Schema::create('registration_files', function(Blueprint $table)
+        Schema::create('registration_files', function(Blueprint $table) use ($types)
         {
             $table->increments('id');
-            $table->integer('registration_id')->index()->unsigned()->nullable();
+            $table->integer('registration_id')
+                  ->index()
+                  ->unsigned()
+                  ->nullable();
+
             $table->foreign('registration_id')
                   ->references('id')
-                  ->on('registration')
+                  ->on('registrations')
                   ->onDelete('CASCADE')
                   ->onUpdate('CASCADE');
 
             $table->enum('type', $types)->default($types[0]);
             $table->string('file_file_name')->nullable();
-            $table->integer('file_file_size')->nullable()->after('file_file_name');
-            $table->string('file_content_type')->nullable()->after('file_file_size');
-            $table->timestamp('file_updated_at')->nullable()->after('file_content_type');
+            $table->integer('file_file_size')->nullable();
+            $table->string('file_content_type')->nullable();
+            $table->timestamp('file_updated_at')->nullable();
 
             $table->timestamps();
         });

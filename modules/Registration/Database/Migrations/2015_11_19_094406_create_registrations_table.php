@@ -12,10 +12,10 @@ class CreateRegistrationsTable extends Migration {
      */
     public function up()
     {
-        Schema::create('registrations', function(Blueprint $table)
-        {
-            $table->increments('id');
-
+      $stay_types = array_keys(config('registration.stay_types'));
+      $social_status = array_keys(config('registration.social_status'));
+        Schema::create('registrations', function(Blueprint $table) use ($stay_types, $social_status) {
+              $table->increments('id');
               $table->string("first_name");
               $table->string("second_name");
               $table->string("third_name");
@@ -47,7 +47,9 @@ class CreateRegistrationsTable extends Migration {
               $table->date("stay_expire");
               $table->string("national_id");
                // accept value date eg : 2015-05-05
-              $table->enum("religion" ,['I', 'J', 'C'])->default('I')->comment = "The religion (I) for islam,(J) for jew and (C) for christian";
+              $table->enum("religion" ,['muslim', 'jew', 'christian'])->default('muslim')->comment = "The religion (I) for islam,(J) for jew and (C) for christian";
+              $table->enum("stay_type",$stay_types)->default('work');
+              $table->enum("social_status",$social_status)->default('single');
               $table->string("contact_region");
               $table->string("contact_postalbox");
               $table->string("contact_street");
@@ -59,6 +61,7 @@ class CreateRegistrationsTable extends Migration {
               $table->string("degree_speciality");
               $table->string("degree_institution");
               $table->integer("degree_score");
+              $table->integer("degree_graduation_year");
               $table->string("social_job");
               $table->boolean('email_verified')->default(0)->comment = "check if the student verified his email (0) not verified ,(1) verified";
               $table->string('verification_token', 100)->comment = 'This used to store the code we use to verify the student email';
@@ -66,14 +69,19 @@ class CreateRegistrationsTable extends Migration {
               $table->date("social_job_start");
               $table->float("social_experience");
               $table->string("social_job_employer");
+              // health status of registrar 0 for disabled and 1 for healthy
               $table->boolean("health_status")->default(0);
               $table->string("health_disabled_type");
               $table->string("health_disabled_size");
+
+              $table->string("computer_skills")->nullable();
+              $table->string("internet_skills")->nullable();
               $table->string("internet_link");
               $table->string("cyber_cafe");
               $table->string("computer_availability");
               $table->string("reference");
               $table->string("reference_other");
+
               $table->char("username_prefix", 10)->nullable();
               $table->integer('registration_period_id')->unsigned()->nullable()->index();
               $table->foreign('registration_period_id')->references('id')->on('registration_periods')->onDelete('CASCADE')->onUpdate('CASCADE');
@@ -81,7 +89,84 @@ class CreateRegistrationsTable extends Migration {
               $table->integer('registration_step_id')->unsigned()->nullable();
               $table->foreign('registration_step_id')->references('id')->on('registration_steps')->onDelete('CASCADE')->onUpdate('CASCADE');
 
-             $table->integer('academystructure_specialty_id')->unsigned()->nullable()->index();
+              $table->integer('degree_country_id')
+                    ->unsigned()
+                    ->nullable()
+                    ->index();
+
+              $table->foreign('degree_country_id')
+                    ->references('id')
+                    ->on('lists_countries')
+                    ->onDelete('SET NULL')
+                    ->onUpdate('SET NULL');
+
+              $table->integer('birth_country_id')
+                    ->unsigned()
+                    ->nullable()
+                    ->index();
+
+              $table->foreign('birth_country_id')
+                    ->references('id')
+                    ->on('lists_countries')
+                    ->onDelete('SET NULL')
+                    ->onUpdate('SET NULL');
+
+              $table->integer('nationality_city_id')
+                    ->unsigned()
+                    ->nullable()
+                    ->index();
+
+              $table->foreign('nationality_city_id')
+                    ->references('id')
+                    ->on('lists_cities')
+                    ->onDelete('SET NULL')
+                    ->onUpdate('SET NULL');
+
+             $table->integer('nationality_state_id')
+                                ->unsigned()
+                                ->nullable()
+                                ->index();
+
+             $table->foreign('nationality_state_id')
+                                ->references('id')
+                                ->on('lists_states')
+                                ->onDelete('SET NULL')
+                                ->onUpdate('SET NULL');
+
+               $table->integer('contact_country_id')
+                    ->unsigned()
+                    ->nullable()
+                    ->index();
+
+              $table->foreign('contact_country_id')
+                    ->references('id')
+                    ->on('lists_countries')
+                    ->onDelete('SET NULL')
+                    ->onUpdate('SET NULL');
+
+              $table->integer('contact_city_id')
+                    ->unsigned()
+                    ->nullable()
+                    ->index();
+
+              $table->foreign('contact_city_id')
+                    ->references('id')
+                    ->on('lists_cities')
+                    ->onDelete('SET NULL')
+                    ->onUpdate('SET NULL');
+
+             $table->integer('contact_state_id')
+                                ->unsigned()
+                                ->nullable()
+                                ->index();
+
+             $table->foreign('contact_state_id')
+                                ->references('id')
+                                ->on('lists_states')
+                                ->onDelete('SET NULL')
+                                ->onUpdate('SET NULL');
+
+              $table->integer('academystructure_specialty_id')->unsigned()->nullable()->index();
               $table->foreign('academystructure_specialty_id')
                     ->references('id')
                     ->on('academystructure_specialties')
