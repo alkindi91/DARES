@@ -22,6 +22,13 @@ class AcademycycleTableSeeder extends Seeder {
 			['name'=>'تعدل عام جامع' ,'slug'=>'edit.academycycle.years','module'=>'academycycle'],
 			['name'=>'حذف عام جامع' ,'slug'=>'delete.academycycle.years','module'=>'academycycle'],
 			['name'=>'مشاهدة العام الجامعي ' ,'slug'=>'view.academycycle.years','module'=>'academycycle'],
+			
+			
+			
+			['name'=>'اضافة فصل دراسى' ,'slug'=>'create.academycycle.semesters','module'=>'academycycle'],
+			['name'=>'تعدل فصل دراسى' ,'slug'=>'edit.academycycle.semesters','module'=>'academycycle'],
+			['name'=>'حذف فصل دراسى' ,'slug'=>'delete.academycycle.semesters','module'=>'academycycle'],
+			['name'=>'مشاهدة الفصول الدراسية ' ,'slug'=>'view.academycycle.semesters','module'=>'academycycle'],
 
 			
 		];
