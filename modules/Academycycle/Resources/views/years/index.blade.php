@@ -79,6 +79,9 @@
 			<a href="{{ route('academycycle.years.delete' ,$year->id)}}" class="btn btn-danger btn-sm">
 			<i class="fa fa-trash"></i> @lang('global.delete')
 			</a>
+			<a href="{{ route('ac.semesters.index' ,$year->id)}}" class="btn btn-info btn-md">
+			<i class="fa fa-table"></i> @lang('academycycle::semesters.header')
+			</a>
 			
 			
 	</td>
