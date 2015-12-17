@@ -35,7 +35,12 @@ class AcademystructureTableSeeder extends Seeder {
 			['name'=>'اضافة التخصص الدراسي' ,'slug'=>'create.academystructure.departments','module'=>'academystructure'],
 			['name'=>'تعديل التخص الدراسي' ,'slug'=>'edit.academystructure.departments','module'=>'academystructure'],
 			['name'=>'حذف التخصص الدراسي' ,'slug'=>'delete.academystructure.departments','module'=>'academystructure'],
-			['name'=>'مشاهدة التخصصات الدراسية' ,'slug'=>'show.academystructure.departments','module'=>'academystructure'],		
+			['name'=>'مشاهدة التخصصات الدراسية' ,'slug'=>'show.academystructure.departments','module'=>'academystructure'],	
+			//Specailty
+			['name'=>'اضافة تخصص دراسي' ,'slug'=>'create.academystructure.specialties','module'=>'academystructure'],
+			['name'=>'تعديل تخصص دراسي' ,'slug'=>'edit.academystructure.specialties','module'=>'academystructure'],
+			['name'=>'حذف تخصص دراسي' ,'slug'=>'delete.academystructure.specialties','module'=>'academystructure'],
+			['name'=>'مشاهدة تخصص دراسي' ,'slug'=>'show.academystructure.specialties','module'=>'academystructure'],		
 		];
 		
 		
