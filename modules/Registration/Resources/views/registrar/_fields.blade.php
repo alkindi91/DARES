@@ -503,7 +503,7 @@
 									سنة التخرج <i class="fa text-danger fa-asterisk"></i>:
 								</label>
 								
-								{!! Form::select('degree_graduation_year' ,[""=>""]+range(date('Y') ,date("Y")-80) ,null ,['data-parsley-errors-container'=>"#degreeYear_1",'class'=>' select2_single form-control','required'=>'required']) !!}
+								{!! Form::select('degree_graduation_year' ,$years_list,null ,['data-parsley-errors-container'=>"#degreeYear_1",'class'=>' select2_single form-control','required'=>'required']) !!}
 								<div class='parsleyjs-error-container' id="degreeYear_1"></div>
 							</div>
 						</div>
@@ -788,10 +788,12 @@
 	</div>
 
 @section('head')
+@parent
 <!-- select2 -->
 <link href="{{ asset('template/css/select/select2.min.css') }}" rel="stylesheet">
 @stop
 @section('footer')
+@parent
 <!-- icheck -->
 <script src="{{ asset('template/js/icheck/icheck.min.js') }}"></script>
 <!-- daterangepicker -->
@@ -927,7 +929,7 @@ $('body').on('click' ,"#addExtraDegrees" ,function() {
 		$mainClone.find("input[name='degree_institution']").siblings('label').html('معهد / كلية / جامعة <i class="fa text-danger fa-asterisk"></i>');
 		$mainClone.find('input[type="text"]').val("");
 		$mainClone.find('select').css({display:"block"});
-		var timestamp = new Date().getUTCMilliseconds();
+		var timestamp = makeid();
 		$mainClone.find('input,select').each(function(index, val) {
 			/* iterate through array or object */
 			var $clonedInput = $(val),originalName = $clonedInput.attr('name') ,clonedName =originalName+timestamp,

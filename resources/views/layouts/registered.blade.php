@@ -167,15 +167,10 @@
 
     </div>
 
-    
-
-
-
     <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('template/js/nicescroll/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('template/js/icheck/icheck.min.js') }}"></script>
-    @section('footer')
-    @show
+
     <script src="{{ asset('template/js/custom.js') }}"></script>
     <script src="{{ asset('template/js/ecss.min.js') }}"></script>
    
@@ -187,11 +182,12 @@
                 });
          NProgress.done();
     });
-       
-
     </script>
-    
 
+@include('partials.notifications')
+
+@section('footer')
+@show
 </body>
 
 </html>
