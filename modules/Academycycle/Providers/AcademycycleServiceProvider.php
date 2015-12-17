@@ -106,6 +106,10 @@ class AcademycycleServiceProvider extends ServiceProvider {
 		$submenu->add(trans('academycycle::years.header'), ['route'=>'academycycle.years.index'])
 		        ->data('permission', ['view.academycycle.years'])
 		        ->prepend('<i class="fa fa-calendar"></i>');
+				
+		$submenu->add(trans('academycycle::semestereventtypes.header'), ['route'=>'ac.semestereventtypes.index'])
+		        ->data('permission', ['view.academycycle.semestereventtypes'])
+		        ->prepend('<i class="fa fa-calendar"></i>');
 		
 	}
 
