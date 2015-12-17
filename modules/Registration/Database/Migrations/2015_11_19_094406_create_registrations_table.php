@@ -135,6 +135,17 @@ class CreateRegistrationsTable extends Migration {
                     ->onDelete('SET NULL')
                     ->onUpdate('SET NULL');
 
+              $table->integer('nationality_country_id')
+                    ->unsigned()
+                    ->nullable()
+                    ->index();
+
+              $table->foreign('nationality_country_id')
+                    ->references('id')
+                    ->on('lists_countries')
+                    ->onDelete('SET NULL')
+                    ->onUpdate('SET NULL');
+
               $table->integer('birth_country_id')
                     ->unsigned()
                     ->nullable()

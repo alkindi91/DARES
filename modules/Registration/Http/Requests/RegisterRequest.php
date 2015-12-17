@@ -51,6 +51,7 @@ class RegisterRequest extends FormRequest {
 				'contact_home_number'   =>'required|max:255',
 				'degree_country_id'      =>'required|exists:lists_countries,id',
 				'birth_country_id'      =>'required|exists:lists_countries,id',
+				'nationality_country_id'   =>'sometimes|required|exists:lists_countries,id',
 				'nationality_city_id'   =>'sometimes|required|exists:lists_cities,id',
 				'nationality_state_id'  =>'sometimes|required|exists:lists_states,id',
 				'contact_country_id'    =>'required|exists:lists_countries,id',
