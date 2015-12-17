@@ -818,7 +818,7 @@ $(document).ready(function () {
 	var countriesCodes = {!! json_encode($codes_list) !!}
 // we fetch contact cities based on current contact country on document load
 //applyFetchCities('contact_city_id' ,$('#contact_country_id').val() ,'contact_state_id');
-@if((isset($registration) and $registration->edit_form) || !isset($registration))
+@if((isset($registration) and $registration->step->edit_form) || !isset($registration))
 $('.date-picker').daterangepicker({
 	singleDatePicker: true,
 	locale: {
@@ -870,7 +870,7 @@ function drawSelect2() {
 	allowClear: true
 });
 }
-@if((isset($registration) and $registration->edit_form) || !isset($registration))
+@if((isset($registration) and $registration->step->edit_form) || !isset($registration))
 drawSelect2();
 @endif
 $('body').on('change', '#contact_country_id', function(event) {
