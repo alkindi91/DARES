@@ -26,8 +26,9 @@ class RegistrarController extends Controller {
 		                      ->with('year')
 		                      ->current()
 		                      ->first();
-       
-		return view('registration::registrar.index' ,compact('period'));
+       	$registration = daress_registerd();
+
+		return view('registration::registrar.index' ,compact('period', 'registration'));
 	}
 
 	
