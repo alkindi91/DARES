@@ -26,7 +26,11 @@ class SemestersController extends Controller {
 		$input = $request->except('active');			
 		$Semester->fill($input);
 		$Semester->active = $request->has('active') ? request('active') : 0;
-		
+		if($Semester->active){
+			//update set all semester not active 
+			$all_semesters = new Semester;
+			$all_semesters->update(['active'=>0]);
+		}
 		$Semester->save();
 		
 		return redirect()->route('ac.semesters.index', [$yid]);
@@ -46,7 +50,11 @@ class SemestersController extends Controller {
 		$Semester->start_at = $request->input('start_at');
 		$Semester->finish_at = $request->input('finish_at');
 		$Semester->active = $request->has('active') ? request('active') : 0;
-			
+		if($Semester->active){
+			//update set all semester not active 
+			$all_semesters = new Semester;
+			$all_semesters->update(['active'=>0]);
+		}	
 		$Semester->save();
 		
 		$yid = $Semester->academycycle_year_id;
@@ -78,5 +86,5 @@ class SemestersController extends Controller {
         ->route('ac.semesters.index')
         ->with('success', trans('academycycle::semesters.delete_bulk_success'));
     }
-	
+
 }
