@@ -109,7 +109,7 @@ class StepsController extends Controller
     public function processVerifyEmail($step) 
     {
         $StepModel = new Step;
-
+        
         if (request('verify_email')) {
 
           $StepModel->where('id' ,'!=' ,$step->id)->update(['verify_email'=>0]);
