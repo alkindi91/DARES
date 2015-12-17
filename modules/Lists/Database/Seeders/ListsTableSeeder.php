@@ -77,7 +77,7 @@ class ListsTableSeeder extends Seeder {
 		$tr = new TranslateClient('en', 'ar');
 
 		foreach($countries as $country){
-			$name  = $tr->translate($country['name']);
+			$name  = $country['name'];//$tr->translate($country['name']);
 			
 			$newCountry = Country::create(['name'=>$name ,'calling_code'=>$country['calling_code']]);
 

@@ -86,6 +86,9 @@ class AuthController extends Controller {
 
 		$social_job_status = [""=>"",'unemployed'=>'بدون عمل' ,'employed'=>'أعمل' ,'retired'=>'متقاعد'];
 
+		$years_list = [""=>""]+array_combine(range(date("Y")-80,date('Y')),range(date("Y")-80,date('Y')));
+
+
 		$computer_skills = [""=>"",'excellent'=>'ممتاز' ,'great'=>'جيد جدا' ,'very_low'=>'ضعيف جدا' ,'low'=>'ضعيف' ,'good'=>'جيد'];
 
 		$social_job_types = [""=>"",'government'=>'عام' ,'private'=>'خاص' ,'free'=>'حر'];
@@ -102,7 +105,7 @@ class AuthController extends Controller {
 		})
 		->first();
 
-		return view('registration::registrar.apply' ,compact('specialties','registration_types', 'period' ,'countries' ,'stay_types' ,'countries_list' ,'references','computer_skills','codes_list' ,'social_job_types','social_status' ,'social_jobs'));
+		return view('registration::registrar.apply' ,compact('years_list','specialties','registration_types', 'period' ,'countries' ,'stay_types' ,'countries_list' ,'references','computer_skills','codes_list' ,'social_job_types','social_status' ,'social_jobs'));
 	}
 
 	public function store(RegisterRequest $request ,

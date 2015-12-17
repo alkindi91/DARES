@@ -7,7 +7,7 @@
 									المؤهل <i class="fa text-danger fa-asterisk"></i>:
 								</label>
 								
-								{!! Form::select('degree_name'.$degree->id ,["high_school"=>"ثانوي",'graduate'=>'إجازة / بكالوريوس / ليسانس','majester'=>'ماجستير' ,'doctorat'=>'دكتوراه'] ,$degree->degree_name,['class'=>' form-control','disabled'=>'disabled' ,'required'=>'required']) !!}
+								{!! Form::select('degree_name'.$degree->id ,["high_school"=>"ثانوي",'graduate'=>'إجازة / بكالوريوس / ليسانس','majester'=>'ماجستير' ,'doctorat'=>'دكتوراه'] ,$degree->degree_name,['class'=>' form-control','required'=>'required']) !!}
 							</div>
 						</div>
 						<div class="col-sm-4 col-xs-12">
@@ -48,7 +48,7 @@
 									سنة التخرج <i class="fa text-danger fa-asterisk"></i>:
 								</label>
 								
-								{!! Form::select('degree_graduation_year'.$degree->id ,[""=>""]+range(date('Y') ,date("Y")-80) ,$degree->degree_graduation_year ,['data-parsley-errors-container'=>"#degreeYear_1",'class'=>' select2_single form-control','required'=>'required']) !!}
+								{!! Form::select('degree_graduation_year'.$degree->id ,$years_list ,$degree->degree_graduation_year ,['data-parsley-errors-container'=>"#degreeYear_1",'class'=>' select2_single form-control','required'=>'required']) !!}
 								<div class='parsleyjs-error-container' id="degreeYear_1"></div>
 							</div>
 						</div>

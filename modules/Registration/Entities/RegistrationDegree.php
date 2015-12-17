@@ -6,7 +6,9 @@ class RegistrationDegree extends Model {
 
 	public $timestamps = false;
 
-    protected $fillable = ['degree_name',
+    protected $fillable = [
+    'registration_id',
+    'degree_name',
     'degree_speciality',
     'degree_institution',
     'degree_graduation_year',
