@@ -62,7 +62,7 @@ class Handler extends ExceptionHandler
 
         if ($this->isHttpException($e))
         {
-            return $this->renderHttpException($e);
+           // return $this->renderHttpException($e);
         }
 
 
