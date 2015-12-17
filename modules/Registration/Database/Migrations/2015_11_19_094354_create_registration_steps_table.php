@@ -20,6 +20,8 @@ class CreateRegistrationStepsTable extends Migration {
             $table->string('name');
             // boolean field to check if user can edit registration form on this step or not ( 0 for NO | 1 is for yes)
             $table->boolean('edit_form')->default(0);
+            // check if the registrar can upload receipt
+            $table->boolean('upload_receipt')->default(0);
             // boolean field to check if user can uplaod files on this step ( 0 for No | 1 for yes)
             $table->boolean('upload_files')->default(0);
             // field to track the user that created this step

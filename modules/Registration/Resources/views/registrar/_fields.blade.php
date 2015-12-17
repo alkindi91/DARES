@@ -1,3 +1,4 @@
+<div class="js-student-fieldset">
 <div class='x_panel panel-primary'>
 			<div class="x_title">
 				<h2>نوع الالتحاق</h2>
@@ -224,7 +225,7 @@
 								الولاية :
 							</label>
 							
-							{!! Form::select('nationality_state_id' ,(isset($registration) and !empty($nationality_states = $registration->nationalitycity->states->lists('name', 'id')->toArray())) ? $nationality_states : [] ,null ,['data-parsley-errors-container'=>"#birthStateContainer",'class'=>'select2_single form-control' ,'id'=>'nationality_state_id']) !!}
+							{!! Form::select('nationality_state_id' ,(isset($registration) and isset($registration->nationalitycity->states) and !empty($nationality_states = $registration->nationalitycity->states->lists('name', 'id')->toArray())) ? $nationality_states : [] ,null ,['data-parsley-errors-container'=>"#birthStateContainer",'class'=>'select2_single form-control' ,'id'=>'nationality_state_id']) !!}
 							<div id="birthStateContainer"></div>
 						</div>
 					</div>
@@ -525,7 +526,13 @@
 					</div>
 				</div>
 				{{-- end rows --}}
-				<div id="extraDegreeContainer"></div>
+				<div id="extraDegreeContainer">
+				@if(isset($registration->degree))
+					@foreach($registration->degrees as $degree)
+						@include('registration::registrar._degree')
+					@endforeach
+				@endif
+				</div>
 				<button type='button' id='addExtraDegrees' class='btn btn-success'>
 				<i class="fa fa-plus"></i> إضافة شهادة أخرى
 				</button>
@@ -778,7 +785,7 @@
 				</div>
 			</div>
 		</div>
-	
+	</div>
 
 @section('head')
 <!-- select2 -->
@@ -801,16 +808,24 @@
 <script src="{{ asset('template/js/select/select2.full.js') }}"></script>
 <script src="{{ asset('template/js/select/i18n/ar.js') }}"></script>
 <script type="text/javascript">
+
 $(document).ready(function () {
+// make all input disabled if student not allowed to edit
+@if(isset($registration) and !$registration->step->edit_form)
+	$('body').find('.js-student-fieldset').find('select,input,button').attr('disabled', true);
+@endif
+
 	var countriesCodes = {!! json_encode($codes_list) !!}
 // we fetch contact cities based on current contact country on document load
 //applyFetchCities('contact_city_id' ,$('#contact_country_id').val() ,'contact_state_id');
+@if((isset($registration) and $registration->edit_form) || !isset($registration))
 $('.date-picker').daterangepicker({
 	singleDatePicker: true,
 	locale: {
 		format: 'YYYY-MM-DD'
 	},
 });
+@endif
 $('body').on('ifChanged', 'input[name="health_status"]', function(event) {
 	var $this = $(this) ,$disabledFields = $('.health-disabled-fields');
 	if($this.val()==1) {
@@ -855,7 +870,9 @@ function drawSelect2() {
 	allowClear: true
 });
 }
+@if((isset($registration) and $registration->edit_form) || !isset($registration))
 drawSelect2();
+@endif
 $('body').on('change', '#contact_country_id', function(event) {
 	event.preventDefault();
 	var $this = $(this);

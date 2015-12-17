@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Modules\Academystructure\Entities\Specialty;
 use Modules\Lists\Entities\Country;
 use Modules\Registration\Entities\Registration;
+use Modules\Registration\Entities\RegistrationDegree;
 use Modules\Registration\Entities\RegistrationPeriod;
 use Modules\Registration\Entities\RegistrationStep;
 use Modules\Registration\Entities\RegistrationType;
@@ -28,7 +29,8 @@ class AuthController extends Controller {
 		if(!$registration = Registration::login($input)->first()) {
 			return redirect()->route('registration.registrar.login')->with('error', trans('registration::registrar.unvalid_credentials'));
 		}
-
+		$registration->load('step','type','speciality','period','birthcountry','contactcountry','contactcity','nationalitycity');
+		
 		event(new RegistrarLogin($registration));
 		
 		session()->put(config('registration.session_key'), $registration);
@@ -42,10 +44,10 @@ class AuthController extends Controller {
 		
 		
 		$period = $PeriodModel->orderBy('id' ,'desc')
-		                      ->with('year')
-		                      ->current()
-		                      ->first();
-       
+		->with('year')
+		->current()
+		->first();
+
 		return view('registration::registrar.auth.login' ,compact('period'));
 	}
 
@@ -56,14 +58,14 @@ class AuthController extends Controller {
 	}
 
 	public function apply(RegistrationPeriod $PeriodModel,
-	 Country $CountryModel ,
-	 Specialty $Specialty ,
-	 RegistrationType $type)
+		Country $CountryModel ,
+		Specialty $Specialty ,
+		RegistrationType $type)
 	{
 		$period = $PeriodModel->orderBy('id' ,'desc')
-		                      ->with('year')
-		                      ->current()
-		                      ->first();
+		->with('year')
+		->current()
+		->first();
 		if(!$period) {
 			return redirect()->route('welcome');
 		}
@@ -93,12 +95,12 @@ class AuthController extends Controller {
 		$references = [""=>"",'iiswebsite'=>'موقع كلية العلوم الشرعية','iisewebsite'=>'موقع مركز التعليم عن بعد','iisfriend'=>'صديق يدرس بالكلية','iisefriend'=>'صديق يدرس بمركز التعليم عن بعد','other'=>'أخرى'];
 
 		$period = $PeriodModel->orderBy('id' ,'desc')
-		                      ->with('year')
-		                      ->where(function($sql) {
-		                      	$sql->where('start_at','<=' ,date('Y-m-d'))
-		                      	    ->where('finish_at','>=' ,date('Y-m-d'));
-		                      })
-		                      ->first();
+		->with('year')
+		->where(function($sql) {
+			$sql->where('start_at','<=' ,date('Y-m-d'))
+			->where('finish_at','>=' ,date('Y-m-d'));
+		})
+		->first();
 
 		return view('registration::registrar.apply' ,compact('specialties','registration_types', 'period' ,'countries' ,'stay_types' ,'countries_list' ,'references','computer_skills','codes_list' ,'social_job_types','social_status' ,'social_jobs'));
 	}
@@ -109,21 +111,27 @@ class AuthController extends Controller {
 		RegistrationStep $StepModel
 		)
 	{
-		
-		$registration->fill($request->all());
+		$input = $request->all();
+
+		$registration->fill($input);
 
 		$step = $StepModel->verifyEmail()
-		                    ->first();
-        
+		->first();
+
 		$period = $PeriodModel->current()
-		                      ->first();
-        $username = daress_generate_username();
-        $registration->username = $username;
-        $registration->registration_period_id = $period->id;
-        $registration->registration_step_id = $step->id;
-        
+		->first();
+
+		$username = daress_generate_username();
+		$registration->username = $username;
+		$registration->registration_period_id = $period->id;
+		$registration->registration_step_id = $step->id;
+
 
 		if($registration->save()) {
+			
+			/** check for extra degrees an dstore them */
+			$this->saveExtraDegrees($input, $registration->id);
+			/** end check for extra degrees */
 			
 			event(new RegistrationCreated($registration));
 			event(new RegistrationUpdated($registration));
@@ -154,5 +162,33 @@ class AuthController extends Controller {
 		event(new RegistrationStepChanged($registration, ['comment'=>'يرجى تحميل ملفاتك']));
 
 		return redirect()->route('registration.registrar.index')->with('success', trans('registration::registrar.email_verified', ['name'=>$registration->fullname]));
+	}
+
+	public function saveExtraDegrees($input, $registration_id)
+	{
+		$extra_degrees_keys=[];
+			foreach($input as $key=>$value){
+				if(count($parts = explode('degree_name', $key))>1) {
+					$extra_degrees_keys[] = $parts[1];
+				}
+			}
+
+			$extra_degrees = [];
+			foreach ($extra_degrees_keys as $key) {
+
+				$extra_degrees[] = [
+				'registration_id'		 =>$registration_id,
+				'degree_name'		     =>$input['degree_name'.$key],
+				'degree_country_id'      =>$input['degree_country_id'.$key],
+				'degree_speciality'      =>$input['degree_speciality'.$key],
+				'degree_institution'     =>$input['degree_institution'.$key],
+				'degree_graduation_year' =>$input['degree_graduation_year'.$key],
+				'degree_score'           =>$input['degree_score'.$key],
+				];
+			}
+
+			if(!empty($extra_degrees)) {
+				RegistrationDegree::insert($extra_degrees);
+			}
 	}
 }

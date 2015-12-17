@@ -103,7 +103,7 @@ jQuery(document).ready(function($) {
 
     $(".select2_multiple").select2({
                     placeholder: "@lang('registration::steps.choose_next_steps')",
-                     dir: "rtl",
+                    dir: "rtl",
                     allowClear: true
                 });
 });

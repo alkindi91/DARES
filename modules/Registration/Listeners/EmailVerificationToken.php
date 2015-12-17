@@ -29,8 +29,9 @@ class EmailVerificationToken
     public function handle(RegistrationCreated $event)
     {
         if(empty($registration->verification_token)) {
-        $registration->verification_token = md5(uniqid(rand(), true));
         $registration = $event->registration;
+        $registration->verification_token = md5(uniqid(rand(), true));
+       
         $registration->load('step', 'period', 'period.year', 'type');
         $step = $registration->step;
         $registration->generateCode();
@@ -38,7 +39,7 @@ class EmailVerificationToken
          [
              $registration->fullname,
              $registration->code,
-             $registration->contact_phone,
+             $registration->contact_mobile,
              $registration->username,
              $registration->period->year->name,
              $registration->national_id

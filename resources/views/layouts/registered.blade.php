@@ -97,7 +97,13 @@
                                     </li>
                                 </ul>
                             </li>
-                           
+                           <li>
+                           <a >
+                           <b class="text-danger">
+                               <i class="fa fa-info-circle"></i> @lang('registration::registrar.you_are_in_step',['name'=>daress_registerd()->step->name])
+                            </b>
+                           </a>
+                           </li>
 
                         </ul>
                     </nav>
@@ -164,6 +170,7 @@
     
 
 
+
     <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('template/js/nicescroll/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('template/js/icheck/icheck.min.js') }}"></script>
@@ -183,10 +190,7 @@
        
 
     </script>
-   
-@include('partials.notifications')
-
-
+    
 
 </body>
 

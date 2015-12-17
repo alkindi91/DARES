@@ -1,15 +1,18 @@
 <?php namespace Modules\Registration\Http\Controllers\Registrar;
 
 use DomDocument;
+use Illuminate\Http\Request;
 use Modules\Academystructure\Entities\Department;
 use Modules\Academystructure\Entities\Specialty;
 use Modules\Lists\Entities\Country;
 use Modules\Registration\Entities\Registration;
+use Modules\Registration\Entities\RegistrationFile;
+use Modules\Registration\Entities\RegistrationHistory as History;
 use Modules\Registration\Entities\RegistrationPeriod;
 use Modules\Registration\Entities\RegistrationStep;
-use Modules\Registration\Entities\RegistrationHistory as History;
 use Modules\Registration\Entities\RegistrationType;
 use Modules\Registration\Events\RegistrationCreated;
+use Modules\Registration\Events\RegistrationStepChanged;
 use Modules\Registration\Events\RegistrationUpdated;
 use Modules\Registration\Http\Requests\RegisterRequest;
 use Pingpong\Modules\Routing\Controller;
@@ -41,8 +44,12 @@ class RegistrarController extends Controller {
 
 	public function files()
 	{
-		return view('registration::registrar.files');
+		$files = RegistrationFile::where('registration_id', daress_registerd()->id)->get();
+		$registration = daress_registerd();
+		return view('registration::registrar.files', compact('files', 'registration'));
 	}
+
+	
 
 	public function form(RegistrationPeriod $PeriodModel,
 	 Country $CountryModel ,
@@ -50,7 +57,7 @@ class RegistrarController extends Controller {
 	 Registration $Registration ,
 	 RegistrationType $type)
 	{
-		$registration = $Registration->with('contactcountry', 'contactcity', 'birthcountry', 'nationalitycity')->find(daress_registerd()->id);
+		$registration = $Registration->with('degrees','contactcountry', 'contactcity', 'birthcountry', 'nationalitycity')->find(daress_registerd()->id);
 
 		$specialties = $Specialty->lists('name', 'id');
 
@@ -80,4 +87,18 @@ class RegistrarController extends Controller {
 
 	}
 
+	
+	public function uploadDone(){
+		$registration = daress_registerd();
+		$step = $registration->step;
+		$step->load('children');
+
+		$nextStepId = $step->children->first()->id;
+		$registration->registration_step_id = $nextStepId;
+		$registration->save();
+		$registration->load('step');
+		session()->put(config('registration.session_key'), $registration);
+		event(new RegistrationStepChanged($registration));
+		return redirect()->route('registration.registrar.index')->with('success',trans('registration.registrar.processing_files'));
+	}
 }

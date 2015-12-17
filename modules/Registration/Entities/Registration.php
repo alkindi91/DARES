@@ -99,10 +99,10 @@ class Registration extends Model {
     public function generateCode()
     {
     	$this->load('type' ,'period','speciality');
-        $prefix  = $this->type->code;
-        $prefix .= $this->speciality->code;
+        $prefix  = "R".$this->type->code;
+        // $prefix .= $this->speciality->code;
         $prefix .= $this->period->code;
-        $prefix .= $this->gender;
+        // $prefix .= ""-$this->gender;
         $this->username_prefix = strtoupper($prefix);
         $this->save();
     }
@@ -134,5 +134,10 @@ class Registration extends Model {
     public function nationalitycity()
     {
     	return $this->belongsTo('\Modules\Lists\Entities\City', 'nationality_city_id');
+    }
+
+    public function degrees()
+    {
+        return $this->hasMany('\Modules\Registration\Entities\RegistrationDegree', 'registration_id');
     }
 }
