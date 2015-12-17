@@ -96,7 +96,7 @@ class RegistrarController extends Controller {
 		$registration = daress_registerd();
 
 		$input = $request->all();
-
+		
 		$registration->fill($input);
 
 		if($registration->save()) {
@@ -108,9 +108,9 @@ class RegistrarController extends Controller {
 			event(new RegistrationUpdated($registration));
 			event(new RegistrationStepChanged($registration));
 
-			return redirect()->back()->with('success', trans('registration:registrar.profile_change_success'));
+			return redirect()->back()->with('success', trans('registration::registrar.profile_change_success'));
 		} else {
-			return redirect()->back()->with('error', trans('registration:registrar.profile_change_error'));
+			return redirect()->back()->with('error', trans('registration::registrar.profile_change_error'));
 		}
 
 	}
@@ -127,13 +127,14 @@ class RegistrarController extends Controller {
 		session()->put(config('registration.session_key'), $registration);
 		event(new RegistrationUpdated($registration));
 		event(new RegistrationStepChanged($registration));
-		return redirect()->route('registration.registrar.index')->with('success',trans('registration.registrar.processing_files'));
+		return redirect()->route('registration.registrar.index')->with('success',trans('registration::registrar.processing_files'));
 	}
 
 	public function saveExtraDegrees($input, $registration_id)
 	{
 
 		$extra_degrees_keys=[];
+		$ids = [];
 			foreach($input as $key=>$value){
 
 				if(count($parts = explode('degree_name', $key))>1) {
@@ -157,7 +158,8 @@ class RegistrarController extends Controller {
 				];
 
 				if(is_numeric($key) && $key>0) {
-					
+					$ids[] = $key;
+
 					RegistrationDegree::where('id', $key)->update($data);
 				} else {
 				$extra_degrees[] = $data;
@@ -165,7 +167,14 @@ class RegistrarController extends Controller {
 			}
 
 			if(!empty($extra_degrees)) {
-				RegistrationDegree::insert($extra_degrees);
+				foreach ($extra_degrees as $extra_degree) {
+					$degree = RegistrationDegree::create($extra_degree);
+					$ids[] = $degree->id;
+				}
+				
 			}
+
+			RegistrationDegree::where('registration_id',$registration_id)->whereNotIn('id',$ids)->delete();
+			
 	}
 }

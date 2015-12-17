@@ -189,7 +189,7 @@
 					</div>
 				</div>
 				<br />
-				<div class="row registration-form__nationality omani" id='expactId'>
+				<div class="row registration-form__nationality {{ (isset($registration) and $registration->nationality_type=='omani') ? 'omani' : null}}" id='expactId'>
 					<div class="col-sm-4 col-xs-12 outsider">
 						<div class="form-group">
 							<label for="nationality">
@@ -231,7 +231,7 @@
 					</div>
 				</div>
 				
-				<div class="row registration-form__outsider">
+				<div class="row registration-form__outsider {{ (isset($registration) and $registration->nationality_type=='omani') ? '' : 'active'}}">
 					<div class="col-sm-4 col-xs-12">
 						<div class="form-group">
 							<label for="stay_type">
@@ -263,11 +263,11 @@
 					</div>
 					<div class="col-sm-4 col-xs-12">
 						<div class="form-group">
-							<label for="passeport_country">
+							<label for="passeport_country_id">
 								جهة الصدور <i class="fa text-danger fa-asterisk resident-required"></i>:
 							</label>
 							
-							{!! Form::select('passeport_country' ,$countries_list ,null ,['class'=>'select2_single form-control' ,'id'=>'passeport_country']) !!}
+							{!! Form::select('passeport_country_id' ,$countries_list ,null ,['class'=>'select2_single form-control' ,'id'=>'passeport_country_id']) !!}
 						</div>
 					</div>
 					
@@ -568,10 +568,10 @@
 					</div>
 				</div>
 				<div class="ln_solid"></div>
-				<div class="row social-job-details">
+				<div class="row social-job-details" style='display:{{ (isset($registration) and $registration->social_job=='employed') ? 'block' : "none" }}'>  
 					<div class="col-sm-4 col-xs-12">
 						<div class="form-group">
-							<label for="social_job_status">
+							<label for="social_job_status" >
 								الوظيفة <i class="fa text-danger fa-asterisk"></i>:
 							</label>
 							
@@ -623,20 +623,20 @@
 					<div class="clearfix"></div>
 					<div class="col-sm-4 col-xs-12">
 						<div class="form-group">
-							<label for="social_job_country">
+							<label for="social_job_country_id">
 								الدولة <i class="fa text-danger fa-asterisk"></i>:
 							</label>
 							
-							{!! Form::select('social_job_country' ,$countries_list ,null ,['required'=>'required','class'=>'select2_single form-control' ,'id'=>'social_job_country']) !!}
+							{!! Form::select('social_job_country_id' ,$countries_list ,null ,['required'=>'required','class'=>'select2_single form-control' ,'id'=>'social_job_country_id']) !!}
 						</div>
 					</div>
 					<div class="col-sm-4 col-xs-12">
 						<div class="form-group">
-							<label for="social_job_city">
+							<label for="social_job_city_id">
 								المحافظة <i class="fa text-danger fa-asterisk"></i>:
 							</label>
 							
-							{!! Form::select('social_job_city' ,[] ,null ,['required'=>'required','class'=>'select2_single form-control' ,'id'=>'social_job_city']) !!}
+							{!! Form::select('social_job_city_id' ,[] ,null ,['required'=>'required','class'=>'select2_single form-control' ,'id'=>'social_job_city_id']) !!}
 						</div>
 					</div>
 				</div>
@@ -899,7 +899,7 @@ $('body').on('change', '#birth_country_id', function(event) {
 	applyFetchCities('nationality_city_id' ,$this.val() ,'nationality_state_id');
 	
 });
-$('body').on('change', '#social_job_country', function(event) {
+$('body').on('change', '#social_job_country_id', function(event) {
 	event.preventDefault();
 	var $this = $(this);
 	/* Act on the event */
@@ -965,7 +965,9 @@ $('body').on('click' ,"#addExtraDegrees" ,function() {
 			$jobDetails.slideUp();
 		}
 	});
-	$('.social-job-details').find('input,select').attr('disabled',true);
+	if($('#social_job').val()!='employed') {
+		$('.social-job-details').find('input,select').attr('disabled',true);
+	}
 	/** end social jobs logic */
 	$('body').on('change', '#stay_type', function(event) {
 		event.preventDefault();
@@ -1008,8 +1010,9 @@ $('body').on('click' ,"#addExtraDegrees" ,function() {
 			});
 		}
 		function applyFetchJobCities() {
-		$('#social_job_city').html("").change();
-			var currentCountry = $('#social_job_country').val();
+
+		$('#social_job_city_id').html("").change();
+			var currentCountry = $('#social_job_country_id').val();
 			if(_.isEmpty(currentCountry)) {
 			return;
 			}
@@ -1021,11 +1024,12 @@ $('body').on('click' ,"#addExtraDegrees" ,function() {
 			})
 			.done(function(response) {
 				var $options;
+				
 				$.each(response, function(index, val) {
 					/* iterate through array or object */
 					$options += '<option value="'+val.id+'">'+val.name+'</option>';
 				});
-				$('#social_job_city').html($options).change();
+				$('#social_job_city_id').html($options).change();
 				//applyFetchStates();
 			});
 		}

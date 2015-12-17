@@ -18,7 +18,8 @@ class Registration extends Model {
 		'gender',
 		'birthday',
 		'nationality_type',
-		'passeport_number',
+        'passeport_number',
+		'passeport_country_id',
 		'passeport_issued',
 		'passeport_expire',
 		'stay_expire',
@@ -46,7 +47,9 @@ class Registration extends Model {
 		'social_job',
 		'social_job_status',
 		'social_job_start',
-		'social_experience',
+        'social_experience',
+        'social_job_country',
+		'social_job_city',
 		'social_job_employer',
 		'health_status',
 		'health_disabled_type',
@@ -133,7 +136,12 @@ class Registration extends Model {
 
     public function nationalitycity()
     {
-    	return $this->belongsTo('\Modules\Lists\Entities\City', 'nationality_city_id');
+        return $this->belongsTo('\Modules\Lists\Entities\City', 'nationality_city_id');
+    }
+
+    public function passeportcountry()
+    {
+    	return $this->belongsTo('\Modules\Lists\Entities\City', 'passeport_country_id');
     }
 
     public function degrees()

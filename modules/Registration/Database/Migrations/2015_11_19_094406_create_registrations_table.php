@@ -69,6 +69,7 @@ class CreateRegistrationsTable extends Migration {
               $table->date("social_job_start");
               $table->float("social_experience");
               $table->string("social_job_employer");
+              $table->enum("social_job_type",['private','freelance','government'])->default('freelance');
               // health status of registrar 0 for disabled and 1 for healthy
               $table->boolean("health_status")->default(0);
               $table->string("health_disabled_type");
@@ -95,6 +96,40 @@ class CreateRegistrationsTable extends Migration {
                     ->index();
 
               $table->foreign('degree_country_id')
+                    ->references('id')
+                    ->on('lists_countries')
+                    ->onDelete('SET NULL')
+                    ->onUpdate('SET NULL');
+
+              
+              $table->integer('social_job_country_id')
+                    ->unsigned()
+                    ->nullable()
+                    ->index();
+
+              $table->foreign('social_job_country_id')
+                    ->references('id')
+                    ->on('lists_countries')
+                    ->onDelete('SET NULL')
+                    ->onUpdate('SET NULL');
+
+               $table->integer('social_job_city_id')
+                    ->unsigned()
+                    ->nullable()
+                    ->index();
+
+              $table->foreign('social_job_city_id')
+                    ->references('id')
+                    ->on('lists_cities')
+                    ->onDelete('SET NULL')
+                    ->onUpdate('SET NULL');
+
+              $table->integer('passeport_country_id')
+                    ->unsigned()
+                    ->nullable()
+                    ->index();
+
+              $table->foreign('passeport_country_id')
                     ->references('id')
                     ->on('lists_countries')
                     ->onDelete('SET NULL')
