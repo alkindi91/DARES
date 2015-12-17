@@ -22,7 +22,7 @@ class CreateRegistrationDegreesTable extends Migration {
 
             $table->string('degree_institution');
 
-            $table->date('degree_graduation_year');
+            $table->smallInteger('degree_graduation_year');
 
             $table->integer('degree_score');
 

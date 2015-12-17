@@ -60,7 +60,7 @@ class RegistrarController extends Controller {
 	 RegistrationType $type)
 	{
 		$registration = $Registration->with('degrees','contactcountry', 'contactcity', 'birthcountry', 'nationalitycity')->find(daress_registerd()->id);
-
+		
 		$specialties = $Specialty->lists('name', 'id');
 
 		$registration_types = $type->lists('title', 'id')->toArray();

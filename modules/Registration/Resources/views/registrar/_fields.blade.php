@@ -527,7 +527,7 @@
 				</div>
 				{{-- end rows --}}
 				<div id="extraDegreeContainer">
-				@if(isset($registration->degree))
+				@if(isset($registration->degrees))
 					@foreach($registration->degrees as $degree)
 						@include('registration::registrar._degree')
 					@endforeach
