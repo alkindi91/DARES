@@ -88,7 +88,7 @@ class RegistrarController extends Controller {
 
 	}
 
-	public function store(UpdateRegistrationRequest $request)
+	public function postForm(UpdateRegistrationRequest $request)
 	{
 		$registration = daress_registerd();
 
