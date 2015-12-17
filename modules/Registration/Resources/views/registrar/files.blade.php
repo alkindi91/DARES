@@ -217,10 +217,18 @@
 		<div class="clearfix"></div>
 		@if($registration->step->upload_files || $registration->step->upload_receipt)
 		<div class="text-center">
-			<a href="{{ route('registration.registrar.uploadDone')}}" class="btn btn-success">
+		<br>
+		<br>
+		<br>
+		<br>
+			<a href="{{ route('registration.registrar.uploadDone')}}" class="btn btn-lg btn-success">
 		<i class="fa fa-check"></i>
 		إضغط هنا عند انتهائك من رفع المستندات
 		</a>
+		<br>
+		<br>
+		<br>
+		<br>
 		</div>
 		@endif
 	</div>
