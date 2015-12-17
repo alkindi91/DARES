@@ -6,6 +6,7 @@ use Modules\Academystructure\Entities\Department;
 use Modules\Academystructure\Entities\Specialty;
 use Modules\Lists\Entities\Country;
 use Modules\Registration\Entities\Registration;
+use Modules\Registration\Entities\RegistrationDegree;
 use Modules\Registration\Entities\RegistrationFile;
 use Modules\Registration\Entities\RegistrationHistory as History;
 use Modules\Registration\Entities\RegistrationPeriod;
@@ -87,7 +88,30 @@ class RegistrarController extends Controller {
 
 	}
 
-	
+	public function store(UpdateRegistrationRequest $request)
+	{
+		$registration = daress_registerd();
+
+		$input = $request->all();
+
+		$registration->fill($input);
+
+		if($registration->save()) {
+			
+			/** check for extra degrees and store them */
+			$this->saveExtraDegrees($input, $registration->id);
+			/** end check for extra degrees */
+			
+			event(new RegistrationUpdated($registration));
+			event(new RegistrationStepChanged($registration));
+
+			return redirect()->back()->with('success', trans('registration.registrar.profile_change_success'));
+		} else {
+			return redirect()->back()->with('error', trans('registration.registrar.profile_change_error'));
+		}
+
+	}
+
 	public function uploadDone(){
 		$registration = daress_registerd();
 		$step = $registration->step;
@@ -100,5 +124,33 @@ class RegistrarController extends Controller {
 		session()->put(config('registration.session_key'), $registration);
 		event(new RegistrationStepChanged($registration));
 		return redirect()->route('registration.registrar.index')->with('success',trans('registration.registrar.processing_files'));
+	}
+
+	public function saveExtraDegrees($input, $registration_id)
+	{
+		$extra_degrees_keys=[];
+			foreach($input as $key=>$value){
+				if(count($parts = explode('degree_name', $key))>1) {
+					$extra_degrees_keys[] = $parts[1];
+				}
+			}
+
+			$extra_degrees = [];
+			foreach ($extra_degrees_keys as $key) {
+
+				$extra_degrees[] = [
+				'registration_id'		 =>$registration_id,
+				'degree_name'		     =>$input['degree_name'.$key],
+				'degree_country_id'      =>$input['degree_country_id'.$key],
+				'degree_speciality'      =>$input['degree_speciality'.$key],
+				'degree_institution'     =>$input['degree_institution'.$key],
+				'degree_graduation_year' =>$input['degree_graduation_year'.$key],
+				'degree_score'           =>$input['degree_score'.$key],
+				];
+			}
+
+			if(!empty($extra_degrees)) {
+				RegistrationDegree::insert($extra_degrees);
+			}
 	}
 }
