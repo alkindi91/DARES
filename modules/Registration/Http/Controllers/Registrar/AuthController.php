@@ -29,7 +29,7 @@ class AuthController extends Controller {
 		if(!$registration = Registration::login($input)->first()) {
 			return redirect()->route('registration.registrar.login')->with('error', trans('registration::registrar.unvalid_credentials'));
 		}
-		$registration->load('step','type','speciality','period','birthcountry','contactcountry','contactcity','nationalitycity');
+		$registration->load('step','type','degrees','speciality','period','birthcountry','contactcountry','contactcity','nationalitycity');
 		
 		event(new RegistrarLogin($registration));
 		

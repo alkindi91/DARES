@@ -16,6 +16,7 @@ use Modules\Registration\Events\RegistrationCreated;
 use Modules\Registration\Events\RegistrationStepChanged;
 use Modules\Registration\Events\RegistrationUpdated;
 use Modules\Registration\Http\Requests\RegisterRequest;
+use Modules\Registration\Http\Requests\Registrar\UpdateRegistrationRequest;
 use Pingpong\Modules\Routing\Controller;
 class RegistrarController extends Controller {
 	
@@ -120,14 +121,16 @@ class RegistrarController extends Controller {
 		$nextStepId = $step->children->first()->id;
 		$registration->registration_step_id = $nextStepId;
 		$registration->save();
-		$registration->load('step');
+		
 		session()->put(config('registration.session_key'), $registration);
+		event(new RegistrationUpdated($registration));
 		event(new RegistrationStepChanged($registration));
 		return redirect()->route('registration.registrar.index')->with('success',trans('registration.registrar.processing_files'));
 	}
 
 	public function saveExtraDegrees($input, $registration_id)
 	{
+
 		$extra_degrees_keys=[];
 			foreach($input as $key=>$value){
 				if(count($parts = explode('degree_name', $key))>1) {
