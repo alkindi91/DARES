@@ -8,7 +8,7 @@
    <li>
   	{{ trans('academystructure::menu.academy') }}
   </li>
-  <li class='active'>
+ {{-- <li class='active'>
   	<a href="{{ route('as.faculties.index')}}">{{ trans('academystructure::menu.academystructure') }}  </a>	
   </li>
   
@@ -19,7 +19,7 @@
   </li>  
   <li class='active'>
   		{{ $breadcrumbs->yname }}
-  </li>
+  </li>--}}
 </ol>
 {{-- End breadcrumbs --}}
 

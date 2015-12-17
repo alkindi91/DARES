@@ -8,7 +8,7 @@
    <li>
   	{{ trans('academystructure::menu.academy') }}
   </li>
-  <li class='active'>
+  {{-- <li class='active'>
   	<a href="{{ route('as.faculties.index')}}">{{ trans('academystructure::menu.academystructure') }}  </a>	
   </li>
   
@@ -24,7 +24,7 @@
   </li> 
   <li class='active'>
   		{{ $breadcrumbs->tname }}
-  </li>
+  </li>--}}
 </ol>
 {{-- End breadcrumbs --}}
 
@@ -57,6 +57,11 @@
 			<i class="fa fa-trash"></i> @lang('global.delete')
 			</span>
 			</th>
+			<th width="10%" class=" no-link last">
+            <span class="nobr">
+			<i class="fa fa-trash"></i> مواد
+			</span>
+			</th>
 	</tr>
 </thead> 
 <tbody>
@@ -87,6 +92,11 @@
 		<td align="center">
 			<a href="{{ route('as.departments.delete' ,$department->id)}}" class="btn btn-danger btn-sm">
 			<i class="fa fa-trash"></i> @lang('global.delete')
+			</a>
+		</td>
+		<td align="center">
+			<a href="{{ route('as.subject.index' ,$department->id)}}" class="btn-primary pull-left">
+			<i class="fa fa-plus"></i> عرض مواد
 			</a>
 		</td>
 <!--		<td align="center">

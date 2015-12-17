@@ -107,9 +107,17 @@ class AcademystructureServiceProvider extends ServiceProvider {
 	public function registerMenu()
 	{
 		$menu = Menu::get('SidebarMenu');
-		$main_academy = $menu->add( trans('academystructure::menu.academy') ,['route'=>'as.faculties.index'])->prepend('<i class="fa fa-tree"></i>');
-		$main_academy->add( trans('academystructure::menu.academystructure') ,['route'=>'as.faculties.index'])->prepend('<i class="fa fa-tree"></i>');
-		$main_academy->add( trans('academystructure::menu.specialty') ,['route'=>'as.specialties.index'])->prepend('<i class="fa fa-tree"></i>');
+		$main_academy = $menu->add( trans('academystructure::menu.academy') ,['route'=>'as.faculties.index'])
+							 ->data('permission', ['show.academystructure.faculties','show.academystructure.specialties'])
+		                     ->prepend('<i class="fa fa-mortar-board"></i>');
+
+		$main_academy->add( trans('academystructure::menu.academystructure') ,['route'=>'as.faculties.index'])
+							 ->data('permission', ['show.academystructure.faculties'])
+							 ->prepend('<i class="fa fa-tree"></i>');
+
+		$main_academy->add( trans('academystructure::menu.specialty') ,['route'=>'as.specialties.index'])
+							 ->data('permission', ['show.academystructure.specialties'])
+							 ->prepend('<i class="fa fa-tree"></i>');
 		return array();
 	}
 

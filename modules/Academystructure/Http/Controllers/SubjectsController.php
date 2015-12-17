@@ -4,9 +4,9 @@ use Pingpong\Modules\Routing\Controller;
 
 class SubjectsController extends Controller {
 	
-	public function index()
+	public function index($depid)
 	{
-		return view('academystructure::index');
+		return view('academystructure::subjects.index');
 	}
 	
 }

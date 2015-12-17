@@ -67,5 +67,18 @@ Route::group(['prefix' => 'academystructure', 'namespace' => 'Modules\Academystr
 		
 		Route::get('delete/{asSpec}', ['as' =>'as.specialties.delete','middleware'=>'permission:delete.academystructure.specialties', 'uses' =>'SpecialtyController@delete']);
 	});
+	////////////////////Subjects///////////////////////////
+	Route::group(['prefix' => 'Subjects'], function()
+	{
+		Route::get('/{depid}',  ['as' =>'as.subject.index', 'uses' =>'SubjectsController@index']);
+		
+		Route::get('create', ['as' =>'as.subject.create','uses' =>'SubjectsController@create']);
+		post('store', ['as' =>'as.subject.store', 'uses' =>'SubjectsController@store']);
+	
+		Route::get('edit/{asSpec}', ['as' =>'as.subject.edit', 'uses' =>'SubjectsController@edit']);
+		post('update/{asSpec}', ['as' =>'as.subject.update', 'uses' =>'SubjectsController@update']);
+		
+		Route::get('delete/{asSpec}', ['as' =>'as.subject.delete', 'uses' =>'SubjectsController@delete']);
+	});
 	
 });

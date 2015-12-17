@@ -7,7 +7,7 @@ class Subject extends Model {
 
     protected $table = 'subject_subjects';
  
-    protected $fillable = ['name','hour','code','description','type','pre_request'];
+    protected $fillable = ['name','hour','code','description','type','pre_request','dep_id'];
 
     public function prerequest()
     {
