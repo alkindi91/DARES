@@ -187,6 +187,7 @@ Route::group([
             get('files',['uses'=>'RegistrarController@files' ,'as'=>'registration.registrar.files', 'middleware'=>'authregister']);
             get('form',['uses'=>'RegistrarController@form' ,'as'=>'registration.registrar.form', 'middleware'=>'authregister']);
             get('upload-done',['uses'=>'RegistrarController@uploadDone','as'=>'registration.registrar.uploadDone','middleware'=>'authregister']);
+            post('form',['uses'=>'RegistrarController@postForm','as'=>'registration.registrar.form','middleware'=>'authregister']);
             
             Route::group(['prefix'=>'files', 'namespace'=>'Files'], function(){
                 post('upload',['uses'=>'FilesController@store' ,'as'=>'registration.registrar.files.store', 'middleware'=>'authregister']);
