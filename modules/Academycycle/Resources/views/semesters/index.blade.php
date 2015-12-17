@@ -38,6 +38,9 @@
 				@lang('academycycle::semesters.name')
 			</th>
 			<th>
+				<i class="fa fa-calendar"></i> @lang('academycycle::semesters.active')
+			</th>
+			<th>
 				<i class="fa fa-calendar"></i> @lang('academycycle::semesters.start_at')
 			</th>
 			<th>
@@ -61,6 +64,8 @@
 		<td>
 			{{ $semester->name }}
 		</td>
+		<td align="center" style="font-size:24px"> <li class="fa {!! $semester->active ? 'fa-check-circle-o text-success' : 'fa-ban text-danger' !!}"></li>
+		</td>
 		<td class='text-center {!! $semester->start_at ? 'success' : 'danger' !!}'>
 			{{ $semester->start_at }}
 		</td>
@@ -75,11 +80,8 @@
 			<a href="{{ route('ac.semesters.delete' ,$semester->id)}}" class="btn btn-danger btn-sm">
 				<i class="fa fa-trash"></i> @lang('global.delete')
 			</a>
-			<a href="{{ route('ac.semesters.delete' ,$semester->id)}}" class="btn btn-info btn-md">
-				<i class="fa fa-table"></i> الاختبارات
-			</a>
-			<a href="{{ route('ac.semesters.delete' ,$semester->id)}}" class="btn btn-info btn-md">
-				<i class="fa fa-table"></i> لااحداث والفترات
+			<a href="{{ route('ac.semestereventtypes.index' ,$semester->id)}}" class="btn btn-info btn-md">
+				<i class="fa fa-table"></i> الاحداث 
 			</a>
 			
 		</td>
@@ -95,3 +97,4 @@
 {!! Form::close() !!}
 </div>
 @stop
+
