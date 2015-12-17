@@ -4,9 +4,12 @@
 
 {!! Form::model($registration, ['route'=>'registration.registrar.form']) !!}
 @include('registration::registrar._fields')
-<a href="" class="btn btn-success">
-	<i class="fa fa-save"></i> @lang('global.save')
+<div class="text-center">
+<a href="" class="btn btn-success btn-lg">
+	<i class="fa fa-save "></i> @lang('global.save')
 </a>
+<br />
+</div>
 {!! Form::close() !!}
 
 @stop
