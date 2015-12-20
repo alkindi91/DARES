@@ -26,9 +26,6 @@
             <th>
              السؤال
             </th>
-             <th>
-             المادة
-            </th>
             <th>
            نوع السؤال
             </th>
@@ -51,20 +48,14 @@
 </thead>
 <tbody>
 
-    @foreach($questions as $question)
-    <tr class="even pointer">
-    <td class="a-center ">
+    @foreach($questions as $question)   
+        <tr class="even pointer">
+        <td class="a-center ">
             <input type="checkbox" class="tableflat" value='{{ $question->id }}' name='table_records[]'>
         </td>
         <td class="a-center ">
             {{ $question->question }}
-
         </td>
-
-         <td>
-            {{ $question->level }}
-        </td>
-
         <td>
             {{ $question->type }}
         </td>
@@ -77,11 +68,11 @@
        
         <td class=" last">
          
-            <a href="{{ route('choice.index' ,$question->id)}}" class="btn btn-success btn-md">
+            <a href="{{ route('choice.index' )}}" class="btn btn-success btn-md">
             <i class="fa fa-table"></i> عرض الإجابات
             </a>
 
-            <a href="{{ route('choice.create',$question->id) }}" class="btn btn-primary pull-md">
+            <a href="{{ route('choice.create') }}" class="btn btn-primary pull-md">
    			 <i class="fa fa-plus"></i> إضافة اجابة جديدة 
 			</a>
         </td>

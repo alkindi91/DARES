@@ -3,7 +3,7 @@
 
 use Illuminate\Http\Request;
 use Modules\Questionbank\Entities\choice;
-use Modules\Questionbank\Entities\question;
+use Modules\Questionbank\Entities\Question;
 use Modules\Subject\Entities\Lesson;
 use Modules\Subject\Entities\Subject;
 use Pingpong\Modules\Routing\Controller;
@@ -24,15 +24,15 @@ class QuestionbankController extends Controller {
 
 	}
 	public function questionlistsub($id){
-		$question = Subject::with('questions')->find($id);
-
-		//var_dump($subject->toArray());
+		$subject = Subject::with('questions')->find($id);
+		$questions = $subject->questions;
 		
-		return view('questionbank::questionlistsub',compact('question'));		
+		return view('questionbank::questionlistsub',compact('questions', 'subject'));		
 
 	}
 	public function questionlist($lessonid){
-		$questions = question::paginate(20)->where('lesson_id',$lessonid);
+		$questions = Question::paginate(20)->where('lesson_id',$lessonid);
+		//var_dump($questions->toArray());
 		return view('questionbank::questionlist',compact('questions'));
 	}
 
@@ -45,7 +45,7 @@ class QuestionbankController extends Controller {
 		return view('questionbank::create', compact('id','type','difficulty','level'));
 	}
 
-	public function store(question $question, Request $req)
+	public function store(Question $question, Request $req,$id)
 	{
 		
 	$question->fill($req->all())->save();

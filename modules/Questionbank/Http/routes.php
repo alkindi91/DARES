@@ -9,7 +9,7 @@ Route::group(['prefix' => 'questionbank', 'namespace' => 'Modules\Questionbank\H
     get('questionlistsub/{qbsubjectid}',['as'=>'questionbank.questionlistsub','uses'=>'QuestionbankController@questionlistsub']);
     
     get('create/{qblessonid}', ['as'=>'questionbank.create','uses'=>'QuestionbankController@create']);
-    post('store', ['as'=>'questionbank.store','uses'=>'QuestionbankController@store']);
+    post('store/{qblessonid}', ['as'=>'questionbank.store','uses'=>'QuestionbankController@store']);
     get('edit', ['as'=>'questionbank.edit','uses'=>'QuestionbankController@edit']);
     post('update', ['as'=>'questionbank.update','uses'=>'QuestionbankController@update']);
     get('delete', ['as'=>'questionbank.delete','uses'=>'QuestionbankController@delete']);
