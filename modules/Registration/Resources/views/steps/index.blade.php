@@ -82,9 +82,9 @@
 			{!! $step->verify_email ? '<i class="glyphicon text-success glyphicon-ok"></i>' : '<i class="glyphicon text-danger glyphicon-remove"></i>' !!}
 		</td>
 		<td>
-			@foreach($step->children as $nextstep)
-				&nbsp;<a href='{{ route('registration.steps.edit' ,$nextstep->id)}}' class="label label-info">
-					{{ $nextstep->name }}
+			@foreach($step->children as $key=>$nextstep)
+				<a href='{{ route('registration.steps.edit' ,$nextstep->id)}}' style='display:block;margin:5px;padding:8px 5px 5px;text-align:right' class="label  label-info">
+					<i class="fa fa-recycle"></i> {{ $nextstep->name }}
 				</a>
 			@endforeach
 		</td>

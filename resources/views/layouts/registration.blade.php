@@ -57,6 +57,7 @@
         </div>
     <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('template/js/custom.js') }}"></script>
+    @include('partials.notifications')
 @section('footer')
 @show
 </body>

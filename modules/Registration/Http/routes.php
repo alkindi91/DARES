@@ -186,6 +186,13 @@ Route::group([
             get('status',['uses'=>'RegistrarController@status' ,'as'=>'registration.registrar.status', 'middleware'=>'authregister']);
             get('files',['uses'=>'RegistrarController@files' ,'as'=>'registration.registrar.files', 'middleware'=>'authregister']);
             get('form',['uses'=>'RegistrarController@form' ,'as'=>'registration.registrar.form', 'middleware'=>'authregister']);
+            get('upload-done',['uses'=>'RegistrarController@uploadDone','as'=>'registration.registrar.uploadDone','middleware'=>'authregister']);
+            post('form',['uses'=>'RegistrarController@postForm','as'=>'registration.registrar.form','middleware'=>'authregister']);
+            
+            Route::group(['prefix'=>'files', 'namespace'=>'Files'], function(){
+                post('upload',['uses'=>'FilesController@store' ,'as'=>'registration.registrar.files.store', 'middleware'=>'authregister']);
+                get('delete/{id}', ['uses'=>'FilesController@delete', 'as'=>'registration.registrar.files.delete', 'middleware'=>'authregister']);
+            });
         });
 
     });

@@ -1,3 +1,4 @@
+<div class="js-student-fieldset">
 <div class='x_panel panel-primary'>
 			<div class="x_title">
 				<h2>نوع الالتحاق</h2>
@@ -188,7 +189,7 @@
 					</div>
 				</div>
 				<br />
-				<div class="row registration-form__nationality omani" id='expactId'>
+				<div class="row registration-form__nationality {{ (isset($registration) and $registration->nationality_type=='omani') ? 'omani' : null}}" id='expactId'>
 					<div class="col-sm-4 col-xs-12 outsider">
 						<div class="form-group">
 							<label for="nationality">
@@ -224,13 +225,13 @@
 								الولاية :
 							</label>
 							
-							{!! Form::select('nationality_state_id' ,(isset($registration) and !empty($nationality_states = $registration->nationalitycity->states->lists('name', 'id')->toArray())) ? $nationality_states : [] ,null ,['data-parsley-errors-container'=>"#birthStateContainer",'class'=>'select2_single form-control' ,'id'=>'nationality_state_id']) !!}
+							{!! Form::select('nationality_state_id' ,(isset($registration) and isset($registration->nationalitycity->states) and !empty($nationality_states = $registration->nationalitycity->states->lists('name', 'id')->toArray())) ? $nationality_states : [] ,null ,['data-parsley-errors-container'=>"#birthStateContainer",'class'=>'select2_single form-control' ,'id'=>'nationality_state_id']) !!}
 							<div id="birthStateContainer"></div>
 						</div>
 					</div>
 				</div>
 				
-				<div class="row registration-form__outsider">
+				<div class="row registration-form__outsider {{ (isset($registration) and $registration->nationality_type=='omani') ? '' : 'active'}}">
 					<div class="col-sm-4 col-xs-12">
 						<div class="form-group">
 							<label for="stay_type">
@@ -262,11 +263,11 @@
 					</div>
 					<div class="col-sm-4 col-xs-12">
 						<div class="form-group">
-							<label for="passeport_country">
+							<label for="passeport_country_id">
 								جهة الصدور <i class="fa text-danger fa-asterisk resident-required"></i>:
 							</label>
 							
-							{!! Form::select('passeport_country' ,$countries_list ,null ,['class'=>'select2_single form-control' ,'id'=>'passeport_country']) !!}
+							{!! Form::select('passeport_country_id' ,$countries_list ,null ,['class'=>'select2_single form-control' ,'id'=>'passeport_country_id']) !!}
 						</div>
 					</div>
 					
@@ -502,7 +503,7 @@
 									سنة التخرج <i class="fa text-danger fa-asterisk"></i>:
 								</label>
 								
-								{!! Form::select('degree_graduation_year' ,[""=>""]+range(date('Y') ,date("Y")-80) ,null ,['data-parsley-errors-container'=>"#degreeYear_1",'class'=>' select2_single form-control','required'=>'required']) !!}
+								{!! Form::select('degree_graduation_year' ,$years_list,null ,['data-parsley-errors-container'=>"#degreeYear_1",'class'=>' select2_single form-control','required'=>'required']) !!}
 								<div class='parsleyjs-error-container' id="degreeYear_1"></div>
 							</div>
 						</div>
@@ -525,7 +526,13 @@
 					</div>
 				</div>
 				{{-- end rows --}}
-				<div id="extraDegreeContainer"></div>
+				<div id="extraDegreeContainer">
+				@if(isset($registration->degrees))
+					@foreach($registration->degrees as $degree)
+						@include('registration::registrar._degree')
+					@endforeach
+				@endif
+				</div>
 				<button type='button' id='addExtraDegrees' class='btn btn-success'>
 				<i class="fa fa-plus"></i> إضافة شهادة أخرى
 				</button>
@@ -561,10 +568,10 @@
 					</div>
 				</div>
 				<div class="ln_solid"></div>
-				<div class="row social-job-details">
+				<div class="row social-job-details" style='display:{{ (isset($registration) and $registration->social_job=='employed') ? 'block' : "none" }}'>  
 					<div class="col-sm-4 col-xs-12">
 						<div class="form-group">
-							<label for="social_job_status">
+							<label for="social_job_status" >
 								الوظيفة <i class="fa text-danger fa-asterisk"></i>:
 							</label>
 							
@@ -616,20 +623,20 @@
 					<div class="clearfix"></div>
 					<div class="col-sm-4 col-xs-12">
 						<div class="form-group">
-							<label for="social_job_country">
+							<label for="social_job_country_id">
 								الدولة <i class="fa text-danger fa-asterisk"></i>:
 							</label>
 							
-							{!! Form::select('social_job_country' ,$countries_list ,null ,['required'=>'required','class'=>'select2_single form-control' ,'id'=>'social_job_country']) !!}
+							{!! Form::select('social_job_country_id' ,$countries_list ,null ,['required'=>'required','class'=>'select2_single form-control' ,'id'=>'social_job_country_id']) !!}
 						</div>
 					</div>
 					<div class="col-sm-4 col-xs-12">
 						<div class="form-group">
-							<label for="social_job_city">
+							<label for="social_job_city_id">
 								المحافظة <i class="fa text-danger fa-asterisk"></i>:
 							</label>
 							
-							{!! Form::select('social_job_city' ,[] ,null ,['required'=>'required','class'=>'select2_single form-control' ,'id'=>'social_job_city']) !!}
+							{!! Form::select('social_job_city_id' ,[] ,null ,['required'=>'required','class'=>'select2_single form-control' ,'id'=>'social_job_city_id']) !!}
 						</div>
 					</div>
 				</div>
@@ -778,13 +785,15 @@
 				</div>
 			</div>
 		</div>
-	
+	</div>
 
 @section('head')
+@parent
 <!-- select2 -->
 <link href="{{ asset('template/css/select/select2.min.css') }}" rel="stylesheet">
 @stop
 @section('footer')
+@parent
 <!-- icheck -->
 <script src="{{ asset('template/js/icheck/icheck.min.js') }}"></script>
 <!-- daterangepicker -->
@@ -801,16 +810,24 @@
 <script src="{{ asset('template/js/select/select2.full.js') }}"></script>
 <script src="{{ asset('template/js/select/i18n/ar.js') }}"></script>
 <script type="text/javascript">
+
 $(document).ready(function () {
+// make all input disabled if student not allowed to edit
+@if(isset($registration) and !$registration->step->edit_form)
+	$('body').find('.js-student-fieldset').find('select,input,button').attr('disabled', true);
+@endif
+
 	var countriesCodes = {!! json_encode($codes_list) !!}
 // we fetch contact cities based on current contact country on document load
 //applyFetchCities('contact_city_id' ,$('#contact_country_id').val() ,'contact_state_id');
+@if((isset($registration) and $registration->step->edit_form) || !isset($registration))
 $('.date-picker').daterangepicker({
 	singleDatePicker: true,
 	locale: {
 		format: 'YYYY-MM-DD'
 	},
 });
+@endif
 $('body').on('ifChanged', 'input[name="health_status"]', function(event) {
 	var $this = $(this) ,$disabledFields = $('.health-disabled-fields');
 	if($this.val()==1) {
@@ -855,7 +872,9 @@ function drawSelect2() {
 	allowClear: true
 });
 }
+@if((isset($registration) and $registration->step->edit_form) || !isset($registration))
 drawSelect2();
+@endif
 $('body').on('change', '#contact_country_id', function(event) {
 	event.preventDefault();
 	var $this = $(this);
@@ -880,7 +899,7 @@ $('body').on('change', '#birth_country_id', function(event) {
 	applyFetchCities('nationality_city_id' ,$this.val() ,'nationality_state_id');
 	
 });
-$('body').on('change', '#social_job_country', function(event) {
+$('body').on('change', '#social_job_country_id', function(event) {
 	event.preventDefault();
 	var $this = $(this);
 	/* Act on the event */
@@ -910,7 +929,7 @@ $('body').on('click' ,"#addExtraDegrees" ,function() {
 		$mainClone.find("input[name='degree_institution']").siblings('label').html('معهد / كلية / جامعة <i class="fa text-danger fa-asterisk"></i>');
 		$mainClone.find('input[type="text"]').val("");
 		$mainClone.find('select').css({display:"block"});
-		var timestamp = new Date().getUTCMilliseconds();
+		var timestamp = makeid();
 		$mainClone.find('input,select').each(function(index, val) {
 			/* iterate through array or object */
 			var $clonedInput = $(val),originalName = $clonedInput.attr('name') ,clonedName =originalName+timestamp,
@@ -946,7 +965,9 @@ $('body').on('click' ,"#addExtraDegrees" ,function() {
 			$jobDetails.slideUp();
 		}
 	});
-	$('.social-job-details').find('input,select').attr('disabled',true);
+	if($('#social_job').val()!='employed') {
+		$('.social-job-details').find('input,select').attr('disabled',true);
+	}
 	/** end social jobs logic */
 	$('body').on('change', '#stay_type', function(event) {
 		event.preventDefault();
@@ -989,8 +1010,9 @@ $('body').on('click' ,"#addExtraDegrees" ,function() {
 			});
 		}
 		function applyFetchJobCities() {
-		$('#social_job_city').html("").change();
-			var currentCountry = $('#social_job_country').val();
+
+		$('#social_job_city_id').html("").change();
+			var currentCountry = $('#social_job_country_id').val();
 			if(_.isEmpty(currentCountry)) {
 			return;
 			}
@@ -1002,11 +1024,12 @@ $('body').on('click' ,"#addExtraDegrees" ,function() {
 			})
 			.done(function(response) {
 				var $options;
+				
 				$.each(response, function(index, val) {
 					/* iterate through array or object */
 					$options += '<option value="'+val.id+'">'+val.name+'</option>';
 				});
-				$('#social_job_city').html($options).change();
+				$('#social_job_city_id').html($options).change();
 				//applyFetchStates();
 			});
 		}

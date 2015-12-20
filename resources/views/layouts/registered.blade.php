@@ -97,7 +97,13 @@
                                     </li>
                                 </ul>
                             </li>
-                           
+                           <li>
+                           <a >
+                           <b class="text-danger">
+                               <i class="fa fa-info-circle"></i> @lang('registration::registrar.you_are_in_step',['name'=>daress_registerd()->step->name])
+                            </b>
+                           </a>
+                           </li>
 
                         </ul>
                     </nav>
@@ -161,14 +167,10 @@
 
     </div>
 
-    
-
-
     <script src="{{ asset('template/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('template/js/nicescroll/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('template/js/icheck/icheck.min.js') }}"></script>
-    @section('footer')
-    @show
+
     <script src="{{ asset('template/js/custom.js') }}"></script>
     <script src="{{ asset('template/js/ecss.min.js') }}"></script>
    
@@ -180,14 +182,12 @@
                 });
          NProgress.done();
     });
-       
-
     </script>
-   
+
 @include('partials.notifications')
 
-
-
+@section('footer')
+@show
 </body>
 
 </html>

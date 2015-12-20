@@ -1,5 +1,6 @@
 <?php
 
 return [
-	'name' => 'Academycycle'
+	'name' => 'Academycycle',
+	'categories'=> [ 'request' => 'طلب'  , 'exam' => 'اختبار' , 'info' => 'معلومات']
 ];

@@ -49,13 +49,22 @@ class RegistrationTableSeeder extends Seeder {
 			'academycycle_year_id'=>'1',
 		];
 
-		$step = [
-			'name'=>'التحقق من البريد الإلكتروني',
+		$steps = [[
+			'name'=>'تم تقديم طلب',
 			'verify_email'=>1,
 			'email_template'=>view('registration::steps.templates.verify_email')
+		],[
+			'name'=>'رفع الملفات',
+			'upload_files'=>1
+		],[
+			'name'=>'الغاء'
+		]
 		];
-
-		RegistrationStep::create($step);
+        
+		foreach ($steps as $step) {
+			RegistrationStep::create($step);
+		}
+		
 
 		RegistrationPeriod::whereNotNull('id')->delete();
 		RegistrationPeriod::create($period);

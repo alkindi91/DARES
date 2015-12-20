@@ -21,7 +21,7 @@ class RegistrationStepChanged extends Event
      * @param  Registration  $registration
      * @return void
      */
-    public function __construct(Registration $registration, $extra)
+    public function __construct(Registration $registration, $extra = [])
     {
        
         $this->registration = $registration;

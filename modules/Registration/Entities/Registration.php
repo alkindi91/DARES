@@ -18,12 +18,14 @@ class Registration extends Model {
 		'gender',
 		'birthday',
 		'nationality_type',
-		'passeport_number',
+        'passeport_number',
+		'passeport_country_id',
 		'passeport_issued',
 		'passeport_expire',
 		'stay_expire',
 		'national_id',
 		'birth_country_id',
+        'nationality_country_id',
 		'nationality_city_id',
 		'nationality_state_id',
 		'contact_country_id',
@@ -37,7 +39,8 @@ class Registration extends Model {
 		'contact_email',
 		'contact_mobile',
 		'contact_phone',
-		'contact_fax',
+        'contact_fax',
+		'stay_type',
 		'degree_country_id',
 		'degree_graduation_year',
 		'degree_speciality',
@@ -46,7 +49,9 @@ class Registration extends Model {
 		'social_job',
 		'social_job_status',
 		'social_job_start',
-		'social_experience',
+        'social_experience',
+        'social_job_country',
+		'social_job_city',
 		'social_job_employer',
 		'health_status',
 		'health_disabled_type',
@@ -99,10 +104,10 @@ class Registration extends Model {
     public function generateCode()
     {
     	$this->load('type' ,'period','speciality');
-        $prefix  = $this->type->code;
-        $prefix .= $this->speciality->code;
+        $prefix  = "R".$this->type->code;
+        // $prefix .= $this->speciality->code;
         $prefix .= $this->period->code;
-        $prefix .= $this->gender;
+        // $prefix .= ""-$this->gender;
         $this->username_prefix = strtoupper($prefix);
         $this->save();
     }
@@ -133,6 +138,16 @@ class Registration extends Model {
 
     public function nationalitycity()
     {
-    	return $this->belongsTo('\Modules\Lists\Entities\City', 'nationality_city_id');
+        return $this->belongsTo('\Modules\Lists\Entities\City', 'nationality_city_id');
+    }
+
+    public function passeportcountry()
+    {
+    	return $this->belongsTo('\Modules\Lists\Entities\City', 'passeport_country_id');
+    }
+
+    public function degrees()
+    {
+        return $this->hasMany('\Modules\Registration\Entities\RegistrationDegree', 'registration_id');
     }
 }

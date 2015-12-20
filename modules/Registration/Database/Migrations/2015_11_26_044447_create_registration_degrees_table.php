@@ -16,21 +16,37 @@ class CreateRegistrationDegreesTable extends Migration {
         {
             $table->increments('id');
 
-            $table->string('type');
+            $table->string('degree_name');
 
-            $table->string('speciality');
+            $table->string('degree_speciality');
 
-            $table->string('institution');
+            $table->string('degree_institution');
 
-            $table->date('graduation_year');
+            $table->smallInteger('degree_graduation_year');
 
-            $table->integer('score');
+            $table->integer('degree_score');
 
-            $table->integer('country_id')->unsigned()->nullable();
+            $table->integer('registration_id')
+                  ->unsigned()
+                  ->nullable();
 
-            $table->foreign('country_id')->references('id')->on('lists_countries')->onDelete('SET NULL')->onUpdate('CASCADE');
+            $table->foreign('registration_id')
+                  ->references('id')
+                  ->on('registrations')
+                  ->onDelete('CASCADE')
+                  ->onUpdate('CASCADE');
 
-            $table->timestamps();
+            $table->integer('degree_country_id')
+                  ->unsigned()
+                  ->nullable();
+
+            $table->foreign('degree_country_id')
+                  ->references('id')
+                  ->on('lists_countries')
+                  ->onDelete('SET NULL')
+                  ->onUpdate('CASCADE');
+
+            // $table->timestamps();
         });
     }
 

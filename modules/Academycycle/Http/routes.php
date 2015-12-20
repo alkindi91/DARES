@@ -55,4 +55,95 @@ Route::group(['prefix' => 'academycycle', 'namespace' => 'Modules\Academycycle\H
                 ]);
     
         });
+	Route::group(['prefix'=>'semesters'], function () {
+
+            get('/{acYear}', [
+                'as'=>'ac.semesters.index',
+                'uses'=>'SemestersController@index' ,
+                'middleware'=>'permission:view.academycycle.semesters'
+                ]);
+
+            get('create/{acYear}', [
+                'as'=>'ac.semesters.create',
+                'uses'=>'SemestersController@create',
+                'middleware'=>'permission:create.academycycle.semesters'
+                ]);
+
+            get('edit/{acSemester}', [
+                'as'=>'ac.semesters.edit',
+                'uses'=>'SemestersController@edit',
+                'middleware'=>'permission:edit.academycycle.semesters'
+                ]);
+            
+            post('store', [
+                'as'=>'ac.semesters.store',
+                'uses'=>'SemestersController@store',
+                'middleware'=>'permission:create.academycycle.semesters'
+                ]);
+
+            post('update/{acSemester}', [
+                'as'=>'ac.semesters.update',
+                'uses'=>'SemestersController@update',
+                'middleware'=>'permission:edit.academycycle.semesters'
+                ]);
+				
+            get('delete/{acSemester}', [
+                'as'=>'ac.semesters.delete',
+                'uses'=>'SemestersController@delete',
+                'middleware'=>'permission:delete.academycycle.semesters'
+                ]);
+
+            get('delete-bulk', [
+                'as'=>'ac.semesters.delete-bulk' ,
+                'uses'=>'SemestersController@deleteBulk',
+                'middleware'=>'permission:delete.academycycle.semesters'
+                ]);
+    
+        });
+		
+	Route::group(['prefix'=>'semestereventtypes'], function () {
+
+            get('/', [
+                'as'=>'ac.semestereventtypes.index',
+                'uses'=>'SemestereventtypesController@index' ,
+                'middleware'=>'permission:view.academycycle.semestereventtypes'
+                ]);
+
+            get('create', [
+                'as'=>'ac.semestereventtypes.create',
+                'uses'=>'SemestereventtypesController@create',
+                'middleware'=>'permission:create.academycycle.semestereventtypes'
+                ]);
+
+            get('edit/{acSemestereventtype}', [
+                'as'=>'ac.semestereventtypes.edit',
+                'uses'=>'SemestereventtypesController@edit',
+                'middleware'=>'permission:edit.academycycle.semestereventtypes'
+                ]);
+            
+            post('store', [
+                'as'=>'ac.semestereventtypes.store',
+                'uses'=>'SemestereventtypesController@store',
+                'middleware'=>'permission:create.academycycle.semestereventtypes'
+                ]);
+
+            post('update/{acSemestereventtype}', [
+                'as'=>'ac.semestereventtypes.update',
+                'uses'=>'SemestereventtypesController@update',
+                'middleware'=>'permission:edit.academycycle.semestereventtypes'
+                ]);
+				
+            get('delete/{acSemestereventtype}', [
+                'as'=>'ac.semestereventtypes.delete',
+                'uses'=>'SemestereventtypesController@delete',
+                'middleware'=>'permission:delete.academycycle.semestereventtypes'
+                ]);
+
+            get('delete-bulk', [
+                'as'=>'ac.semestereventtypes.delete-bulk' ,
+                'uses'=>'SemestereventtypesController@deleteBulk',
+                'middleware'=>'permission:delete.academycycle.semestereventtypes'
+                ]);
+    
+        });
 });
