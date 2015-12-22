@@ -2,14 +2,14 @@
 
 
 use Illuminate\Http\Request;
-use Modules\Questionbank\Entities\choice;
+use Modules\Questionbank\Entities\Choice;
 use Pingpong\Modules\Routing\Controller;
 
 class choiceeController extends Controller {
 	
 	public function index($qid)
 	{
-		$choices = choice::paginate(20)->where('question_id', $qid);
+		$choices = Choice::paginate(20)->where('question_id', $qid);
 		
 		return view('questionbank::choice.index', compact('choices'));
 	}
@@ -32,7 +32,10 @@ class choiceeController extends Controller {
 	}
 
 	public function edit(){
+		
+		$questions = Question::findOrFail($id);
 
+		return view('questionbank::edit', compact('id','type','difficulty','level','questions'));
 	}
 	
 	public function update(){

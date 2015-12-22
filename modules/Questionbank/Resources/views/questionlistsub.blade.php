@@ -68,13 +68,17 @@
        
         <td class=" last">
          
-            <a href="{{ route('choice.index' )}}" class="btn btn-success btn-md">
+            <a href="{{ route('choice.index', $question->id )}}" class="btn btn-success btn-md">
             <i class="fa fa-table"></i> عرض الإجابات
             </a>
 
-            <a href="{{ route('choice.create') }}" class="btn btn-primary pull-md">
+            <a href="{{ route('choice.create',$question->id) }}" class="btn btn-primary pull-md">
    			 <i class="fa fa-plus"></i> إضافة اجابة جديدة 
 			</a>
+
+             <a href="{{ route('questionbank.delete' ,$question->id)}}" class="btn btn-danger btn-sm">
+            <i class="fa fa-trash"></i> @lang('global.delete')
+            </a>
         </td>
     @endforeach
 </tr>
