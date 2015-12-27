@@ -36,12 +36,13 @@ class QuestionbankController extends Controller {
 		return view('questionbank::questionlist',compact('questions'));
 	}
 
-	public function create($id)
+	public function create()
 
 	{	$type=config('questionbank.types');
 		$difficulty=config('questionbank.difficulty');
 		$level=config('questionbank.level');
 
+		
 		return view('questionbank::create', compact('id','type','difficulty','level'));
 	}
 
@@ -53,25 +54,46 @@ class QuestionbankController extends Controller {
 	
 		$message = 'تم اضافة السؤال بنجاح';
 		if(request('submit')=='save')
+		return redirect()->route('choice.create',array('id'=>$id))->with('success' ,$message);
+		else
+		return redirect()->route('questionbank.questionlist',array('id'=>$id))->with('success' ,$message);
+
+	}
+
+
+	public function edit($id)
+	{	$type=config('questionbank.types');
+		$difficulty=config('questionbank.difficulty');
+		$level=config('questionbank.level');
+
+		$questions = Question::findOrFail($id);
+
+		return view('questionbank::edit', compact('id','type','difficulty','level','questions'));
+	}
+
+	public function update(Question $question, Request $req,$id)
+	{
+		$questionlist = $question->findOrFail($id);
+
+    	$questionlist->fill($req->all())->save();
+    	$message = 'تم تعديل الدرس بنجاح';
+
+		if(request('submit')=='save')
 		return redirect()->back()->with('success' ,$message);
 		else
-		return redirect()->route('elements.index',array('id'=>$lessonid))->with('success' ,$message);
-
-	}
-
-	public function update()
-	{
-		return view('questionbank::index');
-	}
-
-	public function edit()
-	{
-		return view('questionbank::index');
+		return redirect()->route('questionbank.questionlist',array('id'=>$questionlist->lesson_id))->with('success' ,$message);
 	}
 
 
-	public function delete()
-	{
+
+	public function delete(Question $question , $id )
+	{	$lessonquestions = $question->findOrFail($id);
+		
+		$questions = $question->findOrFail($id)->delete();
+
+    	$message ="تم حذف المادة بنجاح";
+    	return redirect()->route('questionbank.questionlist',$lessonquestions->lesson_id)->with('success' ,$message);
+	
 		
 	}
 
