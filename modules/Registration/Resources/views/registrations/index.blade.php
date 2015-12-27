@@ -60,6 +60,12 @@
 	</div>
 	<div class="col-sm-4 col-lg-3">
 	<label>
+	@lang('registration::registrations.social_job')
+	</label>
+		{!! Form::select('social_job[]',config('registration.social_jobs'),request('social_job'),['class'=>'form-control select2_multiple','placeholder'=>'الوظيفة','multiple'=>'multiple']) !!}
+	</div>
+	<div class="col-sm-4 col-lg-3">
+	<label>
 	@lang('registration::registrations.national_id')
 	</label>
 		{!! Form::text('national_id',request('national_id'),['class'=>'form-control','placeholder'=>trans('registration::registrations.national_id')]) !!}

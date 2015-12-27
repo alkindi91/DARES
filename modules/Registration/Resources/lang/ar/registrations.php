@@ -17,5 +17,6 @@ return [
 	'academycycle_year'=>'السنة الدراسية',
 	'gender'=>'الجنس',
 	'national_id'=>'الرقم المدني',
+	'social_job'=>'الحالة الوظيفية',
 	'contact_email'=>'البريد الإلكتروني',
 ];
