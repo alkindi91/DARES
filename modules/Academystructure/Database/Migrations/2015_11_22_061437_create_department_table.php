@@ -16,6 +16,8 @@ class CreateDepartmentTable extends Migration {
         {
             $table->increments('id');
 			
+			$table->string('subject_ids');
+			
             $table->integer('spec_id')->unsigned()->nullable();
             $table->foreign('spec_id')->references('id')->on('academystructure_specialties');
 			
