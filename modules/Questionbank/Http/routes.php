@@ -3,7 +3,7 @@
 Route::group(['prefix' => 'questionbank', 'namespace' => 'Modules\Questionbank\Http\Controllers'], function()
 {
     
-    get('/', ['as'=>' .index','uses'=>'QuestionbankController@index']);
+    get('/', ['as'=>'questionbank.index','uses'=>'QuestionbankController@index']);
     get('index_lesson/{qquestionbank}', ['as'=>'questionbank.index_lesson','uses'=>'QuestionbankController@index_lesson']);
     get('questionlist/{qblessonid}', ['as'=>'questionbank.questionlist','uses'=>'QuestionbankController@questionlist']);
     get('questionlistsub/{qbsubjectid}',['as'=>'questionbank.questionlistsub','uses'=>'QuestionbankController@questionlistsub']);
