@@ -34,6 +34,9 @@
             درجة الصعوبة
               </th>
            
+              <th>
+            الدرس
+              </th>
             <th>
             <i class="fa fa-reorder"></i>
             القياس
@@ -51,9 +54,9 @@
     @foreach($questions as $question)   
         <tr class="even pointer">
         <td class="a-center ">
-            <input type="checkbox" class="tableflat" value='{{ $question->id }}' name='table_records[]'>
+            <input type="checkbox" class="tableflat" value='{{ $question->question_id }}' name='table_records[]'>
         </td>
-        <td class="a-center ">
+        <td class="a-center" width="150px">
             {{ $question->question }}
         </td>
         <td>
@@ -63,20 +66,23 @@
             {{ $question->difficulty }}
         </td>
         <td>
-            {{ $question->level }}
+            {{ $question->lesson_name }}
         </td>
-       
+       <td>
+             {{ $question->level }}
+
+        </td>
         <td class=" last">
          
-            <a href="{{ route('choice.index', $question->id )}}" class="btn btn-success btn-md">
+            <a href="{{ route('choice.index', $question->question_id )}}" class="btn btn-success btn-md">
             <i class="fa fa-table"></i> عرض الإجابات
             </a>
 
-            <a href="{{ route('choice.create',$question->id) }}" class="btn btn-primary pull-md">
+            <a href="{{ route('choice.create',$question->question_id) }}" class="btn btn-primary pull-md">
    			 <i class="fa fa-plus"></i> إضافة اجابة جديدة 
 			</a>
 
-             <a href="{{ route('questionbank.delete' ,$question->id)}}" class="btn btn-danger btn-sm">
+             <a href="{{ route('questionbank.delete' ,$question->question_id)}}" class="btn btn-danger btn-sm">
             <i class="fa fa-trash"></i> @lang('global.delete')
             </a>
         </td>

@@ -8,7 +8,7 @@ class Question extends Model {
 
     protected $fillable = ['question','type','isactive','difficulty','level','lesson_id'];
 
-     public function question()
+     public function lesson()
     {
     	return $this->belongsTo('\Modules\subject\Entities\Lesson', 'lesson_id');
     }
