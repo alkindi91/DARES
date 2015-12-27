@@ -82,7 +82,7 @@ class AuthController extends Controller {
 		
 		$stay_types = config('registration.stay_types');
 		
-		$social_status = [""=>"",'single'=>'أعزب' ,'married'=>'متزوج / متزوجة' ,'divorced'=>'مطلق / مطلقة' ,'widow'=>'أرمل /أرملة'];
+		$social_status = [""=>""]+config('registration.social_status');
 
 		$social_job_status = [""=>"",'unemployed'=>'بدون عمل' ,'employed'=>'أعمل' ,'retired'=>'متقاعد'];
 
@@ -128,7 +128,7 @@ class AuthController extends Controller {
 		$registration->username = $username;
 		$registration->registration_period_id = $period->id;
 		$registration->registration_step_id = $step->id;
-
+		$registration->passeport_country_id = !empty($input['passeport_country_id']) ? $input['passeport_country_id'] : null;
 
 		if($registration->save()) {
 			

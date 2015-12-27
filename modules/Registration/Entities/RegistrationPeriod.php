@@ -18,8 +18,5 @@ class RegistrationPeriod extends Model {
 		                    })->orderBy('id' ,'desc');
     }
 
-    public function period()
-    {
-        
-    }
+    
 }
