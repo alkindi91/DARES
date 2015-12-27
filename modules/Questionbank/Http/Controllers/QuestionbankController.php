@@ -33,10 +33,10 @@ class QuestionbankController extends Controller {
 	public function questionlist($lessonid){
 		$questions = Question::paginate(20)->where('lesson_id',$lessonid);
 		//var_dump($questions->toArray());
-		return view('questionbank::questionlist',compact('questions'));
+		return view('questionbank::questionlist',compact('questions','lessonid'));
 	}
 
-	public function create()
+	public function create($id)
 
 	{	$type=config('questionbank.types');
 		$difficulty=config('questionbank.difficulty');
@@ -49,12 +49,12 @@ class QuestionbankController extends Controller {
 	public function store(Question $question, Request $req,$id)
 	{
 		
-	$question->fill($req->all())->save();
+		$question->fill($req->all())->save();
 
 	
 		$message = 'تم اضافة السؤال بنجاح';
 		if(request('submit')=='save')
-		return redirect()->route('choice.create',array('id'=>$id))->with('success' ,$message);
+		return redirect()->route('choice.create',array('id'=>$question->id))->with('success' ,$message);
 		else
 		return redirect()->route('questionbank.questionlist',array('id'=>$id))->with('success' ,$message);
 

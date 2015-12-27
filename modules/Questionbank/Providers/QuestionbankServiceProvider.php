@@ -1,6 +1,7 @@
 <?php namespace Modules\Questionbank\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Menu;
 
 class QuestionbankServiceProvider extends ServiceProvider {
 
@@ -21,6 +22,7 @@ class QuestionbankServiceProvider extends ServiceProvider {
 		$this->registerTranslations();
 		$this->registerConfig();
 		$this->registerViews();
+		$this->registerMenu();
 	}
 
 	/**
@@ -91,5 +93,15 @@ class QuestionbankServiceProvider extends ServiceProvider {
 	{
 		return array();
 	}
+
+	public function registerMenu() 
+	{
+		$menu = Menu::get('SidebarMenu');
+		$submenu = $menu->add('بنك الاسئلة' ,['route'=>'questionbank.index'])
+						->data('permission', ['show.academystructure.faculties','show.academystructure.specialties'])
+		                ->prepend('<i class="fa fa-film"></i>');
+		//$submenu->add('الدروس' ,['route'=>'subject.index'])->prepend('<i class="fa fa-film"></i>');<i class="fa fa-folder"></i>
+	}
+
 
 }

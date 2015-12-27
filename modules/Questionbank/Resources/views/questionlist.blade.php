@@ -9,7 +9,7 @@
   
 </ol>
 
-  <a href="{{ route('questionbank.create') }}" class="btn btn-primary pull-md">
+  <a href="{{ route('questionbank.create',$lessonid) }}" class="btn btn-primary pull-md left">
              <i class="fa fa-plus"></i> جديد  
             </a>
 <div class="clearfix"></div>

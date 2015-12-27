@@ -13,6 +13,58 @@ Route::group([
             'uses'=>'RegistrationController@index'
             ]);
 
+        Route::group(['prefix'=>'registrations'], function () {
+
+            get('/', [
+                'as'=>'registration.registrations.index',
+                'uses'=>'RegistrationsController@index' ,
+                'middleware'=>'permission:view.registration.registrations'
+                ]);
+
+            get('create', [
+                'as'=>'registration.registrations.create',
+                'uses'=>'RegistrationsController@create',
+                'middleware'=>'permission:create.registration.registrations'
+                ]);
+
+            get('edit/{registrationStep}', [
+                'as'=>'registration.registrations.edit',
+                'uses'=>'RegistrationsController@edit',
+                'middleware'=>'permission:edit.registration.registrations'
+                ]);
+
+            get('show/{registrationStep}', [
+                'as'=>'registration.registrations.show',
+                'uses'=>'RegistrationsController@show',
+                'middleware'=>'permission:view.registration.registrations'
+                ]);
+
+            get('delete/{registrationStep}', [
+                'as'=>'registration.registrations.delete',
+                'uses'=>'RegistrationsController@delete',
+                'middleware'=>'permission:delete.registration.registrations'
+                ]);
+
+            get('delete-bulk', [
+                'as'=>'registration.registrations.delete-bulk' ,
+                'uses'=>'RegistrationsController@deleteBulk',
+                'middleware'=>'permission:delete.registration.registrations'
+                ]);
+            
+            post('store', [
+                'as'=>'registration.registrations.store',
+                'uses'=>'RegistrationsController@store',
+                'middleware'=>'permission:create.registration.registrations'
+                ]);
+
+            post('update/{registrationStep}', [
+                'as'=>'registration.registrations.update',
+                'uses'=>'RegistrationsController@update',
+                'middleware'=>'permission:edit.registration.registrations'
+                ]);
+    
+        });
+
         Route::group(['prefix'=>'steps'], function () {
 
             get('/', [

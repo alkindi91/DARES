@@ -20,10 +20,17 @@ class RegistrationTableSeeder extends Seeder {
 		Model::unguard();
 		
 		$permissions = [
+			// ['name'=>'اضافة قبول' ,'slug'=>'create.registration.steps','module'=>'registration'],
+			['name'=>'تعدل طلب' ,'slug'=>'edit.registration.registrations','module'=>'registration'],
+			['name'=>'حذف طلب' ,'slug'=>'delete.registration.registrations','module'=>'registration'],
+			['name'=>'مشاهدة الطلبات' ,'slug'=>'view.registration.registrations','module'=>'registration'],
+			
+
 			['name'=>'اضافة مرحلة قبول تسجيل' ,'slug'=>'create.registration.steps','module'=>'registration'],
 			['name'=>'تعدل مرحلة قبول تسجيل' ,'slug'=>'edit.registration.steps','module'=>'registration'],
 			['name'=>'حذف مرحلة قبول تسجيل' ,'slug'=>'delete.registration.steps','module'=>'registration'],
 			['name'=>'مشاهدة مراحل التسجيل' ,'slug'=>'view.registration.steps','module'=>'registration'],
+			
 			
 			['name'=>'اضافة فترة القبول' ,'slug'=>'create.registration.periods','module'=>'registration'],
 			['name'=>'تعدل فترة القبول' ,'slug'=>'edit.registration.periods','module'=>'registration'],
@@ -35,6 +42,10 @@ class RegistrationTableSeeder extends Seeder {
 			['name'=>'حذف ملاحظة من مرحلة قبول' ,'slug'=>'delete.registration.notes','module'=>'registration'],
 			['name'=>'مشاهدة ملاحظات مراحل القبول' ,'slug'=>'view.registration.notes','module'=>'registration'],
 		];
+
+		$slugs = array_map(function ($ar) {return $ar['slug'];}, $permissions);
+
+		Permission::whereIn('slug' ,$slugs)->delete();
 
 		$types = [
 			['title'=>'دبلوم','code'=>'D'],
@@ -61,21 +72,22 @@ class RegistrationTableSeeder extends Seeder {
 		]
 		];
         
+        RegistrationStep::whereNotNull('id')->delete();
 		foreach ($steps as $step) {
 			RegistrationStep::create($step);
 		}
 		
 
+
 		RegistrationPeriod::whereNotNull('id')->delete();
 		RegistrationPeriod::create($period);
 
-		foreach($types as $type)
-		RegistrationType::create($type);
-
-		$slugs = array_map(function ($ar) {return $ar['slug'];}, $permissions);
-
-		Permission::whereIn('slug' ,$slugs)->delete();
-
+		
+		RegistrationType::whereNotNull('id')->delete();
+		foreach($types as $type) {
+			RegistrationType::create($type);
+		}
+		
 		$users = User::all();
 
 		foreach($permissions as $permission){

@@ -25,11 +25,11 @@
 
         <div class="col-md-6 col-xs-offset-0 col-md-offset-3 col-sm-6 col-xs-12">
         <label>
-           {!! Form::radio('isactive',1,null,['class'=>'form-control flat']) !!}  @lang('subject::subject.active')
+           {!! Form::radio('isactive',1,null,['class'=>'form-control flat']) !!}  صحيحة
         </label>
         <br>
         <label>
-        {!! Form::radio('isactive',0,null,['class'=>'form-control flat']) !!} @lang('subject::subject.notactive')
+        {!! Form::radio('isactive',0,null,['class'=>'form-control flat']) !!} غير صحيحة
         </label>
         </div>
     </div>
