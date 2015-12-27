@@ -14,9 +14,9 @@ class Subject extends Model {
     	return $this->belongsTo('\Modules\Subject\Entities\Subject', "pre_request");
     }
 
-   public function children()
+   public function lessons()
    {
-   	return $this->hasMany('\Modules\Subject\Entities\Subject' ,'pre_request');
+   	return $this->hasMany('\Modules\Subject\Entities\Lesson' ,'subject_subject_id');
    }
 
    public function questions()

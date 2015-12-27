@@ -12,7 +12,10 @@ Route::group(['prefix' => 'questionbank', 'namespace' => 'Modules\Questionbank\H
     post('store/{qblessonid}', ['as'=>'questionbank.store','uses'=>'QuestionbankController@store']);
     get('edit/{qblessonid}', ['as'=>'questionbank.edit','uses'=>'QuestionbankController@edit']);
     post('update/{qblessonid}', ['as'=>'questionbank.update','uses'=>'QuestionbankController@update']);
+    get('createfromsub/{qblessonid}', ['as'=>'questionbank.createfromsub','uses'=>'QuestionbankController@createfromsub']);
+    post('storequestion/{qbsubjectid}', ['as'=>'questionbank.storequestion','uses'=>'QuestionbankController@storequestion']);
     get('delete/{qblessonid}', ['as'=>'questionbank.delete','uses'=>'QuestionbankController@delete']);
+
     get('delete-bulk', ['as'=>'questionbank.delete-bulk','uses'=>'QuestionbankController@delete-bulk']);
    
    Route::group(['prefix'=> 'choice'], function()

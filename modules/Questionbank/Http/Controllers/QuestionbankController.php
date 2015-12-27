@@ -24,10 +24,13 @@ class QuestionbankController extends Controller {
 
 	}
 	public function questionlistsub($id){
-		$subject = Subject::with('questions')->find($id);
-		$questions = $subject->questions;
+		$questions = Question::select('question','questionbank_questions.type','difficulty','level','questionbank_questions.id','subject_lessons.name as lesson_name')
+							 ->join('subject_lessons','subject_lessons.id','=','questionbank_questions.lesson_id')
+							 ->join('subject_subjects','subject_subjects.id','=','subject_lessons.subject_subject_id')
+							 ->where('subject_subjects.id',$id)
+							 ->paginate(20);
 		
-		return view('questionbank::questionlistsub',compact('questions', 'subject'));		
+		return view('questionbank::questionlistsub',compact('questions'));		
 
 	}
 	public function questionlist($lessonid){
@@ -97,5 +100,25 @@ class QuestionbankController extends Controller {
 		
 	}
 
+	public function createfromsub ($subjectid){
+		$type=config('questionbank.types');
+		$difficulty=config('questionbank.difficulty');
+		$level=config('questionbank.level');
+		$lesson = Lesson::where('subject_subject_id',$subjectid)->lists('name','id')->toArray();
 	
+		return view('questionbank::questionsub.create', compact('subjectid','lesson','type','difficulty','level'));
+
+	}
+
+	public function storequestion(Question $question, Request $req, $subjectid){
+
+		$question->fill($req->all())->save();
+		$message = 'تم اضافة السؤال بنجاح';
+		if(request('submit')=='save')
+		return redirect()->route('choice.create',array('id'=>$question->id))->with('success' ,$message);
+		else
+		return redirect()->route('questionbank.questionlistsub',array('id'=>$subjectid))->with('success' ,$message);
+
+	}
+
 }
