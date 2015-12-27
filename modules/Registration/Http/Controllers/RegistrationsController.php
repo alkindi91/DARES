@@ -11,11 +11,17 @@ class RegistrationsController extends Controller {
 	public function index(Registration $Registration)
 	{
 		$registrations = $Registration->with('step','period','period.year')->orderBy('id', 'desc');
+		
 		$steps         = RegistrationStep::lists('name','id')->toArray();
+		
 		$countries     = Country::lists('name','id')->toArray();
-		$search_fields = ['gender','registration_step_id','nationality_type','contact_country_id','social_status'];
+		
+		$search_fields = ['gender','registration_step_id','nationality_type','contact_country_id','social_status','social_job'];
+		
 		$years         = AcademycycleYear::lists('name', 'id')->toArray();
+
 		$genders = config('registration.genders');
+
 		foreach($search_fields as $field) {
 			if(request($field)) {
 				$registrations->whereIn($field,request($field));
