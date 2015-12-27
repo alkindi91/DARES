@@ -20,8 +20,8 @@ class RegistrationMenu {
 
             $menu = Menu::get('SidebarMenu');
 
-            $submenu = $menu->add(trans('registration::registration.header'))->prepend('<i class="fa fa-check"></i>')->data('permission', ['view.registration.steps', 'view.registration.periods','view.registrations']);
-            $submenu->add(trans('registration::registrations.header'), ['route'=>'registration.registrations.index'])->prepend('<i class="fa fa-users"></i>')->data('permission', ['view.registrations']);
+            $submenu = $menu->add(trans('registration::registration.header'))->prepend('<i class="fa fa-check"></i>')->data('permission', ['view.registration.steps', 'view.registration.periods','view.registration.registrations']);
+            $submenu->add(trans('registration::registrations.header'), ['route'=>'registration.registrations.index'])->prepend('<i class="fa fa-users"></i>')->data('permission', ['view.registration.registrations']);
             $submenu->add(trans('registration::steps.header'), ['route'=>'registration.steps.index'])->prepend('<i class="fa fa-recycle"></i>')->data('permission', ['view.registration.steps']);
             $submenu->add(trans('registration::periods.header'), ['route'=>'registration.periods.index'])->prepend('<i class="fa fa-arrows-h"></i>')->data('permission', ['view.registration.periods']);
 

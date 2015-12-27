@@ -51,5 +51,10 @@ return [
 	'genders'=>[
 		'm'=>'ذكر',
 		'f'=>'أنثى'
+	],
+	'social_jobs'=>[
+		'unemployed'=>'بدون عمل' ,
+		'employed'=>'أعمل' ,
+		'retired'=>'متقاعد'
 	]
 ];
