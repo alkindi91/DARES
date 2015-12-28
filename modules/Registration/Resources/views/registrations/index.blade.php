@@ -44,6 +44,7 @@
 	</label>
 		{!! Form::select('social_status[]',config('registration.social_status'),request('social_status'),['class'=>'form-control select2_multiple','placeholder'=>'الجنسية','multiple'=>'multiple']) !!}
 	</div>
+
 	<div class="clearfix"></div>
 	<div class="ln_solid"></div>
 	<div class="col-sm-4 col-lg-3">
@@ -58,6 +59,7 @@
 	</label>
 		{!! Form::select('gender[]',config('registration.genders'),request('gender'),['class'=>'form-control select2_multiple','placeholder'=>'الجنسية','multiple'=>'multiple']) !!}
 	</div>
+	
 	<div class="col-sm-4 col-lg-3">
 	<label>
 	@lang('registration::registrations.national_id')
@@ -70,11 +72,21 @@
 	</label>
 		{!! Form::text('contact_email',request('contact_email'),['class'=>'form-control','placeholder'=>trans('registration::registrations.contact_email')]) !!}
 	</div>
-	<div class="col-sm-12">
+	<div class="clearfix"></div>
+	<div class="ln_solid"></div>
+	<div class="col-sm-4 col-lg-3">
+	<label>
+	@lang('registration::registrations.social_job')
+	</label>
+		{!! Form::select('social_job[]',config('registration.social_jobs'),request('social_job'),['class'=>'form-control select2_multiple','placeholder'=>'الوظيفة','multiple'=>'multiple']) !!}
+	</div>
+	<div class="col-sm-8 col-lg-9">
+
 		<button class="btn btn-primary pull-left">
 			@lang('global.search')
 		</button>
 	</div>
+
 {!! Form::close() !!}
 <div class="clearfix"></div>
 <div class="ln_solid"></div>
@@ -156,6 +168,9 @@
 			</a>
 			<a href="{{ route('registration.registrations.delete' ,$registration->id)}}" class="btn btn-danger btn-sm">
 				<i class="fa fa-trash"></i> @lang('global.delete')
+			</a>
+			<a href="{{ route('registration.files.index' ,$registration->id)}}" class="btn btn-info btn-sm">
+				<i class="fa fa-upload"></i> @lang('registration::files.header')
 			</a>
 			
 		</td>

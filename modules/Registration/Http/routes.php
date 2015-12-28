@@ -117,6 +117,58 @@ Route::group([
     
         });
 
+        Route::group(['prefix'=>'files'], function () {
+
+            get('/{registration_id}', [
+                'as'=>'registration.files.index',
+                'uses'=>'FilesController@index' ,
+                'middleware'=>'permission:view.registration.files'
+                ]);
+
+            get('create', [
+                'as'=>'registration.files.create',
+                'uses'=>'FilesController@create',
+                'middleware'=>'permission:create.registration.files'
+                ]);
+
+            get('edit/{registrationStep}', [
+                'as'=>'registration.files.edit',
+                'uses'=>'FilesController@edit',
+                'middleware'=>'permission:edit.registration.files'
+                ]);
+
+            get('show/{registrationStep}', [
+                'as'=>'registration.files.show',
+                'uses'=>'FilesController@show',
+                'middleware'=>'permission:view.registration.files'
+                ]);
+
+            get('delete/{registrationStep}', [
+                'as'=>'registration.files.delete',
+                'uses'=>'FilesController@delete',
+                'middleware'=>'permission:delete.registration.files'
+                ]);
+
+            get('delete-bulk', [
+                'as'=>'registration.files.delete-bulk' ,
+                'uses'=>'FilesController@deleteBulk',
+                'middleware'=>'permission:delete.registration.files'
+                ]);
+            
+            post('store', [
+                'as'=>'registration.files.store',
+                'uses'=>'FilesController@store',
+                'middleware'=>'permission:create.registration.files'
+                ]);
+
+            post('update/{registrationStep}', [
+                'as'=>'registration.files.update',
+                'uses'=>'FilesController@update',
+                'middleware'=>'permission:edit.registration.files'
+                ]);
+    
+        });
+
         
 
         Route::group(['prefix'=>'periods'], function () {

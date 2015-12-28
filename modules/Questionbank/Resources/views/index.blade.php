@@ -66,8 +66,12 @@
             </a>
 
             <a href="{{ route('questionbank.index_lesson',$subject->id) }}" class="btn btn-primary pull-md">
-   			 <i class="fa fa-plus"></i> إضافة سؤال جديد 
+   			 <i class="fa fa-plus"></i> عرض الدروس
 			</a>
+
+            <a href="{{ route('questionbank.createfromsub',$subject->id) }}" class="btn btn-primary pull-md">
+             <i class="fa fa-plus"></i> إضافة سؤال جديد 
+            </a>
         </td>
     @endforeach
 </tr>

@@ -49,5 +49,7 @@ class RegistrationsController extends Controller {
 		$registrations = $registrations->paginate(50);
 		return view('registration::registrations.index', compact('registrations', 'steps', 'countries', 'years'));
 	}
+
+	
 	
 }

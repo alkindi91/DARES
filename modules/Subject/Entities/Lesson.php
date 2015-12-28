@@ -22,4 +22,8 @@ class Lesson extends Model
     	return $this->belongsTo('\Modules\Subject\Entities\Subject', "subject_subject_id");
     }
 
+    public function questions(){
+        return $this->hasMany('\Modules\Questionbank\Entities\Question');
+    }
+
 }
