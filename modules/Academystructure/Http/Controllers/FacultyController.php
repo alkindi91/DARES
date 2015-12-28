@@ -29,8 +29,7 @@ class FacultyController extends Controller {
 	{				
 		$input = $request->all();			
 		$faculty->fill($input)->save();
-		
-		return redirect()->route('as.faculties.index');
+		return redirect()->route('as.faculties.index')->with('success',trans('academystructure::faculties.create_success'));
 	}
 	/**
 	* @desc Edit Faculty
@@ -48,7 +47,7 @@ class FacultyController extends Controller {
 		$faculty->name = $request->input('name');		
 		$faculty->save();
 		
-		return redirect()->route('as.faculties.index');
+		return redirect()->route('as.faculties.index')->with('success',trans('academystructure::faculties.update_success'));
 	}
 	/**
 	* @desc Delete Faculty

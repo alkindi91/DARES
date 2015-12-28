@@ -38,7 +38,8 @@ class YearController extends Controller {
 		$year->fill($input)->save();
 		
 		$faculty_id = $request->input('faculty_id');
-		return redirect()->route( 'as.years.index' , [$faculty_id] );
+		$message = 'تمت الاضافة بنجاح';
+		return redirect()->route( 'as.years.index' , [$faculty_id] )->with('success',trans('academystructure::years.create_success'));
 	}
 	/**
 	* @desc Edit Year 
@@ -58,8 +59,8 @@ class YearController extends Controller {
 		$year->name = $request->input('name');		
 		$year->save();
 		
-		$faculty_id = $request->input('faculty_id');	
-		return redirect()->route('as.years.index' , [$faculty_id]);
+		$faculty_id = $request->input('faculty_id');
+		return redirect()->route('as.years.index' , [$faculty_id])->with('success',trans('academystructure::years.update_success'));
 	}
 	
 	/**

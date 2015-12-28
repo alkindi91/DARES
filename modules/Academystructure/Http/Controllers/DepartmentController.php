@@ -37,7 +37,7 @@ class DepartmentController extends Controller {
 	* @desc Add New Department 
 	* @create function Open Create From view
 	* @param Term $term 
-	* @param Department $department for parent department list
+	* @param Department $department for parent department list (before current term)
 	* @param Specialty $specialty for parent specialty list
 	* @param Subject $subject for parent subject list	
 	**/
@@ -45,7 +45,7 @@ class DepartmentController extends Controller {
 	{	
 		$subjects = 	$subject->lists('name','id')->toArray();
 		$specialties = $specialty->get();
-	    $menu = $department->menu()->get();
+	    $menu = $department->menu()->where('term_id', '<', $term->id)->get();
 		
 		return view('academystructure::departments.create',compact('term' , 'specialties' , 'menu' , 'subjects'));
 	}
@@ -63,8 +63,7 @@ class DepartmentController extends Controller {
 		$department->fill($input)->save();
 		
 		$term_id = $request->input('term_id');
-		
-		return redirect()->route('as.departments.index' , [$term_id]);
+		return redirect()->route('as.departments.index' , [$term_id])->with('success',trans('academystructure::departments.create_success'));
 	}		
 	/**
 	* @desc Edit Department 
@@ -95,8 +94,7 @@ class DepartmentController extends Controller {
 		$department ->save(); 
 		
 		$term_id = $request->input('term_id');	
-
-		return redirect()->route('as.departments.index' , [$term_id]);
+		return redirect()->route('as.departments.index' , [$term_id])->with('success',trans('academystructure::departments.update_success'));
 	}
 	/**
 	* @desc Delete term 

@@ -28,7 +28,9 @@ class SpecialtyController extends Controller {
 		$input = $request->all();			
 		$specialty->fill($input)->save();
 		
-		return redirect()->route('as.specialties.index');
+
+		$message = 'تمت الاضافة بنجاح';
+		return redirect()->route('as.specialties.index')->with('success',trans('academystructure::specialties.create_success'));
 	}
 	/**
 	* @desc Edit Specialty
@@ -47,7 +49,7 @@ class SpecialtyController extends Controller {
 		$specialty->code = $request->input('code');			
 		$specialty->save();
 		
-		return redirect()->route('as.specialties.index');
+		return redirect()->route('as.specialties.index')->with('success',trans('academystructure::specialties.update_success'));
 	}
 	/**
 	* @desc Delete specialty

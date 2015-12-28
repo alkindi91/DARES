@@ -40,7 +40,7 @@ class TermController extends Controller {
 		$term->fill($input)->save();
 		
 		$year_id = $request->input('year_id');
-		return redirect()->route('as.terms.index' , [$year_id]);
+		return redirect()->route('as.terms.index' , [$year_id])->with('success',trans('academystructure::terms.create_success'));
 	}	
 	/**
 	* @desc Edit Term 
@@ -61,8 +61,7 @@ class TermController extends Controller {
 		$term ->save(); 
 		
 		$year_id = $request->input('year_id');	
-
-		return redirect()->route('as.terms.index' , [$year_id]);
+		return redirect()->route('as.terms.index' , [$year_id])->with('success',trans('academystructure::terms.update_success'));
 	}
 	/**
 	* @desc Delete term 
