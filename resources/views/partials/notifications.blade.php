@@ -38,10 +38,3 @@
     });
 </script>
 @endif
-@section('footer')
-@parent
- <!-- PNotify -->
-    <script type="text/javascript" src="{{ asset('template/js/notify/pnotify.core.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('template/js/notify/pnotify.buttons.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('template/js/notify/pnotify.nonblock.js') }}"></script>
-@stop

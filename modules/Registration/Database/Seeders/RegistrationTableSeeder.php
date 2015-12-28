@@ -31,6 +31,11 @@ class RegistrationTableSeeder extends Seeder {
 			['name'=>'حذف مرحلة قبول تسجيل' ,'slug'=>'delete.registration.steps','module'=>'registration'],
 			['name'=>'مشاهدة مراحل التسجيل' ,'slug'=>'view.registration.steps','module'=>'registration'],
 			
+			['name'=>'اضافة مستندات' ,'slug'=>'create.registration.files','module'=>'registration'],
+			['name'=>'تعدل مستندات' ,'slug'=>'edit.registration.files','module'=>'registration'],
+			['name'=>'حذف مستندات' ,'slug'=>'delete.registration.files','module'=>'registration'],
+			['name'=>'مشاهدة المستندات' ,'slug'=>'view.registration.files','module'=>'registration'],
+			
 			
 			['name'=>'اضافة فترة القبول' ,'slug'=>'create.registration.periods','module'=>'registration'],
 			['name'=>'تعدل فترة القبول' ,'slug'=>'edit.registration.periods','module'=>'registration'],
