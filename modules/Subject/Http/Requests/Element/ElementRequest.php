@@ -28,17 +28,20 @@ class ElementRequest extends FormRequest {
 			'element_order'=>'required|numeric',
 			'type'=>'required',
 			'state' =>'required',
-			'value' => 'required',
-			'subject_lesson_id'=>'exists:subject_lessons,id'		];
+			'value' => 'required_if:type,نص|required_if:type,URL',
+			'subject_lesson_id'=>'exists:subject_lessons,id',
+			'file'=>'required_if:type,فيديو|required_if:type,صوت,required_if:type,PDF'		
+			];
 	}
 	public function attributes() 
 	{
 		return [
-			'title'=>'العنوان',
-			'element_order'=>'ترتيب الدرس',
-			'type'=>'النوع',
-			'state'=>'الحالة',
-			'value'=> 'القيمة'
+			'title'=>'(اسم العنصر)',
+			'element_order'=>'(ترتيب العنصر)',
+			'type'=>'(نوع العنصر)',
+			'state'=>'(الحالة)',
+			'value'=> '(قيمة العنصر)',
+			'file'=>'(الملف)'
 		];
 	}
 	public function messages() 

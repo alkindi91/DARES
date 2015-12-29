@@ -98,7 +98,7 @@ class SubjectServiceProvider extends ServiceProvider {
 		$menu = Menu::get('SidebarMenu');
 		$submenu = $menu->add('المواد' ,['route'=>'subject.index'])
 						->data('permission', ['subject.view.subject'])
-		                ->prepend('<i class="fa fa-film"></i>');
+		                ->prepend('<i class="fa fa-book"></i>');
 		//$submenu->add('الدروس' ,['route'=>'subject.index'])->prepend('<i class="fa fa-film"></i>');<i class="fa fa-folder"></i>
 	}
 

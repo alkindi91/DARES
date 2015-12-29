@@ -19,17 +19,16 @@ class SubjectsController extends Controller {
 		return view('subject::subjects.index',compact('subjects'));
 	}
 
-	public function create(Term $term){
-		
-		
-
+	public function create(Term $term)
+	{
 		$types=config('subject.types');
+
 		$pre_request=Subject::lists('name' ,'id')->toArray();
+		
 		return view('subject::subjects.create',compact('types','pre_request'));
 
 	}//
 
-	 //this block for subject
 	public function store(Subject $subject, SubjectRequest $req)
 	{   
 		$subject->fill($req->all())->save();
@@ -44,7 +43,8 @@ class SubjectsController extends Controller {
 		
 	}
 
-	public function edit(Term $term,$id){
+	public function edit(Term $term,$id)
+	{
 		$subjects = Subject::findOrFail($id);
 
 		$types=config('subject.types');
@@ -59,7 +59,8 @@ class SubjectsController extends Controller {
 		$subject = $subject->findOrFail($id);
 
     	$subject->fill($req->all())->save();
-	$message = 'تم تعديل المادة بنجاح';
+
+		$message = 'تم تعديل المادة بنجاح';
 
 		if(request('submit')=='save')
 		return redirect()->back()->with('success' ,$message);
@@ -73,6 +74,7 @@ class SubjectsController extends Controller {
 		$subject = $subject->findOrFail($id)->delete();
 
     	$message ="تم حذف المادة بنجاح";
+
     	return redirect()->route('subject.index')->with('success' ,$message);
 		
 	}
@@ -80,7 +82,7 @@ class SubjectsController extends Controller {
 	public function detail($sid)
 	{   	
 		$subjects = Subject::where('id',$sid)->findOrFail($sid)->toArray();
-		//dd($subjects);
+
 		return view('subject::subjects.detail',compact('subjects'));
 	}
 	

@@ -35,9 +35,9 @@ class LessonRequest extends FormRequest {
 	public function attributes() 
 	{
 		return [
-			'lesson_order'=>'ترتيب الدرس',
-			'type'=>'النوع',
-			'state'=>'الحالة'
+			'lesson_order'=>'(ترتيب الدرس)',
+			'type'=>'(النوع)',
+			'state'=>'(الحالة)'
 		];
 	}
 	public function messages() 

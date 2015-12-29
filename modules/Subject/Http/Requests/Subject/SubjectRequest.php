@@ -32,10 +32,10 @@ class SubjectRequest extends FormRequest {
 	public function attributes() 
 	{
 		return [
-			'name'=>'الاسم',
-			'hour'=>'عدد الساعات',
-			'code'=>'رمز المادة',
-			'type'=>'النوع'
+			'name'=>'(الاسم)',
+			'hour'=>'(عدد الساعات)',
+			'code'=>'(رمز المادة)',
+			'type'=>'(النوع)'
 		];
 	}
 	public function messages() 
